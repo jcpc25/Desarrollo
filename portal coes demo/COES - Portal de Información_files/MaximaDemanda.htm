@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+    <title>Maxima Demanda</title>
+    
+
+   <link href="MaximaDemanda_data/jquery.css" rel="stylesheet" type="text/css">
+   <link href="MaximaDemanda_data/jquery_002.css" rel="stylesheet" type="text/css">
+
+
+    <link href="MaximaDemanda_data/jqx.css" rel="stylesheet" type="text/css">        
+    <link href="MaximaDemanda_data/jqx_002.css" rel="stylesheet" type="text/css">
+
+
+    
+    <link href="MaximaDemanda_data/ui.css" rel="stylesheet" type="text/css">
+    <link href="MaximaDemanda_data/ui.css" rel="stylesheet" type="text/css">   
+
+    
+    <link href="MaximaDemanda_data/bootstrap.css" rel="stylesheet" type="text/css"> 
+    <link href="MaximaDemanda_data/bootstrap-responsive.htm" rel="stylesheet" type="text/css"> 
+    
+    
+   <link href="MaximaDemanda_data/Site.css" rel="stylesheet" type="text/css"> 
+   
+    
+    
+  <script src="MaximaDemanda_data/jquery-1.js" type="text/javascript"></script>
+    
+   
+
+    <script src="MaximaDemanda_data/jquery_003.js" type="text/javascript"></script>
+	
+	 <script src="MaximaDemanda_data/jquery-asyncUpload-0.js" type="text/javascript"></script>
+	 <script src="MaximaDemanda_data/jquery.js" type="text/javascript"></script>
+
+   
+
+
+
+    
+    <script src="MaximaDemanda_data/jquery_002.js" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/grid.js" type="text/javascript"></script>
+
+   
+    
+    <script src="MaximaDemanda_data/jqxcore.js" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/jqxdata.js" type="text/javascript"></script>    
+    <script src="MaximaDemanda_data/jqxbuttons.js" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/jqxscrollbar.js" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/jqxmenu.js" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/jqxchart.js" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/jqxmaskedinput.js" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/jqxnumberinput.js" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/jqxdatetimeinput.js" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/jqxcalendar.js" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/globalize_002.htm" type="text/javascript"></script>
+    <script src="MaximaDemanda_data/globalize.htm" type="text/javascript"></script>
+
+    
+    <script src="MaximaDemanda_data/jquery-ui.js" type="text/javascript"></script> 
+
+    
+    <script src="MaximaDemanda_data/bootstrap.js" type="text/javascript"></script> 
+
+    <script src="MaximaDemanda_data/master.js"></script>
+
+    <script type="text/javascript"> 
+        
+        $.currentPath = function (url) { { return 'http://www.coes.org.pe/appMedidores/Reportes/MaximaDemanda' + url; }; }
+        $.domain = function (url) { { return 'http://www.coes.org.pe/appMedidores/' + (url.substr(0, 1) === '/' ? url.slice(1) : url); }; }
+    </script>
+</head>
+
+<body>
+        <header style="display: none;"> 
+
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>
+                    <img alt="COES" ;="" src="MaximaDemanda_data/logocoes.png">
+                
+                        Comité de Operación Económica del Sistema 
+Interconectado Nacional                                                 
+           
+                    </p>
+
+                    
+
+
+                </div>
+            </div>
+           
+            <div class="float-right">
+            </div>
+        </header>
+       <div id="body">    
+
+            
+            
+ 
+
+
+            <section class="content-wrapper main-content clear-fix">
+                <div id="content" style="display: none;">
+
+
+
+                            <script type="text/javascript">
+
+                                $(document).ready(function () {
+                                    var theme = "ui-redmond";
+                                   
+                                    $.getJSON("/appMedidores/Home/LoadMenubyApp", null,
+                                            function (data) {
+                                                var source =
+                                                {
+                                                    datatype: "json",
+                                                    datafields: [
+                                                        { name: 'id' },
+                                                        { name: 'PadreId' },
+                                                        { name: 'Nombre' },
+                                                        { name: '' }
+                                                    ],
+                                                    id: 'id',
+                                                    localdata: data
+                                                };
+                                                var dataAdapter = new $.jqx.dataAdapter(source);
+                                                dataAdapter.dataBind();
+                                                var records = dataAdapter.getRecordsHierarchy('id', 'PadreId', 'items', [{ name: 'Nombre', map: 'label' }]);
+                                                $('#jqxWidget').jqxMenu({ source: records, height: 30, theme: theme, width: '960px' });
+                                                $("#jqxWidget").bind('itemclick', function (event) {
+                                                    
+                                                    //$.post($.domain('Home/Enlace'), { id: event.args.id }, function (data) {
+                                                        
+                                                    //    if (data.url != '')
+                                                    //        location = data.url;
+                                                    //});
+
+                                                    var serviceURL = '/appMedidores/Home/Enlace?id=' + event.args.id;// + event.args.id;
+                                                   
+                                                    $.ajax({
+                                                        type: "GET",
+                                                        url: serviceURL,
+                                                        data: param = "45",
+                                                        contentType: "application/json; charset=utf-8",
+                                                        dataType: "json",
+                                                         success: successFunc
+ 
+                                                    });
+                                                    function successFunc(data, status) {
+                                                        if (data.url != '')
+                                                            location = data.url;
+                                                    }
+
+                                                });
+                                            });
+                                    
+                                });
+                            </script>
+                            
+                            <div class="jqx-widget jqx-widget-ui-redmond jqx-menu jqx-menu-ui-redmond jqx-widget-header jqx-widget-header-ui-redmond jqx-menu-horizontal jqx-menu-horizontal-ui-redmond jqx-rc-all jqx-rc-all-ui-redmond" tabindex="1" style="display: block; width: 960px; height: 30px; outline: medium none;" id="jqxWidget">
+
+                            </div>
+                    </div>   
+                
+                
+
+<script type="text/javascript">
+    $(function () {
+        grid = jQuery("#list");
+        grid.jqGrid({
+            url: '/appMedidores/Reportes/DynamicGridData_ListadoMaximaDemanda',
+            width: 910,
+            height: 430,
+            datatype: 'json',
+            gridview: true,
+            
+            loadui : 'block',
+            mtype: 'GET',
+            colNames: [ 'Empresa', 'Central', 'Unidad', 'MW'],
+            colModel: [
+            
+            { name: 'Empresa', index: 'Empresa', sortable: false, width: 160, align: 'left' },
+            { name: 'Central', index: 'Central', sortable: false, width: 160, align: 'left' },
+            { name: 'Unidad', index: 'Unidad', sortable: false, width: 100, align: 'left' },
+            { name: 'MW', index: 'MW', sortable: false, width: 70, align: 'left' }],
+
+
+            // { name: '', index: '', width: 100, align: 'left', formatter: AccionFormatter }],
+            //pager: '#pager',
+            rowNum: 500,
+            //rowList: [10, 20, 30, 40, 50],
+            onComplete: function () {
+                //alert('aca termina todo');
+            },
+            sortname: 'Id',
+            sortorder: "asc",
+            formatter: function (cellvalue, el, opts) {
+
+            },
+            grouping: false, 
+            groupingView: {
+                groupField: ['Empresa', 'Central'],
+                groupColumnShow : [true, true], groupText : ['<b>{0}</b>'], 
+                groupCollapse : true, 
+                groupOrder: ['asc', 'asc'],
+               // showSummaryOnHide: true,
+                groupSummary : [true, true] },
+            viewrecords: true,
+            //imgpath: '/scripts/themes/coffee/images',
+            caption: 'Reporte del día de la Máxima Demanda',
+            postData: {
+                pEmpresa: function () { return $("#CodigoEmpresa2").val() == "0" ? "" : $("#CodigoEmpresa2").val(); },
+                pCentral: function () { return $("#CodigoCentral").val() == "0" ? "" : $("#CodigoCentral").val(); },
+                pBloque: function () { return   "1"; },
+                pIntegrante: function () { return $("#codIntegrante").val() == "0" ? "" : $("#codIntegrante").val(); },
+                pTipoGeneracion: function () { return $("#CodigoTipoGeneracion").val() == "0" ? "" : $("#CodigoTipoGeneracion").val(); },
+                pFecha: function () { return $("#strFecha").val(); }
+            }
+        });
+      
+        grid.navGrid('#pager', {search:true, edit: false, add:false, del:false, searchtext:"Search"});
+
+
+
+
+        function AccionFormatter(cellvalue, options, rowObject) {
+            var strCarac = "U";
+            var strResult = '';
+            var ap = String.fromCharCode(39);
+            //var strResult = '<div onclick="javascript:OpcionAction(' + ap + 'U' + ap + ',' + cellvalue + ');" style="text-align:center; cursor: hand"><img src="/Content/images/editar.gif" /></div>';
+
+            //alert('el valor es : ' + cellvalue);
+
+            //var strResult = '<a href="javascript:Actualiza(' + cellvalue + ');">Actualizar</a> <a href="javascript:Anular(' + cellvalue + ')">Anular</a> <a href="javascript:VerRevision(' + cellvalue + ');">Revisar</a> <a href="javascript:NoVigencia(' + cellvalue + ')">NoVigente</a>';
+            var strResult = '<a href="javascript:VerDetalle(' + cellvalue + ');">Ver Detalle</a>';
+            return strResult;
+        }
+
+        function AccionFormaterEliminar(cellvalue, options, rowObject) {
+            var strCarac = "U";
+            var strResult = '';
+            var ap = String.fromCharCode(39);
+            //var strResult = '<div onclick="javascript:OpcionAction(' + ap + 'E' + ap + ',' + cellvalue + ');" style="text-align:center; cursor: hand"><img src="/Content/images/ico_Eliminar.gif" /></div>';
+            var strResult = '<a href="#">eliminar</a>';
+
+            return strResult;
+        }
+
+
+
+
+    });
+
+    </script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#export_excel").click(function () {
+            
+            var CodEmpresa = $("#CodigoEmpresa2").val();
+            var bloqueHorario = $("#bloqueHorario").val();
+            var fecha = $("#strFecha").val();
+            var integrante = $("#codIntegrante").val();
+            var tipoGeneracion = $("#CodigoTipoGeneracion").val();
+            window.location.href = '/appMedidores/Reportes/MaximaDemanda_ExportExcel?fecha=' + fecha + '&empresa=' + CodEmpresa + '&bloqueHorario=1&integrante=' + integrante + '&tipoGeneracion=' + tipoGeneracion;
+
+               });
+        $("#export_pdf").click(function () {
+            var CodEmpresa = $("#CodigoEmpresa2").val();
+            var bloqueHorario = $("#bloqueHorario").val();
+            var fecha = $("#strFecha").val();
+            var integrante = $("#codIntegrante").val();
+            var tipoGeneracion = $("#CodigoTipoGeneracion").val();
+            window.location.href = '/appMedidores/Reportes/MaximaDemanda_ExportPdf?fecha=' + fecha + '&empresa=' + CodEmpresa + '&bloqueHorario=1&integrante=' + integrante + '&tipoGeneracion=' + tipoGeneracion;
+
+        });
+
+        //$("#CodigoEmpresa2").change(function () {
+        //    // Así accedemos al Valor de la opción seleccionada
+
+        //    var valor = $("#CodigoEmpresa2 option:selected").html();
+        
+        //    cambiaElementos($("#CodigoEmpresa2").val());
+
+        //    // Si seleccionamos la opción "Texto 1"
+        //    // nos mostrará por pantalla "1"
+
+        //});
+
+        cambiaElementos($("#CodigoEmpresa2").val());
+    });
+    function cambiaElementos(cat) {
+
+        var dd = document.getElementById("CodigoCentral");
+        dd.options.length = 0;
+        dd.options[0] = new Option("Espere...");
+        dd.selectedIndex = 0;
+        dd.disabled = true;
+
+        // Control de errores
+
+        $("#CodigoCentral").ajaxError(function (event, request, settings) {
+            dd.options[0] = new Option("Categoría incorrecta");
+        });
+        $.getJSON(
+     '/appMedidores/Reportes/ListarCentralXEmpresa', // URL a la acción
+     { empresa: cat },                  // Objeto JSON con parámetros
+     function (data) {                    // Función de retorno exitoso
+
+         $.each(data.rows, function (i, fila) {
+             dd.options[i] = new Option(fila.codigo, fila.central);
+             //alert(fila.codigo + " " + fila.central);
+             if (fila.central == 0) {
+                 dd.selectedIndex = i;
+             }
+         });
+         
+         dd.disabled = false;
+     });
+    }
+</script>
+
+<div><h5></h5></div>
+<div class="panel panel-default">
+    <div class="panel-heading heading-style">
+        <div class="row">
+            <div class="col-md-10">
+                <h4 class="text-left" style="margin:0;">Reporte del Día de la Máxima Demanda</h4>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+
+<div>
+
+<h6>
+CONFORME A LOS SIGUIENTES PROCEDIMIENTOS TÉCNICOS DEL COES: <br>
+*&nbsp;PR-N° 27: EGRESOS POR COMPRA DE POTENCIA <br>
+*&nbsp;PR-N° 28: INGRESOS GARANTIZADOS POR POTENCIA FIRME<br>
+*&nbsp;PR-N° 43: INTERCAMBIOS INTERNACIONALES DE ELECTRICIDAD EN EL MARCO DE LA DECISIÓN 757 DE LA CAN
+</h6>
+</div>
+
+
+<form action="/appMedidores/Reportes/MaximaDemanda" class="form-horizontal" id="frmMaximaDemanda" method="post" name="frmMaximaDemanda"><div class="panel panel-default">
+<div class="panel-body panel-info">      
+ <div class="col-md-4">
+    <div class="form-group">
+        <label for="CodigoEmpresa2" class="col-lg-4 control-label">Empresa</label>
+        <div class="col-lg-8">
+             <select class="form-control" data-val="true" data-val-number="The field CodigoEmpresa2 must be a number." data-val-required="The CodigoEmpresa2 field is required." id="CodigoEmpresa2" name="CodigoEmpresa2"><option value="69">ADINELSA ADN</option>
+<option value="10422">AGRO INDUSTRIAL PARAMONGA</option>
+<option value="10481">AGUAS Y ENERGIA PERU                              </option>
+<option value="115">AIPSA PARAMONGA</option>
+<option value="7">CAHUA</option>
+<option value="10420">CELEPSA</option>
+<option value="10901">CHINANGO S.A.C.</option>
+<option value="107">COELVISAC                                         </option>
+<option value="10472">COMPAÑIA ELECTRICA EL PLATANAL</option>
+<option value="33">CONS. ELECT. VILLACURI</option>
+<option value="20">CURUMUY</option>
+<option value="79">DISTRIBUIDOR CLIENTE SUR</option>
+<option value="21">EDE CAÑETE</option>
+<option value="4">EDEGEL</option>
+<option value="14">EDELNOR</option>
+<option value="5">EEPSA</option>
+<option value="17">EGASA</option>
+<option value="58">EGEMSA</option>
+<option value="9">EGENOR</option>
+<option value="19">EGESUR</option>
+<option value="76">ELECTRICA SANTA ROSA</option>
+<option value="10684">ELECTRICA YANAPAMPA SAC</option>
+<option value="28">ELECTRO CENTRO</option>
+<option value="22">ELECTRO DUNAS                                     </option>
+<option value="23">ELECTRO NOR OESTE</option>
+<option value="24">ELECTRO NORTE</option>
+<option value="109">ELECTRO NORTE MEDIO</option>
+<option value="30">ELECTRO ORIENTE</option>
+<option value="111">ELECTRO PUNO</option>
+<option value="26">ELECTRO SUR</option>
+<option value="27">ELECTRO SUR ESTE</option>
+<option value="34">ELECTRO TOCACHE</option>
+<option value="40">ELECTRO UCAYALI</option>
+<option value="2">ELECTROPERU</option>
+<option value="35">EMP. MUNICIPAL PARAMONGA</option>
+<option value="11630">EMPRESA DE GENERACION CCOLLPANI SAC</option>
+<option value="11389">EMPRESA DE GENERACION ELECTRICA CANCHAYLLO SAC</option>
+<option value="11153">EMPRESA DE GENERACION ELECTRICA DE JUNIN</option>
+<option value="11626">EMPRESA DE GENERACION ELECTRICA EDGESA</option>
+<option value="11624">EMPRESA DE GENERACION ELECTRICA LOS PINOS</option>
+<option value="11631">EMPRESA DE GENERACION ELECTRICA LUCUMA SAC</option>
+<option value="11625">EMPRESA DE GENERACION ELECTRICA MARCONA S.A.</option>
+<option value="206">EMPRESA DE GENERACION HUANZA                      </option>
+<option value="11629">EMPRESA DE GENERACION SANTA MARIA SAC</option>
+<option value="11323">EMPRESA DE GENERACION TERMICA  DE ETEN</option>
+<option value="11058">EMPRESA ELECTRICA RIO DOBLE </option>
+<option value="113">EMSEMSA</option>
+<option value="127">ENERCHILCA</option>
+<option value="10552">ENERGÍA EÓLICA S.A.</option>
+<option value="11">ENERGIA PACASMAYO</option>
+<option value="18">ENERSUR</option>
+<option value="10717">ESCO COMPAÑÍA DE SERVICIOS DE ENERGÍA SAC</option>
+<option value="11698">ESEMPAT</option>
+<option value="3">ETEVENSA</option>
+<option value="10725">FENIX POWER PERÚ</option>
+<option value="11552">GALVEZ &amp; DOLORIER</option>
+<option value="10647">GENERADORA ENERGÍA DEL PERÚ</option>
+<option value="11628">GENERADORA EOLICA INKA I S.A.</option>
+<option value="11100">GTS MAJES S.A.C</option>
+<option value="11101">GTS REPARTICION S.A.C.</option>
+<option value="15">HIDRANDINA</option>
+<option value="10974">HIDROCAÑETE S.A.</option>
+<option value="11258">HIDROELECTRICA HUANCHOR S.A.C.</option>
+<option value="10582">HIDROELECTRICA SANTA CRUZ                         </option>
+<option value="11149">ILLAPU ENERGY </option>
+<option value="47">KALLPA GENERACION</option>
+<option value="10490">KALLPA GENERACION S.A.(registro duplicado)        </option>
+<option value="13">LUZ DEL SUR</option>
+<option value="10916">MAJA ENERGIA S.A.C.</option>
+<option value="10755">MAPLE ETANOL                                      </option>
+<option value="108">MINERA CORONA</option>
+<option value="11217">MOQUEGUA FV S.A.C.</option>
+<option value="11677">NEXSYS</option>
+<option value="11102">PANAMERICANA  SOLAR SAC. </option>
+<option value="11053">PARQUE EOLICO MARCONA S.R.L.</option>
+<option value="11063">PETRAMAS                                          </option>
+<option value="11621">PUGLUSH ENERGIA</option>
+<option value="61">SAN GABAN</option>
+<option value="10913">SDE PIURA                                         </option>
+<option value="10587">SDF ENERGIA</option>
+<option value="25">SEAL                                              </option>
+<option value="8">SHOUGESA</option>
+<option value="138">SINERSA                                           </option>
+<option value="6">SN POWER                                          </option>
+<option value="11567">STATKRAFT</option>
+<option value="11627">SW ENERGIAS LIMPIAS DEL SUR S.A.</option>
+<option value="11103">TACNA SOLAR SAC. </option>
+<option value="10767">TERMOCHILCA</option>
+<option value="10">TERMOSELVA</option>
+<option selected="selected" value="0">Todos</option>
+</select> 
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="strFecha" class="col-lg-4 control-label"> Mes</label>
+        <div class="col-lg-8">
+            <select class="form-control" id="strFecha" name="strFecha"><option selected="selected" value="2/1/2015 12:00:00 AM">Febrero_2015</option>
+<option value="1/1/2015 12:00:00 AM">Enero_2015</option>
+<option value="12/1/2014 12:00:00 AM">Diciembre_2014</option>
+<option value="11/1/2014 12:00:00 AM">Noviembre_2014</option>
+<option value="10/1/2014 12:00:00 AM">Octubre_2014</option>
+<option value="9/1/2014 12:00:00 AM">Setiembre_2014</option>
+<option value="8/1/2014 12:00:00 AM">Agosto_2014</option>
+<option value="7/1/2014 12:00:00 AM">Julio_2014</option>
+<option value="6/1/2014 12:00:00 AM">Junio_2014</option>
+<option value="5/1/2014 12:00:00 AM">Mayo_2014</option>
+<option value="4/1/2014 12:00:00 AM">Abril_2014</option>
+<option value="3/1/2014 12:00:00 AM">Marzo_2014</option>
+<option value="2/1/2014 12:00:00 AM">Febrero_2014</option>
+<option value="1/1/2014 12:00:00 AM">Enero_2014</option>
+<option value="12/1/2013 12:00:00 AM">Diciembre_2013</option>
+<option value="11/1/2013 12:00:00 AM">Noviembre_2013</option>
+<option value="10/1/2013 12:00:00 AM">Octubre_2013</option>
+<option value="9/1/2013 12:00:00 AM">Setiembre_2013</option>
+<option value="8/1/2013 12:00:00 AM">Agosto_2013</option>
+<option value="7/1/2013 12:00:00 AM">Julio_2013</option>
+<option value="6/1/2013 12:00:00 AM">Junio_2013</option>
+<option value="5/1/2013 12:00:00 AM">Mayo_2013</option>
+<option value="4/1/2013 12:00:00 AM">Abril_2013</option>
+<option value="3/1/2013 12:00:00 AM">Marzo_2013</option>
+<option value="2/1/2013 12:00:00 AM">Febrero_2013</option>
+<option value="1/1/2013 12:00:00 AM">Enero_2013</option>
+<option value="12/1/2012 12:00:00 AM">Diciembre_2012</option>
+<option value="11/1/2012 12:00:00 AM">Noviembre_2012</option>
+<option value="10/1/2012 12:00:00 AM">Octubre_2012</option>
+<option value="9/1/2012 12:00:00 AM">Setiembre_2012</option>
+<option value="8/1/2012 12:00:00 AM">Agosto_2012</option>
+<option value="7/1/2012 12:00:00 AM">Julio_2012</option>
+<option value="6/1/2012 12:00:00 AM">Junio_2012</option>
+<option value="5/1/2012 12:00:00 AM">Mayo_2012</option>
+<option value="4/1/2012 12:00:00 AM">Abril_2012</option>
+<option value="3/1/2012 12:00:00 AM">Marzo_2012</option>
+<option value="2/1/2012 12:00:00 AM">Febrero_2012</option>
+<option value="1/1/2012 12:00:00 AM">Enero_2012</option>
+<option value="12/1/2011 12:00:00 AM">Diciembre_2011</option>
+<option value="11/1/2011 12:00:00 AM">Noviembre_2011</option>
+<option value="10/1/2011 12:00:00 AM">Octubre_2011</option>
+<option value="9/1/2011 12:00:00 AM">Setiembre_2011</option>
+<option value="8/1/2011 12:00:00 AM">Agosto_2011</option>
+<option value="7/1/2011 12:00:00 AM">Julio_2011</option>
+<option value="6/1/2011 12:00:00 AM">Junio_2011</option>
+<option value="5/1/2011 12:00:00 AM">Mayo_2011</option>
+<option value="4/1/2011 12:00:00 AM">Abril_2011</option>
+<option value="3/1/2011 12:00:00 AM">Marzo_2011</option>
+<option value="2/1/2011 12:00:00 AM">Febrero_2011</option>
+<option value="1/1/2011 12:00:00 AM">Enero_2011</option>
+<option value="12/1/2010 12:00:00 AM">Diciembre_2010</option>
+<option value="11/1/2010 12:00:00 AM">Noviembre_2010</option>
+<option value="10/1/2010 12:00:00 AM">Octubre_2010</option>
+<option value="9/1/2010 12:00:00 AM">Setiembre_2010</option>
+<option value="8/1/2010 12:00:00 AM">Agosto_2010</option>
+<option value="7/1/2010 12:00:00 AM">Julio_2010</option>
+<option value="6/1/2010 12:00:00 AM">Junio_2010</option>
+<option value="5/1/2010 12:00:00 AM">Mayo_2010</option>
+<option value="4/1/2010 12:00:00 AM">Abril_2010</option>
+<option value="3/1/2010 12:00:00 AM">Marzo_2010</option>
+<option value="2/1/2010 12:00:00 AM">Febrero_2010</option>
+<option value="1/1/2010 12:00:00 AM">Enero_2010</option>
+<option value="12/1/2009 12:00:00 AM">Diciembre_2009</option>
+<option value="11/1/2009 12:00:00 AM">Noviembre_2009</option>
+<option value="10/1/2009 12:00:00 AM">Octubre_2009</option>
+<option value="9/1/2009 12:00:00 AM">Setiembre_2009</option>
+<option value="8/1/2009 12:00:00 AM">Agosto_2009</option>
+<option value="7/1/2009 12:00:00 AM">Julio_2009</option>
+<option value="6/1/2009 12:00:00 AM">Junio_2009</option>
+<option value="5/1/2009 12:00:00 AM">Mayo_2009</option>
+<option value="4/1/2009 12:00:00 AM">Abril_2009</option>
+<option value="3/1/2009 12:00:00 AM">Marzo_2009</option>
+<option value="2/1/2009 12:00:00 AM">Febrero_2009</option>
+<option value="1/1/2009 12:00:00 AM">Enero_2009</option>
+<option value="12/1/2008 12:00:00 AM">Diciembre_2008</option>
+<option value="11/1/2008 12:00:00 AM">Noviembre_2008</option>
+<option value="10/1/2008 12:00:00 AM">Octubre_2008</option>
+<option value="9/1/2008 12:00:00 AM">Setiembre_2008</option>
+<option value="8/1/2008 12:00:00 AM">Agosto_2008</option>
+<option value="7/1/2008 12:00:00 AM">Julio_2008</option>
+<option value="6/1/2008 12:00:00 AM">Junio_2008</option>
+<option value="5/1/2008 12:00:00 AM">Mayo_2008</option>
+<option value="4/1/2008 12:00:00 AM">Abril_2008</option>
+<option value="3/1/2008 12:00:00 AM">Marzo_2008</option>
+<option value="2/1/2008 12:00:00 AM">Febrero_2008</option>
+<option value="1/1/2008 12:00:00 AM">Enero_2008</option>
+<option value="12/1/2007 12:00:00 AM">Diciembre_2007</option>
+<option value="11/1/2007 12:00:00 AM">Noviembre_2007</option>
+<option value="10/1/2007 12:00:00 AM">Octubre_2007</option>
+<option value="9/1/2007 12:00:00 AM">Setiembre_2007</option>
+<option value="8/1/2007 12:00:00 AM">Agosto_2007</option>
+<option value="7/1/2007 12:00:00 AM">Julio_2007</option>
+<option value="6/1/2007 12:00:00 AM">Junio_2007</option>
+<option value="5/1/2007 12:00:00 AM">Mayo_2007</option>
+<option value="4/1/2007 12:00:00 AM">Abril_2007</option>
+<option value="3/1/2007 12:00:00 AM">Marzo_2007</option>
+<option value="2/1/2007 12:00:00 AM">Febrero_2007</option>
+<option value="1/1/2007 12:00:00 AM">Enero_2007</option>
+<option value="12/1/2006 12:00:00 AM">Diciembre_2006</option>
+<option value="11/1/2006 12:00:00 AM">Noviembre_2006</option>
+<option value="10/1/2006 12:00:00 AM">Octubre_2006</option>
+<option value="9/1/2006 12:00:00 AM">Setiembre_2006</option>
+<option value="8/1/2006 12:00:00 AM">Agosto_2006</option>
+<option value="7/1/2006 12:00:00 AM">Julio_2006</option>
+<option value="6/1/2006 12:00:00 AM">Junio_2006</option>
+<option value="5/1/2006 12:00:00 AM">Mayo_2006</option>
+<option value="4/1/2006 12:00:00 AM">Abril_2006</option>
+<option value="3/1/2006 12:00:00 AM">Marzo_2006</option>
+<option value="2/1/2006 12:00:00 AM">Febrero_2006</option>
+<option value="1/1/2006 12:00:00 AM">Enero_2006</option>
+<option value="12/1/2005 12:00:00 AM">Diciembre_2005</option>
+<option value="11/1/2005 12:00:00 AM">Noviembre_2005</option>
+<option value="10/1/2005 12:00:00 AM">Octubre_2005</option>
+<option value="9/1/2005 12:00:00 AM">Setiembre_2005</option>
+<option value="8/1/2005 12:00:00 AM">Agosto_2005</option>
+<option value="7/1/2005 12:00:00 AM">Julio_2005</option>
+<option value="6/1/2005 12:00:00 AM">Junio_2005</option>
+<option value="5/1/2005 12:00:00 AM">Mayo_2005</option>
+<option value="4/1/2005 12:00:00 AM">Abril_2005</option>
+<option value="3/1/2005 12:00:00 AM">Marzo_2005</option>
+<option value="2/1/2005 12:00:00 AM">Febrero_2005</option>
+<option value="1/1/2005 12:00:00 AM">Enero_2005</option>
+<option value="12/1/2004 12:00:00 AM">Diciembre_2004</option>
+<option value="11/1/2004 12:00:00 AM">Noviembre_2004</option>
+<option value="10/1/2004 12:00:00 AM">Octubre_2004</option>
+<option value="9/1/2004 12:00:00 AM">Setiembre_2004</option>
+<option value="8/1/2004 12:00:00 AM">Agosto_2004</option>
+<option value="7/1/2004 12:00:00 AM">Julio_2004</option>
+<option value="6/1/2004 12:00:00 AM">Junio_2004</option>
+<option value="5/1/2004 12:00:00 AM">Mayo_2004</option>
+<option value="4/1/2004 12:00:00 AM">Abril_2004</option>
+<option value="3/1/2004 12:00:00 AM">Marzo_2004</option>
+<option value="2/1/2004 12:00:00 AM">Febrero_2004</option>
+<option value="1/1/2004 12:00:00 AM">Enero_2004</option>
+<option value="12/1/2003 12:00:00 AM">Diciembre_2003</option>
+<option value="11/1/2003 12:00:00 AM">Noviembre_2003</option>
+<option value="10/1/2003 12:00:00 AM">Octubre_2003</option>
+<option value="9/1/2003 12:00:00 AM">Setiembre_2003</option>
+<option value="8/1/2003 12:00:00 AM">Agosto_2003</option>
+<option value="7/1/2003 12:00:00 AM">Julio_2003</option>
+<option value="6/1/2003 12:00:00 AM">Junio_2003</option>
+<option value="5/1/2003 12:00:00 AM">Mayo_2003</option>
+<option value="4/1/2003 12:00:00 AM">Abril_2003</option>
+<option value="3/1/2003 12:00:00 AM">Marzo_2003</option>
+<option value="2/1/2003 12:00:00 AM">Febrero_2003</option>
+<option value="1/1/2003 12:00:00 AM">Enero_2003</option>
+<option value="12/1/2002 12:00:00 AM">Diciembre_2002</option>
+<option value="11/1/2002 12:00:00 AM">Noviembre_2002</option>
+<option value="10/1/2002 12:00:00 AM">Octubre_2002</option>
+<option value="9/1/2002 12:00:00 AM">Setiembre_2002</option>
+<option value="8/1/2002 12:00:00 AM">Agosto_2002</option>
+<option value="7/1/2002 12:00:00 AM">Julio_2002</option>
+<option value="6/1/2002 12:00:00 AM">Junio_2002</option>
+<option value="5/1/2002 12:00:00 AM">Mayo_2002</option>
+<option value="4/1/2002 12:00:00 AM">Abril_2002</option>
+<option value="3/1/2002 12:00:00 AM">Marzo_2002</option>
+<option value="2/1/2002 12:00:00 AM">Febrero_2002</option>
+<option value="1/1/2002 12:00:00 AM">Enero_2002</option>
+<option value="12/1/2001 12:00:00 AM">Diciembre_2001</option>
+<option value="11/1/2001 12:00:00 AM">Noviembre_2001</option>
+<option value="10/1/2001 12:00:00 AM">Octubre_2001</option>
+<option value="9/1/2001 12:00:00 AM">Setiembre_2001</option>
+<option value="8/1/2001 12:00:00 AM">Agosto_2001</option>
+<option value="7/1/2001 12:00:00 AM">Julio_2001</option>
+<option value="6/1/2001 12:00:00 AM">Junio_2001</option>
+<option value="5/1/2001 12:00:00 AM">Mayo_2001</option>
+<option value="4/1/2001 12:00:00 AM">Abril_2001</option>
+<option value="3/1/2001 12:00:00 AM">Marzo_2001</option>
+<option value="2/1/2001 12:00:00 AM">Febrero_2001</option>
+<option value="1/1/2001 12:00:00 AM">Enero_2001</option>
+<option value="12/1/2000 12:00:00 AM">Diciembre_2000</option>
+<option value="11/1/2000 12:00:00 AM">Noviembre_2000</option>
+<option value="10/1/2000 12:00:00 AM">Octubre_2000</option>
+<option value="9/1/2000 12:00:00 AM">Setiembre_2000</option>
+<option value="8/1/2000 12:00:00 AM">Agosto_2000</option>
+<option value="7/1/2000 12:00:00 AM">Julio_2000</option>
+<option value="6/1/2000 12:00:00 AM">Junio_2000</option>
+<option value="5/1/2000 12:00:00 AM">Mayo_2000</option>
+<option value="4/1/2000 12:00:00 AM">Abril_2000</option>
+<option value="3/1/2000 12:00:00 AM">Marzo_2000</option>
+<option value="2/1/2000 12:00:00 AM">Febrero_2000</option>
+<option value="1/1/2000 12:00:00 AM">Enero_2000</option>
+</select> 
+        </div>
+    </div>
+
+ </div>  
+ <div class="col-md-5">    
+    <div class="form-group" style="display:none">
+        <label for="codIntegrante" class="col-lg-6 control-label"> Central</label>
+        <div class="col-lg-6">
+           <select class="form-control" data-val="true" data-val-number="The field codIntegrante must be a number." data-val-required="The codIntegrante field is required." id="codIntegrante" name="codIntegrante"><option value="0">TODOS</option>
+<option selected="selected" value="1">COES</option>
+<option value="10">NO COES</option>
+</select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="CodigoTipoGeneracion" class="col-lg-6 control-label">Tipo de Generación</label>
+        <div class="col-lg-6">
+            <select class="form-control" data-val="true" data-val-number="The field CodigoTipoGeneracion must be a number." data-val-required="The CodigoTipoGeneracion field is required." id="CodigoTipoGeneracion" name="CodigoTipoGeneracion"><option value="2">TERMOELÉCTRICA</option>
+<option value="3">SOLAR</option>
+<option value="4">EOLICA</option>
+<option value="5">NUCLEAR</option>
+<option value="0">( TODOS )</option>
+<option value="1">HIDROELÉCTRICA</option>
+<option selected="selected" value="0">Todos</option>
+</select> 
+        </div>
+    </div>
+ </div>   
+ <div class="col-md-2 panel-title">
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary col-lg-12">Consultar</button>
+    </div>
+    <div class="form-group">
+        <button type="button" id="export_excel" class="btn btn-default btn-smal col-lg-12" title="Exportar a Excel"><img src="MaximaDemanda_data/excel.png" class="img-rounded">Exportar a Excel</button>
+    </div>
+    <div class="form-group">
+        <button id="export_pdf" type="button" class="btn btn-default btn-smal col-lg-12" title="Exportar a PDF"><img src="MaximaDemanda_data/pdf.png" class="img-rounded">Exportar a PDF</button>
+    </div>
+</div>
+
+    </div>
+    </div>
+</form>
+
+<p>
+<span class="label label-info">Fecha de Consulta:  2015-03-15 07:52:57</span>
+<span class="label label-danger"></span>
+<span class="label label-danger"></span>
+</p>
+    <table>  
+        <tbody><tr><td>
+                <table class="table  table-bordered table-condensed">
+                    <thead class="text-info" style="background-color:#5C9CCC;color:white">
+                        <tr>
+                            <th colspan="3" style="text-align:center;"></th>
+
+                            <th colspan="2" style="text-align:center;background-color:PowderBlue;color:SteelBlue">Interconexión</th>
+                            <th></th>                                                        
+                        </tr>
+                        <tr>
+                            <th valign="top" width="150">
+                              <label class="control-label">Bloque Horario </label>  
+                            </th>
+                            <th style="text-align:center;" align="CENTER" valign="top" width="100">
+                                <label class="control-label">Fecha</label>
+                             </th>
+                            <th style="text-align:center;" align="CENTER" valign="top" width="80">
+                                <label class="control-label">Hora</label>
+                            </th>
+
+                            <th style="text-align:center;background-color:PowderBlue;color:SteelBlue" align="CENTER" valign="top" width="150">
+                                <label class="control-label">PER-ECU Exportación MW</label>
+                            </th>
+                            <th style="text-align:center;background-color:PowderBlue;color:SteelBlue" align="CENTER" valign="top" width="150">
+                                <label class="control-label">ECU-PER Importación MW</label>
+                            </th>
+                            <th style="text-align:center;" align="CENTER" valign="top" width="150">
+                                <label class="control-label">SEIN <br> MW </label>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #ffffff;">
+    <tr>
+        <td>MAXIMA</td>
+        <td style="text-align:center;">2015-02-17</td>
+        <td style="text-align:center;">19:30</td>
+        <td style="text-align:center;">0,000</td>
+        <td style="text-align:center;">0,000</td>
+        <td style="text-align:center;">5 767,175</td>
+    </tr>
+    <tr>
+        <td>MEDIA</td>
+        <td style="text-align:center;">2015-02-17</td>
+        <td style="text-align:center;">12:00</td>
+        <td style="text-align:center;">0,000</td>
+        <td style="text-align:center;">0,000</td>
+        <td style="text-align:center;">5 827,681</td>
+    </tr>
+    <tr>
+        <td>MINIMA</td>
+        <td style="text-align:center;">2015-02-17</td>
+        <td style="text-align:center;">03:30</td>
+        <td style="text-align:center;">0,000</td>
+        <td style="text-align:center;">0,000</td>
+        <td style="text-align:center;">4 299,107</td>
+    </tr>
+
+        </tbody>
+</table> 
+     </td>        
+
+</tr>  
+ </tbody></table>     
+<hr>    
+ <div style="width: 910px;" dir="ltr" id="gbox_list" class="ui-jqgrid ui-widget ui-widget-content ui-corner-all"><div style="display: none;" class="ui-widget-overlay jqgrid-overlay" id="lui_list"></div><div style="display: none;" class="loading ui-state-default ui-state-active" id="load_list">Cargando...</div><div style="width: 910px;" id="gview_list" class="ui-jqgrid-view"><div class="ui-jqgrid-titlebar ui-widget-header ui-corner-top ui-helper-clearfix"><a style="right: 0px;" class="ui-jqgrid-titlebar-close HeaderButton" role="link" href="javascript:void(0)"><span class="ui-icon ui-icon-circle-triangle-n"></span></a><span class="ui-jqgrid-title">Reporte del día de la Máxima Demanda</span></div><div class="ui-state-default ui-jqgrid-hdiv" style="width: 910px;"><div class="ui-jqgrid-hbox"><table class="ui-jqgrid-htable" style="width:892px" role="grid" aria-labelledby="gbox_list" border="0" cellpadding="0" cellspacing="0"><thead><tr class="ui-jqgrid-labels" role="rowheader"><th style="width: 285px;" id="list_Empresa" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr"><span style="cursor: col-resize;" class="ui-jqgrid-resize ui-jqgrid-resize-ltr">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_list_Empresa">Empresa<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th style="width: 285px;" id="list_Central" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr"><span style="cursor: col-resize;" class="ui-jqgrid-resize ui-jqgrid-resize-ltr">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_list_Central">Central<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th style="width: 178px;" id="list_Unidad" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr"><span style="cursor: col-resize;" class="ui-jqgrid-resize ui-jqgrid-resize-ltr">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_list_Unidad">Unidad<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th style="width: 124px;" id="list_MW" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr"><span style="cursor: col-resize;" class="ui-jqgrid-resize ui-jqgrid-resize-ltr">&nbsp;</span><div class="ui-jqgrid-sortable" id="jqgh_list_MW">MW<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th></tr></thead></table></div></div><div style="height: 430px; width: 910px;" class="ui-jqgrid-bdiv"><div style="position:relative;"><div></div><table style="width: 892px;" aria-labelledby="gbox_list" aria-multiselectable="false" role="grid" tabindex="0" id="list" class="ui-jqgrid-btable" border="0" cellpadding="0" cellspacing="0"><tbody><tr class="jqgfirstrow" role="row" style="height:auto"><td role="gridcell" style="height:0px;width:285px;"></td><td role="gridcell" style="height:0px;width:285px;"></td><td role="gridcell" style="height:0px;width:178px;"></td><td role="gridcell" style="height:0px;width:124px;"></td></tr><tr role="row" id="1" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="AGRO INDUSTRIAL PARAMONGA" aria-describedby="list_Empresa">AGRO INDUSTRIAL PARAMONGA</td><td role="gridcell" style="text-align:left;" title="PARAMONGA" aria-describedby="list_Central">PARAMONGA</td><td role="gridcell" style="text-align:left;" title="TGV01                                   " aria-describedby="list_Unidad">TGV01                                   </td><td role="gridcell" style="text-align:left;" title="10,882" aria-describedby="list_MW">10,882</td></tr><tr role="row" id="2" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="AGUAS Y ENERGIA PERU                              " aria-describedby="list_Empresa">AGUAS Y ENERGIA PERU                              </td><td role="gridcell" style="text-align:left;" title="CENTRAL HIDROELÉCTRICA PÍAS 1" aria-describedby="list_Central">CENTRAL HIDROELÉCTRICA PÍAS 1</td><td role="gridcell" style="text-align:left;" title="G1_C.H. PÍAS 1" aria-describedby="list_Unidad">G1_C.H. PÍAS 1</td><td role="gridcell" style="text-align:left;" title="5,858" aria-describedby="list_MW">5,858</td></tr><tr role="row" id="3" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="AGUAS Y ENERGIA PERU                              " aria-describedby="list_Empresa">AGUAS Y ENERGIA PERU                              </td><td role="gridcell" style="text-align:left;" title="CENTRAL HIDROELÉCTRICA PÍAS 1" aria-describedby="list_Central">CENTRAL HIDROELÉCTRICA PÍAS 1</td><td role="gridcell" style="text-align:left;" title="G2_C.H. PÍAS 1" aria-describedby="list_Unidad">G2_C.H. PÍAS 1</td><td role="gridcell" style="text-align:left;" title="5,696" aria-describedby="list_MW">5,696</td></tr><tr role="row" id="4" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="CELEPSA" aria-describedby="list_Empresa">CELEPSA</td><td role="gridcell" style="text-align:left;" title="CH EL PLATANAL" aria-describedby="list_Central">CH EL PLATANAL</td><td role="gridcell" style="text-align:left;" title="CH EL PLATANAL G1                       " aria-describedby="list_Unidad">CH EL PLATANAL G1                       </td><td role="gridcell" style="text-align:left;" title="108,516" aria-describedby="list_MW">108,516</td></tr><tr role="row" id="5" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="CELEPSA" aria-describedby="list_Empresa">CELEPSA</td><td role="gridcell" style="text-align:left;" title="CH EL PLATANAL" aria-describedby="list_Central">CH EL PLATANAL</td><td role="gridcell" style="text-align:left;" title="CH EL PLATANAL G2                       " aria-describedby="list_Unidad">CH EL PLATANAL G2                       </td><td role="gridcell" style="text-align:left;" title="106,529" aria-describedby="list_MW">106,529</td></tr><tr role="row" id="6" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="CHINANGO S.A.C." aria-describedby="list_Empresa">CHINANGO S.A.C.</td><td role="gridcell" style="text-align:left;" title="C.H. CHIMAY" aria-describedby="list_Central">C.H. CHIMAY</td><td role="gridcell" style="text-align:left;" title="CHIMAY1" aria-describedby="list_Unidad">CHIMAY1</td><td role="gridcell" style="text-align:left;" title="74,509" aria-describedby="list_MW">74,509</td></tr><tr role="row" id="7" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="CHINANGO S.A.C." aria-describedby="list_Empresa">CHINANGO S.A.C.</td><td role="gridcell" style="text-align:left;" title="C.H. CHIMAY" aria-describedby="list_Central">C.H. CHIMAY</td><td role="gridcell" style="text-align:left;" title="CHIMAY2" aria-describedby="list_Unidad">CHIMAY2</td><td role="gridcell" style="text-align:left;" title="74,604" aria-describedby="list_MW">74,604</td></tr><tr role="row" id="8" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="CHINANGO S.A.C." aria-describedby="list_Empresa">CHINANGO S.A.C.</td><td role="gridcell" style="text-align:left;" title="C.H. YANANGO" aria-describedby="list_Central">C.H. YANANGO</td><td role="gridcell" style="text-align:left;" title="YANAN1" aria-describedby="list_Unidad">YANAN1</td><td role="gridcell" style="text-align:left;" title="24,363" aria-describedby="list_MW">24,363</td></tr><tr role="row" id="9" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. CALLAHUANCA" aria-describedby="list_Central">C.H. CALLAHUANCA</td><td role="gridcell" style="text-align:left;" title="CALL1" aria-describedby="list_Unidad">CALL1</td><td role="gridcell" style="text-align:left;" title="14,867" aria-describedby="list_MW">14,867</td></tr><tr role="row" id="10" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. CALLAHUANCA" aria-describedby="list_Central">C.H. CALLAHUANCA</td><td role="gridcell" style="text-align:left;" title="CALL2" aria-describedby="list_Unidad">CALL2</td><td role="gridcell" style="text-align:left;" title="14,851" aria-describedby="list_MW">14,851</td></tr><tr role="row" id="11" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. CALLAHUANCA" aria-describedby="list_Central">C.H. CALLAHUANCA</td><td role="gridcell" style="text-align:left;" title="CALL3" aria-describedby="list_Unidad">CALL3</td><td role="gridcell" style="text-align:left;" title="14,614" aria-describedby="list_MW">14,614</td></tr><tr role="row" id="12" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. CALLAHUANCA" aria-describedby="list_Central">C.H. CALLAHUANCA</td><td role="gridcell" style="text-align:left;" title="CALL4" aria-describedby="list_Unidad">CALL4</td><td role="gridcell" style="text-align:left;" title="28,841" aria-describedby="list_MW">28,841</td></tr><tr role="row" id="13" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. HUAMPANI" aria-describedby="list_Central">C.H. HUAMPANI</td><td role="gridcell" style="text-align:left;" title="HPNI1" aria-describedby="list_Unidad">HPNI1</td><td role="gridcell" style="text-align:left;" title="11,765" aria-describedby="list_MW">11,765</td></tr><tr role="row" id="14" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. HUAMPANI" aria-describedby="list_Central">C.H. HUAMPANI</td><td role="gridcell" style="text-align:left;" title="HPNI2" aria-describedby="list_Unidad">HPNI2</td><td role="gridcell" style="text-align:left;" title="11,604" aria-describedby="list_MW">11,604</td></tr><tr role="row" id="15" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. HUINCO" aria-describedby="list_Central">C.H. HUINCO</td><td role="gridcell" style="text-align:left;" title="HCO1" aria-describedby="list_Unidad">HCO1</td><td role="gridcell" style="text-align:left;" title="64,483" aria-describedby="list_MW">64,483</td></tr><tr role="row" id="16" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. HUINCO" aria-describedby="list_Central">C.H. HUINCO</td><td role="gridcell" style="text-align:left;" title="HCO2" aria-describedby="list_Unidad">HCO2</td><td role="gridcell" style="text-align:left;" title="65,417" aria-describedby="list_MW">65,417</td></tr><tr role="row" id="17" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. HUINCO" aria-describedby="list_Central">C.H. HUINCO</td><td role="gridcell" style="text-align:left;" title="HCO3" aria-describedby="list_Unidad">HCO3</td><td role="gridcell" style="text-align:left;" title="66,386" aria-describedby="list_MW">66,386</td></tr><tr role="row" id="18" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. HUINCO" aria-describedby="list_Central">C.H. HUINCO</td><td role="gridcell" style="text-align:left;" title="HCO4" aria-describedby="list_Unidad">HCO4</td><td role="gridcell" style="text-align:left;" title="65,350" aria-describedby="list_MW">65,350</td></tr><tr role="row" id="19" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. MATUCANA" aria-describedby="list_Central">C.H. MATUCANA</td><td role="gridcell" style="text-align:left;" title="MAT1" aria-describedby="list_Unidad">MAT1</td><td role="gridcell" style="text-align:left;" title="68,119" aria-describedby="list_MW">68,119</td></tr><tr role="row" id="20" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. MATUCANA" aria-describedby="list_Central">C.H. MATUCANA</td><td role="gridcell" style="text-align:left;" title="MAT2" aria-describedby="list_Unidad">MAT2</td><td role="gridcell" style="text-align:left;" title="67,464" aria-describedby="list_MW">67,464</td></tr><tr role="row" id="21" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. MOYOPAMPA" aria-describedby="list_Central">C.H. MOYOPAMPA</td><td role="gridcell" style="text-align:left;" title="MOY1" aria-describedby="list_Unidad">MOY1</td><td role="gridcell" style="text-align:left;" title="22,748" aria-describedby="list_MW">22,748</td></tr><tr role="row" id="22" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. MOYOPAMPA" aria-describedby="list_Central">C.H. MOYOPAMPA</td><td role="gridcell" style="text-align:left;" title="MOY2" aria-describedby="list_Unidad">MOY2</td><td role="gridcell" style="text-align:left;" title="22,259" aria-describedby="list_MW">22,259</td></tr><tr role="row" id="23" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.H. MOYOPAMPA" aria-describedby="list_Central">C.H. MOYOPAMPA</td><td role="gridcell" style="text-align:left;" title="MOY3" aria-describedby="list_Unidad">MOY3</td><td role="gridcell" style="text-align:left;" title="23,183" aria-describedby="list_MW">23,183</td></tr><tr role="row" id="24" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.T. STA ROSA UTI" aria-describedby="list_Central">C.T. STA ROSA UTI</td><td role="gridcell" style="text-align:left;" title="STA ROSA - UTI5" aria-describedby="list_Unidad">STA ROSA - UTI5</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="25" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.T. STA ROSA UTI" aria-describedby="list_Central">C.T. STA ROSA UTI</td><td role="gridcell" style="text-align:left;" title="STA ROSA - UTI6" aria-describedby="list_Unidad">STA ROSA - UTI6</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="26" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.T. STA.ROSA WEST" aria-describedby="list_Central">C.T. STA.ROSA WEST</td><td role="gridcell" style="text-align:left;" title="TG7 WEST" aria-describedby="list_Unidad">TG7 WEST</td><td role="gridcell" style="text-align:left;" title="115,027" aria-describedby="list_MW">115,027</td></tr><tr role="row" id="27" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.T. STA.ROSA WEST" aria-describedby="list_Central">C.T. STA.ROSA WEST</td><td role="gridcell" style="text-align:left;" title="TG8 SIEMENS" aria-describedby="list_Unidad">TG8 SIEMENS</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="28" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.T. VENTANILLA" aria-describedby="list_Central">C.T. VENTANILLA</td><td role="gridcell" style="text-align:left;" title="VENT_TG3" aria-describedby="list_Unidad">VENT_TG3</td><td role="gridcell" style="text-align:left;" title="143,727" aria-describedby="list_MW">143,727</td></tr><tr role="row" id="29" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.T. VENTANILLA" aria-describedby="list_Central">C.T. VENTANILLA</td><td role="gridcell" style="text-align:left;" title="VENT_TG4" aria-describedby="list_Unidad">VENT_TG4</td><td role="gridcell" style="text-align:left;" title="140,067" aria-describedby="list_MW">140,067</td></tr><tr role="row" id="30" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EDEGEL" aria-describedby="list_Empresa">EDEGEL</td><td role="gridcell" style="text-align:left;" title="C.T. VENTANILLA" aria-describedby="list_Central">C.T. VENTANILLA</td><td role="gridcell" style="text-align:left;" title="VENT_TV" aria-describedby="list_Unidad">VENT_TV</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="31" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EEPSA" aria-describedby="list_Empresa">EEPSA</td><td role="gridcell" style="text-align:left;" title="C.T. MALACAS" aria-describedby="list_Central">C.T. MALACAS</td><td role="gridcell" style="text-align:left;" title="M_TG1" aria-describedby="list_Unidad">M_TG1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="32" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EEPSA" aria-describedby="list_Empresa">EEPSA</td><td role="gridcell" style="text-align:left;" title="C.T. MALACAS" aria-describedby="list_Central">C.T. MALACAS</td><td role="gridcell" style="text-align:left;" title="M_TG4" aria-describedby="list_Unidad">M_TG4</td><td role="gridcell" style="text-align:left;" title="93,356" aria-describedby="list_MW">93,356</td></tr><tr role="row" id="33" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EEPSA" aria-describedby="list_Empresa">EEPSA</td><td role="gridcell" style="text-align:left;" title="C.T. RESERVA FRIA DE GENERACION TALARA" aria-describedby="list_Central">C.T. RESERVA FRIA DE GENERACION TALARA</td><td role="gridcell" style="text-align:left;" title="M_TG5" aria-describedby="list_Unidad">M_TG5</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="34" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI I" aria-describedby="list_Central">C.H. CHARCANI I</td><td role="gridcell" style="text-align:left;" title="CHAR_I_G1" aria-describedby="list_Unidad">CHAR_I_G1</td><td role="gridcell" style="text-align:left;" title="0,601" aria-describedby="list_MW">0,601</td></tr><tr role="row" id="35" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI I" aria-describedby="list_Central">C.H. CHARCANI I</td><td role="gridcell" style="text-align:left;" title="CHAR_I_G2" aria-describedby="list_Unidad">CHAR_I_G2</td><td role="gridcell" style="text-align:left;" title="0,610" aria-describedby="list_MW">0,610</td></tr><tr role="row" id="36" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI II" aria-describedby="list_Central">C.H. CHARCANI II</td><td role="gridcell" style="text-align:left;" title="CHAR_II_G1" aria-describedby="list_Unidad">CHAR_II_G1</td><td role="gridcell" style="text-align:left;" title="0,181" aria-describedby="list_MW">0,181</td></tr><tr role="row" id="37" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI II" aria-describedby="list_Central">C.H. CHARCANI II</td><td role="gridcell" style="text-align:left;" title="CHAR_II_G2" aria-describedby="list_Unidad">CHAR_II_G2</td><td role="gridcell" style="text-align:left;" title="0,191" aria-describedby="list_MW">0,191</td></tr><tr role="row" id="38" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI II" aria-describedby="list_Central">C.H. CHARCANI II</td><td role="gridcell" style="text-align:left;" title="CHAR_II_G3" aria-describedby="list_Unidad">CHAR_II_G3</td><td role="gridcell" style="text-align:left;" title="0,199" aria-describedby="list_MW">0,199</td></tr><tr role="row" id="39" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI III" aria-describedby="list_Central">C.H. CHARCANI III</td><td role="gridcell" style="text-align:left;" title="CHAR_III_G1" aria-describedby="list_Unidad">CHAR_III_G1</td><td role="gridcell" style="text-align:left;" title="2,158" aria-describedby="list_MW">2,158</td></tr><tr role="row" id="40" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI III" aria-describedby="list_Central">C.H. CHARCANI III</td><td role="gridcell" style="text-align:left;" title="CHAR_III_G2" aria-describedby="list_Unidad">CHAR_III_G2</td><td role="gridcell" style="text-align:left;" title="2,029" aria-describedby="list_MW">2,029</td></tr><tr role="row" id="41" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI IV" aria-describedby="list_Central">C.H. CHARCANI IV</td><td role="gridcell" style="text-align:left;" title="CHAR_IV_G1" aria-describedby="list_Unidad">CHAR_IV_G1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="42" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI IV" aria-describedby="list_Central">C.H. CHARCANI IV</td><td role="gridcell" style="text-align:left;" title="CHAR_IV_G2" aria-describedby="list_Unidad">CHAR_IV_G2</td><td role="gridcell" style="text-align:left;" title="4,959" aria-describedby="list_MW">4,959</td></tr><tr role="row" id="43" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI IV" aria-describedby="list_Central">C.H. CHARCANI IV</td><td role="gridcell" style="text-align:left;" title="CHAR_IV_G3" aria-describedby="list_Unidad">CHAR_IV_G3</td><td role="gridcell" style="text-align:left;" title="4,937" aria-describedby="list_MW">4,937</td></tr><tr role="row" id="44" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI V" aria-describedby="list_Central">C.H. CHARCANI V</td><td role="gridcell" style="text-align:left;" title="CHAR_V_G1" aria-describedby="list_Unidad">CHAR_V_G1</td><td role="gridcell" style="text-align:left;" title="45,711" aria-describedby="list_MW">45,711</td></tr><tr role="row" id="45" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI V" aria-describedby="list_Central">C.H. CHARCANI V</td><td role="gridcell" style="text-align:left;" title="CHAR_V_G2" aria-describedby="list_Unidad">CHAR_V_G2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="46" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI V" aria-describedby="list_Central">C.H. CHARCANI V</td><td role="gridcell" style="text-align:left;" title="CHAR_V_G3" aria-describedby="list_Unidad">CHAR_V_G3</td><td role="gridcell" style="text-align:left;" title="45,297" aria-describedby="list_MW">45,297</td></tr><tr role="row" id="47" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.H. CHARCANI VI" aria-describedby="list_Central">C.H. CHARCANI VI</td><td role="gridcell" style="text-align:left;" title="CHARVI_G1" aria-describedby="list_Unidad">CHARVI_G1</td><td role="gridcell" style="text-align:left;" title="5,642" aria-describedby="list_MW">5,642</td></tr><tr role="row" id="48" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. CHILINA DIESEL" aria-describedby="list_Central">C.T. CHILINA DIESEL</td><td role="gridcell" style="text-align:left;" title="CHI_SLZ12_SLZ1" aria-describedby="list_Unidad">CHI_SLZ12_SLZ1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="49" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. CHILINA DIESEL" aria-describedby="list_Central">C.T. CHILINA DIESEL</td><td role="gridcell" style="text-align:left;" title="CHI_SLZ12_SLZ2" aria-describedby="list_Unidad">CHI_SLZ12_SLZ2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="50" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. CHILINA VAPOR" aria-describedby="list_Central">C.T. CHILINA VAPOR</td><td role="gridcell" style="text-align:left;" title="CCOMB_CCOMB" aria-describedby="list_Unidad">CCOMB_CCOMB</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="51" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. CHILINA VAPOR" aria-describedby="list_Central">C.T. CHILINA VAPOR</td><td role="gridcell" style="text-align:left;" title="CHILTV2_TV2" aria-describedby="list_Unidad">CHILTV2_TV2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="52" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. CHILINA VAPOR" aria-describedby="list_Central">C.T. CHILINA VAPOR</td><td role="gridcell" style="text-align:left;" title="CHILTV3_TV3" aria-describedby="list_Unidad">CHILTV3_TV3</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="53" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. CHILINA VAPOR" aria-describedby="list_Central">C.T. CHILINA VAPOR</td><td role="gridcell" style="text-align:left;" title="CHILTV1_TV1" aria-describedby="list_Unidad">CHILTV1_TV1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="54" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. MOLLENDO DIESEL" aria-describedby="list_Central">C.T. MOLLENDO DIESEL</td><td role="gridcell" style="text-align:left;" title="MOLL123_GD1" aria-describedby="list_Unidad">MOLL123_GD1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="55" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. MOLLENDO DIESEL" aria-describedby="list_Central">C.T. MOLLENDO DIESEL</td><td role="gridcell" style="text-align:left;" title="MOLL123_GD2" aria-describedby="list_Unidad">MOLL123_GD2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="56" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. MOLLENDO DIESEL" aria-describedby="list_Central">C.T. MOLLENDO DIESEL</td><td role="gridcell" style="text-align:left;" title="MOLL123_GD3" aria-describedby="list_Unidad">MOLL123_GD3</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="57" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. PISCO" aria-describedby="list_Central">C.T. PISCO</td><td role="gridcell" style="text-align:left;" title="PISCO_TG1" aria-describedby="list_Unidad">PISCO_TG1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="58" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGASA" aria-describedby="list_Empresa">EGASA</td><td role="gridcell" style="text-align:left;" title="C.T. PISCO" aria-describedby="list_Central">C.T. PISCO</td><td role="gridcell" style="text-align:left;" title="PISCO_TG2" aria-describedby="list_Unidad">PISCO_TG2</td><td role="gridcell" style="text-align:left;" title="30,492" aria-describedby="list_MW">30,492</td></tr><tr role="row" id="59" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGEMSA" aria-describedby="list_Empresa">EGEMSA</td><td role="gridcell" style="text-align:left;" title="C.H. MACHUPICCHU" aria-describedby="list_Central">C.H. MACHUPICCHU</td><td role="gridcell" style="text-align:left;" title="MACHUP_G1" aria-describedby="list_Unidad">MACHUP_G1</td><td role="gridcell" style="text-align:left;" title="27,867" aria-describedby="list_MW">27,867</td></tr><tr role="row" id="60" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGEMSA" aria-describedby="list_Empresa">EGEMSA</td><td role="gridcell" style="text-align:left;" title="C.H. MACHUPICCHU" aria-describedby="list_Central">C.H. MACHUPICCHU</td><td role="gridcell" style="text-align:left;" title="MACHUP_G2" aria-describedby="list_Unidad">MACHUP_G2</td><td role="gridcell" style="text-align:left;" title="28,562" aria-describedby="list_MW">28,562</td></tr><tr role="row" id="61" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGEMSA" aria-describedby="list_Empresa">EGEMSA</td><td role="gridcell" style="text-align:left;" title="C.H. MACHUPICCHU" aria-describedby="list_Central">C.H. MACHUPICCHU</td><td role="gridcell" style="text-align:left;" title="MACHUP_G3" aria-describedby="list_Unidad">MACHUP_G3</td><td role="gridcell" style="text-align:left;" title="28,492" aria-describedby="list_MW">28,492</td></tr><tr role="row" id="62" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGEMSA" aria-describedby="list_Empresa">EGEMSA</td><td role="gridcell" style="text-align:left;" title="C.T. DOLORESPATA 1" aria-describedby="list_Central">C.T. DOLORESPATA 1</td><td role="gridcell" style="text-align:left;" title="C.T. DOLORESPATA 1" aria-describedby="list_Unidad">C.T. DOLORESPATA 1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="63" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGEMSA" aria-describedby="list_Empresa">EGEMSA</td><td role="gridcell" style="text-align:left;" title="C.T.E. CACHIMAYO" aria-describedby="list_Central">C.T.E. CACHIMAYO</td><td role="gridcell" style="text-align:left;" title="BLOQUE A" aria-describedby="list_Unidad">BLOQUE A</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="64" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CAÑA BRAVA" aria-describedby="list_Central">C.H. CAÑA BRAVA</td><td role="gridcell" style="text-align:left;" title="CBRAVA G1                               " aria-describedby="list_Unidad">CBRAVA G1                               </td><td role="gridcell" style="text-align:left;" title="5,013" aria-describedby="list_MW">5,013</td></tr><tr role="row" id="65" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CAÑON DEL PATO" aria-describedby="list_Central">C.H. CAÑON DEL PATO</td><td role="gridcell" style="text-align:left;" title="CPATO1" aria-describedby="list_Unidad">CPATO1</td><td role="gridcell" style="text-align:left;" title="42,925" aria-describedby="list_MW">42,925</td></tr><tr role="row" id="66" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CAÑON DEL PATO" aria-describedby="list_Central">C.H. CAÑON DEL PATO</td><td role="gridcell" style="text-align:left;" title="CPATO2" aria-describedby="list_Unidad">CPATO2</td><td role="gridcell" style="text-align:left;" title="43,198" aria-describedby="list_MW">43,198</td></tr><tr role="row" id="67" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CAÑON DEL PATO" aria-describedby="list_Central">C.H. CAÑON DEL PATO</td><td role="gridcell" style="text-align:left;" title="CPATO3" aria-describedby="list_Unidad">CPATO3</td><td role="gridcell" style="text-align:left;" title="42,698" aria-describedby="list_MW">42,698</td></tr><tr role="row" id="68" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CAÑON DEL PATO" aria-describedby="list_Central">C.H. CAÑON DEL PATO</td><td role="gridcell" style="text-align:left;" title="CPATO4" aria-describedby="list_Unidad">CPATO4</td><td role="gridcell" style="text-align:left;" title="42,569" aria-describedby="list_MW">42,569</td></tr><tr role="row" id="69" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CAÑON DEL PATO" aria-describedby="list_Central">C.H. CAÑON DEL PATO</td><td role="gridcell" style="text-align:left;" title="CPATO5" aria-describedby="list_Unidad">CPATO5</td><td role="gridcell" style="text-align:left;" title="42,834" aria-describedby="list_MW">42,834</td></tr><tr role="row" id="70" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CAÑON DEL PATO" aria-describedby="list_Central">C.H. CAÑON DEL PATO</td><td role="gridcell" style="text-align:left;" title="CPATO6" aria-describedby="list_Unidad">CPATO6</td><td role="gridcell" style="text-align:left;" title="42,479" aria-describedby="list_MW">42,479</td></tr><tr role="row" id="71" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CARHUAQUERO" aria-describedby="list_Central">C.H. CARHUAQUERO</td><td role="gridcell" style="text-align:left;" title="CARQ1" aria-describedby="list_Unidad">CARQ1</td><td role="gridcell" style="text-align:left;" title="29,948" aria-describedby="list_MW">29,948</td></tr><tr role="row" id="72" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CARHUAQUERO" aria-describedby="list_Central">C.H. CARHUAQUERO</td><td role="gridcell" style="text-align:left;" title="CARQ2" aria-describedby="list_Unidad">CARQ2</td><td role="gridcell" style="text-align:left;" title="30,174" aria-describedby="list_MW">30,174</td></tr><tr role="row" id="73" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CARHUAQUERO" aria-describedby="list_Central">C.H. CARHUAQUERO</td><td role="gridcell" style="text-align:left;" title="CARQ3" aria-describedby="list_Unidad">CARQ3</td><td role="gridcell" style="text-align:left;" title="30,066" aria-describedby="list_MW">30,066</td></tr><tr role="row" id="74" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.H. CARHUAQUERO IV" aria-describedby="list_Central">C.H. CARHUAQUERO IV</td><td role="gridcell" style="text-align:left;" title="CARQ4                                   " aria-describedby="list_Unidad">CARQ4                                   </td><td role="gridcell" style="text-align:left;" title="9,966" aria-describedby="list_MW">9,966</td></tr><tr role="row" id="75" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.T. CHIMBOTE" aria-describedby="list_Central">C.T. CHIMBOTE</td><td role="gridcell" style="text-align:left;" title="CHIM3" aria-describedby="list_Unidad">CHIM3</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="76" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.T. O.CHICLAYO" aria-describedby="list_Central">C.T. O.CHICLAYO</td><td role="gridcell" style="text-align:left;" title="CH-O_SZ1" aria-describedby="list_Unidad">CH-O_SZ1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="77" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.T. O.CHICLAYO" aria-describedby="list_Central">C.T. O.CHICLAYO</td><td role="gridcell" style="text-align:left;" title="CH-O_SZ2" aria-describedby="list_Unidad">CH-O_SZ2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="78" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.T. O.CHICLAYO" aria-describedby="list_Central">C.T. O.CHICLAYO</td><td role="gridcell" style="text-align:left;" title="CH-O_GMT2" aria-describedby="list_Unidad">CH-O_GMT2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="79" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.T. PIURA DIESEL 2" aria-describedby="list_Central">C.T. PIURA DIESEL 2</td><td role="gridcell" style="text-align:left;" title="C.T. PIURA DIESEL 2" aria-describedby="list_Unidad">C.T. PIURA DIESEL 2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="80" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.T. PIURA RESIDUAL" aria-describedby="list_Central">C.T. PIURA RESIDUAL</td><td role="gridcell" style="text-align:left;" title="PIURA TG" aria-describedby="list_Unidad">PIURA TG</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="81" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.T. PIURA RESIDUAL" aria-describedby="list_Central">C.T. PIURA RESIDUAL</td><td role="gridcell" style="text-align:left;" title="PIURGMT1" aria-describedby="list_Unidad">PIURGMT1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="82" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGENOR" aria-describedby="list_Empresa">EGENOR</td><td role="gridcell" style="text-align:left;" title="C.T. PIURA RESIDUAL" aria-describedby="list_Central">C.T. PIURA RESIDUAL</td><td role="gridcell" style="text-align:left;" title="PIURGMT2" aria-describedby="list_Unidad">PIURGMT2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="83" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGESUR" aria-describedby="list_Empresa">EGESUR</td><td role="gridcell" style="text-align:left;" title="C.H. ARICOTA I" aria-describedby="list_Central">C.H. ARICOTA I</td><td role="gridcell" style="text-align:left;" title="ARICOTA_G1" aria-describedby="list_Unidad">ARICOTA_G1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="84" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGESUR" aria-describedby="list_Empresa">EGESUR</td><td role="gridcell" style="text-align:left;" title="C.H. ARICOTA I" aria-describedby="list_Central">C.H. ARICOTA I</td><td role="gridcell" style="text-align:left;" title="ARICOTA_G2" aria-describedby="list_Unidad">ARICOTA_G2</td><td role="gridcell" style="text-align:left;" title="3,318" aria-describedby="list_MW">3,318</td></tr><tr role="row" id="85" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGESUR" aria-describedby="list_Empresa">EGESUR</td><td role="gridcell" style="text-align:left;" title="C.H. ARICOTA II" aria-describedby="list_Central">C.H. ARICOTA II</td><td role="gridcell" style="text-align:left;" title="ARICOTA2_G1" aria-describedby="list_Unidad">ARICOTA2_G1</td><td role="gridcell" style="text-align:left;" title="2,766" aria-describedby="list_MW">2,766</td></tr><tr role="row" id="86" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGESUR" aria-describedby="list_Empresa">EGESUR</td><td role="gridcell" style="text-align:left;" title="C.T. INDEPENDENCIA" aria-describedby="list_Central">C.T. INDEPENDENCIA</td><td role="gridcell" style="text-align:left;" title="INDEP_WAR1                              " aria-describedby="list_Unidad">INDEP_WAR1                              </td><td role="gridcell" style="text-align:left;" title="5,584" aria-describedby="list_MW">5,584</td></tr><tr role="row" id="87" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGESUR" aria-describedby="list_Empresa">EGESUR</td><td role="gridcell" style="text-align:left;" title="C.T. INDEPENDENCIA" aria-describedby="list_Central">C.T. INDEPENDENCIA</td><td role="gridcell" style="text-align:left;" title="INDEP_WAR2                              " aria-describedby="list_Unidad">INDEP_WAR2                              </td><td role="gridcell" style="text-align:left;" title="5,630" aria-describedby="list_MW">5,630</td></tr><tr role="row" id="88" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGESUR" aria-describedby="list_Empresa">EGESUR</td><td role="gridcell" style="text-align:left;" title="C.T. INDEPENDENCIA" aria-describedby="list_Central">C.T. INDEPENDENCIA</td><td role="gridcell" style="text-align:left;" title="INDEP_WAR3                              " aria-describedby="list_Unidad">INDEP_WAR3                              </td><td role="gridcell" style="text-align:left;" title="5,647" aria-describedby="list_MW">5,647</td></tr><tr role="row" id="89" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EGESUR" aria-describedby="list_Empresa">EGESUR</td><td role="gridcell" style="text-align:left;" title="C.T. INDEPENDENCIA" aria-describedby="list_Central">C.T. INDEPENDENCIA</td><td role="gridcell" style="text-align:left;" title="INDEP_WAR4                              " aria-describedby="list_Unidad">INDEP_WAR4                              </td><td role="gridcell" style="text-align:left;" title="5,664" aria-describedby="list_MW">5,664</td></tr><tr role="row" id="90" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTRICA SANTA ROSA" aria-describedby="list_Empresa">ELECTRICA SANTA ROSA</td><td role="gridcell" style="text-align:left;" title="C.H. PURMACANA" aria-describedby="list_Central">C.H. PURMACANA</td><td role="gridcell" style="text-align:left;" title="C.H. PURMACANA" aria-describedby="list_Unidad">C.H. PURMACANA</td><td role="gridcell" style="text-align:left;" title="1,130" aria-describedby="list_MW">1,130</td></tr><tr role="row" id="91" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTRICA YANAPAMPA SAC" aria-describedby="list_Empresa">ELECTRICA YANAPAMPA SAC</td><td role="gridcell" style="text-align:left;" title="C.H. YANAPAMPA" aria-describedby="list_Central">C.H. YANAPAMPA</td><td role="gridcell" style="text-align:left;" title="G2" aria-describedby="list_Unidad">G2</td><td role="gridcell" style="text-align:left;" title="1,292" aria-describedby="list_MW">1,292</td></tr><tr role="row" id="92" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTRICA YANAPAMPA SAC" aria-describedby="list_Empresa">ELECTRICA YANAPAMPA SAC</td><td role="gridcell" style="text-align:left;" title="C.H. YANAPAMPA" aria-describedby="list_Central">C.H. YANAPAMPA</td><td role="gridcell" style="text-align:left;" title="G1" aria-describedby="list_Unidad">G1</td><td role="gridcell" style="text-align:left;" title="1,155" aria-describedby="list_MW">1,155</td></tr><tr role="row" id="93" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTRICA YANAPAMPA SAC" aria-describedby="list_Empresa">ELECTRICA YANAPAMPA SAC</td><td role="gridcell" style="text-align:left;" title="C.H. YANAPAMPA" aria-describedby="list_Central">C.H. YANAPAMPA</td><td role="gridcell" style="text-align:left;" title="G3" aria-describedby="list_Unidad">G3</td><td role="gridcell" style="text-align:left;" title="1,296" aria-describedby="list_MW">1,296</td></tr><tr role="row" id="94" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.H. MANTARO" aria-describedby="list_Central">C.H. MANTARO</td><td role="gridcell" style="text-align:left;" title="MRO1" aria-describedby="list_Unidad">MRO1</td><td role="gridcell" style="text-align:left;" title="103,224" aria-describedby="list_MW">103,224</td></tr><tr role="row" id="95" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.H. MANTARO" aria-describedby="list_Central">C.H. MANTARO</td><td role="gridcell" style="text-align:left;" title="MRO2" aria-describedby="list_Unidad">MRO2</td><td role="gridcell" style="text-align:left;" title="103,721" aria-describedby="list_MW">103,721</td></tr><tr role="row" id="96" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.H. MANTARO" aria-describedby="list_Central">C.H. MANTARO</td><td role="gridcell" style="text-align:left;" title="MRO3" aria-describedby="list_Unidad">MRO3</td><td role="gridcell" style="text-align:left;" title="103,666" aria-describedby="list_MW">103,666</td></tr><tr role="row" id="97" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.H. MANTARO" aria-describedby="list_Central">C.H. MANTARO</td><td role="gridcell" style="text-align:left;" title="MRO4" aria-describedby="list_Unidad">MRO4</td><td role="gridcell" style="text-align:left;" title="103,666" aria-describedby="list_MW">103,666</td></tr><tr role="row" id="98" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.H. MANTARO" aria-describedby="list_Central">C.H. MANTARO</td><td role="gridcell" style="text-align:left;" title="MRO5" aria-describedby="list_Unidad">MRO5</td><td role="gridcell" style="text-align:left;" title="80,813" aria-describedby="list_MW">80,813</td></tr><tr role="row" id="99" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.H. MANTARO" aria-describedby="list_Central">C.H. MANTARO</td><td role="gridcell" style="text-align:left;" title="MRO6" aria-describedby="list_Unidad">MRO6</td><td role="gridcell" style="text-align:left;" title="80,537" aria-describedby="list_MW">80,537</td></tr><tr role="row" id="100" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.H. MANTARO" aria-describedby="list_Central">C.H. MANTARO</td><td role="gridcell" style="text-align:left;" title="MRO7" aria-describedby="list_Unidad">MRO7</td><td role="gridcell" style="text-align:left;" title="81,144" aria-describedby="list_MW">81,144</td></tr><tr role="row" id="101" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.H. RESTITUCION" aria-describedby="list_Central">C.H. RESTITUCION</td><td role="gridcell" style="text-align:left;" title="RON1" aria-describedby="list_Unidad">RON1</td><td role="gridcell" style="text-align:left;" title="72,378" aria-describedby="list_MW">72,378</td></tr><tr role="row" id="102" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.H. RESTITUCION" aria-describedby="list_Central">C.H. RESTITUCION</td><td role="gridcell" style="text-align:left;" title="RON2" aria-describedby="list_Unidad">RON2</td><td role="gridcell" style="text-align:left;" title="71,716" aria-describedby="list_MW">71,716</td></tr><tr role="row" id="103" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.H. RESTITUCION" aria-describedby="list_Central">C.H. RESTITUCION</td><td role="gridcell" style="text-align:left;" title="RON3" aria-describedby="list_Unidad">RON3</td><td role="gridcell" style="text-align:left;" title="69,861" aria-describedby="list_MW">69,861</td></tr><tr role="row" id="104" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.T. TUMBES" aria-describedby="list_Central">C.T. TUMBES</td><td role="gridcell" style="text-align:left;" title="MAK1" aria-describedby="list_Unidad">MAK1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="105" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ELECTROPERU" aria-describedby="list_Empresa">ELECTROPERU</td><td role="gridcell" style="text-align:left;" title="C.T. TUMBES" aria-describedby="list_Central">C.T. TUMBES</td><td role="gridcell" style="text-align:left;" title="MAK2" aria-describedby="list_Unidad">MAK2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="106" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EMPRESA DE GENERACION ELECTRICA CANCHAYLLO SAC" aria-describedby="list_Empresa">EMPRESA DE GENERACION ELECTRICA CANCHAYLLO SAC</td><td role="gridcell" style="text-align:left;" title="C.H. CANCHAYLLO" aria-describedby="list_Central">C.H. CANCHAYLLO</td><td role="gridcell" style="text-align:left;" title="G01" aria-describedby="list_Unidad">G01</td><td role="gridcell" style="text-align:left;" title="2,480" aria-describedby="list_MW">2,480</td></tr><tr role="row" id="107" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EMPRESA DE GENERACION ELECTRICA CANCHAYLLO SAC" aria-describedby="list_Empresa">EMPRESA DE GENERACION ELECTRICA CANCHAYLLO SAC</td><td role="gridcell" style="text-align:left;" title="C.H. CANCHAYLLO" aria-describedby="list_Central">C.H. CANCHAYLLO</td><td role="gridcell" style="text-align:left;" title="G02" aria-describedby="list_Unidad">G02</td><td role="gridcell" style="text-align:left;" title="2,520" aria-describedby="list_MW">2,520</td></tr><tr role="row" id="108" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EMPRESA DE GENERACION ELECTRICA DE JUNIN" aria-describedby="list_Empresa">EMPRESA DE GENERACION ELECTRICA DE JUNIN</td><td role="gridcell" style="text-align:left;" title="C.H. RUNATULLO II" aria-describedby="list_Central">C.H. RUNATULLO II</td><td role="gridcell" style="text-align:left;" title="C.H. RUNATULLO II" aria-describedby="list_Unidad">C.H. RUNATULLO II</td><td role="gridcell" style="text-align:left;" title="20,263" aria-describedby="list_MW">20,263</td></tr><tr role="row" id="109" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EMPRESA DE GENERACION ELECTRICA DE JUNIN" aria-describedby="list_Empresa">EMPRESA DE GENERACION ELECTRICA DE JUNIN</td><td role="gridcell" style="text-align:left;" title="C.H. RUNATULLO III" aria-describedby="list_Central">C.H. RUNATULLO III</td><td role="gridcell" style="text-align:left;" title="C.H. RUNATULLO III" aria-describedby="list_Unidad">C.H. RUNATULLO III</td><td role="gridcell" style="text-align:left;" title="19,979" aria-describedby="list_MW">19,979</td></tr><tr role="row" id="110" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EMPRESA DE GENERACION HUANZA                      " aria-describedby="list_Empresa">EMPRESA DE GENERACION HUANZA                      </td><td role="gridcell" style="text-align:left;" title="C.H HUANZA" aria-describedby="list_Central">C.H HUANZA</td><td role="gridcell" style="text-align:left;" title="HUANZA G1" aria-describedby="list_Unidad">HUANZA G1</td><td role="gridcell" style="text-align:left;" title="47,333" aria-describedby="list_MW">47,333</td></tr><tr role="row" id="111" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EMPRESA DE GENERACION HUANZA                      " aria-describedby="list_Empresa">EMPRESA DE GENERACION HUANZA                      </td><td role="gridcell" style="text-align:left;" title="C.H HUANZA" aria-describedby="list_Central">C.H HUANZA</td><td role="gridcell" style="text-align:left;" title="HUANZA G2" aria-describedby="list_Unidad">HUANZA G2</td><td role="gridcell" style="text-align:left;" title="46,926" aria-describedby="list_MW">46,926</td></tr><tr role="row" id="112" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EMPRESA ELECTRICA RIO DOBLE " aria-describedby="list_Empresa">EMPRESA ELECTRICA RIO DOBLE </td><td role="gridcell" style="text-align:left;" title="C.H. LAS PIZARRAS" aria-describedby="list_Central">C.H. LAS PIZARRAS</td><td role="gridcell" style="text-align:left;" title="G1" aria-describedby="list_Unidad">G1</td><td role="gridcell" style="text-align:left;" title="9,505" aria-describedby="list_MW">9,505</td></tr><tr role="row" id="113" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="EMPRESA ELECTRICA RIO DOBLE " aria-describedby="list_Empresa">EMPRESA ELECTRICA RIO DOBLE </td><td role="gridcell" style="text-align:left;" title="C.H. LAS PIZARRAS" aria-describedby="list_Central">C.H. LAS PIZARRAS</td><td role="gridcell" style="text-align:left;" title="G2" aria-describedby="list_Unidad">G2</td><td role="gridcell" style="text-align:left;" title="9,529" aria-describedby="list_MW">9,529</td></tr><tr role="row" id="114" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERGÍA EÓLICA S.A." aria-describedby="list_Empresa">ENERGÍA EÓLICA S.A.</td><td role="gridcell" style="text-align:left;" title="C.E. CUPISNIQUE" aria-describedby="list_Central">C.E. CUPISNIQUE</td><td role="gridcell" style="text-align:left;" title="CE CUPISNIQUE" aria-describedby="list_Unidad">CE CUPISNIQUE</td><td role="gridcell" style="text-align:left;" title="62,892" aria-describedby="list_MW">62,892</td></tr><tr role="row" id="115" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERGÍA EÓLICA S.A." aria-describedby="list_Empresa">ENERGÍA EÓLICA S.A.</td><td role="gridcell" style="text-align:left;" title="C.E. TALARA" aria-describedby="list_Central">C.E. TALARA</td><td role="gridcell" style="text-align:left;" title="CE TALARA" aria-describedby="list_Unidad">CE TALARA</td><td role="gridcell" style="text-align:left;" title="16,332" aria-describedby="list_MW">16,332</td></tr><tr role="row" id="116" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.H. YUNCAN                             " aria-describedby="list_Central">C.H. YUNCAN                             </td><td role="gridcell" style="text-align:left;" title="YUNCAN G1                              " aria-describedby="list_Unidad">YUNCAN G1                              </td><td role="gridcell" style="text-align:left;" title="45,029" aria-describedby="list_MW">45,029</td></tr><tr role="row" id="117" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.H. YUNCAN                             " aria-describedby="list_Central">C.H. YUNCAN                             </td><td role="gridcell" style="text-align:left;" title="YUNCAN G2                              " aria-describedby="list_Unidad">YUNCAN G2                              </td><td role="gridcell" style="text-align:left;" title="45,249" aria-describedby="list_MW">45,249</td></tr><tr role="row" id="118" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.H. YUNCAN                             " aria-describedby="list_Central">C.H. YUNCAN                             </td><td role="gridcell" style="text-align:left;" title="YUNCAN G3" aria-describedby="list_Unidad">YUNCAN G3</td><td role="gridcell" style="text-align:left;" title="44,239" aria-describedby="list_MW">44,239</td></tr><tr role="row" id="119" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. CHILCA 1" aria-describedby="list_Central">C.T. CHILCA 1</td><td role="gridcell" style="text-align:left;" title="CHILCA1_TG11                          " aria-describedby="list_Unidad">CHILCA1_TG11                          </td><td role="gridcell" style="text-align:left;" title="156,994" aria-describedby="list_MW">156,994</td></tr><tr role="row" id="120" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. CHILCA 1" aria-describedby="list_Central">C.T. CHILCA 1</td><td role="gridcell" style="text-align:left;" title="CHILCA1_TG12                          " aria-describedby="list_Unidad">CHILCA1_TG12                          </td><td role="gridcell" style="text-align:left;" title="158,291" aria-describedby="list_MW">158,291</td></tr><tr role="row" id="121" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. CHILCA 1" aria-describedby="list_Central">C.T. CHILCA 1</td><td role="gridcell" style="text-align:left;" title="CHILCA1_TG13                            " aria-describedby="list_Unidad">CHILCA1_TG13                            </td><td role="gridcell" style="text-align:left;" title="172,558" aria-describedby="list_MW">172,558</td></tr><tr role="row" id="122" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. CHILCA 1" aria-describedby="list_Central">C.T. CHILCA 1</td><td role="gridcell" style="text-align:left;" title="CHILCA1_TV" aria-describedby="list_Unidad">CHILCA1_TV</td><td role="gridcell" style="text-align:left;" title="262,263" aria-describedby="list_MW">262,263</td></tr><tr role="row" id="123" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. ILO 1" aria-describedby="list_Central">C.T. ILO 1</td><td role="gridcell" style="text-align:left;" title="ILO1TV1_TV1" aria-describedby="list_Unidad">ILO1TV1_TV1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="124" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. ILO 1" aria-describedby="list_Central">C.T. ILO 1</td><td role="gridcell" style="text-align:left;" title="ILO1TV2_TV2" aria-describedby="list_Unidad">ILO1TV2_TV2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="125" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. ILO 1" aria-describedby="list_Central">C.T. ILO 1</td><td role="gridcell" style="text-align:left;" title="ILO1TV3_TV3" aria-describedby="list_Unidad">ILO1TV3_TV3</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="126" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. ILO 1" aria-describedby="list_Central">C.T. ILO 1</td><td role="gridcell" style="text-align:left;" title="ILO1TV4_TV4" aria-describedby="list_Unidad">ILO1TV4_TV4</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="127" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. ILO 1" aria-describedby="list_Central">C.T. ILO 1</td><td role="gridcell" style="text-align:left;" title="ILO1TG1_TG1" aria-describedby="list_Unidad">ILO1TG1_TG1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="128" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. ILO 1" aria-describedby="list_Central">C.T. ILO 1</td><td role="gridcell" style="text-align:left;" title="ILO1TG2_TG2" aria-describedby="list_Unidad">ILO1TG2_TG2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="129" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. ILO 1" aria-describedby="list_Central">C.T. ILO 1</td><td role="gridcell" style="text-align:left;" title="ILO1CATKATO" aria-describedby="list_Unidad">ILO1CATKATO</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="130" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. ILO 2" aria-describedby="list_Central">C.T. ILO 2</td><td role="gridcell" style="text-align:left;" title="ILO2_CARB_TV1" aria-describedby="list_Unidad">ILO2_CARB_TV1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="131" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. RESERVA FRIA PLANTA ILO" aria-describedby="list_Central">C.T. RESERVA FRIA PLANTA ILO</td><td role="gridcell" style="text-align:left;" title="PLANTAILO_TG1" aria-describedby="list_Unidad">PLANTAILO_TG1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="132" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. RESERVA FRIA PLANTA ILO" aria-describedby="list_Central">C.T. RESERVA FRIA PLANTA ILO</td><td role="gridcell" style="text-align:left;" title="PLANTAILO_TG2" aria-describedby="list_Unidad">PLANTAILO_TG2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="133" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="ENERSUR" aria-describedby="list_Empresa">ENERSUR</td><td role="gridcell" style="text-align:left;" title="C.T. RESERVA FRIA PLANTA ILO" aria-describedby="list_Central">C.T. RESERVA FRIA PLANTA ILO</td><td role="gridcell" style="text-align:left;" title="PLANTAILO_TG3" aria-describedby="list_Unidad">PLANTAILO_TG3</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="134" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="FENIX POWER PERÚ" aria-describedby="list_Empresa">FENIX POWER PERÚ</td><td role="gridcell" style="text-align:left;" title="CENTRAL TERMICA FENIX" aria-describedby="list_Central">CENTRAL TERMICA FENIX</td><td role="gridcell" style="text-align:left;" title="FENIX GT12" aria-describedby="list_Unidad">FENIX GT12</td><td role="gridcell" style="text-align:left;" title="185,335" aria-describedby="list_MW">185,335</td></tr><tr role="row" id="135" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="FENIX POWER PERÚ" aria-describedby="list_Empresa">FENIX POWER PERÚ</td><td role="gridcell" style="text-align:left;" title="CENTRAL TERMICA FENIX" aria-describedby="list_Central">CENTRAL TERMICA FENIX</td><td role="gridcell" style="text-align:left;" title="FENIX TV10" aria-describedby="list_Unidad">FENIX TV10</td><td role="gridcell" style="text-align:left;" title="189,397" aria-describedby="list_MW">189,397</td></tr><tr role="row" id="136" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="FENIX POWER PERÚ" aria-describedby="list_Empresa">FENIX POWER PERÚ</td><td role="gridcell" style="text-align:left;" title="CENTRAL TERMICA FENIX" aria-describedby="list_Central">CENTRAL TERMICA FENIX</td><td role="gridcell" style="text-align:left;" title="FENIX GT11" aria-describedby="list_Unidad">FENIX GT11</td><td role="gridcell" style="text-align:left;" title="185,013" aria-describedby="list_MW">185,013</td></tr><tr role="row" id="137" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="GENERADORA ENERGÍA DEL PERÚ" aria-describedby="list_Empresa">GENERADORA ENERGÍA DEL PERÚ</td><td role="gridcell" style="text-align:left;" title="C.H. LA JOYA                            " aria-describedby="list_Central">C.H. LA JOYA                            </td><td role="gridcell" style="text-align:left;" title="LA JOYA - G1" aria-describedby="list_Unidad">LA JOYA - G1</td><td role="gridcell" style="text-align:left;" title="3,773" aria-describedby="list_MW">3,773</td></tr><tr role="row" id="138" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="GENERADORA ENERGÍA DEL PERÚ" aria-describedby="list_Empresa">GENERADORA ENERGÍA DEL PERÚ</td><td role="gridcell" style="text-align:left;" title="C.H. LA JOYA                            " aria-describedby="list_Central">C.H. LA JOYA                            </td><td role="gridcell" style="text-align:left;" title="LA JOYA - G2" aria-describedby="list_Unidad">LA JOYA - G2</td><td role="gridcell" style="text-align:left;" title="4,688" aria-describedby="list_MW">4,688</td></tr><tr role="row" id="139" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="GTS MAJES S.A.C" aria-describedby="list_Empresa">GTS MAJES S.A.C</td><td role="gridcell" style="text-align:left;" title="CS-MAJES SOLAR 20T" aria-describedby="list_Central">CS-MAJES SOLAR 20T</td><td role="gridcell" style="text-align:left;" title="CS-MAJES SOLAR 20T" aria-describedby="list_Unidad">CS-MAJES SOLAR 20T</td><td role="gridcell" style="text-align:left;" title="18,678" aria-describedby="list_MW">18,678</td></tr><tr role="row" id="140" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="GTS REPARTICION S.A.C." aria-describedby="list_Empresa">GTS REPARTICION S.A.C.</td><td role="gridcell" style="text-align:left;" title="CS-REPARTICION" aria-describedby="list_Central">CS-REPARTICION</td><td role="gridcell" style="text-align:left;" title="CS-REPARTICION" aria-describedby="list_Unidad">CS-REPARTICION</td><td role="gridcell" style="text-align:left;" title="17,233" aria-describedby="list_MW">17,233</td></tr><tr role="row" id="141" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="HIDROCAÑETE S.A." aria-describedby="list_Empresa">HIDROCAÑETE S.A.</td><td role="gridcell" style="text-align:left;" title="CH-IMPERIAL" aria-describedby="list_Central">CH-IMPERIAL</td><td role="gridcell" style="text-align:left;" title="CH-IMPERIAL" aria-describedby="list_Unidad">CH-IMPERIAL</td><td role="gridcell" style="text-align:left;" title="3,200" aria-describedby="list_MW">3,200</td></tr><tr role="row" id="142" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="HIDROELECTRICA HUANCHOR S.A.C." aria-describedby="list_Empresa">HIDROELECTRICA HUANCHOR S.A.C.</td><td role="gridcell" style="text-align:left;" title="C.H. HUANCHOR" aria-describedby="list_Central">C.H. HUANCHOR</td><td role="gridcell" style="text-align:left;" title="HUANCHOR1                               " aria-describedby="list_Unidad">HUANCHOR1                               </td><td role="gridcell" style="text-align:left;" title="9,412" aria-describedby="list_MW">9,412</td></tr><tr role="row" id="143" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="HIDROELECTRICA HUANCHOR S.A.C." aria-describedby="list_Empresa">HIDROELECTRICA HUANCHOR S.A.C.</td><td role="gridcell" style="text-align:left;" title="C.H. HUANCHOR" aria-describedby="list_Central">C.H. HUANCHOR</td><td role="gridcell" style="text-align:left;" title="HUANCHOR2                               " aria-describedby="list_Unidad">HUANCHOR2                               </td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="144" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="HIDROELECTRICA SANTA CRUZ                         " aria-describedby="list_Empresa">HIDROELECTRICA SANTA CRUZ                         </td><td role="gridcell" style="text-align:left;" title="HUASAHUASI I" aria-describedby="list_Central">HUASAHUASI I</td><td role="gridcell" style="text-align:left;" title="HUASAHUASI I" aria-describedby="list_Unidad">HUASAHUASI I</td><td role="gridcell" style="text-align:left;" title="9,794" aria-describedby="list_MW">9,794</td></tr><tr role="row" id="145" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="HIDROELECTRICA SANTA CRUZ                         " aria-describedby="list_Empresa">HIDROELECTRICA SANTA CRUZ                         </td><td role="gridcell" style="text-align:left;" title="HUASAHUASI II                           " aria-describedby="list_Central">HUASAHUASI II                           </td><td role="gridcell" style="text-align:left;" title="HUASAHUASI II                           " aria-describedby="list_Unidad">HUASAHUASI II                           </td><td role="gridcell" style="text-align:left;" title="10,137" aria-describedby="list_MW">10,137</td></tr><tr role="row" id="146" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="HIDROELECTRICA SANTA CRUZ                         " aria-describedby="list_Empresa">HIDROELECTRICA SANTA CRUZ                         </td><td role="gridcell" style="text-align:left;" title="SANTA CRUZ I" aria-describedby="list_Central">SANTA CRUZ I</td><td role="gridcell" style="text-align:left;" title="SANTA CRUZ I" aria-describedby="list_Unidad">SANTA CRUZ I</td><td role="gridcell" style="text-align:left;" title="6,597" aria-describedby="list_MW">6,597</td></tr><tr role="row" id="147" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="HIDROELECTRICA SANTA CRUZ                         " aria-describedby="list_Empresa">HIDROELECTRICA SANTA CRUZ                         </td><td role="gridcell" style="text-align:left;" title="SANTA CRUZ II" aria-describedby="list_Central">SANTA CRUZ II</td><td role="gridcell" style="text-align:left;" title="SANTA CRUZ II" aria-describedby="list_Unidad">SANTA CRUZ II</td><td role="gridcell" style="text-align:left;" title="6,888" aria-describedby="list_MW">6,888</td></tr><tr role="row" id="148" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="KALLPA GENERACION" aria-describedby="list_Empresa">KALLPA GENERACION</td><td role="gridcell" style="text-align:left;" title="C.T. KALLPA" aria-describedby="list_Central">C.T. KALLPA</td><td role="gridcell" style="text-align:left;" title="KALLPATG1                               " aria-describedby="list_Unidad">KALLPATG1                               </td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="149" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="KALLPA GENERACION" aria-describedby="list_Empresa">KALLPA GENERACION</td><td role="gridcell" style="text-align:left;" title="C.T. KALLPA" aria-describedby="list_Central">C.T. KALLPA</td><td role="gridcell" style="text-align:left;" title="KALLPATG2                               " aria-describedby="list_Unidad">KALLPATG2                               </td><td role="gridcell" style="text-align:left;" title="169,242" aria-describedby="list_MW">169,242</td></tr><tr role="row" id="150" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="KALLPA GENERACION" aria-describedby="list_Empresa">KALLPA GENERACION</td><td role="gridcell" style="text-align:left;" title="C.T. KALLPA" aria-describedby="list_Central">C.T. KALLPA</td><td role="gridcell" style="text-align:left;" title="KALLPATG3                               " aria-describedby="list_Unidad">KALLPATG3                               </td><td role="gridcell" style="text-align:left;" title="169,446" aria-describedby="list_MW">169,446</td></tr><tr role="row" id="151" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="KALLPA GENERACION" aria-describedby="list_Empresa">KALLPA GENERACION</td><td role="gridcell" style="text-align:left;" title="C.T. KALLPA" aria-describedby="list_Central">C.T. KALLPA</td><td role="gridcell" style="text-align:left;" title="KALLPATV" aria-describedby="list_Unidad">KALLPATV</td><td role="gridcell" style="text-align:left;" title="183,532" aria-describedby="list_MW">183,532</td></tr><tr role="row" id="152" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="KALLPA GENERACION" aria-describedby="list_Empresa">KALLPA GENERACION</td><td role="gridcell" style="text-align:left;" title="C.T. LAS FLORES                         " aria-describedby="list_Central">C.T. LAS FLORES                         </td><td role="gridcell" style="text-align:left;" title="TG1-LAS FLORES" aria-describedby="list_Unidad">TG1-LAS FLORES</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="153" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="MAJA ENERGIA S.A.C." aria-describedby="list_Empresa">MAJA ENERGIA S.A.C.</td><td role="gridcell" style="text-align:left;" title="CH. RONCADOR" aria-describedby="list_Central">CH. RONCADOR</td><td role="gridcell" style="text-align:left;" title="G1" aria-describedby="list_Unidad">G1</td><td role="gridcell" style="text-align:left;" title="1,312" aria-describedby="list_MW">1,312</td></tr><tr role="row" id="154" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="MAJA ENERGIA S.A.C." aria-describedby="list_Empresa">MAJA ENERGIA S.A.C.</td><td role="gridcell" style="text-align:left;" title="CH. RONCADOR" aria-describedby="list_Central">CH. RONCADOR</td><td role="gridcell" style="text-align:left;" title="G2" aria-describedby="list_Unidad">G2</td><td role="gridcell" style="text-align:left;" title="1,957" aria-describedby="list_MW">1,957</td></tr><tr role="row" id="155" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="MAPLE ETANOL                                      " aria-describedby="list_Empresa">MAPLE ETANOL                                      </td><td role="gridcell" style="text-align:left;" title="C.T. MAPLE ETANOL" aria-describedby="list_Central">C.T. MAPLE ETANOL</td><td role="gridcell" style="text-align:left;" title="MAPLE ETANOL_TV" aria-describedby="list_Unidad">MAPLE ETANOL_TV</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="156" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="MOQUEGUA FV S.A.C." aria-describedby="list_Empresa">MOQUEGUA FV S.A.C.</td><td role="gridcell" style="text-align:left;" title="CS MOQUEGUA FV" aria-describedby="list_Central">CS MOQUEGUA FV</td><td role="gridcell" style="text-align:left;" title="CS MOQUEGUA FV" aria-describedby="list_Unidad">CS MOQUEGUA FV</td><td role="gridcell" style="text-align:left;" title="15,889" aria-describedby="list_MW">15,889</td></tr><tr role="row" id="157" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="PANAMERICANA  SOLAR SAC. " aria-describedby="list_Empresa">PANAMERICANA  SOLAR SAC. </td><td role="gridcell" style="text-align:left;" title="CS PANAMERICANA SOLAR" aria-describedby="list_Central">CS PANAMERICANA SOLAR</td><td role="gridcell" style="text-align:left;" title="CS PANAMERICANA SOLAR" aria-describedby="list_Unidad">CS PANAMERICANA SOLAR</td><td role="gridcell" style="text-align:left;" title="16,452" aria-describedby="list_MW">16,452</td></tr><tr role="row" id="158" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="PARQUE EOLICO MARCONA S.R.L." aria-describedby="list_Empresa">PARQUE EOLICO MARCONA S.R.L.</td><td role="gridcell" style="text-align:left;" title="C.E. MARCONA" aria-describedby="list_Central">C.E. MARCONA</td><td role="gridcell" style="text-align:left;" title="C.E. MARCONA" aria-describedby="list_Unidad">C.E. MARCONA</td><td role="gridcell" style="text-align:left;" title="17,686" aria-describedby="list_MW">17,686</td></tr><tr role="row" id="159" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="PETRAMAS                                          " aria-describedby="list_Empresa">PETRAMAS                                          </td><td role="gridcell" style="text-align:left;" title="C.T. HUAYCOLORO" aria-describedby="list_Central">C.T. HUAYCOLORO</td><td role="gridcell" style="text-align:left;" title="G1 1.6 MW" aria-describedby="list_Unidad">G1 1.6 MW</td><td role="gridcell" style="text-align:left;" title="1,348" aria-describedby="list_MW">1,348</td></tr><tr role="row" id="160" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="PETRAMAS                                          " aria-describedby="list_Empresa">PETRAMAS                                          </td><td role="gridcell" style="text-align:left;" title="C.T. HUAYCOLORO" aria-describedby="list_Central">C.T. HUAYCOLORO</td><td role="gridcell" style="text-align:left;" title="G2 1.6 MW" aria-describedby="list_Unidad">G2 1.6 MW</td><td role="gridcell" style="text-align:left;" title="1,351" aria-describedby="list_MW">1,351</td></tr><tr role="row" id="161" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="PETRAMAS                                          " aria-describedby="list_Empresa">PETRAMAS                                          </td><td role="gridcell" style="text-align:left;" title="C.T. HUAYCOLORO" aria-describedby="list_Central">C.T. HUAYCOLORO</td><td role="gridcell" style="text-align:left;" title="G3" aria-describedby="list_Unidad">G3</td><td role="gridcell" style="text-align:left;" title="1,371" aria-describedby="list_MW">1,371</td></tr><tr role="row" id="162" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SAN GABAN" aria-describedby="list_Empresa">SAN GABAN</td><td role="gridcell" style="text-align:left;" title="C.H. SAN GABAN II                       " aria-describedby="list_Central">C.H. SAN GABAN II                       </td><td role="gridcell" style="text-align:left;" title="SGAB2_G1" aria-describedby="list_Unidad">SGAB2_G1</td><td role="gridcell" style="text-align:left;" title="54,450" aria-describedby="list_MW">54,450</td></tr><tr role="row" id="163" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SAN GABAN" aria-describedby="list_Empresa">SAN GABAN</td><td role="gridcell" style="text-align:left;" title="C.H. SAN GABAN II                       " aria-describedby="list_Central">C.H. SAN GABAN II                       </td><td role="gridcell" style="text-align:left;" title="SGAB2_G2" aria-describedby="list_Unidad">SGAB2_G2</td><td role="gridcell" style="text-align:left;" title="54,834" aria-describedby="list_MW">54,834</td></tr><tr role="row" id="164" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SAN GABAN" aria-describedby="list_Empresa">SAN GABAN</td><td role="gridcell" style="text-align:left;" title="C.T. BELLAVISTA_1(A_D)" aria-describedby="list_Central">C.T. BELLAVISTA_1(A_D)</td><td role="gridcell" style="text-align:left;" title="BVISTA1_ALCO" aria-describedby="list_Unidad">BVISTA1_ALCO</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="165" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SAN GABAN" aria-describedby="list_Empresa">SAN GABAN</td><td role="gridcell" style="text-align:left;" title="C.T. TAPARACHI" aria-describedby="list_Central">C.T. TAPARACHI</td><td role="gridcell" style="text-align:left;" title="C.T. TAPARACHI" aria-describedby="list_Unidad">C.T. TAPARACHI</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="166" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SDE PIURA                                         " aria-describedby="list_Empresa">SDE PIURA                                         </td><td role="gridcell" style="text-align:left;" title="C.T. Tablazo" aria-describedby="list_Central">C.T. Tablazo</td><td role="gridcell" style="text-align:left;" title="TABLAZO_TG1" aria-describedby="list_Unidad">TABLAZO_TG1</td><td role="gridcell" style="text-align:left;" title="25,402" aria-describedby="list_MW">25,402</td></tr><tr role="row" id="167" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SDF ENERGIA" aria-describedby="list_Empresa">SDF ENERGIA</td><td role="gridcell" style="text-align:left;" title="C.T. OQUENDO" aria-describedby="list_Central">C.T. OQUENDO</td><td role="gridcell" style="text-align:left;" title="OQUENDO_TG1                             " aria-describedby="list_Unidad">OQUENDO_TG1                             </td><td role="gridcell" style="text-align:left;" title="25,217" aria-describedby="list_MW">25,217</td></tr><tr role="row" id="168" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SHOUGESA" aria-describedby="list_Empresa">SHOUGESA</td><td role="gridcell" style="text-align:left;" title="C.T. SAN NICOLAS" aria-describedby="list_Central">C.T. SAN NICOLAS</td><td role="gridcell" style="text-align:left;" title="SH_TV1" aria-describedby="list_Unidad">SH_TV1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="169" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SHOUGESA" aria-describedby="list_Empresa">SHOUGESA</td><td role="gridcell" style="text-align:left;" title="C.T. SAN NICOLAS" aria-describedby="list_Central">C.T. SAN NICOLAS</td><td role="gridcell" style="text-align:left;" title="SH_TV2" aria-describedby="list_Unidad">SH_TV2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="170" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SHOUGESA" aria-describedby="list_Empresa">SHOUGESA</td><td role="gridcell" style="text-align:left;" title="C.T. SAN NICOLAS" aria-describedby="list_Central">C.T. SAN NICOLAS</td><td role="gridcell" style="text-align:left;" title="SH_TV3" aria-describedby="list_Unidad">SH_TV3</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="171" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SHOUGESA" aria-describedby="list_Empresa">SHOUGESA</td><td role="gridcell" style="text-align:left;" title="C.T. SAN NICOLAS" aria-describedby="list_Central">C.T. SAN NICOLAS</td><td role="gridcell" style="text-align:left;" title="CUMMINS" aria-describedby="list_Unidad">CUMMINS</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="172" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="SINERSA                                           " aria-describedby="list_Empresa">SINERSA                                           </td><td role="gridcell" style="text-align:left;" title="C.H. POECHOS II                         " aria-describedby="list_Central">C.H. POECHOS II                         </td><td role="gridcell" style="text-align:left;" title="POECHOS II G1" aria-describedby="list_Unidad">POECHOS II G1</td><td role="gridcell" style="text-align:left;" title="8,429" aria-describedby="list_MW">8,429</td></tr><tr role="row" id="173" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. CAHUA" aria-describedby="list_Central">C.H. CAHUA</td><td role="gridcell" style="text-align:left;" title="CAHUA G1" aria-describedby="list_Unidad">CAHUA G1</td><td role="gridcell" style="text-align:left;" title="21,648" aria-describedby="list_MW">21,648</td></tr><tr role="row" id="174" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. CAHUA" aria-describedby="list_Central">C.H. CAHUA</td><td role="gridcell" style="text-align:left;" title="CAHUA G2" aria-describedby="list_Unidad">CAHUA G2</td><td role="gridcell" style="text-align:left;" title="22,363" aria-describedby="list_MW">22,363</td></tr><tr role="row" id="175" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. GALLITO CIEGO" aria-describedby="list_Central">C.H. GALLITO CIEGO</td><td role="gridcell" style="text-align:left;" title="GALLITO CIEGO G1" aria-describedby="list_Unidad">GALLITO CIEGO G1</td><td role="gridcell" style="text-align:left;" title="14,202" aria-describedby="list_MW">14,202</td></tr><tr role="row" id="176" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. GALLITO CIEGO" aria-describedby="list_Central">C.H. GALLITO CIEGO</td><td role="gridcell" style="text-align:left;" title="GALLITO CIEGO G2" aria-describedby="list_Unidad">GALLITO CIEGO G2</td><td role="gridcell" style="text-align:left;" title="14,238" aria-describedby="list_MW">14,238</td></tr><tr role="row" id="177" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. HUAYLLACHO" aria-describedby="list_Central">C.H. HUAYLLACHO</td><td role="gridcell" style="text-align:left;" title="HUAYLLACHO G1" aria-describedby="list_Unidad">HUAYLLACHO G1</td><td role="gridcell" style="text-align:left;" title="0,238" aria-describedby="list_MW">0,238</td></tr><tr role="row" id="178" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. MALPASO" aria-describedby="list_Central">C.H. MALPASO</td><td role="gridcell" style="text-align:left;" title="MALP1" aria-describedby="list_Unidad">MALP1</td><td role="gridcell" style="text-align:left;" title="11,754" aria-describedby="list_MW">11,754</td></tr><tr role="row" id="179" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. MALPASO" aria-describedby="list_Central">C.H. MALPASO</td><td role="gridcell" style="text-align:left;" title="MALP2" aria-describedby="list_Unidad">MALP2</td><td role="gridcell" style="text-align:left;" title="11,966" aria-describedby="list_MW">11,966</td></tr><tr role="row" id="180" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. MALPASO" aria-describedby="list_Central">C.H. MALPASO</td><td role="gridcell" style="text-align:left;" title="MALP3" aria-describedby="list_Unidad">MALP3</td><td role="gridcell" style="text-align:left;" title="10,992" aria-describedby="list_MW">10,992</td></tr><tr role="row" id="181" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. MALPASO" aria-describedby="list_Central">C.H. MALPASO</td><td role="gridcell" style="text-align:left;" title="MALP4" aria-describedby="list_Unidad">MALP4</td><td role="gridcell" style="text-align:left;" title="11,457" aria-describedby="list_MW">11,457</td></tr><tr role="row" id="182" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. MISAPUQUIO" aria-describedby="list_Central">C.H. MISAPUQUIO</td><td role="gridcell" style="text-align:left;" title="C.H. MISAPUQUIO" aria-describedby="list_Unidad">C.H. MISAPUQUIO</td><td role="gridcell" style="text-align:left;" title="3,789" aria-describedby="list_MW">3,789</td></tr><tr role="row" id="183" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. OROYA" aria-describedby="list_Central">C.H. OROYA</td><td role="gridcell" style="text-align:left;" title="OROY1" aria-describedby="list_Unidad">OROY1</td><td role="gridcell" style="text-align:left;" title="3,015" aria-describedby="list_MW">3,015</td></tr><tr role="row" id="184" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. OROYA" aria-describedby="list_Central">C.H. OROYA</td><td role="gridcell" style="text-align:left;" title="OROY2" aria-describedby="list_Unidad">OROY2</td><td role="gridcell" style="text-align:left;" title="1,313" aria-describedby="list_MW">1,313</td></tr><tr role="row" id="185" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. OROYA" aria-describedby="list_Central">C.H. OROYA</td><td role="gridcell" style="text-align:left;" title="OROY3" aria-describedby="list_Unidad">OROY3</td><td role="gridcell" style="text-align:left;" title="3,022" aria-describedby="list_MW">3,022</td></tr><tr role="row" id="186" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. PACHACHACA" aria-describedby="list_Central">C.H. PACHACHACA</td><td role="gridcell" style="text-align:left;" title="PACH1" aria-describedby="list_Unidad">PACH1</td><td role="gridcell" style="text-align:left;" title="1,129" aria-describedby="list_MW">1,129</td></tr><tr role="row" id="187" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. PACHACHACA" aria-describedby="list_Central">C.H. PACHACHACA</td><td role="gridcell" style="text-align:left;" title="PACH2" aria-describedby="list_Unidad">PACH2</td><td role="gridcell" style="text-align:left;" title="0,928" aria-describedby="list_MW">0,928</td></tr><tr role="row" id="188" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. PACHACHACA" aria-describedby="list_Central">C.H. PACHACHACA</td><td role="gridcell" style="text-align:left;" title="PACH3" aria-describedby="list_Unidad">PACH3</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="189" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. PARIAC" aria-describedby="list_Central">C.H. PARIAC</td><td role="gridcell" style="text-align:left;" title="CH4 - G1" aria-describedby="list_Unidad">CH4 - G1</td><td role="gridcell" style="text-align:left;" title="1,387" aria-describedby="list_MW">1,387</td></tr><tr role="row" id="190" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. PARIAC" aria-describedby="list_Central">C.H. PARIAC</td><td role="gridcell" style="text-align:left;" title="CH4 - G2" aria-describedby="list_Unidad">CH4 - G2</td><td role="gridcell" style="text-align:left;" title="1,262" aria-describedby="list_MW">1,262</td></tr><tr role="row" id="191" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. PARIAC" aria-describedby="list_Central">C.H. PARIAC</td><td role="gridcell" style="text-align:left;" title="CH2 - G1" aria-describedby="list_Unidad">CH2 - G1</td><td role="gridcell" style="text-align:left;" title="0,441" aria-describedby="list_MW">0,441</td></tr><tr role="row" id="192" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. PARIAC" aria-describedby="list_Central">C.H. PARIAC</td><td role="gridcell" style="text-align:left;" title="CH2 - G2" aria-describedby="list_Unidad">CH2 - G2</td><td role="gridcell" style="text-align:left;" title="0,309" aria-describedby="list_MW">0,309</td></tr><tr role="row" id="193" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. PARIAC" aria-describedby="list_Central">C.H. PARIAC</td><td role="gridcell" style="text-align:left;" title="CH3 - G1" aria-describedby="list_Unidad">CH3 - G1</td><td role="gridcell" style="text-align:left;" title="0,739" aria-describedby="list_MW">0,739</td></tr><tr role="row" id="194" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. PARIAC" aria-describedby="list_Central">C.H. PARIAC</td><td role="gridcell" style="text-align:left;" title="CH3 - G2                                " aria-describedby="list_Unidad">CH3 - G2                                </td><td role="gridcell" style="text-align:left;" title="0,355" aria-describedby="list_MW">0,355</td></tr><tr role="row" id="195" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. SAN ANTONIO" aria-describedby="list_Central">C.H. SAN ANTONIO</td><td role="gridcell" style="text-align:left;" title="C.H. SAN ANTONIO" aria-describedby="list_Unidad">C.H. SAN ANTONIO</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="196" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. SAN IGNACIO" aria-describedby="list_Central">C.H. SAN IGNACIO</td><td role="gridcell" style="text-align:left;" title="SAN IGNACIO G1" aria-describedby="list_Unidad">SAN IGNACIO G1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="197" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. YAUPI" aria-describedby="list_Central">C.H. YAUPI</td><td role="gridcell" style="text-align:left;" title="YAUP1" aria-describedby="list_Unidad">YAUP1</td><td role="gridcell" style="text-align:left;" title="20,871" aria-describedby="list_MW">20,871</td></tr><tr role="row" id="198" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. YAUPI" aria-describedby="list_Central">C.H. YAUPI</td><td role="gridcell" style="text-align:left;" title="YAUP2" aria-describedby="list_Unidad">YAUP2</td><td role="gridcell" style="text-align:left;" title="22,138" aria-describedby="list_MW">22,138</td></tr><tr role="row" id="199" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. YAUPI" aria-describedby="list_Central">C.H. YAUPI</td><td role="gridcell" style="text-align:left;" title="YAUP3" aria-describedby="list_Unidad">YAUP3</td><td role="gridcell" style="text-align:left;" title="22,037" aria-describedby="list_MW">22,037</td></tr><tr role="row" id="200" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. YAUPI" aria-describedby="list_Central">C.H. YAUPI</td><td role="gridcell" style="text-align:left;" title="YAUP4" aria-describedby="list_Unidad">YAUP4</td><td role="gridcell" style="text-align:left;" title="21,624" aria-describedby="list_MW">21,624</td></tr><tr role="row" id="201" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="STATKRAFT" aria-describedby="list_Empresa">STATKRAFT</td><td role="gridcell" style="text-align:left;" title="C.H. YAUPI" aria-describedby="list_Central">C.H. YAUPI</td><td role="gridcell" style="text-align:left;" title="YAUP5" aria-describedby="list_Unidad">YAUP5</td><td role="gridcell" style="text-align:left;" title="21,549" aria-describedby="list_MW">21,549</td></tr><tr role="row" id="202" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="TACNA SOLAR SAC. " aria-describedby="list_Empresa">TACNA SOLAR SAC. </td><td role="gridcell" style="text-align:left;" title="CS TACNA SOLAR" aria-describedby="list_Central">CS TACNA SOLAR</td><td role="gridcell" style="text-align:left;" title="CS TACNA SOLAR" aria-describedby="list_Unidad">CS TACNA SOLAR</td><td role="gridcell" style="text-align:left;" title="17,576" aria-describedby="list_MW">17,576</td></tr><tr role="row" id="203" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="TERMOCHILCA" aria-describedby="list_Empresa">TERMOCHILCA</td><td role="gridcell" style="text-align:left;" title="CT OLLEROS" aria-describedby="list_Central">CT OLLEROS</td><td role="gridcell" style="text-align:left;" title="OLLEROS TG1" aria-describedby="list_Unidad">OLLEROS TG1</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr><tr role="row" id="204" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="TERMOSELVA" aria-describedby="list_Empresa">TERMOSELVA</td><td role="gridcell" style="text-align:left;" title="C.T. AGUAYTIA" aria-describedby="list_Central">C.T. AGUAYTIA</td><td role="gridcell" style="text-align:left;" title="AGE_TG1" aria-describedby="list_Unidad">AGE_TG1</td><td role="gridcell" style="text-align:left;" title="85,806" aria-describedby="list_MW">85,806</td></tr><tr role="row" id="205" tabindex="-1" class="ui-widget-content jqgrow ui-row-ltr"><td role="gridcell" style="text-align:left;" title="TERMOSELVA" aria-describedby="list_Empresa">TERMOSELVA</td><td role="gridcell" style="text-align:left;" title="C.T. AGUAYTIA" aria-describedby="list_Central">C.T. AGUAYTIA</td><td role="gridcell" style="text-align:left;" title="AGE_TG2" aria-describedby="list_Unidad">AGE_TG2</td><td role="gridcell" style="text-align:left;" title="0,000" aria-describedby="list_MW">0,000</td></tr></tbody></table></div></div></div><div class="ui-jqgrid-resize-mark" id="rs_mlist">&nbsp;</div></div>
+    <div id="pager" class="scroll"></div>  
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+            </section> 
+
+                      
+        </div>
+        <footer style="display: none;">
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>© 2015 - COES Derechos Reservados</p>
+                </div>
+            </div>
+        </footer>
+
+
+
+<div aria-hidden="true" aria-labelledby="alerthd_list" role="dialog" tabindex="-1" style="width: 200px; height: auto; z-index: 950; overflow: hidden; top: -25px; left: -100px;" dir="ltr" id="alertmod_list" class="ui-widget ui-widget-content ui-corner-all ui-jqdialog"><div style="cursor: move;" id="alerthd_list" class="ui-jqdialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span style="float: left;" class="ui-jqdialog-title">Aviso</span><a style="right: 0.3em;" href="javascript:void(0)" class="ui-jqdialog-titlebar-close ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></a></div><div id="alertcnt_list" class="ui-jqdialog-content ui-widget-content"><div>Seleccione una fila</div><span tabindex="0"><span tabindex="-1" id="jqg_alrt"></span></span></div><div class="jqResize ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"></div></div></body></html>
