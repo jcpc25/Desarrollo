@@ -1,0 +1,56 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.BarraModel
+
+@{
+    ViewBag.Title = "Vista preliminar";
+}
+
+<fieldset>
+    <legend>Barra</legend>
+    <table cellspacing="2" cellpadding="5">
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Barrnombre, "Nombre : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Barrnombre)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Barrtension, "Tensión :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Barrtension)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Barrpuntosumirer, "Punto Suministro RER : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Barrpuntosumirer)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Barrbarrabgr, "Barra BGR :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Barrbarrabgr)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Barrflagbarrtran, "Flag Barra Transferencia :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Barrflagbarrtran)</div>
+            </td>
+        </tr>
+
+    </table>
+</fieldset>
+<div>
+    <span class="button b-close">[X]</span>
+</div>

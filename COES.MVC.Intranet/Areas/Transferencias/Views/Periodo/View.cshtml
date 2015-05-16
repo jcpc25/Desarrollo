@@ -1,0 +1,87 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.PeriodoModel
+
+@{
+    ViewBag.Title = "Transferencias - Periodo";
+    
+}
+
+<h2>Detalle</h2>
+
+<fieldset>
+    <legend>Periodo</legend>
+    <table cellspacing="2" cellpadding="5">
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Perinombre, "Periodo : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Perinombre)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Mescodi, "Mes :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Mescodi)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Aniocodi, "Año : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Aniocodi )</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Perifechavalorizacion, "Fecha valorizacion : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Perifechavalorizacion)</div>
+            </td>
+        </tr>
+
+         <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Perifechalimite, "Fecha limite : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Perifechalimite)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Perihoralimite, "Hora limite : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Perihoralimite)</div>
+            </td>
+        </tr>
+
+         <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Perifechaobservacion, "Fecha observaciones : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Perifechaobservacion)</div>
+            </td>
+        </tr>
+
+         <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Periestado, "Estado : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Periestado)</div>
+            </td>
+        </tr>
+     
+    </table>
+</fieldset>
+<div>
+    <span class="button b-close">[X]</span>
+</div>

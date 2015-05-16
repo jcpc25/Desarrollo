@@ -1,0 +1,9 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.CodigoEntregaModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div>
+    @Html.Partial("Form", Model, new ViewDataDictionary { { "sTitulo", "Ingresar Nuevo Codigo de Entrega" }, { "sAccion", "Insertar" }})
+</div>

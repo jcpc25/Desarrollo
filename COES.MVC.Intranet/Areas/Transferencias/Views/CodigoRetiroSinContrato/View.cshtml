@@ -1,0 +1,54 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.CodigoRetiroSinContratoModel
+
+@{
+    ViewBag.Title = "Vista preliminar";
+}
+<fieldset>
+    <legend>Codigo Retiro Sin Contrato</legend>
+    <table cellspacing="2" cellpadding="5">      
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Barrnombbarrtran, "Barra Transferencia :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Barrnombbarrtran)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Clinombre, "Cliente  : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Clinombre)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Codretisinconfechainicio, "Fecha de Inicio :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Codretisinconfechainicio)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Codretisinconfechafin, "Fecha Fin :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Codretisinconfechafin)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Codretisinconcodigo, "Codigo de Entrega sin Contrato :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Codretisinconcodigo)</div>
+            </td>
+        </tr>
+
+    </table>
+</fieldset>
+<div>
+    <span class="button b-close">[X]</span>
+</div>

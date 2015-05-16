@@ -1,0 +1,242 @@
+﻿@model COES.MVC.Intranet.Areas.Eventos.Models.EventoModel
+
+@{
+    ViewBag.Title = "Detalle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#cbTipoEvento').val($('#hfTipoEvento').val());
+        $('#cbEmpresa').val($('#hfEmpresa').val());
+        $('#cbCausaEvento').val($('#hfCausaEvento').val());
+        $('#cbAreaOperativa').val($('#hfAreaOperativa').val());
+        $('#cbTipoFalla').val($('#hfTipoFalla').val());
+        $('#cbFases').val($('#hfFase').val());
+
+        if ($('#hfInterrupcion').val() == "S") { $('#cbInterrupcion').prop('checked', true); }
+        if ($('#hfVersion').val() == "S") { $('#cbMensajeSMS').prop('checked', true); }
+        if ($('#hfRelevante').val() == "1") { $('#cbRelevante').prop('checked', true); }
+        if ($('#hfAnalisisFalla').val() == "S") { $('#cbAnalisisFalla').prop('checked', true); }
+        if ($('#hfInformeFalla').val() == "S") { $('#cbInformeFallas').prop('checked', true); }
+        if ($('#hfInformeFalla2').val() == "S") { $('#cbInformeFallas2').prop('checked', true); }
+        if ($('#hfActuacionERA').val() == "S") { $('#cbActuacionERA').prop('checked', true); }
+        if ($('#hfPreliminar').val() == "N") {
+            $('#rBitacoraInforme').prop('checked', true);
+        }
+        else {
+            $('#rSoloBitacora').prop('checked', true);
+        }
+
+        $('#btnCancelar').click(function () {
+            var url = siteRoot + 'eventos/evento/index';
+            document.location.href = url;
+        });
+    });
+
+    function verInformePerturbacion(id)
+    {
+        var url = siteRoot + 'eventos/evento/perturbacion?id=' + id;
+        document.location.href = url;
+    }
+
+</script>
+
+<div class="form-title">
+    <div class="content-titulo">Detalle del Evento</div>
+     <div class="content-botonera">       
+        <input type="button" id="btnCancelar" value="Cancelar" />   
+    </div>
+</div>
+
+<div class="content-hijo">
+
+    <table style="width:100%">
+        <tr>
+            <td style="vertical-align:top; width:65%" >
+                 <table style="width:100%" class="table-form-show">
+                    <tr>
+                        <td class="tbform-label">Equipo:</td>
+                        <td class="tbform-control">@Model.Evento.EMPRNOMB  @Model.Evento.EQUIABREV</td>
+                        <td class="tbform-label">Tipo de Evento:</td>
+                        <td class="tbform-control">
+                            <select id="cbTipoEvento" name="cbTipoEvento">
+                                 <option value="">--SELECCIONE--</option>
+                                 @foreach (var item in Model.ListaTipoEvento)
+                                 {   
+                                      <option value="@item.TIPOEVENCODI">@item.TIPOEVENDESC</option>
+                                 }
+                            </select>
+                            <input type="hidden" id="hfTipoEvento" value="@Model.Evento.TIPOEVENCODI" /> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tbform-label">Empresa que reporta:</td>
+                        <td class="tbform-control">
+                            <select id="cbEmpresa" name="cbEmpresa">
+                                 <option value="">--SELECCIONE--</option>
+                                 @foreach (var item in Model.ListaEmpresas)
+                                 {   
+                                      <option value="@item.EMPRCODI">@item.EMPRNOMB</option>
+                                 }
+                            </select>
+                            <input type="hidden" id="hfEmpresa" value="@Model.Evento.EMPRCODI" />
+                        </td>
+                        <td class="tbform-label">Causa:</td>
+                        <td class="tbform-control">
+                            <select id="cbCausaEvento" name="cbCausaEvento">
+                                 <option value="">--SELECCIONE--</option>
+                                 @foreach (var item in Model.ListaCausaEvento)
+                                 {   
+                                      <option value="@item.SUBCAUSACODI">@item.SUBCAUSADESC</option>
+                                 }
+                             </select>
+                            <input type="hidden" id="hfCausaEvento" value="@Model.Evento.SUBCAUSACODI" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tbform-label">Inicio:</td>
+                        <td class="tbform-control">@Model.Evento.EVENINI</td>
+                        <td class="tbform-label">Final:</td>
+                        <td class="tbform-control">@Model.Evento.EVENFIN</td>
+                    </tr>
+                    <tr>
+                        <td class="tbform-label">MW Interru/Descagado:</td>
+                        <td class="tbform-control">@Model.Evento.EVENMWINDISP</td>
+                        <td class="tbform-label">Provoca Interrup:</td>
+                        <td class="tbform-control">
+                            <input type="checkbox" id="cbInterrupcion" />
+                            <input type="hidden" id="hfInterrupcion"  @Model.Evento.EVENINTERRUP/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tbform-label">Tensión Falla:</td>
+                        <td class="tbform-control">@Model.Evento.EVENTENSION</td>
+                        <td class="tbform-label">Área Operativa: </td>
+                        <td class="tbform-control">
+                            <select id="cbAreaOperativa" name="cbAreaOperativa">
+                                <option value="">--</option>
+                                <option value="G">GENERACIÓN</option>
+                                <option value="T">TRASMISIÓN</option>
+                                <option value="D">DISTRIBUCIÓN</option>
+                                <option value="C">CLIENTE LIBRE</option>
+                            </select>
+                            <input type="hidden" id="hfAreaOperativa" value="@Model.Evento.EVENAOPERA" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tbform-label">Tipo de Falla:</td>
+                        <td class="tbform-control">
+                            <select id="cbTipoFalla" name="cbTipoFalla">
+                                <option value="">Ninguna</option>
+                                <option value="M">Monofásica</option>
+                                <option value="B">Bifásica</option>
+                                <option value="T">Trifásica</option>
+                                <option value="R">Recierre monofásico</option>
+                                <option value="O">Otros</option>
+                            </select>
+                            <input type="hidden" id="hfTipoFalla" value="@Model.Evento.EVENTIPOFALLA" />
+                        </td>
+                        <td class="tbform-label">Fases:</td>
+                        <td class="tbform-control">
+                            <select id="cbFases" name="cbFases">
+                                <option value="R">R</option>
+                                <option value="S">S</option>
+                                <option value="T">T</option>
+                                <option value="RT">RT</option>
+                                <option value="RS">RS</option>
+                                <option value="TS">TS</option>
+                                <option value="RG">R-G</option>
+                                <option value="SG">S-G</option>
+                                <option value="TG">T-G</option>
+                                <option value="RTG">RT-G</option>
+                                <option value="RSG">RS-G</option>
+                                <option value="TSG">TS-G</option>
+                                <option value="R">RST</option>
+                                <option value="">Ninguna</option>
+                            </select>
+                            <input type="hidden" id="hfFase" value="@Model.Evento.EVENTIPOFALLAFASE" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="tbform-label">Descripción(Resumen): </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="form-texto-cuadro">
+                                @Model.Evento.EVENASUNTO
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="tbform-label">DETALLE ADICIONAL Y OBSERVACIONES:  </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="form-texto-cuadro">
+                                @Model.Evento.EVENDESC
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="tbform-label">COMENTARIOS INTERNOS: </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="form-texto-cuadro">
+                                @Model.Evento.EVENCOMENTARIOS
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width:5%"></td>
+            <td style="vertical-align:top; width:30%">
+                <fieldset id="fsVersionDestino">
+                    <legend>Versión - destino</legend>
+                    <input type="checkbox" id="cbMensajeSMS"/>Mensaje SMS<br />
+                    <input type="hidden" id="hfVersion" value="@Model.Evento.SMSENVIAR" />
+                    <input type="radio" id="rBitacoraInforme" name="rblBitacora" value="N" />Bitácora+Informes+WEB<br />
+                    <input type="radio" id="rSoloBitacora" name="rblBitacora" value="S" />Sólo bitácora<br />
+                    <input type="hidden" id="hfPreliminar" value="@Model.Evento.EVENPRELIMINAR" />
+                </fieldset>
+                <br />
+                <br />
+                <input type="checkbox" id="cbRelevante"/>RELEVANTE (INFORME GART)
+                <input type="hidden" id="hfRelevante" value="@Model.Evento.EVENRELEVANTE" /><br />
+
+                <input type="checkbox" id="cbAnalisisFalla"/>C.T. Análisis Fallas
+                <input type="hidden" id="hfAnalisisFalla" value="@Model.Evento.EVENCTAF" /><br />
+
+                <input type="checkbox" id="cbInformeFallas"/>Informe de Fallas
+                <input type="hidden" id="hfInformeFalla" value="@Model.Evento.EVENINFFALLA" /><br />
+
+                <input type="checkbox" id="cbInformeFallas2"/>Informe de Fallas N2
+                <input type="hidden" id="hfInformeFalla2" value="@Model.Evento.EVENINFFALLAN2" /><br />
+
+                <input type="checkbox" id="cbActuacionERA"/>Actuación del ERACMF, ERACMT O EDAGSF
+                <input type="hidden" id="hfActuacionERA" value="@Model.Evento.EVENACTUACION" /><br />
+                <br />
+                <div class="clear"></div>
+
+                @if (@Model.Evento.EVENPERTURBACION == "S")
+                {
+                    <a href="JavaScript:verInformePerturbacion(@Model.Evento.EVENCODI);">Ver informe perturbación</a>
+                }
+                else
+                {
+                    <a href="JavaScript:verInformePerturbacion(@Model.Evento.EVENCODI);">Crear informe perturbación</a>
+                }
+
+            </td>
+        </tr>        
+    </table>
+    <div class="clear"></div>
+    <div class="contet-auditoria">
+        <strong>Última modificación:</strong>
+        <span>Usuario:</span> @Model.Evento.LASTUSER
+        <span>Fecha:</span> @Model.Evento.LASTDATE
+    </div>
+
+</div>

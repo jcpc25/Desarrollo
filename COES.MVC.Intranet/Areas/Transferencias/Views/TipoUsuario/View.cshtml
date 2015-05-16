@@ -1,0 +1,36 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.TipoUsuarioModel
+
+@{
+    ViewBag.Title = "Vista Preliminar";
+
+}
+
+<h2>Detalle</h2>
+
+<fieldset>
+    <legend>Tipo Usuario</legend>
+    <table cellspacing="2" cellpadding="5">
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model =>model.Entidad.Tipousuanombre , "Nombre : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tipousuanombre)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Tipousuaestado, "Estado : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tipousuaestado)</div>
+            </td>
+        </tr>
+
+    </table>
+
+</fieldset>
+<div>
+    <span class="button b-close">[X]</span>
+</div>

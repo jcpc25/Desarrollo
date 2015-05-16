@@ -1,0 +1,46 @@
+﻿@model COES.MVC.Intranet.Areas.Equipamiento.Models.AreaDetalleModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Areas/Equipamiento/Content/Css/css.css" rel="stylesheet" />
+
+<div class="form-title">
+    <div class="content-titulo">Detalle de Área</div>
+</div>
+@*<div style="clear:both; height:30px"></div>*@
+<div class="content-hijo">
+    <table style="width:50%;margin-right: auto" class="table-form-show">
+        <tr>
+            <td class="tbform-label">Código:</td>
+            <td class="tbform-control">@Model.Areacodi</td>
+        </tr>
+        <tr>
+            <td class="tbform-label">Nombre:</td>
+            <td class="tbform-control">@Model.Areanomb</td>
+        </tr>
+        <tr>
+            <td class="tbform-label">Abreviatura:</td>
+            <td class="tbform-control">@Model.Areaabrev</td>
+        </tr>
+        <tr>
+            <td class="tbform-label">Usuario de creación:</td>
+            <td class="tbform-control">@Model.AreaUsuIns</td>
+        </tr>
+        <tr>
+            <td class="tbform-label">Fecha de creación:</td>
+            <td class="tbform-control"></td>
+        </tr>
+        <tr>
+            <td class="tbform-label">Usuario de actualización:</td>
+            <td class="tbform-control">@Model.AreaUsuUpd</td>
+        </tr>
+        <tr>
+            <td class="tbform-label">Fecha de actualización:</td>
+            <td class="tbform-control"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input id="btnConsultar" value="Regresar" type="button"></td>
+        </tr>
+    </table>
+</div>

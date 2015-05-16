@@ -1,0 +1,186 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.CodigoRetiroSinContratoModel
+@{
+    string sAccion = ViewData["sAccion"].ToString();
+    string sTitulo = ViewData["sTitulo"].ToString();
+    var EMPRCODI2 = (IEnumerable<SelectListItem>)TempData["EMPRCODI2"];
+    var BARRCODI2 = (IEnumerable<SelectListItem>)TempData["BARRCODI2"]; 
+}
+<link href="~/Areas/Transferencias/Content/Css/Validate.css" rel="stylesheet" />
+<script src="~/Areas/Transferencias/Content/Scripts/codigoretirosincontrato.js"></script>
+
+@using (Html.BeginForm("Save", "codigoretirosincontrato", FormMethod.Post, new { id = "frmCodigoRetiroSinContrato", @class = "cmxform" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>@sTitulo</legend>
+        <div style="padding-left:20px; width:500px;">
+            @Html.HiddenFor(model => model.Entidad.Codretisinconcodi)
+            @Html.HiddenFor(model => model.Entidad.Genemprcodi)
+            <table cellspacing="2" cellpadding="5">                
+                @if (Model.sError != "")
+                {
+                    <tr>
+                        <td colspan="2">
+                            <div class="editor-label" style="color:red;">
+                                @Model.sError
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Barrcodi, "Barra Transferencia")
+                            (*)
+                    
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("Entidad.BARRCODI", @BARRCODI2, "--Seleccione--")
+                            @Html.ValidationMessageFor(model => model.Entidad.Barrcodi)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Clicodi, "Cliente")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("Entidad.CLICODI", @EMPRCODI2, "--Seleccione--")
+                            @Html.ValidationMessageFor(model => model.Entidad.Clicodi)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Codretisinconfechainicio, "Fecha Inicio de Operacion")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Codretisinconfechainicio, "{0:dd/MM/yyyy}", new { @class = "txtFecha" })
+                            @Html.ValidationMessageFor(model => model.Codretisinconfechainicio)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Codretisinconfechafin, "Fecha Fin de Operacion")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Codretisinconfechafin, "{0:dd/MM/yyyy}", new { @class = "txtFecha"})
+                            @Html.ValidationMessageFor(model => model.Codretisinconfechafin)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Codretisinconcodigo, "Código")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Entidad.Codretisinconcodigo)
+                            @Html.ValidationMessageFor(model => model.Entidad.Codretisinconcodigo)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Codretisinconestado, "Estado")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            <label>@Html.RadioButtonFor(model => model.Entidad.Codretisinconestado, "ACT")Activo</label>
+                            <label>@Html.RadioButtonFor(model => model.Entidad.Codretisinconestado, "INA")Inactivo</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="right"><input type="button" value="Retornar" onclick="location.href='@Url.Action("Index","codigoretirosincontrato")'" alt="Retornar" title="Retornar" />&nbsp;</td>
+                    <td align="left">
+                        &nbsp;
+                        @if (Model.bGrabar)
+                        {
+                            <input type="submit" value="@sAccion" alt="@sAccion" title="@sAccion" />
+                        }
+                    </td>
+                </tr>
+
+                <tr><td>Nota(*): Campos Requeridos</td></tr>
+
+            </table>
+        </div>
+    </fieldset>
+}
+<script src="~/Areas/Transferencias/Content/Scripts/jquery.validate.js"></script>
+<script>
+    function FormatFecha(sFecha)
+    {   //DD/MM/AAAA
+        var sDia = sFecha.substring(0, 2);
+        var sMes = sFecha.substring(3, 5);
+        var sAnio = sFecha.substring(6, 10);
+        return new Date(sAnio,sMes,sDia);
+    }
+
+    jQuery.validator.addMethod("MasGrandeQue", function (value, element, params) {
+        //value: (val)fechafinal / params: (tag)fechainicial
+        if (!/Invalid|NaN/.test(new Date(value))) {
+            //Si la fechafinal no es nulo compara
+            return FormatFecha(value) >= FormatFecha($(params).val());
+        }
+        //caso contrario si la fechafinal es vacia, devuelve true
+        return !isNaN(value); 
+    }, '<br>Debe ser mayor que la fecha de Inicio de Operación.');
+
+    $("#frmCodigoRetiroSinContrato").validate({
+        rules: {
+            "Entidad.Codretisinconcodigo": {
+                required: true
+            },
+            "Entidad.Barrtension": {
+                required: true,
+                number: true
+            },
+            "Entidad.BARRCODI": {
+                required: true
+            },
+            "Entidad.CLICODI": {
+            required: true,
+            },
+            Codretisinconfechainicio: {
+                required: true,
+            },
+            Codretisinconfechafin: {
+                MasGrandeQue: "#Codretisinconfechainicio"
+            }
+        }
+    });
+
+</script>
+<script>
+    var sAccion = '@ViewData["sAccion"].ToString()';    
+    if (sAccion == "Insertar") {       
+        document.forms[0].Codretisinconfechafin.value = '';
+        document.forms[0].Entidad_Codretisinconestado[0].checked = true;
+    }
+</script>

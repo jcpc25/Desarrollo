@@ -1,0 +1,65 @@
+﻿@model COES.MVC.Intranet.Areas.Hidrologia.Models.BusquedaFormatoMedicionModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Areas/Hidrologia/Content/Scripts/formato.js"></script>
+<script src="~/Content/Scripts/jquery.easytabs.min.js"></script>
+<link href="~/Content/Css/tabs.css" rel="stylesheet" />
+<div class="form-title">
+    <div class="content-titulo">Generación de Formatos</div>
+    <div class="content-botonera">
+          <input type="button" id="btnBuscar" value="Ejecutar" />
+          <input type="button" id="btnNuevo" value="Agregar Formato" />
+    </div>
+</div>
+
+<div class="content" id="mainLayout">
+
+    <div class="spfilter-container">
+    <table class="content-tabla-search" style="width:auto">
+        <tr>
+            <td>Area COES:</td>
+            <td>
+                <select id="cbArea"  name="IdArea">  
+                    <option value="0">[Todos]</option>      
+                     @foreach (var item in Model.ListaAreasCoes)
+                     {   
+                          <option value="@item.Areacode">@item.Areaname</option>
+                     }
+                </select>
+            <td>
+
+            </td>
+            <td></td>
+            <td>
+
+            </td>
+        </tr>
+
+
+      </table>
+    <input type="hidden" id="hfNroPagina" name="NroPagina" value="1" />
+
+   </div>
+
+
+<div class="content-tabla">
+    <div class="tabla-header">       
+        <div class="table-paginado" id="paginado"></div>
+    </div>
+    <div class="table-list" id="listado"></div>
+</div>
+
+<div style="clear:both; height:30px"></div>
+<div id="detalle"></div>
+
+</div>
+
+<div id="popupUnidad">
+    <span class="button b-close"><span>X</span></span>
+    <div class="popup-title"><span>Agregar formato</span></div>
+    <div id="edicionGrupo"></div>
+</div>
+
+

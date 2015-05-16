@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="182b19cb-684f-40e8-9a09-80fa4993b016" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://www.coes.org.pe/wsSeguridadtest/SeguridadServicio.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SeguridadServicio.xsd" MetadataType="Schema" ID="d0b7ea5c-1e19-46d7-8efa-48d4f617f58a" SourceId="1" SourceUrl="http://www.coes.org.pe/wsSeguridadTest/SeguridadServicio.svc?xsd=xsd3" />
+    <MetadataFile FileName="SeguridadServicio1.xsd" MetadataType="Schema" ID="ea00a2f7-430a-4b46-aa43-03ab0382878a" SourceId="1" SourceUrl="http://www.coes.org.pe/wsSeguridadTest/SeguridadServicio.svc?xsd=xsd2" />
+    <MetadataFile FileName="SeguridadServicio.disco" MetadataType="Disco" ID="b7843aa6-29f0-43b4-ade1-4e78faff9595" SourceId="1" SourceUrl="http://www.coes.org.pe/wsSeguridadTest/SeguridadServicio.svc?disco" />
+    <MetadataFile FileName="SeguridadServicio.wsdl" MetadataType="Wsdl" ID="4fbb58a1-c2b7-4e65-ace3-4eeb1b8eae97" SourceId="1" SourceUrl="http://www.coes.org.pe/wsSeguridadTest/SeguridadServicio.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="SeguridadServicio1.wsdl" MetadataType="Wsdl" ID="b29c74dd-fbe6-4ae9-b2bc-551a2626e148" SourceId="1" SourceUrl="http://www.coes.org.pe/wsSeguridadTest/SeguridadServicio.svc?wsdl" />
+    <MetadataFile FileName="SeguridadServicio2.xsd" MetadataType="Schema" ID="954c8b24-17ea-4f52-95e5-4045c08553a7" SourceId="1" SourceUrl="http://www.coes.org.pe/wsSeguridadTest/SeguridadServicio.svc?xsd=xsd1" />
+    <MetadataFile FileName="SeguridadServicio3.xsd" MetadataType="Schema" ID="f02210d7-777c-4aa0-a6c8-4a10bc520218" SourceId="1" SourceUrl="http://www.coes.org.pe/wsSeguridadTest/SeguridadServicio.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

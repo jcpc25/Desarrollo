@@ -1,0 +1,31 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.ValorTransferenciaModel
+
+@Html.AntiForgeryToken()
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+           
+            <th>Empresa</th>
+            <th>Barra Transferencia</th>
+            <th>Codigo Entrega / Retiro</th>
+            <th>Energia MW/H</th>
+            <th>Valorizacion</th>
+            <th>Informacion</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaValorTransferencia) 
+        {
+            <tr id="fila_@item.ValoTranCodi">
+                <td class="text_left">@item.Emprnomb</td>
+                <td class="text_left">@item.Barrnombbarrtran</td>
+                <td class="text_left">@item.ValoTranCodEntRet</td>
+                <td style="text-align:right;">@item.VTTotalEnergia</td>
+                <td style="text-align:right;">@item.VTTotalDia</td>
+                <td class="text_left">@item.VTTipoinformacion </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

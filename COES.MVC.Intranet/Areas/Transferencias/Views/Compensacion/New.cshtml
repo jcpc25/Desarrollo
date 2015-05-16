@@ -1,0 +1,9 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.CompensacionModel
+@{
+    ViewBag.Title = "Transferencias - Cabecera de compensación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div>
+    @Html.Partial("Form", Model, new ViewDataDictionary { { "sTitulo", "Ingresar una nueva Compensacion" }, { "sAccion", "Insertar" } })
+</div>

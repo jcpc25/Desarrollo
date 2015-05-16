@@ -1,0 +1,28 @@
+﻿@model COES.MVC.Intranet.Models.EmpresaModel
+
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Razón Social</th>
+            <th>RUC</th>
+            <th>Teléfono</th>
+            <th>LastUser</th>
+            <th>LastUpdate</th>         
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.ListaEmpresas ) {
+        <tr>                        
+            <td>@item.Emprcodi</td>
+            <td>@item.Emprnomb</td>
+            <td>@item.Emprrazsocial</td>
+            <td>@item.Emprruc</td>
+            <td>@item.Emprtele</td>
+            <td>@item.Lastuser</td>
+            <td>@item.Lastdate</td>            
+        </tr>
+    }
+    </tbody>
+</table>

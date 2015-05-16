@@ -1,0 +1,138 @@
+﻿@model COES.MVC.Intranet.Areas.Eventos.Models.BusquedaEventoModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Areas/Eventos/Content/Scripts/evento.js"></script>
+<link href="~/Areas/Eventos/Content/Css/css.css" rel="stylesheet" />
+
+<div class="form-title">
+    <div class="content-titulo">Eventos</div>
+    <div class="content-botonera">
+          <input type="button" id="btnBuscar" value="Buscar" />
+          
+    </div>
+</div>
+
+<div class="content-hijo" id="mainLayout">
+
+@using (Html.BeginForm("Listar", "Evento", FormMethod.Post, new { @class = "form-search", name = "frmBusqueda", id = "frmBusqueda" }))
+{ 
+    <table class="content-tabla-search" style="width:auto">
+        <tr>
+            <td>Tipo de Evento:</td>
+            <td>
+                <select id="cbTipoEvento" name="IdTipoEvento">        
+                     @foreach (var item in Model.ListaTipoEvento)
+                     {   
+                          <option value="@item.TIPOEVENCODI">@item.TIPOEVENDESC @item.TIPOEVENABREV</option>
+                     }
+                </select>
+            </td>
+            
+            <td>Tipo de Equipo:</td>
+            <td>
+                <select id="cbFamilia" name="IdFamilia">         
+                     @foreach (var item in Model.ListaFamilias)
+                     {   
+                          <option value="@item.FAMCODI">@item.FAMNOMB</option>
+                     }
+                </select>
+            </td>
+            <td>Con Interrupción</td>
+            <td>
+                <select id="cbInterrupcion" name="IndInterrupcion" style="width:100px">
+                    <option value="-1">--TODOS--</option>
+                    <option value="S">SI</option>
+                    <option value="N">NO</option>
+                </select>
+            </td>
+            <td>Con Inf. Perturbación:</td>
+            <td>                
+                <select id="cbInforme" name="Informe" style="width:100px">
+                    <option value="-1">--TODOS--</option>
+                    <option value="S">SI</option>
+                    <option value="N">NO</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Fecha desde:</td>
+            <td><input type="text" id="FechaDesde" name="FechaInicio" value="@Model.FechaInicio"  /></td>
+
+            <td>Fecha hasta:</td>
+            <td><input type="text" id="FechaHasta" name="FechaFin" value="@Model.FechaFin" /></td>
+
+            <td>Versión:</td>
+            <td>
+                <select id="cbVersion" name="Version" style="width:100px">
+                    <option value="-1">--TODOS--</option>
+                    <option value="N">FINAL</option>
+                    <option value="S">BITÁCORA</option>
+                </select>
+            </td>
+            <td>Turno:</td>
+            <td>
+                <select id="cbTurno" name="Turno" style="width:100px">
+                    <option value="">--TODOS--</option>
+                    <option value="1">TURNO 1</option>
+                    <option value="2">TURNO 2</option>
+                    <option value="3">TURNO 3</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Tipo de Empresa</td>
+            <td>                
+                <select id="cbTipoEmpresa" name="IdTipoEmpresa">
+                    <option value="0">-TODOS-</option>
+                    @foreach (var item in Model.ListaTipoEmpresas)
+                    { 
+                        <option value="@item.Tipoemprcodi">@item.Tipoemprdesc</option>
+                    }
+                </select>
+            </td>
+            <td>Empresa:</td>
+            <td>
+                <select id="cbEmpresa" name="IdEmpresa">
+                    @foreach (var item in Model.ListaEmpresas)
+                    {
+                        <option value="@item.EMPRCODI">@item.EMPRNOMB</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <a href="JavaScript:mostrarLeyenda();"><span id="spanLeyenda">Mostrar leyenda CIER</span></a>
+                
+            </td>
+            <td>
+                <div class="contet-leyenda" id="leyenda">
+                    <table>
+                        @foreach (var item in Model.ListaCausaEvento)
+                        {
+                            <tr>
+                                <td><strong>@item.Causaevenabrev:</strong></td>
+                                <td><span>@item.Causaevendesc</span></td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+      </table>
+    <input type="hidden" id="hfNroPagina" name="NroPagina" value="1" />
+   
+}
+
+<div class="content-tabla">
+    <div class="tabla-header">       
+        <div class="table-paginado" id="paginado"></div>
+    </div>
+    <div class="table-list" id="listado"></div>
+</div>
+
+<div style="clear:both; height:30px"></div>
+ 
+</div>

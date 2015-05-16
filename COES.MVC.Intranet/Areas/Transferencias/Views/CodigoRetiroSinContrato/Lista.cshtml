@@ -1,0 +1,60 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.CodigoRetiroSinContratoModel
+@Html.AntiForgeryToken()
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>          
+            <th>Barra Transferencia</th>
+            <th>Cliente</th>
+            <th>Inicio de Operacion</th>
+            <th>Fin de Operacion</th>
+            <th>Codigo Retiro</th>
+            <th>Estado</th>
+            <th style="width:30px;">&nbsp;</th>
+            <th style="width:30px;">&nbsp;</th>
+            <th style="width:30px;">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaCodigoRetiroSinContrato)
+        {
+            <tr id="fila_@item.Codretisinconcodi">                
+                <td class="text_left">@item.Barrnombbarrtran</td>
+                <td class="text_left">@item.Clinombre</td>
+                <td>@item.Codretisinconfechainicio.ToString("dd/MM/yyyy")</td>
+                <td>@if (item.Codretisinconfechafin != null)
+                { <span>@item.Codretisinconfechafin.GetValueOrDefault().ToString("dd/MM/yyyy")</span>}</td>
+                <td class="text_left">@item.Codretisinconcodigo</td>
+                <td class="text_left">
+                    @if (item.Codretisinconestado == "ACT")
+                    { <span>Activo</span> }
+                    else
+                    { <span>Inactivo</span> }
+                </td>
+                <td style="width:30px;"><a href="#" id="view_@item.Codretisinconcodi" class="view"><img src="@Url.Content("~/Content/Images/btn-open.png")" title="Ver informacion del registro" alt="Ver informacion del registro" /></a></td>
+                <td style="width:30px;">
+                @if (Model.bEditar)
+                    {
+                        <a href="@Url.Action("Edit", new { id = item.Codretisinconcodi })"><img src="@Url.Content("~/Content/Images/btn-edit.png")" title="Editar el registro" alt="Editar el registro" /></a>
+                    }
+                </td>
+                <td style="width:30px;">
+                @if (Model.bEliminar)
+                    {
+                        <a href="#" id="eliminar_@item.Codretisinconcodi" class="delete"><img src="~/Content/Images/btn-cancel.png" title="Eliminar el registro" alt="Eliminar el registro" /></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<div id="popup">
+</div>
+<div style="text-align:center">
+    <input type="button" value="Limpiar" onclick="location.href='@Url.Action("Index","codigoretirosincontrato")'" alt="Limpiar" title="Limpiar" />
+    @if (Model.bNuevo)
+    {
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <input type="button" value="Nuevo" onclick="location.href='@Url.Action("New", "codigoretirosincontrato")'" alt="Insertar un nuevo registro" title="Insertar un nuevo registro" />
+    }
+</div>

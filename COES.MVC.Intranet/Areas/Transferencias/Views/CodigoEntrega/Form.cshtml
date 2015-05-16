@@ -1,0 +1,196 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.CodigoEntregaModel
+@{
+    string sAccion = ViewData["sAccion"].ToString();
+    string sTitulo = ViewData["sTitulo"].ToString();
+    var CENTGENECODI2 = (IEnumerable<SelectListItem>)TempData["CENTGENECODI2"];
+    var EMPRCODI2 = (IEnumerable<SelectListItem>)TempData["EMPRCODI2"];
+    var BARRCODI2 = (IEnumerable<SelectListItem>)TempData["BARRCODI2"];
+   
+}
+<link href="~/Areas/Transferencias/Content/Css/Validate.css" rel="stylesheet" />
+<script src="~/Areas/Transferencias/Content/Scripts/codigoentrega.js"></script>
+
+@using (Html.BeginForm("Save", "codigoentrega", FormMethod.Post, new { id = "frmCodigoEntrega", @class = "cmxform" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>@sTitulo</legend>
+        <div style="padding-left:20px; width:500px;">
+            @Html.HiddenFor(model => model.Entidad.Codientrcodi)
+            <table cellspacing="2" cellpadding="5">
+                @if (Model.sError != "")
+                {
+                    <tr>
+                        <td colspan="2">
+                            <div class="editor-label" style="color:red;">
+                                @Model.sError
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tr>         
+                     <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Centgenecodi, "Unidad Generadora")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("Entidad.CENTGENECODI", @CENTGENECODI2, "--Seleccione--")
+                            @Html.ValidationMessageFor(model => model.Entidad.Centgenecodi)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Barrcodi, "Barra Transferencia")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("Entidad.BARRCODI", @BARRCODI2, "--Seleccione--")
+                            @Html.ValidationMessageFor(model => model.Entidad.Barrcodi)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Emprcodi, "Empresa")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("Entidad.EMPRCODI", @EMPRCODI2, "--Seleccione--")
+                            @Html.ValidationMessageFor(model => model.Entidad.Emprcodi)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Codientrfechainicio, "Fecha Inicio de Operacion")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Codientrfechainicio, "{0:dd/MM/yyyy}", new { @class = "txtFecha" })
+                            @Html.ValidationMessageFor(model => model.Codientrfechainicio)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Codientrfechafin, "Fecha Fin de Operacion")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Codientrfechafin,"{0:dd/MM/yyyy}", new { @class = "txtFecha" })
+                            @Html.ValidationMessageFor(model => model.Codientrfechafin)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Codientrcodigo, "Código")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                          @Html.EditorFor(model => model.Entidad.Codientrcodigo)
+                         @Html.ValidationMessageFor(model => model.Entidad.Codientrcodigo)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Codientrestado, "Estado")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            <label>@Html.RadioButtonFor(model => model.Entidad.Codientrestado, "ACT")Activo</label>
+                            <label>@Html.RadioButtonFor(model => model.Entidad.Codientrestado, "INA")Inactivo</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="right"><input type="button" value="Retornar" onclick="location.href='@Url.Action("Index","codigoentrega")'" alt="Retornar" title="Retornar" />&nbsp;</td>
+                    <td align="left">&nbsp;
+                    @if (Model.bGrabar)
+                    {
+                        <input type="submit" value="@sAccion" alt="@sAccion" title="@sAccion" />
+                    }
+                    </td>
+                </tr>
+
+                <tr><td>Nota(*): Campos Requeridos</td></tr>
+
+            </table>
+        </div>
+    </fieldset>
+}
+<script src="~/Areas/Transferencias/Content/Scripts/jquery.validate.js"></script>
+<script>
+    function FormatFecha(sFecha) {   //DD/MM/AAAA
+        var sDia = sFecha.substring(0, 2);
+        var sMes = sFecha.substring(3, 5);
+        var sAnio = sFecha.substring(6, 10);
+        return new Date(sAnio, sMes, sDia);
+    }
+
+    jQuery.validator.addMethod("MasGrandeQue", function (value, element, params) {
+        //value: (val)fechafinal / params: (tag)fechainicial
+        if (!/Invalid|NaN/.test(new Date(value))) {
+            //Si la fechafinal no es nulo compara
+            return FormatFecha(value) >= FormatFecha($(params).val());
+        }
+        //caso contrario si la fechafinal es vacia, devuelve true
+        return !isNaN(value);
+    }, '<br>Debe ser mayor que la fecha de Inicio de Operación.');
+
+    $("#frmCodigoEntrega").validate({
+        rules: {
+            "Entidad.Codientrcodigo": {
+                required: true,
+            },
+            Codientrfechainicio: {
+                required: true,
+            },
+            "Entidad.EMPRCODI": {
+                required: true,
+            },
+            "Entidad.BARRCODI": {
+                required: true,
+            },
+            "Entidad.CENTGENECODI": {
+                required: true,
+            },
+            Codientrfechafin: {
+                MasGrandeQue: "#Codientrfechainicio"
+            }
+        }
+    });
+
+</script>
+<script>
+    var sAccion = '@ViewData["sAccion"].ToString()';
+    if (sAccion == "Insertar") {
+        document.forms[0].Codientrfechafin.value = '';
+        document.forms[0].Entidad_Codientrestado[0].checked = true;
+    }
+</script>

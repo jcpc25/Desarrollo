@@ -1,0 +1,9 @@
+﻿@model COES.Dominio.DTO.Transferencias.BarraDTO
+@{
+    ViewBag.Title = "Transferencias - Insertar una Barra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div>
+@Html.Partial("Form", Model, new ViewDataDictionary { { "sTitulo", "Ingresar una nueva Barra" }, { "sAccion", "Insertar" }, { "sArea", TempData["Areacodigo"] } })
+</div>

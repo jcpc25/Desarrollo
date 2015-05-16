@@ -1,0 +1,35 @@
+﻿@model COES.MVC.Intranet.Areas.Mediciones.Models.GeneracionRERModel
+
+<table border="0" class="tabla-formulario" id="tabla">
+    <thead>
+        <tr>
+            <th>Empresa</th>
+            <th>Estado</th>
+            <th>Archivo</th>            
+            <th>Usuario</th>               
+            <th>Fecha carga</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ListaReporte.Count > 0)
+        {
+            foreach (var item in Model.ListaReporte)
+            {
+                <tr>
+                    <td>@item.EmprNomb</td>
+                    <td>@item.EstEnvNomb</td>
+                    <td>@item.Filenomb</td>                    
+                    <td>@item.Lastuser</td>
+                    <td>
+                        @if (item.Fecproceso != null)
+                        {
+                            var fecha = ((DateTime)item.Fecproceso).ToString("dd/MM/yyyy HH:mm:ss");
+                            <span>@fecha</span>
+                        }
+                    </td>                   
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

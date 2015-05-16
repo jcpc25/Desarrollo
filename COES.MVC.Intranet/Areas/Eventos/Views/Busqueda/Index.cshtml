@@ -1,0 +1,58 @@
+﻿@model COES.MVC.Intranet.Areas.Eventos.Models.BusquedaEquipoModel
+
+<script src="~/Areas/Eventos/Content/Scripts/busqueda.js"></script>
+<script type="text/javascript">
+
+$(function () {
+    $('#cbEmpresa').change(function () {
+        mostrarAreas();
+        mostrarEquipos("0");
+    });
+    $('#cbFamilia').change(function () {       
+        mostrarEquipos("0");
+    });
+    $('#btnBuscar').click(function () {
+        mostrarEquipos("0");
+    });
+});
+
+</script>
+
+<span class="button b-close"><span>X</span></span>
+
+Empresa
+<select id="cbEmpresa" name="cbEmpresa">
+     <option value="">--SELECCIONE--</option>
+     @foreach (var item in Model.ListaEmpresa)
+     {   
+          <option value="@item.EMPRCODI">@item.EMPRNOMB</option>
+     }
+</select>
+
+Tipo de Equipo:
+<select id="cbFamilia" name="cbFamilia">
+     <option value="">--SELECCIONE--</option>
+     @foreach (var item in Model.ListaFamilia)
+     {   
+          <option value="@item.FAMCODI">@item.FAMNOMB</option>
+     }
+</select>
+
+Filtro
+<input type="text" id="txtFiltro" />
+<input type="button" value="Buscar" id="btnBuscar" />
+
+<table style="width:900px">
+    <tr>
+        <td style="width:300px; vertical-align:top"><div id="cntArea"></div></td>
+        <td style="width:20px"></td>
+        <td style="width:580px; vertical-align:top">
+            <div id="cntPaginado"></div>
+            <div id="cntEquipo"></div>
+        </td>
+    </tr>
+</table>
+
+<input type="hidden" id="hfIdEmpresa" />
+<input type="hidden" id="hfIdFamilia" />
+<input type="hidden" id="hfIdArea" />

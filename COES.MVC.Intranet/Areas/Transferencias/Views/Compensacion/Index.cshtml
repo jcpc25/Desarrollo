@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Transferencias - Conceptos de compensación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sMensajeExito = TempData["sMensajeExito"];
+}
+
+<link href="~/Areas/Transferencias/Content/Css/Transferencia.css" rel="stylesheet" />
+<script src="~/Areas/Transferencias/Content/Scripts/compensacion.js"></script>
+<script>
+    $(document).ready(function () {
+        setTimeout(function ()
+        { $(".mensajes").fadeOut(800).fadeIn(800).fadeOut(500).fadeIn(500).fadeOut(300); }, 3000);
+    }
+    );
+</script>
+<div class="ast">
+    @if (@sMensajeExito != null)
+    {<div class="exito mensajes">@sMensajeExito</div>}
+    <div class="form-title">
+        <div class="content-titulo">Lista de compensaciones</div>
+        <div class="content-botonera">
+        </div>
+    </div>
+    <div class="content-hijo" style="padding-top:8px">
+        <div id="paso5">
+            <h2>Descargar Formato Excel : </h2>
+            <div>
+                <input type="button" id="btnGenerarExcel" value="Generar excel" />
+            </div>
+        </div>
+        <div class="listado" id="listado">
+        </div>
+    </div>
+
+</div>

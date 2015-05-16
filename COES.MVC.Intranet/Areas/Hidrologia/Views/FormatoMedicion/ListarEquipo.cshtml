@@ -1,0 +1,17 @@
+﻿@model COES.MVC.Intranet.Areas.Hidrologia.Models.FormatoMedicionModel
+<script type="text/javascript">
+    $(document).ready(function () { 
+
+        $('#idequipo').change(function () {
+            listarpto($(this).val());
+        });
+
+    });
+</script>
+<select id="idequipo">
+    <option value="0"> [Seleccionar Equipo] </option>
+    @foreach (var reg in Model.ListaEquipo)
+    {
+        <option value="@reg.Equicodi">@reg.Equinomb</option>
+    }
+</select>

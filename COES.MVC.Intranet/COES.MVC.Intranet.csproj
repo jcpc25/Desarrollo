@@ -1,0 +1,941 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FA6514D9-B68C-40C7-8415-33F9BBFF0C83}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>COES.MVC.Intranet</RootNamespace>
+    <AssemblyName>COES.MVC.Intranet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocX, Version=1.0.1.13, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\DocX.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.0.0.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\COES.Servicios.Aplicacion\bin\Debug\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=4.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\EstadisticaController.cs" />
+    <Compile Include="Areas\Admin\Helper\MenuHelper.cs" />
+    <Compile Include="Areas\Admin\Models\EstadisticaModel.cs" />
+    <Compile Include="Areas\Equipamiento\Controllers\AreaController.cs" />
+    <Compile Include="Areas\Equipamiento\EquipamientoAreaRegistration.cs" />
+    <Compile Include="Areas\Equipamiento\Models\EquipamientoModel.cs" />
+    <Compile Include="Areas\Eventos\Controllers\AnalisisFallasController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\BusquedaController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\EventoController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\HorasOperacionController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\MantenimientoController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\MedicionController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\RegistroController.cs" />
+    <Compile Include="Areas\Eventos\EventosAreaRegistration.cs" />
+    <Compile Include="Areas\Eventos\Helper\ExcelDocument.cs" />
+    <Compile Include="Areas\Eventos\Helper\ExcelGrafico.cs" />
+    <Compile Include="Areas\Eventos\Helper\PdfDocument.cs" />
+    <Compile Include="Areas\Eventos\Helper\WordDocument.cs" />
+    <Compile Include="Areas\Eventos\Models\EventoModel.cs" />
+    <Compile Include="Areas\Eventos\Models\MantenimientoModel.cs" />
+    <Compile Include="Areas\Eventos\Models\RsfModel.cs" />
+    <Compile Include="Areas\Formulas\Controllers\ConfiguracionController.cs" />
+    <Compile Include="Areas\Formulas\Controllers\FormulaController.cs" />
+    <Compile Include="Areas\Formulas\FormulaSCADAAreaRegistration.cs" />
+    <Compile Include="Areas\Formulas\Helper\ExcelDocument.cs" />
+    <Compile Include="Areas\Formulas\Models\FormulaModel.cs" />
+    <Compile Include="Areas\Hidrologia\Controllers\FormatoMedicionController.cs" />
+    <Compile Include="Areas\Hidrologia\Controllers\PtoMedicionController.cs" />
+    <Compile Include="Areas\Hidrologia\Controllers\ReporteController.cs" />
+    <Compile Include="Areas\Hidrologia\Helper\Constantes.cs" />
+    <Compile Include="Areas\Hidrologia\Helper\Helper.cs" />
+    <Compile Include="Areas\Hidrologia\HidrologiaAreaRegistration.cs" />
+    <Compile Include="Areas\Hidrologia\Models\FormatoMedicionModel.cs" />
+    <Compile Include="Areas\Hidrologia\Models\HidrologiaModel.cs" />
+    <Compile Include="Areas\Hidrologia\Models\PtoMedicionModel.cs" />
+    <Compile Include="Areas\Manttos\ManttosAreaRegistration.cs" />
+    <Compile Include="Areas\Manttos\Models\ManttoModel.cs" />
+    <Compile Include="Areas\Mediciones\Controllers\ConfiguracionController.cs" />
+    <Compile Include="Areas\Mediciones\Controllers\DesviacionController.cs" />
+    <Compile Include="Areas\Mediciones\Controllers\FormatoController.cs" />
+    <Compile Include="Areas\Mediciones\Controllers\GeneracionRERController.cs" />
+    <Compile Include="Areas\Mediciones\Controllers\MedidoresGeneracionController.cs" />
+    <Compile Include="Areas\Mediciones\Controllers\ReporteMedidoresController.cs" />
+    <Compile Include="Areas\Mediciones\Helpers\MedicionHelper.cs" />
+    <Compile Include="Areas\Mediciones\MedicionesAreaRegistration.cs" />
+    <Compile Include="Areas\Mediciones\Models\DesviacionModel.cs" />
+    <Compile Include="Areas\Mediciones\Models\GeneracionRERModel.cs" />
+    <Compile Include="Areas\Mediciones\Models\MedicionModel.cs" />
+    <Compile Include="Areas\Mediciones\Models\MedidoresGeneracionModel.cs" />
+    <Compile Include="Areas\Medidores\Controllers\ReportesController.cs" />
+    <Compile Include="Areas\Medidores\Helpers\MedidorHelper.cs" />
+    <Compile Include="Areas\Medidores\MedidoresAreaRegistration.cs" />
+    <Compile Include="Areas\Medidores\Models\MaximaDemanda.cs" />
+    <Compile Include="Areas\ServicioRPF\Controllers\AnalisisAlternativoController.cs" />
+    <Compile Include="Areas\ServicioRPF\Controllers\AnalisisFallaController.cs" />
+    <Compile Include="Areas\ServicioRPF\Controllers\AnalisisNormalController.cs" />
+    <Compile Include="Areas\ServicioRPF\Controllers\ConsistenciaController.cs" />
+    <Compile Include="Areas\ServicioRPF\Controllers\ConsultaController.cs" />
+    <Compile Include="Areas\ServicioRPF\Controllers\FrecuenciaController.cs" />
+    <Compile Include="Areas\ServicioRPF\Helper\ExcelDocument.cs" />
+    <Compile Include="Areas\ServicioRPF\Helper\Grafico.cs" />
+    <Compile Include="Areas\ServicioRPF\Helper\RpfHelper.cs" />
+    <Compile Include="Areas\ServicioRPF\Helper\WordDocument.cs" />
+    <Compile Include="Areas\ServicioRPF\Models\AnalisisModel.cs" />
+    <Compile Include="Areas\ServicioRPF\Models\CoesCloud.cs" />
+    <Compile Include="Areas\ServicioRPF\Models\ServicioModel.cs" />
+    <Compile Include="Areas\ServicioRPF\ServicioRPFAreaRegistration.cs" />
+    <Compile Include="Areas\SupervisionPlanificacion\Controllers\DesviacionController.cs" />
+    <Compile Include="Areas\SupervisionPlanificacion\Controllers\RpfEnergiaPotenciaController.cs" />
+    <Compile Include="Areas\SupervisionPlanificacion\Helpers\RpfHelper.cs" />
+    <Compile Include="Areas\SupervisionPlanificacion\Models\DesviacionModel.cs" />
+    <Compile Include="Areas\SupervisionPlanificacion\Models\RpfEnergiaPotenciaModel.cs" />
+    <Compile Include="Areas\SupervisionPlanificacion\SupervisionPlanificacionAreaRegistration.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\BarraController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\CodigoEntregaController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\CodigoRetiroController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\CodigoRetiroSinContratoController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\CompensacionController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\EnvioInformacionController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\FactorPerdidaController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\InfoDesbalanceController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\InfoDesviacionController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\InfoFaltanteController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\IngresoCompensacionController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\IngresoPotenciaController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\IngresoRetiroSCController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\LevantamientoController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\PeriodoController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\RecalculoController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\TipoContratoController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\TipoUsuarioController.cs" />
+    <Compile Include="Areas\Transferencias\Controllers\ValorTransferenciaController.cs" />
+    <Compile Include="Areas\Transferencias\Helper\Funcion.cs" />
+    <Compile Include="Areas\Transferencias\Models\AreaModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\BarraModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\CentralGeneracionModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\CodigoEntregaModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\CodigoRetiroModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\CodigoRetiroSinContratoModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\CompensacionModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\CostoMarginalModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\EmpresaModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\EmpresaPagoModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\EnvioInformacionModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\ExportExcelModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\FactorPerdidaModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\InfoDesbalanceModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\InfoDesviacionModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\InfoFaltanteModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\InformePreliminarModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\IngresoCompensacionModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\IngresoPotenciaModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\IngresoRetiroSCModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\LevantamientoModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\PeriodoModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\RecalculoModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\TipoContratoModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\TipoUsuarioModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\TramiteLevantamientoModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\TransferenciaEntregaDetalleModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\TransferenciaEntregaModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\TransferenciaRetiroDetalleModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\TransferenciaRetiroModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\ValorTotalEmpresaModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\ValorTransferenciaEmpresaModel.cs" />
+    <Compile Include="Areas\Transferencias\Models\ValorTransferenciaModel.cs" />
+    <Compile Include="Areas\Transferencias\TransferenciasAreaRegistration.cs" />
+    <Compile Include="Controllers\GeneralController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Constantes.cs" />
+    <Compile Include="Helper\CustomAuthorize.cs" />
+    <Compile Include="Helper\ExcelHelper.cs" />
+    <Compile Include="Helper\HtmlHelper.cs" />
+    <Compile Include="Helper\Tools.cs" />
+    <Compile Include="Models\EmpresaModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MenuModel.cs" />
+    <Compile Include="Models\SeguridadModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\SeguridadServicio\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServicioCloud\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Content\Scripts\estadistica.js" />
+    <Content Include="Areas\Equipamiento\Content\Css\css.css" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\jquery-ui.css" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\jquery-ui.min.css" />
+    <Content Include="Areas\Equipamiento\Content\Css\cupertino\theme.css" />
+    <Content Include="Areas\Equipamiento\Content\Css\ui.jqgrid.css" />
+    <Content Include="Areas\Equipamiento\Content\Scripts\area.js" />
+    <Content Include="Areas\Equipamiento\Content\Scripts\grid.locale-es.js" />
+    <Content Include="Areas\Equipamiento\Content\Scripts\jquery.jqGrid.min.js" />
+    <Content Include="Areas\Eventos\Content\Css\css.css" />
+    <Content Include="Areas\Eventos\Content\Scripts\analisisfalla.js" />
+    <Content Include="Areas\Eventos\Content\Scripts\busqueda.js" />
+    <Content Include="Areas\Eventos\Content\Scripts\evento.js" />
+    <Content Include="Areas\Eventos\Content\Scripts\mantenimiento.js" />
+    <Content Include="Areas\Eventos\Content\Scripts\matrizrsf.js" />
+    <Content Include="Areas\Eventos\Content\Scripts\perturbacion.js" />
+    <Content Include="Areas\Eventos\Content\Scripts\registro.js" />
+    <Content Include="Areas\Eventos\Reporte\coes.png" />
+    <Content Include="Areas\Formulas\Content\Css\css.css" />
+    <Content Include="Areas\Formulas\Content\Scripts\configuracion.js" />
+    <Content Include="Areas\Formulas\Content\Scripts\detalle.js" />
+    <Content Include="Areas\Formulas\Content\Scripts\formula.js" />
+    <Content Include="Areas\Formulas\Content\Scripts\nuevo.js" />
+    <Content Include="Areas\Hidrologia\Content\Css\css.css" />
+    <Content Include="Areas\Hidrologia\Content\Scripts\formato.js" />
+    <Content Include="Areas\Hidrologia\Content\Scripts\formatoedit.js" />
+    <Content Include="Areas\Hidrologia\Content\Scripts\ptomededit.js" />
+    <Content Include="Areas\Hidrologia\Content\Scripts\ptomedicion.js" />
+    <Content Include="Areas\Hidrologia\Content\Scripts\reporte.js" />
+    <Content Include="Areas\Mediciones\Content\Css\mediciones.css" />
+    <Content Include="Areas\Mediciones\Content\Scripts\configuracion.js" />
+    <Content Include="Areas\Mediciones\Content\Scripts\desviacion.js" />
+    <Content Include="Areas\Mediciones\Content\Scripts\formato.js" />
+    <Content Include="Areas\Mediciones\Content\Scripts\generacionrer.js" />
+    <Content Include="Areas\Mediciones\Content\Scripts\medidores.js" />
+    <Content Include="Areas\Mediciones\Content\Scripts\reporte.js" />
+    <Content Include="Areas\Mediciones\Content\Scripts\reporterer.js" />
+    <Content Include="Areas\Medidores\Content\Scripts\maximademanda.js" />
+    <Content Include="Areas\Medidores\Content\Scripts\maximademanda_HFP_HP.js" />
+    <Content Include="Areas\ServicioRPF\Content\Css\alternativo.css" />
+    <Content Include="Areas\ServicioRPF\Content\Css\fallas.css" />
+    <Content Include="Areas\ServicioRPF\Content\Scripts\alternativo.js" />
+    <Content Include="Areas\ServicioRPF\Content\Scripts\consistencia.js" />
+    <Content Include="Areas\ServicioRPF\Content\Scripts\consulta.js" />
+    <Content Include="Areas\ServicioRPF\Content\Css\normal.css" />
+    <Content Include="Areas\ServicioRPF\Content\Scripts\fallas.js" />
+    <Content Include="Areas\ServicioRPF\Content\Scripts\frecuencia.js" />
+    <Content Include="Areas\ServicioRPF\Content\Scripts\maximas.js" />
+    <Content Include="Areas\ServicioRPF\Content\Scripts\normal.js" />
+    <Content Include="Areas\ServicioRPF\Content\Scripts\potencia.js" />
+    <Content Include="Areas\ServicioRPF\Reporte\coes.png" />
+    <Content Include="Areas\SupervisionPlanificacion\Content\Scripts\desviacion.js" />
+    <Content Include="Areas\SupervisionPlanificacion\Content\Scripts\rpf.js" />
+    <Content Include="Areas\Transferencias\Content\Css\tabs.css" />
+    <Content Include="Areas\Transferencias\Content\Css\Transferencia.css" />
+    <Content Include="Areas\Transferencias\Content\Css\Validate.css" />
+    <Content Include="Areas\Transferencias\Content\Images\alerta.png" />
+    <Content Include="Areas\Transferencias\Content\Images\cmxform-divider.gif" />
+    <Content Include="Areas\Transferencias\Content\Images\cmxform-fieldset.gif" />
+    <Content Include="Areas\Transferencias\Content\Images\compensacion.jpg" />
+    <Content Include="Areas\Transferencias\Content\Images\delete-icon.png" />
+    <Content Include="Areas\Transferencias\Content\Images\error.png" />
+    <Content Include="Areas\Transferencias\Content\Images\exito.png" />
+    <Content Include="Areas\Transferencias\Content\Images\info.png" />
+    <Content Include="Areas\Transferencias\Content\Images\recalculo.jpg" />
+    <Content Include="Areas\Transferencias\Content\Images\tachito.gif" />
+    <Content Include="Areas\Transferencias\Content\Images\trans.gif" />
+    <Content Include="Areas\Transferencias\Content\Images\view.gif" />
+    <Content Include="Areas\Transferencias\Content\Images\view.jpg" />
+    <Content Include="Areas\Transferencias\Content\Scripts\barra.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jqplot.barRenderer.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jqplot.canvasAxisTickRenderer.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jqplot.canvasTextRenderer.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jqplot.cursor.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jqplot.dateAxisRenderer.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jqplot.highlighter.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jqplot.json2.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jqplot.logAxisRenderer.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jqplot.pointLabels.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jquery.jqplot.min.css" />
+    <Content Include="Areas\Transferencias\Content\Scripts\Charts\jquery.jqplot.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\codigoentrega.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\codigoretiro.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\codigoretirosincontrato.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\compensacion.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\envioInformacion.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\factorperdida.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\fecha.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\indice.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\infodesbalance.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\infodesviacion.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\infofaltante.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\ingcompensacion.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\ingpotencia.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\ingretirosc.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\jquery.easytabs.min.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\jquery.validate.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\levantamiento.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\load.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\periodo.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\recalculo.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\tipocontrato.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\tipousuario.js" />
+    <Content Include="Areas\Transferencias\Content\Scripts\valortransferencia.js" />
+    <Content Include="Content\Css\calendar.css" />
+    <Content Include="Content\Css\css.css" />
+    <Content Include="Content\Css\login.css" />
+    <Content Include="Content\Css\menu.css" />
+    <Content Include="Content\Css\multiselect.css" />
+    <Content Include="Content\Css\popup.css" />
+    <Content Include="Content\Css\resizablecolumn.css" />
+    <Content Include="Content\Css\scroll.min.css" />
+    <Content Include="Content\Css\table.css" />
+    <Content Include="Content\Css\tabs.css" />
+    <Content Include="Content\Css\uitree.css" />
+    <Content Include="Content\Images\blank.gif" />
+    <Content Include="Content\Images\btn-add.png" />
+    <Content Include="Content\Images\btn-cancel.png" />
+    <Content Include="Content\Images\btn-edit.png" />
+    <Content Include="Content\Images\btn-ok.png" />
+    <Content Include="Content\Images\btn-open.png" />
+    <Content Include="Content\Images\calendar-disabled.png" />
+    <Content Include="Content\Images\calendar.png" />
+    <Content Include="Content\Images\coes.gif" />
+    <Content Include="Content\Images\darrow.png" />
+    <Content Include="Content\Images\error.png" />
+    <Content Include="Content\Images\ExportExcel.png" />
+    <Content Include="Content\Images\fnd-login.jpg" />
+    <Content Include="Content\Images\fnd-map.png" />
+    <Content Include="Content\Images\fnd-menu-hover.png" />
+    <Content Include="Content\Images\fnd-menu.png" />
+    <Content Include="Content\Images\fnd-section.png" />
+    <Content Include="Content\Images\fndboton-hover.png" />
+    <Content Include="Content\Images\fndboton.png" />
+    <Content Include="Content\Images\fondo.png" />
+    <Content Include="Content\Images\fondo1.png" />
+    <Content Include="Content\Images\gridheader.png" />
+    <Content Include="Content\Images\hide-menu.png" />
+    <Content Include="Content\Images\hide-top.png" />
+    <Content Include="Content\Images\ico-delete.gif" />
+    <Content Include="Content\Images\ico-done.gif" />
+    <Content Include="Content\Images\ico-info.gif" />
+    <Content Include="Content\Images\ico-warning.gif" />
+    <Content Include="Content\Images\icon-user.png" />
+    <Content Include="Content\Images\iconstree.gif" />
+    <Content Include="Content\Images\info.png" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\loading1.gif" />
+    <Content Include="Content\Images\loadingtree.gif" />
+    <Content Include="Content\Images\login.png" />
+    <Content Include="Content\Images\logocoes.png" />
+    <Content Include="Content\Images\multiple-select.png" />
+    <Content Include="Content\Images\rarrow.png" />
+    <Content Include="Content\Images\sort_asc.png" />
+    <Content Include="Content\Images\sort_both.png" />
+    <Content Include="Content\Images\sort_desc.png" />
+    <Content Include="Content\Images\valid.png" />
+    <Content Include="Content\Scripts\Charts\jqplot.canvasAxisLabelRenderer.min.js" />
+    <Content Include="Content\Scripts\Charts\jqplot.canvasAxisTickRenderer.min.js" />
+    <Content Include="Content\Scripts\Charts\jqplot.canvasTextRenderer.min.js" />
+    <Content Include="Content\Scripts\Charts\jqplot.cursor.min.js" />
+    <Content Include="Content\Scripts\Charts\jqplot.dateAxisRenderer.min.js" />
+    <Content Include="Content\Scripts\Charts\jqplot.highlighter.min.js" />
+    <Content Include="Content\Scripts\Charts\jqplot.json2.min.js" />
+    <Content Include="Content\Scripts\Charts\jqplot.logAxisRenderer.min.js" />
+    <Content Include="Content\Scripts\Charts\jqplot.pieRenderer.min.js" />
+    <Content Include="Content\Scripts\Charts\jquery.jqplot.min.css" />
+    <Content Include="Content\Scripts\Charts\jquery.jqplot.min.js" />
+    <Content Include="Content\Scripts\datatable.js" />
+    <Content Include="Content\Scripts\datepicker..js" />
+    <Content Include="Content\Scripts\efecto.js" />
+    <Content Include="Content\Scripts\fixedcolumn.js" />
+    <Content Include="Content\Scripts\fixedheader.js" />
+    <Content Include="Content\Scripts\general.js" />
+    <Content Include="Content\Scripts\highcharts.js" />
+    <Content Include="Content\Scripts\hoverIntent.js" />
+    <Content Include="Content\Scripts\jquery-ui-autocomplete.js" />
+    <Content Include="Content\Scripts\jquery.dataTables.min.js" />
+    <Content Include="Content\Scripts\jquery.dataTables.rowReordering.js" />
+    <Content Include="Content\Scripts\jquery.easytabs.min.js" />
+    <Content Include="Content\Scripts\jquery.format.js" />
+    <Content Include="Content\Scripts\jquery.js" />
+    <Content Include="Content\Scripts\jquery.select-to-autocomplete.js" />
+    <Content Include="Content\Scripts\jquery.select-to-autocomplete.min.js" />
+    <Content Include="Content\Scripts\jquerytree.js" />
+    <Content Include="Content\Scripts\jquerytreednd.js" />
+    <Content Include="Content\Scripts\jqueryui.js" />
+    <Content Include="Content\Scripts\login.js" />
+    <Content Include="Content\Scripts\master.js" />
+    <Content Include="Content\Scripts\menu.js" />
+    <Content Include="Content\Scripts\mousewheel.min.js" />
+    <Content Include="Content\Scripts\Moxie.swf" />
+    <Content Include="Content\Scripts\Moxie.xap" />
+    <Content Include="Content\Scripts\multiselect.js" />
+    <Content Include="Content\Scripts\plupload.full.min.js" />
+    <Content Include="Content\Scripts\popup.js" />
+    <Content Include="Content\Scripts\resizablecolumn.js" />
+    <Content Include="Content\Scripts\scroll.min.js" />
+    <Content Include="Content\Scripts\store.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.AreaDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.AutentificarUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.EmpresaDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.OptionDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.PermissionDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.RolDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.RolOptionDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.UserDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.WebAppDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Areas\Eventos\Views\Busqueda\Area.cshtml" />
+    <Content Include="Areas\Eventos\Views\Busqueda\Index.cshtml" />
+    <Content Include="Areas\Eventos\Views\Busqueda\Paginado.cshtml" />
+    <Content Include="Areas\Eventos\Views\Busqueda\Resultado.cshtml" />
+    <Content Include="Areas\Eventos\Views\Evento\Detalle.cshtml" />
+    <Content Include="Areas\Eventos\Views\Evento\ExportarTest.cshtml" />
+    <Content Include="Areas\Eventos\Views\Evento\Index.cshtml" />
+    <Content Include="Areas\Eventos\Views\Evento\Lista.cshtml" />
+    <Content Include="Areas\Eventos\Views\Evento\Paginado.cshtml" />
+    <Content Include="Areas\Eventos\Views\Evento\Perturbacion.cshtml" />
+    <Content Include="Areas\Eventos\Views\Web.config" />
+    <Content Include="Areas\Formulas\Reporte\Plantilla.xlsx" />
+    <Content Include="Areas\Formulas\Views\Formula\Datos.cshtml" />
+    <Content Include="Areas\Formulas\Views\Formula\Detalle.cshtml" />
+    <Content Include="Areas\Formulas\Views\Formula\Grid.cshtml" />
+    <Content Include="Areas\Formulas\Views\Formula\Index.cshtml" />
+    <Content Include="Areas\Formulas\Views\Formula\Lista.cshtml" />
+    <Content Include="Areas\Formulas\Views\Formula\Valores.cshtml" />
+    <Content Include="Areas\Formulas\Views\Web.config" />
+    <Content Include="Areas\ServicioRPF\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\ServicioRPF\Views\Consulta\Index.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\Consulta\Consulta.cshtml" />
+    <Content Include="Areas\Eventos\Views\HorasOperacion\Index.cshtml" />
+    <Content Include="Areas\Eventos\Views\HorasOperacion\Matriz.cshtml" />
+    <Content Include="Areas\Eventos\Views\HorasOperacion\CargarHora.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\Consulta\Carga.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisNormal\Index.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisFalla\Index.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisNormal\SeleccionRango.cshtml" />
+    <Content Include="Areas\Eventos\Reporte\Plantilla.xlsx" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisNormal\SeleccionUnidad.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisNormal\Excluidos.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisNormal\CargaPotencia.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisNormal\Reporte.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisNormal\Configuracion.cshtml" />
+    <Content Include="Areas\Eventos\Reporte\PlantillaRSF30.xlsx" />
+    <Content Include="Areas\Eventos\Reporte\PlantillaReporteRSF.xlsx" />
+    <Content Include="Areas\Mediciones\Views\Web.config" />
+    <Content Include="Areas\Mediciones\Views\Desviacion\Grilla.cshtml" />
+    <Content Include="Areas\Mediciones\Views\Desviacion\Index.cshtml">
+      <BrowseToURL>~/Mediciones/Desviacion/Index</BrowseToURL>
+    </Content>
+    <Content Include="Areas\ServicioRPF\Views\AnalisisFalla\Reporte.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisFalla\Configuracion.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisFalla\Evaluacion.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisFalla\CargaPotencia.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\Consulta\Potencias.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\Consulta\ConsultaPotencia.cshtml" />
+    <Content Include="Areas\ServicioRPF\Reporte\Plantilla.xlsx" />
+    <Content Include="Areas\ServicioRPF\Reporte\PlantillaPotenciaRPF.xlsx" />
+    <Content Include="Areas\ServicioRPF\Reporte\PlantillaRPF.xlsx" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisFalla\Validacion.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisFalla\ReValidacion.cshtml" />
+    <Content Include="Areas\ServicioRPF\Reporte\PlantillaRPFFalla.xlsx" />
+    <Content Include="Areas\SupervisionPlanificacion\Views\Web.config" />
+    <Content Include="Areas\SupervisionPlanificacion\Views\RpfEnergiaPotencia\Index.cshtml" />
+    <Content Include="Areas\SupervisionPlanificacion\Views\RpfEnergiaPotencia\Grilla.cshtml" />
+    <Content Include="Areas\SupervisionPlanificacion\Views\RpfEnergiaPotencia\Detalle.cshtml" />
+    <Content Include="Areas\SupervisionPlanificacion\Views\RpfEnergiaPotencia\Anadir.cshtml" />
+    <Content Include="Areas\SupervisionPlanificacion\Views\Desviacion\Index.cshtml" />
+    <Content Include="Areas\SupervisionPlanificacion\Views\Desviacion\Grilla.cshtml" />
+    <Content Include="Areas\Formulas\Views\Configuracion\Index.cshtml" />
+    <Content Include="Areas\Formulas\Views\Configuracion\Lista.cshtml" />
+    <Content Include="Areas\Formulas\Views\Configuracion\Nuevo.cshtml" />
+    <Content Include="Areas\Formulas\Views\Configuracion\Selector.cshtml" />
+    <Content Include="Areas\Formulas\Views\Formula\Formula.cshtml" />
+    <Content Include="Areas\Formulas\Reporte\PlantillaImportacion.xlsx" />
+    <Content Include="Areas\Eventos\Views\AnalisisFallas\Index.cshtml" />
+    <Content Include="Areas\Mediciones\Views\GeneracionRER\Index.cshtml" />
+    <Content Include="Areas\Mediciones\Views\MedidoresGeneracion\Index.cshtml" />
+    <Content Include="Areas\Mediciones\Views\MedidoresGeneracion\Lista.cshtml" />
+    <Content Include="Areas\Mediciones\Views\ReporteMedidores\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Estadistica\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Estadistica\Tree.cshtml" />
+    <Content Include="Areas\Admin\Views\Estadistica\Aplicacion.cshtml" />
+    <Content Include="Areas\Admin\Views\Estadistica\Opcion.cshtml" />
+    <Content Include="Areas\Mediciones\Views\Configuracion\Index.cshtml" />
+    <Content Include="Areas\Mediciones\Views\Configuracion\Lista.cshtml" />
+    <Content Include="Areas\Mediciones\Views\Configuracion\Edicion.cshtml" />
+    <Content Include="Areas\Mediciones\Views\Formato\Index.cshtml" />
+    <Content Include="Areas\Mediciones\Views\Formato\Lista.cshtml" />
+    <Content Include="Areas\Mediciones\Views\Formato\Agregar.cshtml" />
+    <Content Include="Areas\Mediciones\Views\GeneracionRER\Lista.cshtml" />
+    <Content Include="Areas\Mediciones\Reporte\PlantillaGeneracionRERDiario.xlsx" />
+    <Content Include="Areas\Mediciones\Reporte\PlantillaGeneracionRERSemanal.xlsx" />
+    <Content Include="Areas\Mediciones\Views\GeneracionRER\Reporte.cshtml" />
+    <Content Include="Areas\Mediciones\Views\GeneracionRER\Cumplimiento.cshtml" />
+    <Content Include="Areas\Equipamiento\Views\Web.config" />
+    <Content Include="Areas\Equipamiento\Views\Area\Index.cshtml" />
+    <Content Include="Areas\Equipamiento\Views\Area\ListarAreas.cshtml" />
+    <Content Include="Areas\Eventos\Views\Registro\Index.cshtml" />
+    <Content Include="Areas\Eventos\Views\Registro\Listado.cshtml" />
+    <Content Include="Areas\Eventos\Views\Registro\Consulta.cshtml" />
+    <Content Include="Areas\Eventos\Views\Registro\Email.cshtml" />
+    <Content Include="Areas\Eventos\Views\AnalisisFallas\Cubo.cshtml" />
+    <Content Include="Areas\Mediciones\Views\MedidoresGeneracion\Paginado.cshtml" />
+    <Content Include="Areas\Medidores\Views\Web.config" />
+    <Content Include="Areas\Mediciones\Views\ReporteMedidores\Reporte.cshtml" />
+    <Content Include="Areas\Equipamiento\Views\Area\Detalle.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\AnalisisAlternativo\Index.cshtml" />
+    <Content Include="Areas\Mediciones\Views\MedidoresGeneracion\Empresas.cshtml" />
+    <Content Include="Areas\Mediciones\Views\ReporteMedidores\Empresas.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\Consistencia\Index.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\Consistencia\Consulta.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\Consistencia\Configuracion.cshtml" />
+    <Content Include="Areas\ServicioRPF\Reporte\PlantillaConsistencia.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\Plantilla.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\PlantillaArea.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\PlantillaBarra.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\PlantillaCliente.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\PlantillaCodigoEntrega.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\PlantillaCodigoRetiro.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\PlantillaCodigoRetiroSinCon.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\PlantillaCompensacion.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\PlantillaFactorPerdida.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\PlantillaTipoContrato.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\PlantillaTipoUsuario.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\Reporte.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\ReporteBarra.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\ReporteCodigoEntrega.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\ReporteCodigoRetiro.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\ReporteCodigoRetiroSinCon.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\ReporteCompensacion.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\ReporteFactorPerdida.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\ReporteTipoContrato.xlsx" />
+    <Content Include="Areas\Transferencias\Reporte\ReporteTipoUsuario.xlsx" />
+    <Content Include="Areas\Transferencias\Views\Barra\Edit.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Barra\Form.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Barra\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Barra\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Barra\New.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Barra\View.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoEntrega\Edit.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoEntrega\Form.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoEntrega\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoEntrega\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoEntrega\New.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoEntrega\View.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiroSinContrato\Edit.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiroSinContrato\Form.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiroSinContrato\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiroSinContrato\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiroSinContrato\New.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiroSinContrato\View.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiro\Edit.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiro\Form.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiro\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiro\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiro\View.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Compensacion\Edit.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Compensacion\Form.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Compensacion\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Compensacion\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Compensacion\New.cshtml" />
+    <Content Include="Areas\Transferencias\Views\EnvioInformacion\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\FactorPerdida\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\InfoDesbalance\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\InfoDesbalance\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\InfoDesviacion\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\InfoDesviacion\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\InfoFaltante\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\InfoFaltante\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\IngresoCompensacion\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\IngresoCompensacion\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\IngresoPotencia\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\IngresoPotencia\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Levantamiento\Edit.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Levantamiento\Form.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Levantamiento\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Levantamiento\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Levantamiento\View.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Periodo\Edit.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Periodo\Form.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Periodo\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Periodo\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Periodo\New.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Periodo\View.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Recalculo\Edit.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Recalculo\Form.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Recalculo\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Recalculo\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Recalculo\New.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoContrato\Edit.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoContrato\Form.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoContrato\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoContrato\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoContrato\New.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoContrato\View.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoUsuario\Edit.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoUsuario\Form.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoUsuario\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoUsuario\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoUsuario\New.cshtml" />
+    <Content Include="Areas\Transferencias\Views\TipoUsuario\View.cshtml" />
+    <Content Include="Areas\Transferencias\Views\ValorTransferencia\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\ValorTransferencia\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Web.config" />
+    <Content Include="Areas\Transferencias\Views\IngresoRetiroSC\Index.cshtml" />
+    <Content Include="Areas\Transferencias\Views\IngresoRetiroSC\Lista.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoEntrega\Save.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiro\Save.cshtml" />
+    <Content Include="Areas\Transferencias\Views\CodigoRetiroSinContrato\Save.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Periodo\Save.cshtml" />
+    <Content Include="Areas\Transferencias\Views\ValorTransferencia\ListaInfo.cshtml" />
+    <Content Include="Areas\Eventos\Views\AnalisisFallas\fallac100.cshtml" />
+    <Content Include="Areas\Eventos\Views\Mantenimiento\Empresas.cshtml" />
+    <Content Include="Areas\Eventos\Views\Mantenimiento\GraficoReporte.cshtml" />
+    <Content Include="Areas\Eventos\Views\Mantenimiento\Index.cshtml" />
+    <Content Include="Areas\Eventos\Views\Mantenimiento\Lista.cshtml" />
+    <Content Include="Areas\Eventos\Views\Mantenimiento\Paginado.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\Frecuencia\Index.cshtml" />
+    <Content Include="Areas\ServicioRPF\Views\Frecuencia\Lista.cshtml" />
+    <Content Include="Areas\ServicioRPF\Reporte\PlantillaFrecuencia.xlsx" />
+    <Content Include="Areas\Transferencias\Views\Compensacion\Save.cshtml" />
+    <Content Include="Areas\Transferencias\Views\Recalculo\Save.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\Web.config" />
+    <Content Include="Areas\Hidrologia\Views\PtoMedicion\Index.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\PtoMedicion\Lista.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\PtoMedicion\Editar.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\PtoMedicion\Grabar.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\Index.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\ListaFormato.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\Editar.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\PtoMedicion\TipoPtoMedicion.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\ListaHoja.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\Agregar.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\ListaPtoMedicion.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\MostrarAgregarPto.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\ListarEquipo.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\ListarPto.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\ListarHeadColumn.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\MostrarAgregarTitulo.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\MostrarEditarPto.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\IndexHoja.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\FormatoMedicion\DetalleGeneralFormato.cshtml" />
+    <Content Include="Areas\Eventos\Views\Mantenimiento\Equipos.cshtml" />
+    <Content Include="Areas\Medidores\Views\Reportes\Empresas.cshtml" />
+    <Content Include="Areas\Medidores\Views\Reportes\Index.cshtml" />
+    <Content Include="Areas\Medidores\Views\Reportes\Index_HFP_HP.cshtml" />
+    <Content Include="Areas\Medidores\Views\Reportes\MaximaDemandaDiaria.cshtml" />
+    <Content Include="Areas\Medidores\Views\Reportes\MaximaDemandaDiaria_HFP_HP.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\Reporte\Index.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\Reporte\Lista.cshtml" />
+    <Content Include="Areas\Hidrologia\Views\PtoMedicion\Paginado.cshtml" />
+    <None Include="Properties\PublishProfiles\Intranet.pubxml" />
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.AutentificarUsuarioADResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SeguridadServicio\COES.MVC.Intranet.SeguridadServicio.LogOptionDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\SeguridadServicio\SeguridadServicio.disco" />
+    <None Include="Service References\SeguridadServicio\configuration91.svcinfo" />
+    <None Include="Service References\SeguridadServicio\configuration.svcinfo" />
+    <None Include="Service References\SeguridadServicio\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\ServicioCloud\COES.MVC.Intranet.ServicioCloud.Medicion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServicioCloud\COES.MVC.Intranet.ServicioCloud.ObtenerDatosAnalisisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServicioCloud\COES.MVC.Intranet.ServicioCloud.RegistroRPF.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServicioCloud\COES.MVC.Intranet.ServicioCloud.ResultadoVerificacion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServicioCloud\COES.MVC.Intranet.ServicioCloud.ReporteEnvio.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ServicioCloud\configuration91.svcinfo" />
+    <None Include="Service References\ServicioCloud\configuration.svcinfo" />
+    <None Include="Service References\ServicioCloud\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServicioCloud\ServicioCloud1.disco" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <None Include="Service References\SeguridadServicio\SeguridadServicio.wsdl" />
+    <None Include="Service References\SeguridadServicio\SeguridadServicio.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SeguridadServicio\SeguridadServicio1.wsdl" />
+    <None Include="Service References\SeguridadServicio\SeguridadServicio1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SeguridadServicio\SeguridadServicio2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SeguridadServicio\SeguridadServicio3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Home\Autorizacion.cshtml" />
+    <Content Include="Views\Home\Default.cshtml" />
+    <Content Include="Views\Home\Info.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\Menu.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Master.cshtml" />
+    <Content Include="Views\General\Index.cshtml" />
+    <Content Include="Views\General\Grilla.cshtml" />
+    <None Include="Service References\ServicioCloud\ServicioCloud2.wsdl" />
+    <None Include="Service References\ServicioCloud\ServicioCloud21.wsdl" />
+    <None Include="Service References\ServicioCloud\ServicioCloud4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicioCloud\ServicioCloud41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicioCloud\ServicioCloud42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicioCloud\ServicioCloud43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Equipamiento\Views\Shared\" />
+    <Folder Include="Areas\Formulas\Views\Shared\" />
+    <Folder Include="Areas\Hidrologia\Views\Shared\" />
+    <Folder Include="Areas\Manttos\Content\" />
+    <Folder Include="Areas\Manttos\Controllers\" />
+    <Folder Include="Areas\Manttos\Helper\" />
+    <Folder Include="Areas\Manttos\Reporte\" />
+    <Folder Include="Areas\Manttos\Views\" />
+    <Folder Include="Areas\Mediciones\Views\Shared\" />
+    <Folder Include="Areas\Medidores\Views\Shared\" />
+    <Folder Include="Areas\ServicioRPF\Views\Shared\" />
+    <Folder Include="Areas\SupervisionPlanificacion\Content\Css\" />
+    <Folder Include="Areas\SupervisionPlanificacion\Views\Shared\" />
+    <Folder Include="Uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SeguridadServicio\" />
+    <WCFMetadataStorage Include="Service References\ServicioCloud\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\COES.Base\COES.Base.csproj">
+      <Project>{2f0b7b6a-0c6a-42b2-8c44-11697cf04242}</Project>
+      <Name>COES.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COES.Dominio.DTO\COES.Dominio.DTO.csproj">
+      <Project>{28fff8f3-12ce-41b1-839b-2fd36d3c50a8}</Project>
+      <Name>COES.Dominio.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COES.Servicios.Aplicacion\COES.Servicios.Aplicacion.csproj">
+      <Project>{5ff9cd43-ab2f-42f2-b8b2-0d2c95ef41b1}</Project>
+      <Name>COES.Servicios.Aplicacion</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63867</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:63867/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

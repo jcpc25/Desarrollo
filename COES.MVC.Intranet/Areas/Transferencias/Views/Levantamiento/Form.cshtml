@@ -1,0 +1,164 @@
+﻿@model COES.Dominio.DTO.Transferencias.TramiteDTO
+
+@{
+    string sAccion = ViewData["sAccion"].ToString();
+    string sTitulo = ViewData["sTitulo"].ToString();
+    var Tipotramnombre = TempData["Tipotramnombre"].ToString();
+    var PeriodoNombre = TempData["Periodonombre"].ToString();
+    var EmprNombre = TempData["EmprNombre"].ToString();
+}
+<link href="~/Areas/Transferencias/Content/Css/Validate.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Save", "levantamiento", FormMethod.Post, new { id = "frmLevantamiento", @class = "cmxform" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>@sTitulo</legend>
+        <div style="padding-left: 20px; width: 500px;">
+            @Html.HiddenFor(model => model.Tramcodi)
+            @Html.HiddenFor(model => model.Tipotramcodi)
+            <table cellspacing="2" cellpadding="5">
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Pericodi, "Periodo")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Pericodi, new { @Value = PeriodoNombre, @readonly = "readonly" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Tipotramnombre, "Tipo")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Tipotramnombre, new { @Value = Tipotramnombre, @readonly = "readonly" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Emprnombre, "Empresa")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Emprnombre, new { @Value = EmprNombre, @readonly = "readonly" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Usuaseincodi, "Usuario extranet")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Usuaseincodi, new { @readonly = "readonly" })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Tramfecreg, "Fecha de Registro")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Tramfecreg, new { @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.Tramfecreg)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Tramdescripcion, "Descripcion")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.Tramdescripcion, new { cols = 80, @rows = 2, @readonly = true, style = "background-color: #f2f4f3; border: 1px solid #cbd3cf; border-radius: 5px; color: #4876aa; font: 12px arial,sans-serif; text-indent: 8px; width: 650px; height: 40px;" })
+                            @Html.ValidationMessageFor(model => model.Tramdescripcion)
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Tramrespuesta, "Respuesta")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.Tramrespuesta, new { cols = 80, @rows = 2, style = "background-color: #f2f4f3; border: 1px solid #cbd3cf; border-radius: 5px; color: #4876aa; font: 12px arial,sans-serif; text-indent: 8px; width: 650px; height: 40px;" })
+                            @Html.ValidationMessageFor(model => model.Tramrespuesta)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Tramcorrinf, "Corrigio Informe")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            <label>@Html.RadioButtonFor(model => model.Tramcorrinf, "Si")Si</label>
+                            <label>@Html.RadioButtonFor(model => model.Tramcorrinf, "No", new{@checked="checked"})No</label>
+                            
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <input type="button" value="Retornar" onclick="location.href='@Url.Action("Index", "levantamiento")    '" alt="Retornar" title="Retornar" />&nbsp;
+                    </td>
+                    <td align="left">
+                        &nbsp;
+                        @if (Model.bGrabar)
+                        {
+                            <input type="submit" value="@sAccion" alt="@sAccion" title="@sAccion" />
+                        }
+                    </td>
+                </tr>
+
+                <tr><td>Nota(*): Campos Requeridos</td></tr>
+
+            </table>
+        </div>
+    </fieldset>
+}
+<script src="~/Areas/Transferencias/Content/Scripts/jquery.validate.js"></script>
+<script>
+    $("#frmLevantamiento").validate({
+        rules: {
+            Tramcorrinf: {
+                required: true
+            },
+            Tramrespuesta: {
+                required: true,
+                maxlength: 1000
+            },
+        }
+    });
+
+</script>
+
+

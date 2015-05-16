@@ -1,0 +1,47 @@
+﻿@model COES.MVC.Intranet.Areas.Hidrologia.Models.FormatoMedicionModel
+<script type="text/javascript">
+    $(document).ready(function () { 
+
+        $('#btnActualizar').click(function () {
+            editarPto();
+        });
+
+    });
+</script>
+@{
+    var activo = "checked";
+    if (Model.HojaPto.Hojaptoactivo != 1)
+    {
+        activo = "unchecked";
+    }
+    }
+<table style="width:100%">
+ 
+    <tr>
+        <td  class="tbform-label">Limite Superior:</td>
+        <td class="tbform-control">
+            <input type="Text" id="idLimSup"  value="@Model.HojaPto.Hojaptolimsup" />
+        </td>
+    </tr>
+    <tr>
+        <td  class="tbform-label">Flujo Inverso:</td>
+        <td class="tbform-control">
+            <input type="checkbox" name="checkbox" id="idSigno"><br>
+        </td>
+    </tr>
+    <tr>
+        <td  class="tbform-label">Activo:</td>
+        <td class="tbform-control">
+            <input type="checkbox" name="checkbox" id="idActivo" checked="@activo"><br>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <input type="button" value="Actualizar" id="btnActualizar" />
+        </td>
+    </tr>
+</table>
+<input type="hidden" id="hfHoja" value ="@Model.HojaPto.Hojanumero"/>
+<input type="hidden" id="hfPto" value ="@Model.HojaPto.Ptomedicodi"/>
+<input type="hidden" id="hfFormat" value ="@Model.HojaPto.Formatcodi"/>

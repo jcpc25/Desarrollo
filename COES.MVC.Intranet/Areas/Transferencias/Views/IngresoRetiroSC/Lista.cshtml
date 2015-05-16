@@ -1,0 +1,31 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.IngresoRetiroSCModel
+
+@Html.AntiForgeryToken()
+
+
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+            <th>Version</th>
+            <th>Periodo</th>
+            <th>Empresa</th>
+            <th>Importe</th>
+            <th>Usuario</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var item in Model.ListaIngresoRetiroSC)
+        {
+            <tr id="fila_@item.Ingrsccodi">
+                <td class="text_left">@item.Ingrscversion</td>
+                <td class="text_left">@item.PeriNombre</td>
+                <td class="text_left">@item.EmprNombre</td>
+                <td style="text-align:right;">@item.Ingrscimporte</td>
+                <td class="text_left">@item.Ingrscusername</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

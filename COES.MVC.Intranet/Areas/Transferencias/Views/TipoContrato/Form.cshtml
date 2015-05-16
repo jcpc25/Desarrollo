@@ -1,0 +1,95 @@
+﻿@model COES.Dominio.DTO.Transferencias.TipoContratoDTO
+@{
+    string sAccion = ViewData["sAccion"].ToString();
+    string sTitulo = ViewData["sTitulo"].ToString();
+}
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+         {
+             Text = "Activo",
+             Value = "ACT",
+             Selected = true
+         });
+    listItems.Add(new SelectListItem
+         {
+             Text = "Inactivo",
+             Value = "INA"
+
+         });
+
+}
+
+<link href="~/Areas/Transferencias/Content/Css/Validate.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Save", "tipocontrato", FormMethod.Post, new { id = "frmTipocontrato", @class = "cmxform" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>@sTitulo</legend>
+        <div style="padding-left:20px; width:500px;">
+            @Html.HiddenFor(model => model.Tipocontcodi)
+            <table cellspacing="2" cellpadding="5">
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Tipocontnombre, "Nombre")
+                            (*)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Tipocontnombre, new { size = 50, maxLength = 100 })
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Tipocontestado, "Estado")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("Tipocontestado", listItems)
+
+                            @Html.ValidationMessageFor(model => model.Tipocontestado)
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="right"><input type="button" value="Retornar" onclick="location.href='@Url.Action("Index","tipocontrato")'" alt="Retornar" title="Retornar" />&nbsp;</td>
+                    <td align="left">
+                        &nbsp;
+                        @if (Model.bGrabar)
+                        {
+                            <input type="submit" value="@sAccion" alt="@sAccion" title="@sAccion" />
+                        }
+                    </td>
+                </tr>
+
+                <tr><td>Nota(*): Campos Requeridos</td></tr>
+
+            </table>
+        </div>
+    </fieldset>
+}
+<script src="~/Areas/Transferencias/Content/Scripts/jquery.validate.js"></script>
+<script>
+    $("#frmTipocontrato").validate({
+        rules: {
+            Tipocontnombre: {
+                required: true
+            }
+           
+        }
+    });
+
+</script>

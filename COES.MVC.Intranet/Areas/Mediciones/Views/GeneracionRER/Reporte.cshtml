@@ -1,0 +1,107 @@
+﻿@model COES.MVC.Intranet.Areas.Mediciones.Models.GeneracionRERModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Areas/Mediciones/Content/Scripts/reporterer.js"></script>
+
+<div class="form-title">
+    <div class="content-titulo">Generación RER - Reporte de Cumplimiento</div>
+    <div class="content-botonera">   
+        <input type="button" id="btnCancelar" value="Cancelar" />
+    </div>
+</div>
+
+<div class="content-hijo">
+
+
+    <div class="action-message" id="mensaje">
+        Por favor complete los datos.
+    </div>
+
+    <table class="content-tabla-search" style="width:auto">
+        <tr>
+           
+            <td>Horizonte:</td>
+            <td>
+                <select id="cbHorizonte" style="width:120px">
+                    <option value="0">DIARIO</option>
+                    <option value="1">SEMANAL</option>
+                </select>
+            </td>
+            <td id="cntFecha">
+                Fecha:<input type="text" id="txtFecha" value="@Model.Fecha" style="width:100px" />
+            </td>
+            <td id="cntAnio" style="display:none">
+
+                <table class="tabla-inside">
+                    <tr>
+                        <td>
+                            Año:
+                            <select id="cbAnio" style="width:80px">
+                                <option value="">-SELECCIONE-</option>
+                                @{
+                                    foreach (var item in Model.ListaAnios)
+                                    {
+                                        if (Model.Anio == item)
+                                        {
+                                            <option value="@item" selected="selected">@item</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            Semana:
+                            <select id="cbSemana" style="width:60px">
+                                <option value="">-SELECCIONE-</option>
+                                @{
+                                    int i = 1;
+                                    foreach (var item in Model.ListaSemanas)
+                                    {
+                                        if (Model.NroSemana == i)
+                                        {
+                                            <option value="@i" selected="selected">@item</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@i">@item</option>
+                                        }
+
+                                        i++;
+                                    }
+                                }
+                            </select>
+                            <input type="hidden" id="hfSemana" value="@Model.NroSemana" />
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+            <td>
+                <input type="button" id="btnConsultar" value="Consultar datos" />
+            </td>
+        </tr>
+    </table>
+    <div id="fechasSemana" class="cuadro-resumen" style="display:none">
+        <strong style="color:#3D90CB; padding-right:5px">Fecha inicio:</strong>
+        <span id="txtFechaInicio">@Model.FechaInicio</span>
+
+        <strong style="color:#3D90CB; padding-left:20px; padding-right:5px">Fecha fin:</strong>
+        <span id="txtFechaFin">@Model.FechaFin</span>
+    </div>
+    
+    <div style="clear:both; height:20px"></div>
+
+    <div id="listado">
+
+    </div>
+
+
+</div>

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Transferencias - Barras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sMensajeExito = TempData["sMensajeExito"];
+}
+<script src="~/Areas/Transferencias/Content/Scripts/barra.js"></script>
+<link href="~/Areas/Transferencias/Content/Css/Transferencia.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        setTimeout(function ()
+        { $(".mensajes").fadeOut(800).fadeIn(800).fadeOut(500).fadeIn(500).fadeOut(300); }, 3000);
+    }
+    );
+</script>
+<div class="ast">
+    @if (@sMensajeExito != null)
+    {<div class="exito mensajes">@sMensajeExito</div>}
+    <div class="form-title">
+        <div class="content-titulo">Lista de barras</div>
+        <div class="content-botonera">
+        </div>
+    </div>
+    <div class="content-hijo" style="padding-top:8px">
+        <div class="listado" id="listado">       </div>
+    </div>
+</div>

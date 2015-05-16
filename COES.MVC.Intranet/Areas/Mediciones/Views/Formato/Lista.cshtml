@@ -1,0 +1,45 @@
+﻿@model COES.MVC.Intranet.Areas.Mediciones.Models.FormatoModel
+
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+            <th>Empresa</th>
+            <th>Pto medición</th>
+            <th>Indicador</th>            
+            <th>Central</th>
+            <th>Unidad</th>
+            <th>Estado</th>
+            <th>Usuario</th>
+            <th>Fecha</th>       
+            <th>Desactivar</th>     
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ListaPuntos.Count > 0)
+        {
+            foreach (var item in Model.ListaPuntos)
+            {
+                <tr>
+                    <td>@item.EmprNomb</td>
+                    <td>@item.Ptomedicodi</td>
+                    <td>@item.IndPorCentral</td>                   
+                    <td>@item.Central</td>
+                    <td>@item.EquiNomb</td>
+                    <td>@item.Estado</td>                
+                    <td>@item.Userupdate</td>
+                    <td>
+                        @if (item.Fecupdate != null)
+                        {
+                            var fecha = ((DateTime)item.Fecupdate).ToString("dd/MM/yyyy");
+                            <span>@fecha</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="JavaScript:eliminarPunto(@item.Ptomedicodi)">Desactivar</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

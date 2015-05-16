@@ -1,0 +1,10 @@
+﻿@model COES.Dominio.DTO.Transferencias.TipoUsuarioDTO
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div>
+    @Html.Partial("Form", Model, new ViewDataDictionary { { "sTitulo", "Ingresar nuevo Tipo Usuario" }, { "sAccion", "Actualizar" } })
+</div>

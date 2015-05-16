@@ -1,0 +1,53 @@
+﻿@model COES.MVC.Intranet.Areas.Mediciones.Models.ConfiguracionModel
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#cbEditTipoGrupo').val($('#hfTipoGrupo').val());
+
+        $('#btnActualizar').click(function () {
+            actualizar();
+        });
+    });
+</script>
+
+<table class="table-form-vertical">
+    <tr>
+        <td>Empresa:</td>
+        <td>
+            @Model.EmpresaNombre
+        </td>
+    </tr>
+    <tr>
+        <td>Nombre:</td>
+        <td>
+            @Model.GrupoNombre
+        </td>
+    </tr>
+    <tr>
+        <td>Abreviación:</td>
+        <td>
+            @Model.GrupoAbreviacion
+        </td>
+    </tr>
+    <tr>
+        <td>Tipo grupo:</td>
+        <td>
+            <select id="cbEditTipoGrupo">                
+                @foreach (var item in Model.ListaTipoGrupo)
+                {
+                    <option value="@item.Tipogrupocodi">@item.Tipogruponomb</option>
+                }
+            </select>
+           
+            <input type="hidden" id="hfTipoGrupo" value="@Model.TipoGrupoCodi" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="button" value="Actualizar" id="btnActualizar" />
+        </td>
+    </tr>
+</table>
+
+<input type="hidden" value="@Model.IdGrupo" id="hfIdGrupo" />

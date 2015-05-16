@@ -1,0 +1,13 @@
+﻿@model COES.Dominio.DTO.Transferencias.TramiteDTO
+
+
+
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    @Html.Partial("Form", Model, new ViewDataDictionary { { "sTitulo", "Editar la informacion del tramite" }, { "sAccion", "Actualizar" }, { "sTipoTramite", TempData["Tipotramitecodigo"] }@*, { "sPeriodo", TempData["Periodocodigo"] }*@ })
+</div>

@@ -1,0 +1,136 @@
+﻿@model COES.MVC.Intranet.Areas.Eventos.Models.BusquedaMantenimientoModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+     
+}
+<script src="~/Areas/Eventos/Content/Scripts/mantenimiento.js"></script>
+<link href="~/Areas/Eventos/Content/Css/css.css" rel="stylesheet" />
+<script src="~/Content/Scripts/highcharts.js"></script>
+<script src="~/Content/Scripts/multiselect.js"></script>
+<link href="~/Content/Css/multiselect.css" rel="stylesheet" />
+<script src="~/Content/Scripts/jquery.easytabs.min.js"></script>
+<script src="~/Content/Scripts/highcharts-3d.js"></script>
+<script src="~/Content/Scripts/jquery.format.js"></script>
+
+
+<link href="~/Content/Css/tabs.css" rel="stylesheet" />
+
+<div class="form-title">
+    <div class="content-titulo">Mantenimientos</div>
+    <div class="content-botonera">
+          <input type="button" id="btnBuscar" value="Ver Reporte" />
+          <input type="button" id="btnExpotar" value="Exportar Reporte" />
+          <input type="button" id="btnGrafico" value="Ver Gráfico" />
+    </div>
+</div>
+
+<div class="content-hijo" id="mainLayout">
+
+    <div class="spfilter-container">
+    <table class="content-tabla-search" style="width:auto">
+        <tr>
+            <td>Fecha desde:</td>
+            <td><input type="text" id="FechaDesde" name="FechaInicio" value="@Model.FechaInicio"  /></td>
+
+            <td>Fecha hasta:</td>
+            <td><input type="text" id="FechaHasta" name="FechaFin" value="@Model.FechaFin" /></td>
+
+            <td>Con Interrupción</td>
+            <td>
+                <select id="cbInterrupcion" name="IndInterrupcion" style="width:300px">
+                    <option value="-1">--TODOS--</option>
+                    <option value="S">SI</option>
+                    <option value="N">NO</option>
+                </select>
+            </td>
+            <td></td>
+            <td>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>Mantenimiento:</td>
+            <td>
+                <select id="cbTipoMantenimiento"  name="IdTipoMantenimiento" multiple="multiple">        
+                     @foreach (var item in Model.ListaTipoMantenimiento)
+                     {   
+                          <option value="@item.Evenclasecodi">@item.Evenclasedesc @item.Evenclaseabrev</option>
+                     }
+                </select>
+            </td>
+
+            <td>Tipo de Mantenimiento</td>
+            <td>                
+                <select id="cbTipoMantto"  name="IdTipoMantto" multiple="multiple">        
+                     @foreach (var item in Model.ListaTipoEvento)
+                     {   
+                          <option value="@item.TIPOEVENCODI">@item.TIPOEVENDESC</option>
+                     }
+                </select>
+            </td>
+
+            <td>Tipo de Equipo:</td>
+            <td>
+                <select id="cbFamilia" name="IdFamilia" multiple="multiple">         
+                     @foreach (var item in Model.ListaFamilias)
+                     {   
+                          <option value="@item.FAMCODI">@item.FAMNOMB</option>
+                     }
+                </select>
+            </td>
+
+
+            <td></td>
+            <td>                
+
+            </td>
+        </tr>
+
+        <tr>
+
+            <td>Tipo de Empresa</td>
+            <td>                
+                <select id="cbTipoEmpresa" name="IdTipoEmpresa" multiple="multiple">
+                    @foreach (var item in Model.ListaTipoEmpresas)
+                    { 
+                        <option value="@item.Tipoemprcodi">@item.Tipoemprdesc</option>
+                    }
+                </select>
+            </td>
+
+            <td>Empresa:</td>
+            <td>
+                <div id="empresas"></div>
+            </td>
+
+            <td>Equipo:</td>
+            <td>
+                <div id="equipos" style="display:none;"></div>
+            </td>
+            <td>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+      </table>
+    <input type="hidden" id="hfNroPagina" name="NroPagina" value="1" />
+    <input type="hidden" id="hfEmpresa" />
+    <input type="hidden" id="hfTipoMantenimiento" />
+    <input type="hidden" id="hfTipoEmpresa" />
+    <input type="hidden" id="hfTipoEquipo" />
+    <input type="hidden" id="hfTipoMantto" />
+    <input type="hidden" id="hfEquipo" />
+   </div>
+
+<div class="content-tabla">
+    <div class="tabla-header">       
+        <div class="table-paginado" id="paginado"></div>
+    </div>
+    <div class="table-list" id="listado"></div>
+</div>
+
+<div style="clear:both; height:30px"></div>
+
+</div>

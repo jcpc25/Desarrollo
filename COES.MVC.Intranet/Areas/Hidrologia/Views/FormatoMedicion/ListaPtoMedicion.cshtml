@@ -1,0 +1,99 @@
+﻿@model COES.MVC.Intranet.Areas.Hidrologia.Models.FormatoMedicionModel
+@{
+    var altoFila = 25;
+    }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#tablaHead').on('click', 'a.edithead', function () {
+            var argumento = $(this).attr('id');
+            var param = argumento.split("#");
+            modificarTitulo(param[1], param[2], param[3], param[4], param[0]);
+        });
+
+
+    });
+
+</script>
+
+<table>
+
+    <tr>
+        
+        <td>
+<table border="0" class="pretty tabla-adicional" cellspacing="0" width="100%" id="tablaHead">
+    <thead>
+        <tr>
+            <th>Titulo Columna</th>
+            <th></th>
+           
+        </tr>
+   </thead>
+    <tbody>
+        @foreach(var item in Model.ListaHeadColumn)
+        {
+            var titulo = "";
+            var len = item.Headnombre.Length;
+            if (len > 10)
+            {
+                titulo = item.Headnombre.Substring(0, len-1) + "...";
+                
+            }
+            else {
+                titulo = item.Headnombre;
+            }
+
+        <tr style="height:@(item.Headlen * altoFila)px;" id="rwHead@(item.Headpos)">
+            <td>@titulo</td>
+            <td><a href="#" id="@(item.Headpos)#@(Model.EmpresaCodigo)#@(Model.FormatoCodigo)#@(Model.HojaNumero)#@item.Headnombre" class="edithead">[E]</a></td>
+            
+        </tr>
+        }
+    </tbody>
+</table>
+
+        </td>
+
+        <td>
+<table border="0" class="pretty tabla-adicional" cellspacing="0" width="100%" id="tablaPtos">
+    <thead>
+        <tr>
+            <th>Orden</th>
+            <th>Pto</th>
+            <th>Empresa</th>
+            <th>Equipo</th>
+            <th>Medida</th>
+            <th>Lim. Sup.</th>
+            <th>Estado</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+     </thead>
+     <tbody>
+        @foreach (var item in Model.ListaHojaPto)
+        {
+            var idestado = "id" + item.Hojaptoorden;
+            var activo = "Activo";
+            if (item.Hojaptoactivo != 1)
+            {
+                activo = "Desactivo";
+            }
+                    
+        <tr id="@item.Hojaptoorden" style="height:@(altoFila)px;">  
+            <td>@item.Hojaptoorden</td>          
+            <td>@item.Ptomedicodi</td>
+            <td>@item.Emprabrev</td>
+            <td>@item.Equinomb</td>
+            <td>@item.Tipoptomedinomb (@item.Tipoinfoabrev)</td>
+            <td>@item.Hojaptolimsup</td>
+            <td>@activo</td>
+            <td><a href="#" onclick=" modificarPto(@item.Formatcodi,@item.Hojanumero,@item.Ptomedicodi,@item.Hojaptoorden,'@item.Hojaptolimsup',@item.Hojaptoactivo)">Editar</a></td>
+            <td><a href="#">Elimnar</a></td>
+        </tr>
+        }
+     </tbody>
+</table>
+        </td>
+    </tr>
+</table>

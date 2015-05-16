@@ -1,0 +1,10 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.PeriodoModel
+
+@{
+    ViewBag.Title = "Transferencias - Editar un Periodo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div>
+@Html.Partial("Form", Model, new ViewDataDictionary { { "sTitulo", "Editar la informacion del Periodo" }, { "sAccion", "Actualizar" } })
+</div>

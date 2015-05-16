@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Areas/Eventos/Content/Scripts/registro.js"></script>
+<link href="~/Areas/Eventos/Content/Css/css.css" rel="stylesheet" />
+<script src="~/Content/Scripts/jquery.easytabs.min.js"></script>
+<link href="~/Content/Css/tabs.css" rel="stylesheet" />
+
+<div class="form-title">
+    <div class="content-titulo">Consulta de Informes - Eventos</div>
+    <div class="content-botonera">
+        <input type="button" id="btnGrabar" value="Grabar" />
+        <input type="button" id="btnCancelar" value="Cancelar" />
+    </div>
+</div>
+
+<div class="content-hijo">
+
+    <div id="tab-container" class='tab-container'>
+        <ul class='etabs'>
+            <li class='tab'><a href="#paso1">Datos del Evento</a></li>
+            <li class='tab'><a href="#paso2">Informe preliminar</a></li>
+            <li class='tab'><a href="#paso3">Informe final</a></li>
+            <li class='tab'><a href="#paso4">Informe complementario</a></li>
+            <li class='tab'><a href="#paso5">Archivos Adjuntos</a></li>
+        </ul>
+        <div class='panel-container'>
+            <div id="paso1">
+                <h2>Datos del Evento</h2>
+                                
+            </div>
+            <div id="paso2">
+                <h2>Informe preliminar</h2>
+            </div>
+            <div id="paso3">
+                <h2>Informe final</h2>
+            </div>
+            <div id="paso4">
+                <h2>Informe complementario</h2>
+            </div>
+            <div id="paso5">
+                <h2>Archivos adjuntos</h2>
+            </div>
+        </div>
+    </div>
+</div>

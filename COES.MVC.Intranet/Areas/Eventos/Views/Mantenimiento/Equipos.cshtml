@@ -1,0 +1,21 @@
+﻿@model COES.MVC.Intranet.Areas.Eventos.Models.BusquedaMantenimientoModel
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#cbEquipo').multipleSelect({
+            width: '250px',
+            filter: true
+        });
+
+        $('#cbEquipo').multipleSelect('checkAll');
+    });
+
+</script>
+
+<select id="cbEquipo" name="IdEquipo" multiple="multiple">
+    @foreach (var item in Model.ListaEquipo)
+    {
+        <option value="@item.Equicodi">@item.Equinomb</option>
+    }
+</select>

@@ -1,0 +1,33 @@
+﻿@model COES.MVC.Intranet.Areas.Hidrologia.Models.FormatoMedicionModel
+
+<div style="clear:both; height:15px"></div>
+<table border="0" class="pretty tabla-adicional" cellspacing="0" width="100%" id="tabla">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Formato</th>
+            <th>Area</th>
+            <th>Usuario</th>
+            <th>Periodo</th>
+            <th>Resolución</th>
+            <th>Horizonte</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaFormato)
+        {
+            
+            <tr onclick="mostrarDetalle(@item.Formatcodi);" style="cursor:pointer">
+                <td>@item.Formatcodi</td>
+                <td>@item.Formatnombre</td>
+                <td>@item.Areaname</td>
+                <td>@item.Lastuser</td>
+                <td>@item.Periodo</td>
+                <td>@item.Resolucion</td>
+                <td>@item.Horizonte</td>
+                <td>@item.Lastdate</td>
+            </tr>
+        }
+    </tbody>
+</table>

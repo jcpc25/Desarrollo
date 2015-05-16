@@ -1,0 +1,47 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.LevantamientoModel
+@Html.AntiForgeryToken()
+        <table border="0" class="pretty" id="tabla">
+            <thead>
+                <tr>
+                    <th>Fecha Registro</th>
+                    <th>Empresa</th>
+                    <th>Usuario</th>
+                    <th>Tipo</th>
+                    <th>Descripcion</th>
+                    <th>Usuario Intranet</th>
+                    <th>Respuesta</th>
+                    <th>Fecha Respuesta</th>
+                    <th>Corrigio informe</th>
+                    <th style="width:30px;">&nbsp;</th>
+                    <th style="width:30px;">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.ListaTramites)
+            {
+                    <tr id="fila_@item.Tramcodi" >
+                        <td class="text_left">@item.Tramfecreg.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        <td class="text_left">@item.Emprnombre</td>
+                        <td class="text_left">@item.Usuaseincodi</td>  
+                        <td class="text_left">@item.Tipotramnombre</td>
+                        <td class="text_left">@item.Tramdescripcion</td>
+                        <td class="text_left">@item.Usuacoescodi</td>  
+                        <td class="text_left">@item.Tramrespuesta</td>  
+                        <td>@if (item.Tramfecres != null)
+                        { <span>@item.Tramfecres.GetValueOrDefault().ToString("dd/MM/yyyy HH:mm:ss")</span>}</td>  
+                        <td>@item.Tramcorrinf</td>
+                        <td style="width:30px;"><a href="#" id="view_@item.Tramcodi" class="view"><img src="@Url.Content("~/Content/Images/btn-open.png")" title="Ver informacion del registro" alt="Ver informacion del registro" /></a></td>
+                        <td style="width:30px;">
+                            @if (Model.bEditar)
+                            {
+                                <a href="@Url.Action("Edit", new { id = item.Tramcodi })"><img src="@Url.Content("~/Content/Images/btn-edit.png")" title="Editar el registro" alt="Editar el registro" /></a>
+                            }
+                        </td>
+                    </tr>
+            }
+            </tbody>
+
+        </table>
+        <div id="popup">    </div>
+
+  

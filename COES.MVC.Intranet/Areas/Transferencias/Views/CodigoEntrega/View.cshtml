@@ -1,0 +1,61 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.CodigoEntregaModel
+
+@{
+    ViewBag.Title = "Vista preliminar";
+}
+<fieldset>
+    <legend>Codigo Entrega</legend>
+    <table cellspacing="2" cellpadding="5">
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Centgenenombre, "Central Generadora : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Centgenenombre)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Barrnombbarrtran, "Barra Transferencia :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Barrnombbarrtran)</div>
+            </td>
+        </tr>
+        <tr>           
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Emprnomb, "Empresa  : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Emprnomb)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Codientrfechainicio, "Fecha de Inicio :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Codientrfechainicio)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Codientrfechafin, "Fecha Fin :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Codientrfechafin)</div>
+            </td>
+        </tr>
+        <tr>           
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Codientrcodigo, "Codigo Entreg :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Codientrcodigo)</div>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+<div>
+    <span class="button b-close">[X]</span>
+</div>

@@ -1,0 +1,22 @@
+﻿@model COES.MVC.Intranet.Areas.Mediciones.Models.GeneracionRERModel
+
+<script type="text/javascript">
+    $(function () {
+        $('#listado').css("width", $('#hfAncho').val() + "px");
+
+       
+        $('#tabla').dataTable({
+            "scrollY": 430,
+            "scrollX": true,
+            "sDom": 't',
+            "ordering": false,
+            "bPaginate": false,
+            "bDestroy": true,
+            "iDisplayLength": 50
+        });
+    });
+
+</script>
+
+
+@Html.Raw(Model.Resultado)

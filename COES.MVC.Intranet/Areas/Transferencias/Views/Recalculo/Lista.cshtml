@@ -1,0 +1,50 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.RecalculoModel
+@Html.AntiForgeryToken()
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Descripcion</th>
+            <th style="width:30px;">&nbsp;</th>
+            @*<th style="width:30px;">&nbsp;</th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaRecalculo)
+        {
+            <tr id="fila_@item.Recacodi">
+                <td class="text_left">@item.Recafecini.ToString("dd/MM/yyyy")</td>
+                <td>@item.Recafecfin.ToString("dd/MM/yyyy")</td>
+                <td>@item.Recadesc</td>
+                <td style="width:30px;">
+                    @if (Model.bEditar)
+                    {
+                        <a href="@Url.Action("Edit", new { id = item.Recacodi })"><img src="@Url.Content("~/Content/Images/btn-edit.png")" title="Editar el registro" alt="Editar el registro" /></a>
+                    }
+                </td>
+                @*<td style="width:30px;">
+                @if (Model.bEliminar)
+                    {
+                        <a href="#" id="eliminar_@item.Recacodi" class="delete"><img src="~/Content/Images/btn-cancel.png" title="Eliminar el registro" alt="Eliminar el registro" /></a>
+                    }
+                </td>*@
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<div id="popup">    </div>
+
+
+<div style="text-align:center">
+    <input type="button" value="Regresar" onclick="location.href='@Url.Action("Index","periodo")'" alt="Regresar" title="Regresar" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" value="Limpiar" onclick="location.href='@Url.Action("Index","recalculo")'" alt="Limpiar" title="Limpiar" />
+    @if (Model.bNuevo)
+    {
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <input type="button" value="Nuevo" onclick="location.href='@Url.Action("New", "recalculo")'" alt="Insertar un nuevo registro" title="Insertar un nuevo registro" />
+    }
+</div>

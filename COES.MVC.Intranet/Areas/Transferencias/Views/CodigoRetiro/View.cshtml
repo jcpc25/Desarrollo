@@ -1,0 +1,96 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.CodigoRetiroModel
+
+@{
+    ViewBag.Title = "Vista preliminar";
+}
+<fieldset>
+    <legend>Codigo Retiro </legend>
+    <table cellspacing="2" cellpadding="5">
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Emprnombre, "Empresa  : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Emprnombre)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Clinombre, "Cliente : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Clinombre)</div>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Barrnombbarrtran, "Barra Transferencia :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Barrnombbarrtran)</div>
+            </td>
+        </tr>
+       
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Tipocontnombre, " Tipo Contrato: ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tipocontnombre)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Tipousuanombre, " Tipo Usuario: ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tipousuanombre)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Solicodiretifechainicio, "Fecha de Inicio :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Solicodiretifechainicio)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Solicodiretifechafin, "Fecha Fin :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Solicodiretifechafin)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Solicodireticodigo, "Codigo de Retiro :    ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Solicodireticodigo)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Solicodiretidescripcion, " Descripcion: ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Solicodiretidescripcion)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Solicodiretidetalleamplio, " Mayor Detalle: ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Solicodiretidetalleamplio)</div>
+            </td>
+        </tr>
+
+    </table>
+</fieldset>
+<div>
+    <span class="button b-close">[X]</span>
+</div>

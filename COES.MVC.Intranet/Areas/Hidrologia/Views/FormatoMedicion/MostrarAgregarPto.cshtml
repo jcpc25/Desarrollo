@@ -1,0 +1,76 @@
+﻿@model COES.MVC.Intranet.Areas.Hidrologia.Models.FormatoMedicionModel
+<script type="text/javascript">
+    $(document).ready(function () { 
+
+        $('#btnAgregarPto').on('click',function () {
+            agregarNuevoPto();
+        });
+        $('#idFamilia').on('change',function () {
+            var empresa = $('#hfEmpresa').val();
+            listarequipo(empresa, $(this).val());
+        });
+    });
+</script>
+
+<table style="width:100%">
+    <tr>
+        <td  class="tbform-label">Tipo de Equipo:</td>
+        <td class="tbform-control">
+              <select id="idFamilia">
+                <option value="0"> [Seleccionar Tipo de Equipo] </option>
+                @foreach (var reg in Model.ListaFamilia)
+                { 
+                    <option value="@reg.Famcodi">@reg.Famnomb</option>
+                }
+            </select>         
+        </td>
+    </tr>
+    <tr>
+        <td  class="tbform-label">Equipo:</td>
+        <td class="tbform-control">
+            <div id="listaEquipo"></div>   
+        </td>
+    </tr>
+    <tr>
+        <td  class="tbform-label">Código Pto:</td>
+        <td class="tbform-control">
+            <div id="listaPto"></div> 
+        </td>
+    </tr>
+    <tr>
+        <td  class="tbform-label">Medida:</td>
+        <td class="tbform-control">
+            <select id="idMedidas">
+                <option value="0"> [Seleccionar Medida] </option>
+                @foreach (var reg in Model.ListaMedidas)
+                { 
+                    <option value="@reg.Tipoinfocodi">@reg.Tipoinfoabrev</option>
+                }
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td  class="tbform-label">Limite Superior:</td>
+        <td class="tbform-control">
+            <input type="Text" id="idLimSup"  value="" onkeydown="return validarLetras(event)"/>
+        </td>
+    </tr>
+@*    <tr>
+        <td  class="tbform-label">Flujo Inverso:</td>
+        <td class="tbform-control">
+            <input type="checkbox" name="checkbox" id="idSigno"><br>
+        </td>
+    </tr>*@
+    <tr>
+        <td>.</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2">
+            <input type="button" value="Agregar" id="btnAgregarPto" />
+        </td>
+    </tr>
+</table>
+<input type="hidden" id="hfHoja" value ="@Model.HojaNumero"/>
+<input type="hidden" id="hfEmpresa" value ="@Model.EmpresaCodigo"/>
+<input type="hidden" id="hfFormat" value ="@Model.FormatoCodigo"/>

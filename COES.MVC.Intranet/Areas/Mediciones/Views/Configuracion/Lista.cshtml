@@ -1,0 +1,41 @@
+﻿@model COES.MVC.Intranet.Areas.Mediciones.Models.ConfiguracionModel
+
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+            <th>Empresa</th>
+            <th>Tipo Grupo</th>
+            <th>Nombre</th>
+            <th>Abreviación</th>
+            <th>Usuario Act.</th>
+            <th>Fecha Act.</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ListaGrupo.Count > 0)
+        {
+            foreach (var item in Model.ListaGrupo)
+            {
+                <tr>
+                    <td>@item.EmprNomb</td>
+                    <td>@item.DesTipoGrupo</td>
+                    <td>@item.Gruponomb</td>
+                    <td>@item.Grupoabrev</td>
+                    <td>@item.Lastuser</td>
+                    <td>
+                        @if (item.Lastdate != null)
+                        {
+                            var fecha = ((DateTime)item.Lastdate).ToString("dd/MM/yyyy");
+                            <span>@fecha</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="JavaScript:editarRegistro(@item.Grupocodi, '@item.EmprNomb','@item.Gruponomb','@item.Grupoabrev',@item.Tipogrupocodi)">Editar</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,9 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.RecalculoModel
+@{
+    ViewBag.Title = "Transferencias - Recalculo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div>
+    @Html.Partial("Form", Model, new ViewDataDictionary { { "sTitulo", "Ingresar un nuevo recalculo" }, { "sAccion", "Insertar" } })
+</div>

@@ -1,0 +1,31 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.IngresoPotenciaModel
+
+@Html.AntiForgeryToken()
+
+
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+            <th>Version</th>
+            <th>Periodo</th>
+            <th>Empresa</th>
+            <th>Importe</th>
+            <th>Usuario</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var item in Model.ListaIngresoPotencia)
+        {
+            <tr id="fila_@item.IngrPoteCodi">
+                <td class="text_left">@item.IngrPoteVersion</td>
+                <td class="text_left">@item.PeriNombre</td>
+                <td class="text_left">@item.EmprNombre</td>
+                <td style="text-align:right;">@item.IngrPoteImporte</td>
+                <td class="text_left">@item.IngrPoteUsername</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

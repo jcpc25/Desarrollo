@@ -1,0 +1,35 @@
+﻿@model COES.MVC.Intranet.Areas.SupervisionPlanificacion.Models.DesviacionModel
+
+
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Fecha Desviación</th>
+            <th>Punto de Medición</th>
+            <th>Medidor</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @if(Model.Mensaje=="")
+        { 
+            if (Model.ListaDesviaciones != null)
+            {
+                foreach (var item in Model.ListaDesviaciones)
+                {
+                    <tr>
+                        <td>@item.Lectcodi</td>
+                        <td>@Model.fecha.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Ptomedicodi</td>
+                        <td>@item.Medorigdesv</td>
+
+                    </tr>
+                }
+            }
+        }
+       
+
+    </tbody>
+</table>

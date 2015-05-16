@@ -1,0 +1,20 @@
+﻿@model COES.MVC.Intranet.Areas.Hidrologia.Models.FormatoMedicionModel
+<script type="text/javascript">
+    $(document).ready(function () { 
+
+        $('#idPunto').on('change', function () {
+            var opcion = $('#idPunto option:selected').html();
+            var param = opcion.split("-");
+            $('#idMedidas').val(parseInt(param[2]));
+
+        });
+    });
+</script>
+<select id="idPunto">
+    <option value="0"> [Seleccionar Pto] </option>
+    @foreach (var reg in Model.ListaPtos)
+    {
+        var nombrePunto = reg.Ptomedicodi + "-" + reg.Ptomedielenomb + "-" + reg.Tipoinfocodi;
+        <option value="@reg.Ptomedicodi">@nombrePunto </option>
+    }
+</select>

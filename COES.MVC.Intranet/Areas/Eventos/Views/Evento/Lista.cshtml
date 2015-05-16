@@ -1,0 +1,55 @@
+﻿@model COES.MVC.Intranet.Areas.Eventos.Models.EventoModel
+
+
+<div style="clear:both; height:15px"></div>
+<table border="0" class="pretty tabla-adicional" cellspacing="0" width="100%" id="tabla">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Empresa</th>
+            <th>Ubicación</th>
+            <th>Familia</th>
+            <th>Equipo</th>
+            <th>Inicio</th>
+            <th>CIER</th>
+            <th>Causa</th>
+            <th>Interrup.</th>
+            <th>Tensión</th>
+            <th>Interrupción (MW)</th>
+            <th>Disminución (MW)</th>
+            <th>Duración (minutos)</th>
+            <th>ENS(MWh)</th>
+            <th>R</th>
+            <th>Descripción</th>
+            <th>Final</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaEventos)
+        {
+            <tr onclick="mostrarDetalle(@item.EVENCODI);" style="cursor:pointer">
+                <td>@item.TIPOEVENABREV</td>
+                <td>@item.EMPRNOMB</td>
+                <td>@item.TAREAABREV  @item.AREANOMB</td>
+                <td>@item.FAMABREV</td>
+                <td>@item.EQUIABREV</td>
+                <td>@item.EVENINI</td>
+                <td>@item.CAUSAEVENABREV</td>
+                <td>@item.SUBCAUSAABREV</td>
+                <td>@item.EVENINTERRUP</td>
+                <td>@item.EQUITENSION</td>
+                <td>@item.INTERRUPCIONMW</td>
+                <td>@item.DISMINUCIONMW</td>
+                <td>@item.DURACION</td>
+                <td>@item.ENERGIAINTERRUMPIDA</td>
+                <td>@item.EVENRELEVANTE</td>
+                <td>@item.EVENASUNTO</td>
+                <td>@item.EVENFIN</td>
+                <td>@item.LASTUSER</td>
+                <td>@item.LASTDATE</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,9 @@
+﻿@model COES.Dominio.DTO.Transferencias.BarraDTO
+@{
+    ViewBag.Title = "Transferencias - Editar una Barra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div>
+    @Html.Partial("Form", Model, new ViewDataDictionary { { "sTitulo", "Editar la informacion de la Barra" }, { "sAccion", "Actualizar" }, { "sArea", TempData["Areacodigo"] } })
+</div>

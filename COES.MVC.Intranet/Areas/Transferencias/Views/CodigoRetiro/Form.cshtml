@@ -1,0 +1,195 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.CodigoRetiroModel
+@{
+    string sAccion = ViewData["sAccion"].ToString();
+    string sTitulo = ViewData["sTitulo"].ToString();
+
+    var CLICODI2 = (IEnumerable<SelectListItem>)TempData["CLICODI2"];
+    var BARRCODI2 = (IEnumerable<SelectListItem>)TempData["BARRCODI2"];
+    var TIPOCONTCODI2 = (IEnumerable<SelectListItem>)TempData["TIPOCONTCODI2"];
+    var TIPOUSUACODI2 = (IEnumerable<SelectListItem>)TempData["TIPOUSUACODI2"];
+
+}
+<script src="~/Areas/Transferencias/Content/Scripts/codigoretiroex.js"></script>
+<link href="~/Areas/Transferencias/Content/Css/Validate.css" rel="stylesheet" />
+
+
+@using (Html.BeginForm("Save", "codigoretiro", FormMethod.Post, new { id = "frmCodigoRetiro", @class = "cmxform" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>@sTitulo</legend>
+        <div style="padding-left:20px; width:500px;">
+            @Html.HiddenFor(model => model.Entidad.Solicodireticodi)
+            @Html.HiddenFor(model => model.Entidad.Solicodiretifecharegistro)
+            @Html.HiddenFor(model => model.Entidad.Emprcodi)
+
+            @Html.HiddenFor(model => model.Entidad.Barrcodi)
+            @Html.HiddenFor(model => model.Entidad.Clicodi)
+            @Html.HiddenFor(model => model.Entidad.Tipocontcodi)
+            @Html.HiddenFor(model => model.Entidad.Tipousuacodi)
+            @Html.HiddenFor(model => model.Entidad.Solicodiretiobservacion)
+
+            @Html.HiddenFor(model => model.Entidad.Usuacodi)
+            @Html.HiddenFor(model => model.Entidad.Solicodiretifecins)
+            @Html.HiddenFor(model => model.Entidad.Solicodiretifechasolbaja)
+            @Html.HiddenFor(model => model.Entidad.Solicodiretifechadebaja)
+            <table cellspacing="2" cellpadding="5">
+                @if (Model.sError != "")
+                {
+                    <tr>
+                        <td colspan="2">
+                            <div class="editor-label" style="color:red;">
+                                @Model.sError
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td><img src="~/Areas/Transferencias/Content/Images/trans.gif" width="120" height="1" /></td>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Clicodi, "Cliente")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("CLICODI", @CLICODI2, "--Seleccione--", new { @disabled = true })
+                            @Html.ValidationMessageFor(model => model.Entidad.Clicodi)
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Barrcodi, "Barra Transferencia")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("BARRCODI", @BARRCODI2, "--Seleccione--", new { @disabled = true })
+                            @Html.ValidationMessageFor(model => model.Entidad.Barrcodi)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Solicodiretifechainicio, "Fecha de Inicio ")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Entidad.Solicodiretifechainicio, "{0:dd/MM/yyyy}", new { @readonly = true, style = "background-color: #f8f8f8;" })
+                            @Html.ValidationMessageFor(model => model.Entidad.Solicodiretifechainicio)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Solicodiretifechafin, "Fecha Fin")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Entidad.Solicodiretifechafin, "{0:dd/MM/yyyy}", new { @readonly = true, style = "background-color: #f8f8f8;" })
+                            @Html.ValidationMessageFor(model => model.Entidad.Solicodiretifechafin)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Tipocontcodi, "Tipo Contrato")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("TIPOCONTCODI", @TIPOCONTCODI2, "--Seleccione--", new { @disabled = true })
+                            @Html.ValidationMessageFor(model => model.Entidad.Tipocontcodi)
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Tipousuacodi, "Tipo Usuario")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("TIPOUSUACODI", @TIPOUSUACODI2, "--Seleccione--", new { @disabled = true })
+                            @Html.ValidationMessageFor(model => model.Entidad.Tipousuacodi)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Solicodiretidescripcion, "Descripción")
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.Entidad.Solicodiretidescripcion, new { cols = 80, @rows = 2, @readonly = true, style = "background-color: #f8f8f8; border: 1px solid #cbd3cf; border-radius: 5px; color: #4876aa; font: 12px arial,sans-serif; text-indent: 8px; width: 650px; height: 40px;" })
+                            @Html.ValidationMessageFor(model => model.Entidad.Solicodiretidescripcion)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Solicodiretidetalleamplio, "Mayor Detalle")
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.Entidad.Solicodiretidetalleamplio, new { cols = 80, @rows = 2, @readonly = true, style = "background-color: #f8f8f8; border: 1px solid #cbd3cf; border-radius: 5px; color: #4876aa; font: 12px arial,sans-serif; text-indent: 8px; width: 650px; height: 40px;" })
+                            @Html.ValidationMessageFor(model => model.Entidad.Solicodiretidetalleamplio)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Entidad.Solicodireticodigo, "Codigo de Retiro")
+                            (*)
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Entidad.Solicodireticodigo, new { style = "background-color: #DDDDDD;" })
+                            @Html.ValidationMessageFor(model => model.Entidad.Solicodireticodigo)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="~/Areas/Transferencias/Content/Images/trans.gif" width="120" height="1" /></td>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="right"><input type="button" value="Retornar" onclick="location.href='@Url.Action("Index","codigoretiro")'" alt="Retornar" title="Retornar" /></td>
+                    <td align="left" colspan="3">
+                        &nbsp;
+                        @if (Model.bGrabar)
+                        {
+                            <input type="submit" value="@sAccion" alt="@sAccion" title="@sAccion" />
+                        }
+                    </td>
+                </tr>
+                <tr><td colspan="4">Nota(*): Campos Requeridos</td></tr>
+            </table>
+        </div>
+    </fieldset>
+}
+<script src="~/Areas/Transferencias/Content/Scripts/jquery.validate.js"></script>
+<script>
+    $("#frmCodigoRetiro").validate({
+        rules: {
+            "Entidad.Solicodireticodigo": {
+                required: true
+            }
+        }
+    });
+
+</script>

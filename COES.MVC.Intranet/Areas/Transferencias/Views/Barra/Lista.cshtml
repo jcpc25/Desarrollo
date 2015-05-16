@@ -1,0 +1,64 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.BarraModel
+@Html.AntiForgeryToken()
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+            <th>Barra</th>
+            <th>Tensión</th>
+            <th>Punto Suministro RER</th>
+            <th>Barra BGR</th>
+            <th>Tiene BT?</th>
+            @*<th>Area</th>*@
+            <th>Barra Transferencia</th>
+            <th>Estado</th>
+            <th style="width:30px;">&nbsp;</th>
+            <th style="width:30px;">&nbsp;</th>
+            <th style="width:30px;">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaBarras)
+        {
+            <tr id="fila_@item.Barrcodi">
+                <td class="text_left">@item.Barrnombre</td>
+                <td>@item.Barrtension</td>
+                <td>@item.Barrpuntosumirer</td>
+                <td>@item.Barrbarrabgr</td>
+                <td>@item.Barrflagbarrtran</td>
+                @*<td>@item.Areacodi</td>*@
+                <td class="text_left">@item.Barrnombbarrtran</td>
+                <td>@if (item.Barrestado == "ACT")
+                { <span>Activo</span> }
+                else
+                { <span>Inactivo</span> }</td>
+                <td style="width:30px;"><a href="#" id="view_@item.Barrcodi" class="view"><img src="@Url.Content("~/Content/Images/btn-open.png")" title="Ver informacion del registro" alt="Ver informacion del registro" /></a></td>
+                <td style="width:30px;">
+                    @if (Model.bEditar)
+                    {
+                        <a href="@Url.Action("Edit", new { id = item.Barrcodi })"><img src="@Url.Content("~/Content/Images/btn-edit.png")" title="Editar el registro" alt="Editar el registro" /></a>
+
+                    }
+                </td>
+                <td style="width:30px;">
+                    @if (Model.bEliminar)
+                    {
+                        <a href="#" id="eliminar_@item.Barrcodi" class="delete"><img src="~/Content/Images/btn-cancel.png" title="Eliminar el registro" alt="Eliminar el registro" /></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<div id="popup">    </div>
+
+<div style="text-align:center">
+    <input type="button" value="Limpiar" onclick="location.href='@Url.Action("Index","barra")'" alt="Limpiar" title="Limpiar" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" value="Generar excel" onclick="generarExcel()" alt="Generar excel" title="Generar excel" />
+    @if (Model.bNuevo)
+    {
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <input type="button" id="btnNuevo" value="Nuevo" onclick="location.href='@Url.Action("New","barra")'" alt="Insertar un nuevo registro" title="Insertar un nuevo registro" />
+    }
+</div>

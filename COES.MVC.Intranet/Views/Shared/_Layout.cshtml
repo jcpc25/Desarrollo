@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" />
+    <link rel="icon" href="~/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />  
+    <link href="~/Content/Css/calendar.css" rel="stylesheet" />
+    <link href="~/Content/Css/table.css" rel="stylesheet" />
+    <link href="~/Content/Css/css.css" rel="stylesheet" />
+    <link href="~/Content/Css/menu.css" rel="stylesheet" />        
+    <link href="~/Content/Css/popup.css" rel="stylesheet" />
+    <script type="text/javascript">
+        var siteRoot = "@Url.Content("~/")";
+    </script>
+ 
+     <script src="~/Content/Scripts/jquery.js"></script>
+    <script src="~/Content/Scripts/menu.js"></script>
+    <script src="~/Content/Scripts/efecto.js"></script>
+    <script src="~/Content/Scripts/popup.js"></script>
+    <script src="~/Content/Scripts/master.js"></script>
+    <script src="~/Content/Scripts/datatable.js"></script> 
+    <script src="~/Content/Scripts/jqueryui.js"></script>
+     @*<script src="~/Content/Scripts/jQuery.dataTables.min.js" ></script>*@
+    <script src="~/Content/Scripts/jQuery.dataTables.rowReordering.js"></script>
+    <script src="~/Content/Scripts/datepicker..js"></script>
+    <script src="~/Content/Scripts/hoverIntent.js"></script>   
+
+</head>
+<body>  
+    <div class="layout">     
+    <header>        
+         @Html.Action("Header", "Home", new {model = Model, area=""})
+         <div style="clear:both"></div>
+    </header>    
+    <div class="content" id="content">        
+        <div class="content-frame">
+            <table>               
+                <tr>
+                    <td>
+                        <div class="frame-menu" id="cntMenu">
+                            <div class="logo" id="cntLogo">
+                                 <div class="logo-img">
+                                     <img src="~/Content/Images/logocoes.png" />
+                                 </div>
+                                 <div class="logo-text"></div>
+                             </div>
+                             <div class="clear"></div>
+                            <div class="content-menu">                            
+                                @Html.Action("Menu","Home", new {model = Model, area=""})
+                            </div>
+                        </div> 
+                    </td>
+                    <td class="frame-section">                       
+                        <div class="content-header" id="cntTitulo">
+                            <div id="mapa" class="mapa">Principal <span>/</span></div>
+                        </div>                        
+                        <div id="divGeneral">
+                            @RenderBody()
+                        </div>
+                        <div id="divTemporal" class="oculto">
+                            <iframe id="frameContenido" class="frame"></iframe>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>                       
+                    </td>
+                </tr>
+            </table>
+            <div class="clear"></div>
+        </div>       
+    </div>       
+    </div>   
+   <div class="footer">
+        COES © Todos los derechos reservados 
+        <br />
+        C. Manuel Roaud y Paz Soldán 364. San Isidro, Lima - PERÚ Teléfono: (511) 611-8585           
+   </div>
+   <div id="loading" class="loading">
+        <div class="loading-image"><img src="~/Content/Images/loading.gif" /></div>
+        <div class="loading-text">Procesando...</div>
+   </div>   
+</body>
+
+</html>

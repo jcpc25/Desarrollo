@@ -1,0 +1,210 @@
+﻿@model COES.MVC.Intranet.Areas.Formulas.Models.ConfiguracionPerfilModel
+
+@{
+    ViewBag.Title = "Nuevo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Areas/Formulas/Content/Scripts/nuevo.js"></script>
+<link href="~/Areas/Formulas/Content/Css/css.css" rel="stylesheet" />
+
+<div class="form-title">
+    <div class="content-titulo">Creación de Fórmulas</div>
+    <div class="content-botonera">
+        <input type="button" id="btnGrabar" value="Grabar" />
+        <input type="button" id="btnNuevo" value="Nuevo" />
+        <input type="button" id="btnCancelar" value="Cancelar" />
+    </div>
+</div>
+
+<div class="content-hijo" style="padding-bottom:40px">   
+
+    <table>
+        <tr>
+            <td valign="top">
+
+                @if (Model.Edicion == "S")
+                {
+                    <div class="action-exito">Los datos de la fórmula fueron grabados correctamente.</div>
+                }
+                else
+                {
+                    <div class="action-message">Complete los datos de la fórmula y presione "Grabar"</div>
+                }
+
+                <div class="formula-subtitulo">Datos de la fórmula:</div>
+                <table style="width:400px; margin-top:15px">
+                    <tr style="line-height:25px">
+                        <td>Fuente:</td>
+                        <td>
+                            @if (Model.IdFormula == 0)
+                            { 
+                                <select id="cbFuente"> 
+                                    <option value="">-SELECCIONE-</option>
+                                    <option value="E">Ejecutado</option>
+                                    <option value="D">Demanda en barras</option>
+                                </select>
+                            }
+                            else
+                            {
+                                <select id="cbFuente" disabled="disabled">
+                                    <option value="">-SELECCIONE-</option>
+                                    <option value="E">Ejecutado</option>
+                                    <option value="D">Demanda en barras</option>
+                                </select>
+                            }
+                            <input type="hidden" id="hfFuente" value="@Model.Fuente" />
+                        </td>
+                    </tr>
+                    <tr style="line-height:25px">
+                        <td>SubEstación:</td>
+                        <td><input type="text" id="txtSubestacion" value="@Model.SubEstacion" /></td>
+                    </tr>
+                    <tr style="line-height:25px">
+                        <td>Área:</td>
+                        <td><input type="text" id="txtArea" value="@Model.Area" /></td>
+                    </tr>
+                    <tr style="line-height:40px">
+                        <td></td>
+                        <td>
+                            @{
+                                if (@Model.IdFormula > 0)
+                                {
+                                    <input type="button" id="btnAddEdit" value="Modificar fórmula" style="margin-left:0" />
+                                }
+                            }
+                        </td>
+                    </tr>
+                </table>
+
+                <div style="clear:both; height:20px"></div>
+
+                <input type="hidden" value="@Model.IdFormula" id="hfIdFormula" />
+
+                <div class="formula-subtitulo">Items de la fórmula:</div>                              
+
+                <table style="width:auto">
+                    <tr>
+                        <td>
+                            <div id="formulaSCADA" style="display:none;">
+                                <table>
+                                    <tr style="line-height:20px">
+                                        <td>Origen:</td>
+                                        <td style="padding-right:15px">
+                                            <select id="cbOrigen" style="width:120px">
+                                                <option value="">-SELECCIONE-</option>
+                                                <option value="S">SCADA</option>
+                                                <option value="M">EJECUTADO</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="selector">
+                            </div>
+                        </td>
+                    </tr>
+                </table>               
+
+                <input type="hidden" id="hfOrigen" value="@Model.Origen" />
+
+                <div id="formula" style="margin-top:15px">
+                    <table class="tabla-formulario" id="tbItems">
+                        <thead>
+                            <tr>                               
+                                <th>Constante</th>
+                                <th>Fuente</th>
+                                <th>Punto</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{ var i = 1;
+                            foreach (var item in Model.ListaItems)
+                            {
+                                <tr>
+                                    <td>                                        
+                                        <input type="hidden" id="thfOrigen" value="@item.Tipo" />
+                                        <input type="text" style="width:50px" value="@item.Constante" onkeydown="mover(event, this)" onkeypress="return validarNumero(this,event)" id="@("constante" + i.ToString())" />
+                                    </td>
+                                    <td>@item.Descripcion</td>
+                                    <td>
+                                        <span>@item.PuntoNombre</span>
+                                        <input type="hidden" id="thfPunto" value="@item.Codigo" />
+                                    </td>
+                                    <td>
+                                        <span onclick="$(this).parent().parent().remove();" style="cursor:pointer">Quitar</span>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                            }
+                        </tbody>
+                    </table>
+                </div>      
+
+            </td>
+            <td style="width:20px"></td>
+            <td valign="top">
+                <div class="formula-subtitulo">Quienes podrán manipular:</div>
+                <table border="0" class="tabla-formulario" id="tablaArea">
+                    <thead>
+                        <tr>
+                            <th>Abreviatura</th>
+                            <th>Descripción</th>                
+                            <th></th>            
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                            @foreach (var item in Model.ListaAreas)
+                            {
+                                var count = Model.IdsAreas.Where(x => x == item.AreaCode).Count();                     
+                                <tr>
+                                    <td>@item.AreaAbrev</td>
+                                    <td>@item.AreaName</td>                                   
+                                    <td>
+                                        @if (count == 0)
+                                        {
+                                            <input type="checkbox" value="@item.AreaCode"/>
+                                        }
+                                        else
+                                        { 
+                                            <input type="checkbox" checked="checked" value="@item.AreaCode" />
+                                        }
+                                    </td>
+                                </tr>
+                            }                       
+                    </tbody>
+                </table>
+
+                @if(Model.IdFormula > 0)
+                { 
+                    <div class="formula-subtitulo" style="margin-top:20px">Datos de aduditoría:</div>
+                    <table style="width:auto">
+                        <tr style="line-height:20px">
+                            <td><strong>Usuario creación:</strong></td>
+                            <td style="padding-left:15px">@Model.UsuarioCreacion</td>
+                        </tr>
+                        <tr style="line-height:20px">
+                            <td><strong>Fecha creación:</strong></td>
+                            <td style="padding-left:15px">@Model.FechaCreacion</td>
+                        </tr>
+                        <tr style="line-height:20px">
+                            <td><strong>Usuario modificación:</strong></td>
+                            <td style="padding-left:15px">@Model.UsuarioModificacion</td>
+                        </tr>
+                        <tr style="line-height:20px">
+                            <td><strong>Fecha Modificación:</strong></td>
+                            <td style="padding-left:15px">@Model.FechaModificacion</td>
+                        </tr>
+                    </table>
+                }
+
+            </td>
+        </tr>
+    </table>
+
+</div>

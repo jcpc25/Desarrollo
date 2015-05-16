@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <title>Contenedor Intranet</title>
+    <link href="~/Content/Css/css.css" rel="stylesheet" />    
+    <link href="~/Content/Css/calendar.css" rel="stylesheet" />
+    <link href="~/Content/Css/table.css" rel="stylesheet" />
+    <link href="~/Content/Css/popup.css" rel="stylesheet" />
+    <script type="text/javascript">
+        var siteRoot = "@Url.Content("~/")";
+    </script>
+    <script src="~/Content/Scripts/jquery.js"></script>   
+    <script src="~/Content/Scripts/datatable.js"></script>
+    <script src="~/Content/Scripts/efecto.js"></script>
+    <script src="~/Content/Scripts/popup.js"></script>
+    <script src="~/Content/Scripts/master.js"></script>
+    <script src="~/Content/Scripts/datepicker..js"></script>
+
+    <script type="text/javascript">
+        $(document).ajaxStart(function () {
+            $("#loading").show();
+        });
+        $(document).ajaxStop(function () {
+            $("#loading").hide();
+        });
+    </script>
+    
+</head>
+<body class="cuerpo"> 
+  
+    <section>
+          <div id="loading" class="loading">
+              <div class="loading-image"><img src="~/Content/Images/loading.gif" /></div>
+              <div class="loading-text">Procesando...</div>
+          </div>      
+        @RenderBody()          
+    </section>
+  
+</body>
+
+</html>

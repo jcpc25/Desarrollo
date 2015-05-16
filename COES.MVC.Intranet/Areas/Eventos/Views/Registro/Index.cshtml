@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Areas/Eventos/Content/Scripts/registro.js"></script>
+
+<link href="~/Areas/Eventos/Content/Css/css.css" rel="stylesheet" />
+
+<div class="form-title">
+    <div class="content-titulo">Registro de Eventos</div>
+    <div class="content-botonera">
+        <input type="button" id="btnGrabar" value="Grabar" />
+        <input type="button" id="btnCancelar" value="Cancelar" />
+    </div>
+</div>
+
+<div class="content-hijo">
+
+    <table>
+        <tr>
+            <td valign="top">
+                <div class="action-message">Complete los datos del evento y presione "Grabar"</div>
+
+                <div class="formula-subtitulo">Datos del evento</div>
+                <table class="tabla-registro">
+                    <tr>
+                        <td>Tipo de Evento:</td>
+                        <td>
+                            <select id="cbTipoGrupo">
+                                <option value="0">-SELECCIONE-</option>
+                             
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Hora inicial</td>
+                        <td>
+                            <input type="text" id="txtFechaInicio" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Hora final</td>
+                        <td>
+                            <input type="text" id="txtFechaHasta" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Empresa principal</td>
+                        <td>
+                            <select id="cbEmpresa">
+                                <option >-SELECCIONE-</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Descripción:</td>
+                        <td>
+                            <textarea>
+
+                            </textarea>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+            <td style="width:40px"></td>
+            <td valign="top">
+
+                <div class="formula-subtitulo">Empresas involucradas</div>
+
+                <table style="width:auto">
+                    <tr style="line-height:20px">
+                        <td>Agregar empresa:</td>
+                        <td>
+                            <select id="cbSeleccion">
+                                <option>-SELECCIONE-</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="button" value="Agregar" />
+                        </td>
+                    </tr>
+                </table>
+                <div style="clear:both; height:10px"></div>
+
+                <table class="tabla-formulario">
+                    <thead>
+                        <tr>
+                            <th>Abreviación</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>EDEGEL</td>
+                            <td>EDEGEL</td>
+                        </tr>
+                        <tr>
+                            <td>SINERSA</td>
+                            <td>SINERSA</td>
+                        </tr>
+                        <tr>
+                            <td>ELECTROPERU</td>
+                            <td>ELECTROPERU</td>
+                        </tr>
+                        <tr>
+                            <td>EDEGEL</td>
+                            <td>EDEGEL</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="clear:both; height:20px"></div>
+                <table style="width:auto">
+                    <tr style="line-height:20px">
+                        <td>
+                            Enviar correo electrónico a involucrados:
+                        </td>
+                        <td>
+                            <input type="checkbox" />
+                        </td>
+                    </tr>
+                </table>
+
+
+            </td>
+        </tr>
+
+     </table>
+       
+  
+</div>

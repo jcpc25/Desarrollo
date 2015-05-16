@@ -1,0 +1,98 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.LevantamientoModel
+
+@{
+    ViewBag.Title = "Details";
+
+}
+
+<h2>Detalle</h2>
+
+<fieldset>
+    <legend>Tramite</legend>
+    <table cellspacing="2" cellpadding="5">
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Tramfecreg, "Fecha Registro :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tramfecreg)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Emprnombre, "Empresa :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Emprnombre)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Usuaseincodi, "Usuario :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Usuaseincodi)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Tipotramnombre, "Tipo : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tipotramnombre)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Tramdescripcion, "Descripcion :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tramdescripcion)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Usuacoescodi, "Uusario Intranet :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Usuacoescodi)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Tramrespuesta, "Respuesta :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tramrespuesta)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Tramcorrinf, "Corrigio informe :   ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tramcorrinf)</div>
+            </td>
+        </tr>
+
+
+
+
+
+
+    </table>
+</fieldset>
+<div>
+    <span class="button b-close">[X]</span>
+</div>
+
+
+

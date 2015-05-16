@@ -1,0 +1,36 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.TipoContratoModel
+
+@{
+    ViewBag.Title = "Vista Preliminar";
+
+}
+
+<h2>Detalle</h2>
+
+<fieldset>
+    <legend>Tipo Contrato</legend>
+    <table cellspacing="2" cellpadding="5">
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Tipocontnombre, "Nombre : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tipocontnombre)</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Entidad.Tipocontestado, "Estado : ")</div>
+            </td>
+            <td>
+                <div class="editor-label">@Html.DisplayFor(model => model.Entidad.Tipocontestado)</div>
+            </td>
+        </tr>
+
+    </table>
+
+</fieldset>
+<div>
+    <span class="button b-close">[X]</span>
+</div>

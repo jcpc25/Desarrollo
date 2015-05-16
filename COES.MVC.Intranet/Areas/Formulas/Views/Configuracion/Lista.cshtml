@@ -1,0 +1,38 @@
+﻿@model COES.MVC.Intranet.Areas.Formulas.Models.ConfiguracionPerfilModel
+
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>           
+            <th>Subestación</th>
+            <th>Área</th>
+            <th>Usuario Crc.</th>
+            <th>Fecha Crc.</th>
+            <th>Usuario Act.</th>
+            <th>Fecha Act.</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ListaFormulas.Count > 0)
+        {
+            foreach (var item in Model.ListaFormulas)
+            {
+                <tr>                   
+                    <td>@item.Prruabrev</td>
+                    <td>@item.Prrudetalle</td>
+                    <td>@item.Prrufirstuser</td>
+                    <td>@item.Prrufirstdate</td>
+                    <td>@item.Prrulastuser</td>
+                    <td>@item.Prrulastdate</td>
+                    <td>
+                        <a href="JavaScript:editar(@item.Prrucodi)">Editar</a>
+                    </td>
+                    <td>
+                        <a href="JavaScript:eliminar(@item.Prrucodi)">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        }       
+    </tbody>
+</table>

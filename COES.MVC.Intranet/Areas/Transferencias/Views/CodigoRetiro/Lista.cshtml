@@ -1,0 +1,81 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.CodigoRetiroModel
+
+@Html.AntiForgeryToken()
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Barra Transferencia</th>
+            <th>Empresa</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Tipo Contrato</th>
+            <th>Tipo Usuairo</th>
+            <th>Descripcion</th>
+            <th>Codigo</th>
+            <th style="width:30px;">&nbsp;</th>
+            <th style="width:30px;">&nbsp;</th>
+            <th style="width:30px;">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>                            
+    @foreach (var item in Model.ListaCodigoRetiro)
+    {
+        if (item.Solicodiretiobservacion.Equals("SOLBAJANO"))
+        {   @:<tr id="fila_@item.Solicodireticodi" >
+            @: <td class="text_left">@item.Clinombre</td>
+            @: <td class="text_left">@item.Barrnombbarrtran</td>
+            @: <td class="text_left">@item.Emprnombre</td>
+            @: <td>@item.Solicodiretifechainicio.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
+            @: <td>@if (item.Solicodiretifechafin != null)
+            { <span>@item.Solicodiretifechafin.GetValueOrDefault().ToString("dd/MM/yyyy")</span>}</td>
+            @: <td class="text_left">@item.Tipocontnombre</td>
+            @: <td class="text_left">@item.Tipousuanombre</td>
+            @: <td class="text_left">@item.Solicodiretidescripcion</td>
+            @: <td class="text_left"><b>@item.Solicodireticodigo</b></td>
+            @: <td style="width:30px;"><a href="#" id="view_@item.Solicodireticodi" class="view"><img src="@Url.Content("~/Content/Images/btn-open.png")" title="Ver informacion del registro" alt="Ver informacion del registro" /></a></td>
+            @: <td style="width:30px;">@if(Model.bEditar){<a href="@Url.Action("Edit", new { id = item.Solicodireticodi })"><img src="@Url.Content("~/Content/Images/btn-edit.png")" title="Editar el registro" alt="Editar el registro" /></a>}</td>
+            @: <td style="width:30px;">@if(Model.bEliminar){<a href="#" id="eliminar_@item.Solicodireticodi" class="delete"><img src="@Url.Content("~/Content/Images/btn-cancel.png")" title="Dar de Baja" alt="Dar de Baja" /></a>}</td>
+            @:</tr>
+        }
+        else if (item.Solicodiretiobservacion.Equals("SOLBAJAOK"))
+        {   @:<tr id="fila_@item.Solicodireticodi">
+            @: <td class="text_left" style="background-color: #FFDDDD;">@item.Clinombre</td>
+            @: <td class="text_left" style="background-color: #FFDDDD;">@item.Barrnombbarrtran</td>
+            @: <td class="text_left" style="background-color: #FFDDDD;">@item.Emprnombre</td>
+            @: <td style="background-color: #FFDDDD;">@item.Solicodiretifechainicio.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
+            @: <td style="background-color: #FFDDDD;">@if (item.Solicodiretifechafin != null)
+            { <span>@item.Solicodiretifechafin.GetValueOrDefault().ToString("dd/MM/yyyy")</span>}</td>
+            @: <td class="text_left" style="background-color: #FFDDDD;">@item.Tipocontnombre</td>
+            @: <td class="text_left" style="background-color: #FFDDDD;">@item.Tipousuanombre</td>
+            @: <td class="text_left" style="background-color: #FFDDDD;">@item.Solicodiretidescripcion</td>
+            @: <td class="text_left" style="background-color: #FFDDDD;">@item.Solicodireticodigo</td>
+            @: <td style="width:30px; background-color: #FFDDDD;"><a href="#" id="view_@item.Solicodireticodi" class="view"><img src="@Url.Content("~/Content/Images/btn-open.png")" title="Ver informacion del registro" alt="Ver informacion del registro" /></a></td>
+            @: <td style="width:30px; background-color: #FFDDDD;">@if (Model.bEditar)
+            {<a href="@Url.Action("Edit", new { id = item.Solicodireticodi })"><img src="@Url.Content("~/Content/Images/btn-edit.png")" title="Editar el registro" alt="Editar el registro" /></a>}</td>
+            @: <td style="width:30px; background-color: #FFDDDD;">@if (Model.bEliminar)
+            {<a href="#" id="eliminar_@item.Solicodireticodi" class="delete"><img src="@Url.Content("~/Content/Images/btn-cancel.png")" title="Dar de Baja" alt="Dar de Baja" /></a>}</td>
+            @:</tr>
+        }
+        else if (item.Solicodiretiobservacion.Equals("SOLBAJAPEN"))
+        {   @:<tr id="fila_@item.Solicodireticodi" class="amarillo">
+            @: <td class="text_left">@item.Clinombre</td>
+            @: <td class="text_left">@item.Barrnombbarrtran</td>
+            @: <td class="text_left">@item.Emprnombre</td>
+            @: <td>@item.Solicodiretifechainicio.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
+            @: <td>@if (item.Solicodiretifechafin != null)
+            { <span>@item.Solicodiretifechafin.GetValueOrDefault().ToString("dd/MM/yyyy")</span>}</td>
+            @: <td class="text_left">@item.Tipocontnombre</td>
+            @: <td class="text_left">@item.Tipousuanombre</td>
+            @: <td class="text_left">@item.Solicodiretidescripcion</td>
+            @: <td class="text_left">@item.Solicodireticodigo</td>
+            @: <td style="width:30px;"><a href="#" id="view_@item.Solicodireticodi" class="view"><img src="@Url.Content("~/Content/Images/btn-open.png")" title="Ver informacion del registro" alt="Ver informacion del registro" /></a></td>
+            @: <td style="width:30px;">@if(Model.bEditar){<a href="@Url.Action("Edit", new { id = item.Solicodireticodi })"><img src="@Url.Content("~/Content/Images/btn-edit.png")" title="Editar el registro" alt="Editar el registro" /></a>}</td>
+            @: <td style="width:30px;">@if(Model.bEliminar){<a href="#" id="eliminar_@item.Solicodireticodi" class="delete"><img src="@Url.Content("~/Content/Images/btn-cancel.png")" title="Dar de Baja" alt="Dar de Baja" /></a>}</td>
+            @:</tr>
+        }
+    }
+    </tbody>
+</table>
+<div id="popup">
+</div>

@@ -1,0 +1,10 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.PeriodoModel
+
+@{
+    ViewBag.Title = "Transferencias - Insertar un Periodo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div>
+@Html.Partial("Form", Model, new ViewDataDictionary { { "sTitulo", "Ingresar un nuevo periodo" }, { "sAccion", "Insertar" } })
+</div>

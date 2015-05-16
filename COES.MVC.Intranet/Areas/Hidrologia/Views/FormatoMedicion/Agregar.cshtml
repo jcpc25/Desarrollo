@@ -1,0 +1,97 @@
+﻿@model COES.MVC.Intranet.Areas.Hidrologia.Models.FormatoMedicionModel
+<script type="text/javascript">
+    $(document).ready(function () { 
+
+        $('#btnActualizar').click(function () {
+            agregarFormato();
+        });
+
+    });
+</script>
+<div id="alerta"></div>
+
+<table class="table-form-vertical">
+    <tr>
+
+       <td>Nombre:</td> 
+       <td>
+           <input type="Text" id="txtNombre"  value="" onkeydown="return validarLetras(event)"/>
+       </td>
+    </tr>
+    <tr>
+        <td>Area:</td>
+        <td>
+          <select id="cbAreas" name="idAreas">
+              <option value="0">-SELECCIONE-</option>
+              @foreach (var item in Model.ListaAreasCoes)
+              { 
+                    <option value="@item.Areacode">@item.Areaname</option>
+              }
+          </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Resoluciòn:</td>
+        <td>
+            <select id="cbResolucion" name="idResolucion">
+               <option value="0">--SELECCIONE--</option>
+               <option value="15">15 minutos</option>
+               <option value="30">30 minutos</option>
+               <option value="60">1 hora</option>
+             </select>
+        </td>
+    </tr>
+    <tr>
+       <td>Horizonte:</td> 
+       <td>
+                 <select id="cbHorizonte" name="idHorizonte">
+                    <option value="">--SELECCIONE--</option>
+                    <option value="1">1 día</option>
+                    <option value="3">3 días</option>
+                    <option value="7">7 días</option>
+                    <option value="10">10 días</option>
+                 </select>
+       </td>
+    </tr>
+         <tr>
+            <td class="tbform-label">Periodo:</td>
+             <td class="tbform-control">
+                 <select id="cbPeriodo" name="idPeriodo">
+                    <option value="0">--SELECCIONE--</option>
+                    <option value="1">Diario</option>
+                    <option value="2">Semanal</option>
+                    <option value="3">Mensual</option>
+                    <option value="4">Anual</option>
+                 </select>
+             </td>
+        </tr> 
+
+</table>
+
+<div class="popup-title"><span>Información Hoja 1</span></div>
+
+<table class="table-form-vertical">
+
+    <tr >
+        <td  class="tbform-label">Titulo:</td>
+        <td class="tbform-control">
+            <input type="Text" id="txtTitulo" name="idTitulo" value="" onkeydown="return validarLetras(event)"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="tbform-label">Lectura:</td>
+        <td class="tbform-control">
+            <select id="idLecturas">
+            @foreach (var reg in Model.ListaLectura)
+            { 
+                <option value="@reg.Lectcodi">@reg.Lectnomb</option>
+            }
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="button" value="Agregar" id="btnActualizar" />
+        </td>
+    </tr>
+</table>

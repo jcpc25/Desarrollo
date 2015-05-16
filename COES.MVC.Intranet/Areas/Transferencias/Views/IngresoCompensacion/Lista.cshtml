@@ -1,0 +1,34 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.IngresoCompensacionModel
+
+@Html.AntiForgeryToken()
+
+
+<table border="0" class="pretty" id="tabla">
+    <thead>
+        <tr>
+            <th>Version</th>
+            <th>Periodo</th>
+            <th>Empresa</th>
+            <th>Compensacion</th>
+            <th>Importe</th>
+            <th>Usuario</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var item in Model.ListaIngresoCompensacion)
+        {
+            <tr id="fila_@item.IngrCompCodi">
+                <td class="text_left">@item.IngrCompVersion</td>
+                <td class="text_left">@item.PeriNombre</td>
+                <td class="text_left">@item.EmprNombre</td>
+                <td class="text_left">@item.CabeCompNombre</td>
+                <td style="text-align:right;">@item.IngrCompImporte.ToString("#,###.##")</td>
+                <td class="text_left">@item.IngrCompusername</td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>

@@ -1,0 +1,31 @@
+﻿@model COES.MVC.Intranet.Areas.Transferencias.Models.InformePreliminarModel
+<table border="0" class="pretty" id="tabla2">
+    <thead>
+        <tr>
+            <th>EMPRESA</th>
+            <th>VALORIZACION</th>
+            <th>COMPENSACION</th>
+            <th>INGRESO POTENCIA</th>
+            <th>SALDO TRANSMISION</th>
+            <th>CALCULO TOTAL</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaInformePreliminar)
+        {
+            <tr>
+                <td class="text_left">@item.NombEmp</td>
+                <td style="text-align:right;">@item.Valorizacion</td>
+                <td style="text-align:right;">@item.Compensacion</td>
+                <td style="text-align:right;">@item.IngresoPotencia</td>
+                <td style="text-align:right;">@item.SaldoTransmision</td>
+                <td style="text-align:right;">@item.ValorTotalEmp</td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+<div id="popup"></div>
+<div style="text-align:center"></div>
