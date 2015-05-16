@@ -1,0 +1,36 @@
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\bin\Debug\COES.Dominio.DTO.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\bin\Debug\COES.Dominio.DTO.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\bin\Debug\COES.Framework.Base.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\bin\Debug\COES.Framework.Base.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\obj\Debug\COES.Dominio.DTO.csprojResolveAssemblyReference.cache
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\obj\Debug\COES.Dominio.DTO.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Dominio.DTO\obj\Debug\COES.Dominio.DTO.pdb
+D:\Proyectos\COES-APP\COES.Dominio.DTO\bin\Debug\COES.Dominio.DTO.dll
+D:\Proyectos\COES-APP\COES.Dominio.DTO\bin\Debug\COES.Dominio.DTO.pdb
+D:\Proyectos\COES-APP\COES.Dominio.DTO\bin\Debug\COES.Framework.Base.dll
+D:\Proyectos\COES-APP\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Proyectos\COES-APP\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Proyectos\COES-APP\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Proyectos\COES-APP\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Proyectos\COES-APP\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\Proyectos\COES-APP\COES.Dominio.DTO\bin\Debug\COES.Framework.Base.pdb
+D:\Proyectos\COES-APP\COES.Dominio.DTO\obj\Debug\COES.Dominio.DTO.csprojResolveAssemblyReference.cache
+D:\Proyectos\COES-APP\COES.Dominio.DTO\obj\Debug\COES.Dominio.DTO.dll
+D:\Proyectos\COES-APP\COES.Dominio.DTO\obj\Debug\COES.Dominio.DTO.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\bin\Debug\COES.Dominio.DTO.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\bin\Debug\COES.Dominio.DTO.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\bin\Debug\COES.Framework.Base.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.Unity.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\bin\Debug\COES.Framework.Base.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\obj\Debug\COES.Dominio.DTO.csprojResolveAssemblyReference.cache
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\obj\Debug\COES.Dominio.DTO.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Dominio.DTO\obj\Debug\COES.Dominio.DTO.pdb

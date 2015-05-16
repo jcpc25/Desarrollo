@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{28FFF8F3-12CE-41B1-839B-2FD36D3C50A8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>COES.Dominio.DTO</RootNamespace>
+    <AssemblyName>COES.Dominio.DTO</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sic\AreaDTO.cs" />
+    <Compile Include="Sic\CbArchivoEnvioDTO.cs" />
+    <Compile Include="Sic\CbCombustibleDatosDTO.cs" />
+    <Compile Include="Sic\CbConceptocombDTO.cs" />
+    <Compile Include="Sic\CbEnvioDTO.cs" />
+    <Compile Include="Sic\CombustibleDTO.cs" />
+    <Compile Include="Sic\ConceptoDatoDTO.cs" />
+    <Compile Include="Sic\ConsolidadoEnvioDTO.cs" />
+    <Compile Include="Sic\DemandaDiaDTO.cs" />
+    <Compile Include="Sic\DesviacionDTO.cs" />
+    <Compile Include="Sic\EjecutadoRuleDTO.cs" />
+    <Compile Include="Sic\EmpresaDTO.cs" />
+    <Compile Include="Sic\EnEnsayoDTO.cs" />
+    <Compile Include="Sic\EnEnsayoformatoDTO.cs" />
+    <Compile Include="Sic\EnEnsayounidadDTO.cs" />
+    <Compile Include="Sic\EnEstadoDTO.cs" />
+    <Compile Include="Sic\EnEstensayoDTO.cs" />
+    <Compile Include="Sic\EnEstformatoDTO.cs" />
+    <Compile Include="Sic\EnFormatoDTO.cs" />
+    <Compile Include="Sic\EqAreaDTO.cs" />
+    <Compile Include="Sic\EqEquipoDTO.cs" />
+    <Compile Include="Sic\EqEquirelDTO.cs" />
+    <Compile Include="Sic\EqFamiliaDTO.cs" />
+    <Compile Include="Sic\EqFamrelDTO.cs" />
+    <Compile Include="Sic\EqPropequiDTO.cs" />
+    <Compile Include="Sic\EqPropiedadDTO.cs" />
+    <Compile Include="Sic\EqRelacionDTO.cs" />
+    <Compile Include="Sic\EqTipoareaDTO.cs" />
+    <Compile Include="Sic\EqTiporelDTO.cs" />
+    <Compile Include="Sic\EquipoDTO.cs" />
+    <Compile Include="Sic\EveCausaeventoDTO.cs" />
+    <Compile Include="Sic\EveEvenclaseDTO.cs" />
+    <Compile Include="Sic\EveManttoDTO.cs" />
+    <Compile Include="Sic\EventoDTO.cs" />
+    <Compile Include="Sic\ExtArchivoDTO.cs" />
+    <Compile Include="Sic\ExtEstadoEnvioDTO.cs" />
+    <Compile Include="Sic\ExtLogenvioDTO.cs" />
+    <Compile Include="Sic\ExtLogproDTO.cs" />
+    <Compile Include="Sic\FamiliaDTO.cs" />
+    <Compile Include="Sic\FwAreaDTO.cs" />
+    <Compile Include="Sic\FwCounterDTO.cs" />
+    <Compile Include="Sic\GrupoGeneracionDTO.cs" />
+    <Compile Include="Sic\IeodCuadroDTO.cs" />
+    <Compile Include="Sic\InformePerturbacionDTO.cs" />
+    <Compile Include="Sic\ManMantto.cs" />
+    <Compile Include="Sic\ManRegistroDTO.cs" />
+    <Compile Include="Sic\MdCambioenvioDTO.cs" />
+    <Compile Include="Sic\MdEnvioDTO.cs" />
+    <Compile Include="Sic\MdPublicacionDTO.cs" />
+    <Compile Include="Sic\MdValidacionDTO.cs" />
+    <Compile Include="Sic\MeAmpliacionfechaDTO.cs" />
+    <Compile Include="Sic\MeFormatoDTO.cs" />
+    <Compile Include="Sic\MeFormatohojaDTO.cs" />
+    <Compile Include="Sic\MeHeadcolumnDTO.cs" />
+    <Compile Include="Sic\MeHojaptomedDTO.cs" />
+    <Compile Include="Sic\MeLecturaDTO.cs" />
+    <Compile Include="Sic\MeMedicion1DTO.cs" />
+    <Compile Include="Sic\MeMedicion24DTO.cs" />
+    <Compile Include="Sic\MeMedicion96DTO.cs" />
+    <Compile Include="Sic\MeMedicion48DTO.cs" />
+    <Compile Include="Sic\MeMedidorDTO.cs" />
+    <Compile Include="Sic\MeOrigenlecturaDTO.cs" />
+    <Compile Include="Sic\MePerfilRuleAreaDTO.cs" />
+    <Compile Include="Sic\MePerfilRuleDTO.cs" />
+    <Compile Include="Sic\MePeriodomedidorDTO.cs" />
+    <Compile Include="Sic\MePtomedicionDTO.cs" />
+    <Compile Include="Sic\MeTipopuntomedicionDTO.cs" />
+    <Compile Include="Sic\ModoOperacionDTO.cs" />
+    <Compile Include="Sic\ParametroRpfDTO.cs" />
+    <Compile Include="Sic\PerfilScadaDetDTO.cs" />
+    <Compile Include="Sic\PerfilScadaDTO.cs" />
+    <Compile Include="Sic\PrConceptoDTO.cs" />
+    <Compile Include="Sic\PrEquipodatDTO.cs" />
+    <Compile Include="Sic\PrGrupodatDTO.cs" />
+    <Compile Include="Sic\PrGrupoDTO.cs" />
+    <Compile Include="Sic\PropiedadEquipoHistDTO.cs" />
+    <Compile Include="Sic\PrTipogrupoDTO.cs" />
+    <Compile Include="Sic\RpfEnergiaPotenciaDTO.cs" />
+    <Compile Include="Sic\ScadaDTO.cs" />
+    <Compile Include="Sic\ServicioRpdDTO.cs" />
+    <Compile Include="Sic\ServicioRpfDTO.cs" />
+    <Compile Include="Sic\SiEmpresaDTO.cs" />
+    <Compile Include="Sic\SiFuenteenergiaDTO.cs" />
+    <Compile Include="Sic\SiTipoempresaDTO.cs" />
+    <Compile Include="Sic\SiTipogeneracionDTO.cs" />
+    <Compile Include="Sic\SiTipoinformacionDTO.cs" />
+    <Compile Include="Sic\SubCausaEventoDTO.cs" />
+    <Compile Include="Sic\TipoEventoDTO.cs" />
+    <Compile Include="Sic\WbGeneracionrerDTO.cs" />
+    <Compile Include="Sic\WbMedidoresValidacionDTO.cs" />
+    <Compile Include="Transferencias\AreaDTO.cs" />
+    <Compile Include="Transferencias\BarraDTO.cs" />
+    <Compile Include="Transferencias\CentralGeneracionDTO.cs" />
+    <Compile Include="Transferencias\CodigoEntregaDTO.cs" />
+    <Compile Include="Transferencias\CodigoRetiroDTO.cs" />
+    <Compile Include="Transferencias\CodigoRetiroSinContratoDTO.cs" />
+    <Compile Include="Transferencias\CompensacionDTO.cs" />
+    <Compile Include="Transferencias\CostoMarginalDTO.cs" />
+    <Compile Include="Transferencias\EmpresaDTO.cs" />
+    <Compile Include="Transferencias\EmpresaPagoDTO.cs" />
+    <Compile Include="Transferencias\ExportExcelDTO.cs" />
+    <Compile Include="Transferencias\FactorPerdidaDTO.cs" />
+    <Compile Include="Transferencias\InfoDesbalanceDTO.cs" />
+    <Compile Include="Transferencias\InfoDesviacionDTO.cs" />
+    <Compile Include="Transferencias\InfoFaltanteDTO.cs" />
+    <Compile Include="Transferencias\InformePreliminarDTO.cs" />
+    <Compile Include="Transferencias\IngresoCompensacionDTO.cs" />
+    <Compile Include="Transferencias\IngresoPotenciaDTO.cs" />
+    <Compile Include="Transferencias\IngresoRetiroSCDTO.cs" />
+    <Compile Include="Transferencias\PeriodoDTO.cs" />
+    <Compile Include="Transferencias\RatioCumplimientoDTO.cs" />
+    <Compile Include="Transferencias\RecalculoDTO.cs" />
+    <Compile Include="Transferencias\ReporteLogDTO.cs" />
+    <Compile Include="Transferencias\SaldoCodigoRetiroscDTO.cs" />
+    <Compile Include="Transferencias\SaldoEmpresaDTO.cs" />
+    <Compile Include="Transferencias\TipoContratoDTO.cs" />
+    <Compile Include="Transferencias\TipoEmpresaDTO.cs" />
+    <Compile Include="Transferencias\TipoTramiteDTO.cs" />
+    <Compile Include="Transferencias\TipoUsuarioDTO.cs" />
+    <Compile Include="Transferencias\TramiteDTO.cs" />
+    <Compile Include="Transferencias\TransferenciaEntregaDetalleDTO.cs" />
+    <Compile Include="Transferencias\TransferenciaEntregaDTO.cs" />
+    <Compile Include="Transferencias\TransferenciaRetiroDetalleDTO.cs" />
+    <Compile Include="Transferencias\TransferenciaRetiroDTO.cs" />
+    <Compile Include="Transferencias\ValorTotalEmpresaDTO.cs" />
+    <Compile Include="Transferencias\ValorTransferenciaDTO.cs" />
+    <Compile Include="Transferencias\ValorTransferenciaEmpresaDTO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scada\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\COES.Base\COES.Base.csproj">
+      <Project>{2f0b7b6a-0c6a-42b2-8c44-11697cf04242}</Project>
+      <Name>COES.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
