@@ -151,5 +151,9 @@ namespace COES.Infraestructura.Datos.Helper.Sic
         {
             get { return base.GetSqlXml("ListaEquiposEnsayo"); }
         }
+        public string SqlListaRecursosxCuenca
+        {
+            get { return base.GetSqlXml("ListaRecursosxCuenca"); }
+        }
     }
 }

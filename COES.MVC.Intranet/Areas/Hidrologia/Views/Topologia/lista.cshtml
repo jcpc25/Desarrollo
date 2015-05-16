@@ -1,0 +1,23 @@
+﻿@model COES.MVC.Intranet.Areas.Hidrologia.Models.HidrologiaModel
+
+<div style="clear:both; height:15px"></div>
+<table border="0" class="pretty tabla-adicional" cellspacing="0" width="640" id="tabla">
+    <thead>
+        <tr>
+            <th colspan="2"> Recurso Origen</th>
+        </tr>
+        <tr>
+            <th>Tipo</th>
+            <th>nombre</th>           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaRecursosCuenca)
+        {
+            <tr>
+                <td>@item.Famnomb</td>
+                <td>@item.Equinomb</td>             
+            </tr>
+        }
+    </tbody>
+</table>

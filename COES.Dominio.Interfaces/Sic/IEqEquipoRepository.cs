@@ -26,5 +26,7 @@ namespace COES.Dominio.Interfaces.Sic
         List<EqEquipoDTO> ListarEquipoxFamilias2(string sCodFamilias,string sCodEmpresas);
         List<EqEquipoDTO> ListarCentralesXEmpresaGEN(string emprcodi);
         List<EqEquipoDTO> ListarEquiposEnsayo(string equicodi);
+        List<EqEquipoDTO> ListaRecursosxCuenca(int idEquipo);
+
     }
 }

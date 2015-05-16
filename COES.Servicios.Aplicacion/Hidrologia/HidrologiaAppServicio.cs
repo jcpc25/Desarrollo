@@ -297,6 +297,11 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             return FactorySic.GetEqEquipoRepository().ListarEquipoxFamilias(idsFamilia.ToArray());
         }
 
+        public List<EqEquipoDTO> ListarRecursosxCuenca(int idEquipo)
+        {
+            return FactorySic.GetEqEquipoRepository().ListaRecursosxCuenca(idEquipo);
+        }
+
         #endregion
 
         #region Métodos Tabla Me_PuntosdeMedicion
