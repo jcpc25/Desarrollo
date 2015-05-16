@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(enviocodi), 0) + 1 from md_envio
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into md_envio(
+           envioarchnomb,
+           estenvcodi,
+           enviomes,
+           emprcodi,
+           usercodi,
+           enviocodi,
+           enviofecha
+       )
+       values(
+           :envioarchnomb,
+           :estenvcodi,
+           :enviomes,
+           :emprcodi,
+           :usercodi,
+           :enviocodi,
+           :enviofecha
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update md_envio
+       set
+           envioarchnomb = :envioarchnomb,
+           estenvcodi = :estenvcodi,
+           enviomes = :enviomes,
+           emprcodi = :emprcodi,
+           usercodi = :usercodi,
+           enviofecha = :enviofecha
+       where
+           enviocodi = :enviocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from md_envio
+       where
+           enviocodi = :enviocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           envioarchnomb,
+           estenvcodi,
+           enviomes,
+           emprcodi,
+           usercodi,
+           enviocodi,
+           enviofecha
+       from
+           md_envio           
+       where
+           enviocodi = :enviocodi
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           envioarchnomb,
+           estenvcodi,
+           enviomes,
+           emprcodi,
+           usercodi,
+           enviocodi,
+           enviofecha
+       from
+           md_envio
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select * from md_envio a inner join (select max(enviocodi) maxcodi from 
+      md_envio where emprcodi = {0} and ENVIOMES = to_date('{1}','YYYY-MM-DD') 
+      and ESTENVCODI in (3,5) )  maxEnvio on a.enviocodi = maxEnvio.maxcodi
+    </query>
+  </Sql>
+</Sqls>

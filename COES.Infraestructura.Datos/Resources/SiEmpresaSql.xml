@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into si_empresa(
+           emprcodi,
+           emprnomb,
+           tipoemprcodi,
+           emprdire,
+           emprtele,
+           emprnumedocu,
+           tipodocucodi,
+           emprruc,
+           emprabrev,
+           emprorden,
+           emprdom,
+           emprsein,
+           emprrazsocial,
+           emprcoes,
+           lastuser,
+           lastdate,
+           emprcodi,
+           emprnomb,
+           compcode,
+           tipoemprcodi,
+           emprdire,
+           emprtele,
+           emprnumedocu,
+           tipodocucodi,
+           emprruc,
+           emprabrev,
+           emprorden,
+           emprdom,
+           emprsein,
+           emprrazsocial,
+           emprcoes,
+           lastuser,
+           lastdate,
+           inddemanda
+       )
+       values(
+           :emprcodi,
+           :emprnomb,
+           :tipoemprcodi,
+           :emprdire,
+           :emprtele,
+           :emprnumedocu,
+           :tipodocucodi,
+           :emprruc,
+           :emprabrev,
+           :emprorden,
+           :emprdom,
+           :emprsein,
+           :emprrazsocial,
+           :emprcoes,
+           :lastuser,
+           :lastdate,
+           :emprcodi,
+           :emprnomb,
+           :compcode,
+           :tipoemprcodi,
+           :emprdire,
+           :emprtele,
+           :emprnumedocu,
+           :tipodocucodi,
+           :emprruc,
+           :emprabrev,
+           :emprorden,
+           :emprdom,
+           :emprsein,
+           :emprrazsocial,
+           :emprcoes,
+           :lastuser,
+           :lastdate,
+           :inddemanda
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update si_empresa
+       set
+           emprnomb = :emprnomb,
+           tipoemprcodi = :tipoemprcodi,
+           emprdire = :emprdire,
+           emprtele = :emprtele,
+           emprnumedocu = :emprnumedocu,
+           tipodocucodi = :tipodocucodi,
+           emprruc = :emprruc,
+           emprabrev = :emprabrev,
+           emprorden = :emprorden,
+           emprdom = :emprdom,
+           emprsein = :emprsein,
+           emprrazsocial = :emprrazsocial,
+           emprcoes = :emprcoes,
+           lastuser = :lastuser,
+           lastdate = :lastdate,
+           emprnomb = :emprnomb,
+           compcode = :compcode,
+           tipoemprcodi = :tipoemprcodi,
+           emprdire = :emprdire,
+           emprtele = :emprtele,
+           emprnumedocu = :emprnumedocu,
+           tipodocucodi = :tipodocucodi,
+           emprruc = :emprruc,
+           emprabrev = :emprabrev,
+           emprorden = :emprorden,
+           emprdom = :emprdom,
+           emprsein = :emprsein,
+           emprrazsocial = :emprrazsocial,
+           emprcoes = :emprcoes,
+           lastuser = :lastuser,
+           lastdate = :lastdate,
+           inddemanda = :inddemanda
+       where
+           emprcodi = :emprcodi 
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from si_empresa
+       where
+           emprcodi = :emprcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           emprcodi,
+           emprnomb,
+           tipoemprcodi,
+           emprdire,
+           emprtele,
+           emprnumedocu,
+           tipodocucodi,
+           emprruc,
+           emprabrev,
+           emprorden,
+           emprdom,
+           emprsein,
+           emprrazsocial,
+           emprcoes,
+           lastuser,
+           lastdate,
+           emprcodi,
+           emprnomb,
+           compcode,
+           tipoemprcodi,
+           emprdire,
+           emprtele,
+           emprnumedocu,
+           tipodocucodi,
+           emprruc,
+           emprabrev,
+           emprorden,
+           emprdom,
+           emprsein,
+           emprrazsocial,
+           emprcoes,
+           lastuser,
+           lastdate,
+           inddemanda
+       where
+           emprcodi = :emprcodi
+       from
+           si_empresa
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           emprcodi,
+           emprnomb,
+           tipoemprcodi,
+           emprdire,
+           emprtele,
+           emprnumedocu,
+           tipodocucodi,
+           emprruc,
+           emprabrev,
+           emprorden,
+           emprdom,
+           emprsein,
+           emprrazsocial,
+           emprcoes,
+           lastuser,
+           lastdate,
+           emprcodi,
+           emprnomb,
+           compcode,
+           tipoemprcodi,
+           emprdire,
+           emprtele,
+           emprnumedocu,
+           tipodocucodi,
+           emprruc,
+           emprabrev,
+           emprorden,
+           emprdom,
+           emprsein,
+           emprrazsocial,
+           emprcoes,
+           lastuser,
+           lastdate,
+           inddemanda
+       from
+           si_empresa
+       where 
+           tipoemprcodi = :tipoemprcodi
+        order by 2 asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select
+      emprcodi,
+      emprnomb,
+      tipoemprcodi,
+      emprdire,
+      emprtele,
+      emprnumedocu,
+      tipodocucodi,
+      emprruc,
+      emprabrev,
+      emprorden,
+      emprdom,
+      emprsein,
+      emprrazsocial,
+      emprcoes,
+      lastuser,
+      lastdate,
+      emprcodi,
+      emprnomb,
+      compcode,
+      tipoemprcodi,
+      emprdire,
+      emprtele,
+      emprnumedocu,
+      tipodocucodi,
+      emprruc,
+      emprabrev,
+      emprorden,
+      emprdom,
+      emprsein,
+      emprrazsocial,
+      emprcoes,
+      lastuser,
+      lastdate,
+      inddemanda
+      from
+      si_empresa
+      where
+      (tipoemprcodi in ({0}) or '{0}' = '-1' ) and emprsein = 'S'
+      order by 2 asc
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetEmpresasSein</key>
+    <query>
+      select
+      emprcodi,
+      emprnomb,
+      tipoemprcodi,
+      emprdire,
+      emprtele,
+      emprnumedocu,
+      tipodocucodi,
+      emprruc,
+      emprabrev,
+      emprorden,
+      emprdom,
+      emprsein,
+      emprrazsocial,
+      emprcoes,
+      lastuser,
+      lastdate,
+      emprcodi,
+      emprnomb,
+      compcode,
+      tipoemprcodi,
+      emprdire,
+      emprtele,
+      emprnumedocu,
+      tipodocucodi,
+      emprruc,
+      emprabrev,
+      emprorden,
+      emprdom,
+      emprsein,
+      emprrazsocial,
+      emprcoes,
+      lastuser,
+      lastdate,
+      inddemanda
+      from
+      si_empresa   
+      where emprsein = 'S' and emprcodi> 0
+      order by 2 asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByUser</key>
+    <query>
+      select
+      em.emprcodi,
+      emprnomb,
+      tipoemprcodi,
+      emprdire,
+      emprtele,
+      emprnumedocu,
+      tipodocucodi,
+      emprruc,
+      emprabrev,
+      emprorden,
+      emprdom,
+      emprsein,
+      emprrazsocial,
+      emprcoes,
+      em.lastuser,
+      em.lastdate,
+      em.Compcode,
+      inddemanda
+      from
+      si_empresa em
+      inner join fw_user_x_empresa ue on ue.emprcodi = em.emprcodi
+      inner join fw_user us on us.usercode = ue.usercode
+      where us.userlogin = '{0}'
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetEmpresasxCombustible</key>
+    <query>
+      select distinct gp.emprcodi emprcodi , emp.emprnomb  from  pr_grupo gp
+      inner join si_empresa emp on emp.emprcodi = gp.emprcodi
+      where catecodi = 3 and fenergcodi in ({0})
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetEmpresasxCombustiblexUsuario</key>
+    <query>
+      select distinct gp.emprcodi emprcodi , emp.emprnomb  from  pr_grupo gp
+      inner join si_empresa emp on emp.emprcodi = gp.emprcodi
+      inner join fw_user_x_empresa ue on ue.emprcodi = emp.emprcodi
+      where catecodi = 3 and fenergcodi in ({0}) and ue.usercode = '{1}'
+    </query>
+  </Sql>
+  
+</Sqls>

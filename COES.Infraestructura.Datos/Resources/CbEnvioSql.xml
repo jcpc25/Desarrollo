@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(Enviocodi), 0) + 1 from cb_envio
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into cb_envio(
+      enviocodi,
+      enviofecha,
+      usercodi,
+      grupocodi,
+      estenvcodi,
+      tipocombcodi,
+      emprcodi,
+      envioobservacion,
+      lastdate,
+      lastuser,
+      envioestado,
+      envioplazo
+      )
+      values(
+      {0},to_date('{1}','YYYY-MM-DD HH24:MI:SS'),
+      '{2}',
+      {3},
+      {4},
+      {5},
+      {6},
+      '{7}',
+      to_date('{8}','YYYY-MM-DD HH24:MI:SS'),
+      '{9}',
+      '{10}',
+      '{11}'
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+      update cb_envio
+      set
+      enviofecha = to_date('{0}','YYYY-MM-DD HH24:MI:SS'),
+      usercodi = '{1}',
+      grupocodi = {2},
+      estenvcodi= {3},
+      tipocombcodi = {4},
+      emprcodi = {5},
+      envioobservacion = '{6}',
+      lastdate = to_date('{7}','YYYY-MM-DD HH24:MI:SS'),
+      lastuser = '{8}',
+      envioestado = '{10}',
+      envioplazo = '{11}'
+      where
+      enviocodi = {9}
+    </query>
+  </Sql>
+  <Sql>
+    <key>UpdateObs</key>
+    <query>
+      update cb_envio
+      set
+      estenvcodi= :estenvcodi,
+      envioobservacion = :envioobservacion,
+      lastdate = :lastdate,
+      lastuser = :lastuser
+      where
+      enviocodi = :enviocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from cb_envio
+      where
+      enviocodi = :enviocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+      select
+      enviocodi,
+      enviofecha,
+      usercodi,
+      grupocodi,
+      estenvcodi,
+      tipocombcodi,
+      emprcodi,
+      envioobservacion,
+      envioestado,
+      envioplazo,
+      lastdate,
+      lastuser
+      from
+      cb_envio
+      where
+      enviocodi = :enviocodi
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+      select
+      enviocodi,
+      enviofecha,
+      usercodi,
+      grupocodi,
+      estenvcodi,
+      tipocombcodi,
+      emprcodi,
+      envioobservacion,
+      envioestado,
+      envioplazo,
+      lastdate,
+      lastuser
+      from
+      cb_envio
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>ListaDetalle</key>
+    <query>
+      select
+      enviocodi,
+      enviofecha,
+      usercodi,
+      en.grupocodi,
+      en.estenvcodi,
+      tipocombcodi,
+      en.emprcodi,
+      en.envioobservacion,
+      en.envioestado,
+      en.envioplazo,
+      emp.emprnomb,
+      eq.gruponomb,
+      ex.estenvnomb,
+      en.lastdate,
+      en.lastuser
+      from
+      cb_envio en
+      inner join si_empresa emp on emp.emprcodi = en.emprcodi
+      inner join pr_grupo eq on eq.grupocodi = en.grupocodi
+      inner join ext_estado_envio ex on ex.estenvcodi =  en.estenvcodi
+      where tipocombcodi = {0}
+      order by enviocodi
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>ListaDetalleFiltro</key>
+    <query>
+      select * from (
+      select
+      enviocodi,
+      enviofecha,
+      usercodi,
+      en.grupocodi,
+      en.estenvcodi,
+      tipocombcodi,
+      en.emprcodi,
+      en.envioobservacion,
+      en.envioestado,
+      en.envioplazo,
+      emp.emprnomb,
+      eq.gruponomb,
+      ex.estenvnomb,
+      en.lastdate,
+      en.lastuser,
+      (row_number() over (order by en.enviocodi asc)) as r
+      from
+      cb_envio en
+      inner join si_empresa emp on emp.emprcodi = en.emprcodi
+      inner join pr_grupo eq on eq.grupocodi = en.grupocodi
+      inner join ext_estado_envio ex on ex.estenvcodi =  en.estenvcodi
+      where ((en.emprcodi in ({0}) or '{0}' = '-1' ) and  (en.grupocodi in ({1}) or '{1}' = '-1')) and (en.estenvcodi in ({2}) or '{2}' = '-1')
+      and (enviofecha >=  TO_DATE('{3}','YYYY-MM-DD')  and ENVIOFECHA &lt;= TO_DATE('{4}','YYYY-MM-DD')
+      and  (tipocombcodi = {5} or {5} = 0))
+      order by enviocodi asc
+      )
+      where r >= ((({6}-1) * {7}) + 1) and r &lt; (({6} * {7}) + 1 )
+
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>ListaDetalleFiltroXls</key>
+    <query>
+
+      select
+      enviocodi,
+      enviofecha,
+      usercodi,
+      en.grupocodi,
+      en.estenvcodi,
+      tipocombcodi,
+      en.emprcodi,
+      en.envioobservacion,
+      emp.emprnomb,
+      eq.gruponomb,
+      ex.estenvnomb,
+      en.lastdate,
+      en.lastuser
+      from
+      cb_envio en
+      inner join si_empresa emp on emp.emprcodi = en.emprcodi
+      inner join pr_grupo eq on eq.grupocodi = en.grupocodi
+      inner join ext_estado_envio ex on ex.estenvcodi =  en.estenvcodi
+      where ( (en.emprcodi in ({0}) or '{0}' = '-1' ) and  (en.grupocodi in ({1}) or '{1}' = '-1') ) and (en.estenvcodi in ({2}) or '{2}' = '-1')
+      and enviofecha >=  TO_DATE('{3}','YYYY-MM-DD')  and ENVIOFECHA &lt;= TO_DATE('{4}','YYYY-MM-DD')
+      and  (tipocombcodi = {5} or {5} = 0)
+      order by enviocodi asc
+
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>TotalListaEnvio</key>
+    <query>
+      select
+      count(*) total
+      from
+      (((cb_envio en
+      inner join si_empresa emp on emp.emprcodi = en.emprcodi)
+      inner join pr_grupo eq on eq.grupocodi = en.grupocodi)
+      inner join ext_estado_envio ex on ex.estenvcodi =  en.estenvcodi)
+      where ((en.emprcodi in ({0}) or '{0}' = '-1' ) and  (en.grupocodi in ({1}) or '{1}' = '-1')) and (en.estenvcodi in ({2}) or '{2}' = '-1')
+      and (( enviofecha BETWEEN  TO_DATE('{3}','YYYY-MM-DD')  and TO_DATE('{4}','YYYY-MM-DD'))
+      and  (tipocombcodi = {5} or {5} = 0))
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetDiasFeriados</key>
+    <query>
+      select * from doc_dia_esp d
+      where d.diafecha >= to_date('{0}','YYYY-MM-DD') and d.diafecha  &lt;= to_date('{1}','YYYY-MM-DD')
+    </query>
+  </Sql>
+  
+</Sqls>

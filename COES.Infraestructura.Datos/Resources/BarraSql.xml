@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    <query>select * from trn_barra where barrcodi = :barrcodi</query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into trn_barra
+      (
+      barrcodi, barrnombre, barrtension, barrpuntosuministrorer, barrbarrabgr, barrestado,
+      barrflagbarratransferencia, areacodi, barrbarratransferencia, barrusername, barrfecins
+      )
+      values
+      (
+      :barrcodi, :barrnombre, :barrtension, :barrpuntosuministrorer,
+      :barrbarrabgr, :barrestado, :barrflagbarratransferencia, :areacodi, :barrbarratransferencia, :barrusername, :barrfecins
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+      update trn_barra
+      set
+      barrnombre = :barrnombre,
+      barrtension = :barrtension,
+      barrpuntosuministrorer = :barrpuntosuministrorer,
+      barrbarrabgr = :barrbarrabgr,
+      barrestado = :barrestado,
+      barrflagbarratransferencia= :barrflagbarratransferencia,
+      areacodi=:areacodi,
+      barrbarratransferencia= :barrbarratransferencia,
+      barrfecact = :barrfecact
+      where
+      barrcodi = :barrcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from trn_barra where barrcodi = :barrcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+      select * from trn_barra order by barrnombre asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select * from trn_barra where (barrnombre like '%' + :barrnombre + '%' or :barrnombre is null) order by barrnombre asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(barrcodi), 0) + 1 from trn_barra
+    </query>
+  </Sql>
+
+
+</Sqls>

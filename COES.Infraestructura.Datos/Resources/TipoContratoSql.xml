@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    <query>select * from TRN_TIPO_CONTRATO where TIPCONCODI = :TIPCONCODI</query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into TRN_TIPO_CONTRATO
+      (
+      TIPCONCODI, TIPCONNOMBRE, TIPCONESTADO, TIPCONUSERNAME, TIPCONFECINS
+      )
+      values
+      (
+      :TIPCONCODI, :TIPCONNOMBRE, :TIPCONESTADO, :TIPCONUSERNAME, :TIPCONFECINS
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+      update TRN_TIPO_CONTRATO
+      set
+      TIPCONNOMBRE = :TIPCONNOMBRE,
+      TIPCONESTADO = :TIPCONESTADO,
+      TIPCONFECACT = :TIPCONFECACT
+      where
+      TIPCONCODI = :TIPCONCODI
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from TRN_TIPO_CONTRATO where TIPCONCODI = :TIPCONCODI
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+      select * from TRN_TIPO_CONTRATO order by TIPCONNOMBRE asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select * from TRN_TIPO_CONTRATO where (TIPCONNOMBRE like '%' + :TIPCONNOMBRE + '%' or :TIPCONNOMBRE is null)
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(TIPCONCODI), 0) + 1 from TRN_TIPO_CONTRATO
+    </query>
+  </Sql>
+
+
+</Sqls>

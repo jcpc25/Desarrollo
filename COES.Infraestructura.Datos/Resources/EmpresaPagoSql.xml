@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    <query><!--select * from si_empresa where emprecodi = :emprcodi--></query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCodigo</key>
+    <query><!--select * from si_empresa where emprnomb = :emprnomb--></query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+
+
+
+      insert into TRN_EMPRESA_PAGO
+      (
+      EMPPAGCODI, VTOTEMCODI, PERICODI, EMPRCODI, EMPPAGVERSION,
+      EMPPAGCODEMPPAGO, EMPPAGMONTO,EMPPAGUSERNAME, EMPPAGFECINS
+      )
+      values
+      (
+      :EMPPAGCODI, :VTOTEMCODI, :PERICODI, :EMPRCODI,
+      :EMPPAGVERSION, :EMPPAGCODEMPPAGO, :EMPPAGMONTO, :EMPPAGUSERNAME,:EMPPAGFECINS
+
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+    
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from TRN_EMPRESA_PAGO where PERICODI = :PERICODI and EMPPAGVERSION = :EMPPAGVERSION
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+     
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+   
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(EMPPAGCODI), 0) + 1 from TRN_EMPRESA_PAGO
+    </query>
+  </Sql>
+
+
+ 
+      
+
+    <Sql>
+    <key>GetEmpresaPositivaByCriteria</key>
+    <query>
+    select * from trn_valor_total_empresa where  VALTOTAEMPTOTAL &gt; 0 and pericodi =:pericodi and valtotaempversion=:valtotaempversion 
+    </query>
+    </Sql>
+
+    <Sql>
+    <key>GetEmpresaNegativaByCriteria</key>
+    <query>
+    select * from trn_valor_total_empresa where  VALTOTAEMPTOTAL &lt; 0 and  pericodi =:pericodi and valtotaempversion=:valtotaempversion
+    </query>
+    </Sql>
+
+</Sqls>

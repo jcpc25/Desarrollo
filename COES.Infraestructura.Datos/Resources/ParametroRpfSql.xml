@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+      select paramrpfcodi, paramtipo, paramvalue, parammodulo from wb_parametrorpf
+      where paramrpfcodi = :paramrpfcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into wb_parametrorpf
+      (
+        paramrpfcodi,
+        paramtipo,
+        paramvalue,
+        parammodulo
+      )
+      values
+      (
+        :paramrpfcodi,
+        :paramtipo,
+        :paramvalue,
+        :parammodulo
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from wb_parametrorpf where parammodulo = :parammodulo
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select paramrpfcodi, paramtipo, paramvalue, parammodulo from wb_parametrorpf
+      where parammodulo = :parammodulo
+    </query>
+  </Sql>
+
+</Sqls>

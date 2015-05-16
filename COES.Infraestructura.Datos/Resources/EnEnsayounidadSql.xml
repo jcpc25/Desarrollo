@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into en_ensayounidad(
+           ensayocodi,
+           equicodi,
+           unidadfecha
+       )
+       values(
+           :ensayocodi,
+           :equicodi,
+           :unidadfecha
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+      update en_ensayounidad
+      set
+      ensayocodi = :ensayocodi,
+      equicodi = :equicodi,
+      unidadfecha = :unidadfecha
+      where
+      ensayocodi = :ensayocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from en_ensayounidad
+      where
+      ensayocodi = {0}
+    </query>
+  </Sql>
+
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+      select
+      ensayocodi,
+      equicodi,
+      unidadfecha
+      from
+      en_ensayounidad
+      where
+      ensayocodi = :ensayocodi and
+      equicodi = :equicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+      select
+      ensayocodi,
+      equicodi,
+      unidadfecha
+      from
+      en_ensayounidad
+      where
+      ensayocodi = :ensayocodi and
+      equicodi = :equicodi
+    </query>
+  </Sql>
+  <Sql>
+    <key>ListUnidadxEnsayo</key>
+    <query>
+      select
+      en.ensayocodi,
+      en.equicodi,
+      en.unidadfecha,
+      eq.equinomb
+      from EN_ENSAYOUNIDAD en
+      inner join eq_equipo eq on eq.equicodi = en.equicodi
+      where en.ensayocodi = {0}
+    </query>
+  </Sql>
+</Sqls>

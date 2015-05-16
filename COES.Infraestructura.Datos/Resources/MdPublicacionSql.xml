@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into md_publicacion(
+           publiarchivo,
+           lastuser,
+           lastdate,
+           publiplazofecha,
+           emprcodi,
+           usercodi,
+           publimes,
+           publifecha,
+           publipin
+       )
+       values(
+           :publiarchivo,
+           :lastuser,
+           :lastdate,
+           :publiplazofecha,
+           :emprcodi,
+           :usercodi,
+           :publimes,
+           :publifecha,
+           :publipin
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update md_publicacion
+       set
+           publiarchivo = :publiarchivo,
+           lastuser = :lastuser,
+           lastdate = :lastdate,
+           publiplazofecha = :publiplazofecha,
+           usercodi = :usercodi,
+           publifecha = :publifecha,
+           publipin = :publipin
+       where
+           emprcodi = :emprcodi and
+           publimes = :publimes
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from md_publicacion
+       where
+           emprcodi = :emprcodi and
+           publimes = :publimes
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           publiarchivo,
+           lastuser,
+           lastdate,
+           publiplazofecha,
+           emprcodi,
+           usercodi,
+           publimes,
+           publifecha,
+           publipin
+       where
+           emprcodi = :emprcodi and
+           publimes = :publimes
+       from
+           md_publicacion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           publiarchivo,
+           lastuser,
+           lastdate,
+           publiplazofecha,
+           emprcodi,
+           usercodi,
+           publimes,
+           publifecha,
+           publipin
+       from
+           md_publicacion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           publiarchivo,
+           lastuser,
+           lastdate,
+           publiplazofecha,
+           emprcodi,
+           usercodi,
+           publimes,
+           publifecha,
+           publipin
+       from
+           md_publicacion
+       where
+           publimes = :publimes and emprcodi = :emprcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetLastPubEmpresa</key>
+    <query>
+      select
+      a.publiarchivo,
+      a.lastuser,
+      a.lastdate,
+      a.publiplazofecha,
+      a.emprcodi,
+      a.usercodi,
+      a.publimes,
+      a.publifecha,
+      a.publipin
+      from md_publicacion a inner join
+      (select max(b.publifecha) fecha,b.emprcodi from md_publicacion b where b.emprcodi = :emprecodi
+      and publimes = :publimes group by b.emprcodi ) maxPub on a.emprcodi = maxPub.emprcodi and a.publifecha = maxPub.fecha
+    </query>
+  </Sql>
+  
+</Sqls>

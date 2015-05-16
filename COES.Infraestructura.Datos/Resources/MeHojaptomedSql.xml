@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxOrder</key>
+    <query>
+      select nvl(max(hojaptoorden), 0) + 1 from me_hojaptomed hp
+      inner join ME_PTOMEDICION PTO ON PTO.PTOMEDICODI = HP.PTOMEDICODI
+      inner join eq_equipo eq on eq.equicodi = pto.equicodi
+      where
+      HP.hojanumero = {0} and
+      HP.formatcodi = {1} and
+      eq.emprcodi = {2}
+
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into me_hojaptomed(
+      ptomedicodi,
+      hojaptolimsup,
+      tipoinfocodi,
+      formatcodi,
+      hojanumero,
+      hojaptoliminf,
+      lastuser,
+      lastdate,
+      hojaptoactivo,
+      hojaptoorden,
+      hojaptosigno
+      )
+      values(
+      :ptomedicodi,
+      :hojaptolimsup,
+      :tipoinfocodi,
+      :formatcodi,
+      :hojanumero,
+      :hojaptoliminf,
+      :lastuser,
+      :lastdate,
+      :hojaptoactivo,
+      :hojaptoorden,
+      :hojaptosigno
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+      update me_hojaptomed
+      set
+      hojaptolimsup = {0},
+      hojaptoliminf = {1},
+      lastuser = '{2}',
+      lastdate = to_date('{3}','YYYY-MM-DD HH24:MI:SS'),
+      hojaptoactivo = {4},
+      hojaptoorden = {5}
+      where
+      ptomedicodi = {6} and
+      tipoinfocodi = {7} and
+      formatcodi = {8} and
+      hojanumero = {9} and
+      hojaptosigno = {10}
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from me_hojaptomed
+       where
+           hojanumero = :hojanumero and
+           formatcodi = :formatcodi and
+           tipoinfocodi = :tipoinfocodi and
+           ptomedicodi = :ptomedicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           HP.*,eq.equinomb,ti.tipoinfoabrev,emp.emprabrev,tpto.tipoptomedinomb
+       from
+           me_hojaptomed HP
+      inner join ME_PTOMEDICION PTO ON PTO.PTOMEDICODI = HP.PTOMEDICODI
+      inner join me_tipoptomedicion tpto on tpto.tipoptomedicodi = pto.tipoptomedicodi      
+      inner join eq_equipo eq on eq.equicodi = pto.equicodi
+      inner join si_tipoinformacion ti on ti.tipoinfocodi = hp.tipoinfocodi
+      inner join si_empresa emp on emp.emprcodi = eq.emprcodi       
+       where
+           HP.hojanumero = :hojanumero and
+           HP.formatcodi = :formatcodi and
+           HP.tipoinfocodi = :tipoinfocodi and
+           HP.ptomedicodi = :ptomedicodi and
+           HP.hojaptosigno = :hojaptosigno
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select *
+       from
+           me_hojaptomed
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select HP.*,eq.equinomb,ti.tipoinfoabrev,emp.emprabrev,tpmed.tipoptomedicodi,tpmed.tipoptomedinomb from me_hojaptomed HP
+      inner join ME_PTOMEDICION PTO ON PTO.PTOMEDICODI = HP.PTOMEDICODI
+      inner join eq_equipo eq on eq.equicodi = pto.equicodi
+      inner join si_tipoinformacion ti on ti.tipoinfocodi = hp.tipoinfocodi
+      inner join me_tipoptomedicion tpmed on tpmed.tipoptomedicodi = pto.tipoptomedicodi
+      inner join si_empresa emp on emp.emprcodi = eq.emprcodi
+      WHERE eq.emprcodi = {0} and hp.formatcodi= {1} and hp.hojanumero = {2} and  hp.hojaptoactivo = 1
+      order by hp.hojaptoorden asc
+    </query>
+  </Sql>
+</Sqls>

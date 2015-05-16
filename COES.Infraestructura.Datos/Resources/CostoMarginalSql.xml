@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    <query>select * from trn_costo_marginal where cosmarcodi = :cosmarcodi</query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into trn_costo_marginal
+      (
+      cosmarcodi, barrcodi, cosmarbarratransferencia, pericodi, facpercodi, cosmarversion, cosmardia,
+      cosmar1, cosmar2, cosmar3, cosmar4, cosmar5, cosmar6, cosmar7, cosmar8, cosmar9, cosmar10,
+      cosmar11, cosmar12, cosmar13, cosmar14, cosmar15, cosmar16, cosmar17, cosmar18, cosmar19, cosmar20,
+      cosmar21, cosmar22, cosmar23, cosmar24, cosmar25, cosmar26, cosmar27, cosmar28, cosmar29, cosmar30,
+      cosmar31, cosmar32, cosmar33, cosmar34, cosmar35, cosmar36, cosmar37, cosmar38, cosmar39, cosmar40,
+      cosmar41, cosmar42, cosmar43, cosmar44, cosmar45, cosmar46, cosmar47, cosmar48, cosmar49, cosmar50,
+      cosmar51, cosmar52, cosmar53, cosmar54, cosmar55, cosmar56, cosmar57, cosmar58, cosmar59, cosmar60,
+      cosmar61, cosmar62, cosmar63, cosmar64, cosmar65, cosmar66, cosmar67, cosmar68, cosmar69, cosmar70,
+      cosmar71, cosmar72, cosmar73, cosmar74, cosmar75, cosmar76, cosmar77, cosmar78, cosmar79, cosmar80,
+      cosmar81, cosmar82, cosmar83, cosmar84, cosmar85, cosmar86, cosmar87, cosmar88, cosmar89, cosmar90,
+      cosmar91, cosmar92, cosmar93, cosmar94, cosmar95, cosmar96, cosmarpromediodia, cosmarusername, cosmarfecins
+      )
+      values
+      (
+      :cosmarcodi, :barrcodi, :cosmarbarratransferencia, :pericodi, :facpercodi, :cosmarversion, :cosmardia,
+      :cosmar1, :cosmar2, :cosmar3, :cosmar4, :cosmar5, :cosmar6, :cosmar7, :cosmar8, :cosmar9, :cosmar10,
+      :cosmar11, :cosmar12, :cosmar13, :cosmar14, :cosmar15, :cosmar16, :cosmar17, :cosmar18, :cosmar19, :cosmar20,
+      :cosmar21, :cosmar22, :cosmar23, :cosmar24, :cosmar25, :cosmar26, :cosmar27, :cosmar28, :cosmar29, :cosmar30,
+      :cosmar31, :cosmar32, :cosmar33, :cosmar34, :cosmar35, :cosmar36, :cosmar37, :cosmar38, :cosmar39, :cosmar40,
+      :cosmar41, :cosmar42, :cosmar43, :cosmar44, :cosmar45, :cosmar46, :cosmar47, :cosmar48, :cosmar49, :cosmar50,
+      :cosmar51, :cosmar52, :cosmar53, :cosmar54, :cosmar55, :cosmar56, :cosmar57, :cosmar58, :cosmar59, :cosmar60,
+      :cosmar61, :cosmar62, :cosmar63, :cosmar64, :cosmar65, :cosmar66, :cosmar67, :cosmar68, :cosmar69, :cosmar70,
+      :cosmar71, :cosmar72, :cosmar73, :cosmar74, :cosmar75, :cosmar76, :cosmar77, :cosmar78, :cosmar79, :cosmar80,
+      :cosmar81, :cosmar82, :cosmar83, :cosmar84, :cosmar85, :cosmar86, :cosmar87, :cosmar88, :cosmar89, :cosmar90,
+      :cosmar91, :cosmar92, :cosmar93, :cosmar94, :cosmar95, :cosmar96, :cosmarpromediodia, :cosmarusername, :cosmarfecins
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>delete from trn_costo_marginal where pericodi = :pericodi and cosmarversion = :cosmarversion</query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(cosmarcodi), 0) + 1 from trn_costo_marginal
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>List</key>
+    <query>
+      select distinct BARRCODI, COSMARBARRATRANSFERENCIA  from trn_costo_marginal where
+      (PERICODI= :PERICODI OR PERICODI IS NULL)
+      ORDER BY COSMARBARRATRANSFERENCIA ASC
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select * from trn_costo_marginal where
+      (PERICODI= :PERICODI OR :PERICODI IS NULL)and
+      (BARRCODI = :BARRCODI OR :BARRCODI IS NULL)
+      ORDER BY cosmarDIA ASC
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>ListByBarrPeriodoVer</key>
+    <query>
+      select * from trn_costo_marginal where barrcodi = :barrcodi and pericodi =  :pericodi  and cosmarversion= :cosmarversion order by cosmardia asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCodigo</key>
+    <query>
+      select * from trn_costo_marginal where (pericodi=:pericodi or :pericodi is null)
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByBarraTransferencia</key>
+    <query>
+      select distinct barrcodi, cosmarbarratransferencia from trn_costo_marginal where pericodi=:pericodi and cosmarversion=:cosmarversion order by cosmarbarratransferencia
+    </query>
+  </Sql>
+</Sqls>

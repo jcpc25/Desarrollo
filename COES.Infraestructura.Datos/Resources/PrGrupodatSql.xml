@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into pr_grupodat(
+           fechadat,
+           concepcodi,
+           grupocodi,
+           lastuser,
+           formuladat,
+           deleted,
+           fechaact
+       )
+       values(
+           :fechadat,
+           :concepcodi,
+           :grupocodi,
+           :lastuser,
+           :formuladat,
+           :deleted,
+           :fechaact
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update pr_grupodat
+       set
+           lastuser = :lastuser,
+           formuladat = :formuladat,
+           fechaact = :fechaact
+       where
+           fechadat = :fechadat and
+           concepcodi = :concepcodi and
+           grupocodi = :grupocodi and
+           deleted = :deleted
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from pr_grupodat
+       where
+           fechadat = :fechadat and
+           concepcodi = :concepcodi and
+           grupocodi = :grupocodi and
+           deleted = :deleted
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           fechadat,
+           concepcodi,
+           grupocodi,
+           lastuser,
+           formuladat,
+           deleted,
+           fechaact
+       from
+           pr_grupodat
+       where
+           fechadat = :fechadat and
+           concepcodi = :concepcodi and
+           grupocodi = :grupocodi and
+           deleted = :deleted
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           fechadat,
+           concepcodi,
+           grupocodi,
+           lastuser,
+           formuladat,
+           deleted,
+           fechaact
+       from
+           pr_grupodat
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           fechadat,
+           concepcodi,
+           grupocodi,
+           lastuser,
+           formuladat,
+           deleted,
+           fechaact
+       from
+           pr_grupodat
+    </query>
+  </Sql>
+  <Sql>
+    <key>SqlValoresModoOperacionGrupoDat</key>
+    <query>
+      select distinct gd.concepcodi,fn_sdatoactualconcepto(gd.grupocodi,gd.concepcodi) valor ,c.concepunid
+      from pr_grupodat gd
+      inner join pr_concepto c on gd.concepcodi=c.concepcodi
+      where gd.grupocodi=:grupocodi
+    </query>
+  </Sql>
+</Sqls>

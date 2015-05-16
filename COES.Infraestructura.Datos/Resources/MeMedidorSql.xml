@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(medicodi), 0) + 1 from me_medidor
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into me_medidor(
+           medicodi,
+           medinombre,
+           medimarca,
+           medimodelo,
+           medinserie,
+           medicprecision,
+           ptomedicodi,
+           meditipo
+       )
+       values(
+           :medicodi,
+           :medinombre,
+           :medimarca,
+           :medimodelo,
+           :medinserie,
+           :medicprecision,
+           :ptomedicodi,
+           :meditipo
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update me_medidor
+       set
+           medinombre = :medinombre,
+           medimarca = :medimarca,
+           medimodelo = :medimodelo,
+           medinserie = :medinserie,
+           medicprecision = :medicprecision,
+           ptomedicodi = :ptomedicodi,
+           meditipo = :meditipo
+       where
+           medicodi = :medicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from me_medidor
+       where
+           medicodi = :medicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           medicodi,
+           medinombre,
+           medimarca,
+           medimodelo,
+           medinserie,
+           medicprecision,
+           ptomedicodi,
+           meditipo
+       where
+           medicodi = :medicodi
+       from
+           me_medidor
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           medicodi,
+           medinombre,
+           medimarca,
+           medimodelo,
+           medinserie,
+           medicprecision,
+           ptomedicodi,
+           meditipo
+       from
+           me_medidor
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           medicodi,
+           medinombre,
+           medimarca,
+           medimodelo,
+           medinserie,
+           medicprecision,
+           ptomedicodi,
+           meditipo
+       from
+           me_medidor
+    </query>
+  </Sql>
+</Sqls>

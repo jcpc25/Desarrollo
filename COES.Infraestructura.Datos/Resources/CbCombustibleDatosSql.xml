@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into cb_combustibledatos(
+           combdatosfecha,
+           combdatosvalor,
+           concepcodi,
+           enviocodi
+       )
+       values(
+           :combdatosfecha,
+           :combdatosvalor,
+           :concepcodi,
+           :enviocodi
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update cb_combustibledatos
+       set
+           combdatosvalor = :combdatosvalor
+       where
+           combdatosfecha = :combdatosfecha and
+           concepcodi = :concepcodi and
+           enviocodi = :enviocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from cb_combustibledatos
+       where
+           combdatosfecha = :combdatosfecha and
+           concepcodi = :concepcodi and
+           enviocodi = :enviocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           combdatosfecha,
+           combdatosvalor,
+           concepcodi,
+           enviocodi
+       from
+           cb_combustibledatos           
+       where
+           concepcodi = :concepcodi and
+           enviocodi = :enviocodi
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           combdatosfecha,
+           combdatosvalor,
+           concepcodi,
+           enviocodi
+       from
+           cb_combustibledatos
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           combdatosfecha,
+           combdatosvalor,
+           concepcodi,
+           enviocodi
+       from
+           cb_combustibledatos
+       where
+           concepcodi = :concepcodi and
+           enviocodi = :enviocodi           
+    </query>
+  </Sql>
+  <Sql>
+    <key>GetListPropValor</key>
+    <query>
+      select  ccom.CONCEPORDEN,ccom.concepnomb,ccom.concepunidad, cd.* from CB_COMBUSTIBLEDATOS cd
+      inner join (select concepcodi, max(combdatosfecha) fecha from CB_COMBUSTIBLEDATOS a where a.ENVIOCODI = {0}
+      group by concepcodi)
+      maxenv on maxenv.fecha = cd.COMBDATOSFECHA and maxenv.concepcodi = cd.CONCEPCODI
+      inner join CB_CONCEPTOCOMB ccom on ccom.concepcodi = cd.CONCEPCODI
+      where cd.ENVIOCODI = {0} order by cd.concepcodi
+    </query>
+  </Sql>
+</Sqls>

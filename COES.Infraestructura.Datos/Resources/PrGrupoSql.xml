@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(grupocodi), 0) + 1 from pr_grupo
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into pr_grupo(
+           fenergcodi,
+           barracodi,
+           grupocodi,
+           gruponomb,
+           grupoabrev,
+           grupovmax,
+           grupovmin,
+           grupoorden,
+           emprcodi,
+           grupotipo,
+           catecodi,
+           grupotipoc,
+           grupopadre,
+           grupoactivo,
+           grupocomb,
+           osicodi,
+           grupocodi2,
+           lastuser,
+           lastdate,
+           gruposub,
+           barracodi2,
+           barramw1,
+           barramw2,
+           gruponombncp,
+           tipogrupocodi
+       )
+       values(
+           :fenergcodi,
+           :barracodi,
+           :grupocodi,
+           :gruponomb,
+           :grupoabrev,
+           :grupovmax,
+           :grupovmin,
+           :grupoorden,
+           :emprcodi,
+           :grupotipo,
+           :catecodi,
+           :grupotipoc,
+           :grupopadre,
+           :grupoactivo,
+           :grupocomb,
+           :osicodi,
+           :grupocodi2,
+           :lastuser,
+           :lastdate,
+           :gruposub,
+           :barracodi2,
+           :barramw1,
+           :barramw2,
+           :gruponombncp,
+           :tipogrupocodi
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update pr_grupo
+       set
+           fenergcodi = :fenergcodi,
+           barracodi = :barracodi,
+           gruponomb = :gruponomb,
+           grupoabrev = :grupoabrev,
+           grupovmax = :grupovmax,
+           grupovmin = :grupovmin,
+           grupoorden = :grupoorden,
+           emprcodi = :emprcodi,
+           grupotipo = :grupotipo,
+           catecodi = :catecodi,
+           grupotipoc = :grupotipoc,
+           grupopadre = :grupopadre,
+           grupoactivo = :grupoactivo,
+           grupocomb = :grupocomb,
+           osicodi = :osicodi,
+           grupocodi2 = :grupocodi2,
+           lastuser = :lastuser,
+           lastdate = :lastdate,
+           gruposub = :gruposub,
+           barracodi2 = :barracodi2,
+           barramw1 = :barramw1,
+           barramw2 = :barramw2,
+           gruponombncp = :gruponombncp,
+           tipogrupocodi = :tipogrupocodi
+       where
+           grupocodi = :grupocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from pr_grupo
+       where
+           grupocodi = :grupocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+      select
+      fenergcodi,
+      barracodi,
+      grupocodi,
+      gruponomb,
+      grupoabrev,
+      grupovmax,
+      grupovmin,
+      grupoorden,
+      emprcodi,
+      grupotipo,
+      catecodi,
+      grupotipoc,
+      grupopadre,
+      grupoactivo,
+      grupocomb,
+      osicodi,
+      grupocodi2,
+      lastuser,
+      lastdate,
+      gruposub,
+      barracodi2,
+      barramw1,
+      barramw2,
+      gruponombncp,
+      tipogrupocodi
+      from
+      pr_grupo
+      where
+      grupocodi = :grupocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           fenergcodi,
+           barracodi,
+           grupocodi,
+           gruponomb,
+           grupoabrev,
+           grupovmax,
+           grupovmin,
+           grupoorden,
+           emprcodi,
+           grupotipo,
+           catecodi,
+           grupotipoc,
+           grupopadre,
+           grupoactivo,
+           grupocomb,
+           osicodi,
+           grupocodi2,
+           lastuser,
+           lastdate,
+           gruposub,
+           barracodi2,
+           barramw1,
+           barramw2,
+           gruponombncp,
+           tipogrupocodi
+       from
+           pr_grupo
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select distinct
+      pg.fenergcodi,
+      pg.barracodi,
+      pg.grupocodi,
+      pg.gruponomb,
+      pg.grupoabrev,
+      pg.grupovmax,
+      pg.grupovmin,
+      pg.grupoorden,
+      pg.emprcodi,
+      pg.grupotipo,
+      pg.catecodi,
+      pg.grupotipoc,
+      pg.grupopadre,
+      pg.grupoactivo,
+      pg.grupocomb,
+      pg.osicodi,
+      pg.grupocodi2,
+      pg.lastuser,
+      pg.lastdate,
+      pg.gruposub,
+      pg.barracodi2,
+      pg.barramw1,
+      pg.barramw2,
+      pg.gruponombncp,
+      pg.tipogrupocodi,
+      tg.tipogruponomb,
+      emp.emprnomb
+      from
+      pr_grupo pg inner join pr_tipogrupo tg on pg.tipogrupocodi = tg.tipogrupocodi
+      inner join si_empresa emp on pg.emprcodi = emp.emprcodi
+      inner join me_ptomedicion pto on pg.grupocodi = pto.grupocodi
+      where (pg.tipogrupocodi = :tipogrupocodi or :tipogrupocodi = 0) and  pto.origlectcodi = 15
+      order by emp.emprnomb asc
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>ListarGeneradoresDespachoOsinergmin</key>
+    <query>
+      select pr.grupocodi, 
+      pr.gruponomb,
+      pr.grupopadre,
+      (select min(eq.equifechiniopcom) from eq_equipo eq where eq.grupocodi=pr.grupocodi and eq.equiestado='A') equifechiniopcom,
+      (select max(eq.equifechfinopcom) from eq_equipo eq where eq.grupocodi=pr.grupocodi and eq.equiestado='A') equifechfinopcom
+      from PR_GRUPO pr
+      where
+      pr.catecodi in (3,5)
+      and pr.grupoactivo='S'
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>ListaModosOperacionActivos</key>
+    <query>
+      select * from pr_grupo where catecodi =2 and grupoactivo='S'
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>CambiarTipoGrupo</key>
+    <query>
+      update pr_grupo
+      set
+      tipogrupocodi = :tipogrupocodi,
+      lastuser = :lastuser,
+      lastdate = :lastdate
+      where grupocodi = :grupocodi
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>ModosOperacionPorCentral1</key>
+    <query>
+      select GRUPOCODI,GRUPONOMB,GRUPOABREV,-1 EQUICODI,GRUPONOMB MODONOM 
+      from pr_grupo 
+      where 
+      grupopadre in (select distinct grupocodi from EQ_EQUIPO t where t.equipadre=:idCentral and grupocodi>0) and 
+      GRUPOACTIVO ='S'
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>ModosOperacionPorCentral2</key>
+    <query>
+      select equicodi,grupocodi
+      from pr_equipodat
+      where grupocodi in (select grupocodi from pr_grupo where grupopadre in (select distinct grupocodi from EQ_EQUIPO t where t.equipadre=:idCentral) and GRUPOACTIVO ='S')
+      group by equicodi,grupocodi
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>ObtenerCodigoModoOperacionPadre</key>
+    <query>
+      select grupopadre from pr_grupo where grupocodi=:grupocodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>ListCentrales</key>
+    <query>
+      select * from pr_grupo where grupocodi in (
+      select
+      grupopadre
+      from
+      pr_grupo where fenergcodi in ({0}) and catecodi = 3 and
+      ( emprcodi in ({1}) or '{1}' = '-1' ))
+    </query>
+  </Sql>
+</Sqls>

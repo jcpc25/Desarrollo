@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(equicodi), 0) + 1 from eq_equipo
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into eq_equipo(
+           equicodi,
+           emprcodi,
+           grupocodi,
+           elecodi,
+           areacodi,
+           famcodi,
+           equiabrev,
+           equinomb,
+           equiabrev2,
+           equitension,
+           equipadre,
+           equipot,
+           lastuser,
+           lastdate,
+           ecodigo,
+           equiestado,
+           osigrupocodi,
+           lastcodi,
+           equifechiniopcom,
+           equifechfinopcom
+       )
+       values(
+           :equicodi,
+           :emprcodi,
+           :grupocodi,
+           :elecodi,
+           :areacodi,
+           :famcodi,
+           :equiabrev,
+           :equinomb,
+           :equiabrev2,
+           :equitension,
+           :equipadre,
+           :equipot,
+           :lastuser,
+           :lastdate,
+           :ecodigo,
+           :equiestado,
+           :osigrupocodi,
+           :lastcodi,
+           :equifechiniopcom,
+           :equifechfinopcom
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update eq_equipo
+       set
+           emprcodi = :emprcodi,
+           grupocodi = :grupocodi,
+           elecodi = :elecodi,
+           areacodi = :areacodi,
+           famcodi = :famcodi,
+           equiabrev = :equiabrev,
+           equinomb = :equinomb,
+           equiabrev2 = :equiabrev2,
+           equitension = :equitension,
+           equipadre = :equipadre,
+           equipot = :equipot,
+           lastuser = :lastuser,
+           lastdate = :lastdate,
+           ecodigo = :ecodigo,
+           equiestado = :equiestado,
+           osigrupocodi = :osigrupocodi,
+           lastcodi = :lastcodi,
+           equifechiniopcom = :equifechiniopcom,
+           equifechfinopcom = :equifechfinopcom
+       where
+           equicodi = :equicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from eq_equipo
+       where
+           equicodi = :equicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           equicodi,
+           emprcodi,
+           grupocodi,
+           elecodi,
+           areacodi,
+           famcodi,
+           equiabrev,
+           equinomb,
+           equiabrev2,
+           equitension,
+           equipadre,
+           equipot,
+           lastuser,
+           lastdate,
+           ecodigo,
+           equiestado,
+           osigrupocodi,
+           lastcodi,
+           equifechiniopcom,
+           equifechfinopcom
+       from
+           eq_equipo           
+       where
+           equicodi = :equicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           equicodi,
+           emprcodi,
+           grupocodi,
+           elecodi,
+           areacodi,
+           famcodi,
+           equiabrev,
+           equinomb,
+           equiabrev2,
+           equitension,
+           equipadre,
+           equipot,
+           lastuser,
+           lastdate,
+           ecodigo,
+           equiestado,
+           osigrupocodi,
+           lastcodi,
+           equifechiniopcom,
+           equifechfinopcom
+       from
+           eq_equipo
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           equicodi,
+           emprcodi,
+           grupocodi,
+           elecodi,
+           areacodi,
+           famcodi,
+           equiabrev,
+           equinomb,
+           equiabrev2,
+           equitension,
+           equipadre,
+           equipot,
+           lastuser,
+           lastdate,
+           ecodigo,
+           equiestado,
+           osigrupocodi,
+           lastcodi,
+           equifechiniopcom,
+           equifechfinopcom
+       from
+           eq_equipo a
+       where
+           a.emprcodi = :emprcodi and
+           a.famcodi = :famcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByEmprFam</key>
+    <query>
+      select
+      equicodi,
+      emprcodi,
+      grupocodi,
+      elecodi,
+      areacodi,
+      famcodi,
+      equiabrev,
+      equinomb,
+      equiabrev2,
+      equitension,
+      equipadre,
+      equipot,
+      lastuser,
+      lastdate,
+      ecodigo,
+      equiestado,
+      osigrupocodi,
+      lastcodi,
+      equifechiniopcom,
+      equifechfinopcom
+      from
+      eq_equipo a
+      where
+      a.emprcodi = :emprcodi and
+      a.famcodi = :famcodi
+    </query>
+  </Sql>  
+  
+  <Sql>
+    <key>ListadoCentralesOsinergmin</key>
+    <query>
+      select
+      emprcodi,
+      grupocodi,
+      famcodi,
+      equinomb,
+      equifechiniopcom,
+      equifechfinopcom
+      from
+      eq_equipo
+      where
+      famcodi in (39,4,37,5) and equiestado ='A'
+    </query>
+  </Sql>
+  <Sql>
+    <key>SQLListarEquiposxFiltro</key>
+    <query>
+      select equicodi,
+      e.emprcodi,
+      e.grupocodi,
+      e.elecodi,
+      e.areacodi,
+      e.famcodi,
+      e.equiabrev,
+      e.equinomb,
+      e.equiabrev2,
+      e.equitension,
+      e.equipadre,
+      e.equipot,
+      e.lastuser,
+      e.lastdate,
+      e.ecodigo,
+      e.equiestado,
+      e.osigrupocodi,
+      e.lastcodi,
+      e.equifechiniopcom,
+      e.equifechfinopcom,
+      emp.emprnomb,
+      fam.famnomb,
+      a.areanomb
+      from eq_equipo e
+      inner join si_empresa emp on emp.emprcodi=e.emprcodi
+      inner join eq_familia fam on fam.famcodi=e.famcodi
+      inner join eq_area a on a.areacodi=e.areacodi
+      where
+      (emp.emprcodi= :emprcodi or 0= emprcodi)and
+      (fam.famcodi=:famcodi or 0=famcodi) and
+      (emp.tipoemprcodi=:tipoemprcodi or 0=:tipoemprcodi) and
+      e.equinomb like '%:equinomb%' and
+      (e.equipadre=:equipadre or -99=:equipadre)
+    </query>
+  </Sql>
+  <Sql>
+    <key>SqlBuscarEquipoPorNombrePaginado</key>
+    <query>
+      select
+      *
+      from (
+      select equicodi,
+      emprcodi,
+      grupocodi,
+      elecodi,
+      areacodi,
+      famcodi,
+      equiabrev,
+      equinomb,
+      equiabrev2,
+      equitension,
+      equipadre,
+      equipot,
+      lastuser,
+      lastdate,
+      ecodigo,
+      equiestado,
+      osigrupocodi,
+      lastcodi,
+      equifechiniopcom,
+      equifechfinopcom,
+      (row_number() over (order by eq_equipo.equinomb)) as r
+      from eq_equipo
+      where
+      equinomb like '%:equinomb%'
+      order by equinomb asc
+      )
+      where r >= (((:nropaginas-1) * :nroFilas) + 1) and r &lt; ((:nropaginas * :nroFilas) + 1 )
+    </query>
+  </Sql>
+  <Sql>
+    <key>EquiposxFamilias</key>
+    <query>
+      select equicodi,
+      e.emprcodi,
+      e.grupocodi,
+      e.elecodi,
+      e.areacodi,
+      e.famcodi,
+      e.equiabrev,
+      e.equinomb,
+      e.equiabrev2,
+      e.equitension,
+      e.equipadre,
+      e.equipot,
+      e.lastuser,
+      e.lastdate,
+      e.ecodigo,
+      e.equiestado,
+      e.osigrupocodi,
+      e.lastcodi,
+      e.equifechiniopcom,
+      e.equifechfinopcom,
+      emp.emprnomb,
+      fam.famnomb,
+      a.areanomb
+      from eq_equipo e
+      inner join si_empresa emp on emp.emprcodi=e.emprcodi
+      inner join eq_familia fam on fam.famcodi=e.famcodi
+      inner join eq_area a on a.areacodi=e.areacodi
+      where e.famcodi in (:famcodi) and equiestado='A'
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>CentralesXCombustible</key>
+    <query>
+      select * from eq_equipo eq
+      inner join pr_grupo pr on pr.grupocodi = eq.grupocodi
+      where eq.famcodi = 5 and pr.fenergcodi = {0}
+      and eq.emprcodi = {1}
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>EquiposxFamilias2</key>
+    <query>
+      select equicodi,
+      e.emprcodi,
+      e.grupocodi,
+      e.elecodi,
+      e.areacodi,
+      e.famcodi,
+      e.equiabrev,
+      e.equinomb,
+      e.equiabrev2,
+      e.equitension,
+      e.equipadre,
+      e.equipot,
+      e.lastuser,
+      e.lastdate,
+      e.ecodigo,
+      e.equiestado,
+      e.osigrupocodi,
+      e.lastcodi,
+      e.equifechiniopcom,
+      e.equifechfinopcom,
+      emp.emprnomb,
+      fam.famnomb,
+      a.areanomb
+      from eq_equipo e
+      inner join si_empresa emp on emp.emprcodi=e.emprcodi
+      inner join eq_familia fam on fam.famcodi=e.famcodi
+      inner join eq_area a on a.areacodi=e.areacodi
+      where
+      (e.famcodi in ({0}) or '{0}' = '-1') and
+      (e.emprcodi in ({1}) or '{1}' = '-1') and
+      equiestado='A'
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>CentralesXEmpresaGEN</key>
+    <query>
+      select * from eq_equipo
+      where famcodi = 5 and ( emprcodi in ({0}) or '{0}' = '-1' )
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>ListaEquiposEnsayo</key>
+    <query>
+      select * from eq_equipo
+      where famcodi in (2,3) and ( equipadre = {0} )
+    </query>
+  </Sql>
+  
+</Sqls>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into en_estformato(
+           ensayocodi,
+           formatocodi,
+           estadocodi,
+           lastdate,
+           lastuser,
+           estformatdescrip
+       )
+       values(
+           :ensayocodi,
+           :formatocodi,
+           :estadocodi,
+           :lastdate,
+           :lastuser,
+           :estformatdescrip
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update en_estformato
+       set
+           ensayocodi = :ensayocodi,
+           formatocodi = :formatocodi,
+           estadocodi = :estadocodi,
+           lastdate = :lastdate,
+           lastuser = :lastuser,
+           estformatdescrip = :estformatdescrip
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from en_estformato
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           ensayocodi,
+           formatocodi,
+           estadocodi,
+           lastdate,
+           lastuser,
+           estformatdescrip
+       where
+       from
+           en_estformato
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           ensayocodi,
+           formatocodi,
+           estadocodi,
+           lastdate,
+           lastuser,
+           estformatdescrip
+       from
+           en_estformato
+    </query>
+  </Sql>
+  <Sql>
+    <key>ListFormatoXEstado</key>
+    <query>
+      select
+      en.ensayocodi,
+      en.FORMATOCODI,
+      en.estadocodi,
+      en.lastdate,
+      en.lastuser,
+      en.estformatdescrip,
+      fr.FORMATODESC,
+      ex.ESTADONOMBRE,
+      ex.estadocolor
+      from
+      en_estformato en
+      inner join EN_FORMATO fr on fr.FORMATOCODI = en.FORMATOCODI
+      inner join en_estado ex on ex.estadocodi =  en.estadocodi
+      where
+      en.ensayocodi = {0} and en.FORMATOCODI = {1}
+      order by en.lastdate DESC
+    </query>
+  </Sql>
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           ensayocodi,
+           formatocodi,
+           estadocodi,
+           lastdate,
+           lastuser,
+           estformatdescrip
+       from
+           en_estformato
+    </query>
+  </Sql>
+  <Sql>
+    <key>ListaFormatosEmpresaCentral</key>
+    <query>
+      select
+      *
+      from
+      en_ensayoformato ef
+      where ef.ensayocodi =  (
+      select max(ensayocodi) from en_ensayo where EMPRCODI = {0} and EQUICODI = {1})
+    </query>
+  </Sql>
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select
+      ensayocodi,
+      formatocodi,
+      ensformatnombfisico,
+      ensformatnomblogico,
+      lastdate,
+      lastuser,
+      ensformtestado
+      from
+      en_ensayoformato
+    </query>
+  </Sql>
+</Sqls>

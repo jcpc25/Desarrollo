@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(fenergcodi), 0) + 1 from si_fuenteenergia
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into si_fuenteenergia(
+           fenergcodi,
+           fenergabrev,
+           fenergnomb,
+           tgenercodi
+       )
+       values(
+           :fenergcodi,
+           :fenergabrev,
+           :fenergnomb,
+           :tgenercodi
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update si_fuenteenergia
+       set
+           fenergabrev = :fenergabrev,
+           fenergnomb = :fenergnomb,
+           tgenercodi = :tgenercodi
+       where
+           fenergcodi = :fenergcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from si_fuenteenergia
+       where
+           fenergcodi = :fenergcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           fenergcodi,
+           fenergabrev,
+           fenergnomb,
+           tgenercodi
+       where
+           fenergcodi = :fenergcodi
+       from
+           si_fuenteenergia
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           fenergcodi,
+           fenergabrev,
+           fenergnomb,
+           tgenercodi
+       from
+           si_fuenteenergia
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select
+        fenergcodi,
+        fenergabrev,
+        fenergnomb,
+        tgenercodi
+      from
+        si_fuenteenergia
+      order by fenergnomb
+    </query>
+  </Sql>
+</Sqls>

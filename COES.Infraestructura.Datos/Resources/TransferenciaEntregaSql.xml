@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    <query></query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      
+    INSERT INTO TRN_TRANS_ENTREGA(
+    TENTCODI, CODENTCODI , BARRCODI ,PERICODI ,EMPRCODI ,EQUICODI ,TENTCODIGO ,TENTVERSION ,TENTTIPOINFORMACION ,TENTESTADO ,TENTUSERNAME , TENTFECINS 
+    )
+    VALUES
+    (:TENTCODI,:CODENTCODI,:BARRCODI,:PERICODI,:EMPRCODI,:EQUICODI,:TENTCODIGO,:TENTVERSION,:TENTTIPOINFORMACION,
+    :TENTESTADO,:TENTUSERNAME,:TENTFECINS)
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from trn_trans_entrega where
+      emprcodi= :emprcodi and
+      pericodi= :pericodi and
+      tentversion =:tentrversion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+      select TENTCODIGO,
+      (select EMPRNOMB from VW_SI_EMPRESA where  VW_SI_EMPRESA.emprcodi = trn_trans_entrega.emprcodi) as EMPRNOMBRE,
+      (select EQUINOMB from VW_EQ_CENTRAL_GENERACION where   VW_EQ_CENTRAL_GENERACION.EQUICODI = trn_trans_entrega.EQUICODI) AS CENTGENENOMBRE,
+      TRN_BARRA.BARRNOMBRE,
+      tenttipoinformacion,
+      ( select sum(
+      TENTDE1 +TENTDE2+
+      TENTDE3+
+      TENTDE4+
+      TENTDE5+
+      TENTDE6+
+      TENTDE7+
+      TENTDE8+
+      TENTDE9+
+      TENTDE10+
+      TENTDE11+
+      TENTDE12+
+      TENTDE13+
+      TENTDE14+
+      TENTDE15+
+      TENTDE16+
+      TENTDE17+
+      TENTDE18+
+      TENTDE19+
+      TENTDE20+
+      TENTDE21+
+      TENTDE22+
+      TENTDE23+
+      TENTDE24+
+      TENTDE25+
+      TENTDE26+
+      TENTDE27+
+      TENTDE28+
+      TENTDE29+
+      TENTDE30+
+      TENTDE31+
+      TENTDE32+
+      TENTDE33+
+      TENTDE34+
+      TENTDE35+
+      TENTDE36+
+      TENTDE37+
+      TENTDE38+
+      TENTDE39+
+      TENTDE40+
+      TENTDE41+
+      TENTDE42+
+      TENTDE43+
+      TENTDE44+
+      TENTDE45+
+      TENTDE46+
+      TENTDE47+
+      TENTDE48+
+      TENTDE49+
+      TENTDE50+
+      TENTDE51+
+      TENTDE52+
+      TENTDE53+
+      TENTDE54+
+      TENTDE55+
+      TENTDE56+
+      TENTDE57+
+      TENTDE58+
+      TENTDE59+
+      TENTDE60+
+      TENTDE61+
+      TENTDE62+
+      TENTDE63+
+      TENTDE64+
+      TENTDE65+
+      TENTDE66+
+      TENTDE67+
+      TENTDE68+
+      TENTDE69+
+      TENTDE70+
+      TENTDE71+
+      TENTDE72+
+      TENTDE73+
+      TENTDE74+
+      TENTDE75+
+      TENTDE76+
+      TENTDE77+
+      TENTDE78+
+      TENTDE79+
+      TENTDE80+
+      TENTDE81+
+      TENTDE82+
+      TENTDE83+
+      TENTDE84+
+      TENTDE85+
+      TENTDE86+
+      TENTDE87+
+      TENTDE88+
+      TENTDE89+
+      TENTDE90+
+      TENTDE91+
+      TENTDE92+
+      TENTDE93+
+      TENTDE94+
+      TENTDE95+
+      TENTDE96)
+      from trn_trans_entrega_detalle  WHERE  trn_trans_entrega_detalle.TENTCODI =trn_trans_entrega.TENTCODI
+
+      )as total
+      from trn_trans_entrega  join TRN_BARRA  ON  TRN_BARRA.BARRCODI = trn_trans_entrega.BARRCODI
+      where
+      (EMPRCODI = :EMPRCODI ) and
+      (PERICODI= :PERICODI OR :PERICODI IS NULL)  and
+      (TENTVERSION = :TENTVERSION)
+      ORDER BY TENTCODIGO ASC
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+     select nvl(max(TENTCODI), 0) + 1 from TRN_TRANS_ENTREGA
+    </query>
+  </Sql>
+
+</Sqls>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Sqls>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select EQUINOMB as Empresa, BARRBARRATRANSFERENCIA as Barra, EMPRNOMB as Cliente, CODENTCODIGO as Codigo
+      from Transferencia.TRN_PERIODO P, Transferencia.TRN_CODIGO_ENTREGA C,
+      Transferencia.VW_EQ_CENTRAL_GENERACION G, Transferencia.TRN_BARRA B, Transferencia.VW_SI_EMPRESA E
+      where C.EQUICODI = G.EQUICODI and C.BARRCODI = B.BARRCODI and C.EMPRCODI = E.EMPRCODI
+      and P.PERICODI = :PERICODI and P.PERIANIOMES between extract(year from C.CODENTFECHAINICIO) * 100 + extract(month from C.CODENTFECHAINICIO)
+      and extract(year from C.CODENTFECHAFIN) * 100 + extract(month from C.CODENTFECHAFIN)
+      and not exists (select CODENTCODI from Transferencia.TRN_TRANS_ENTREGA T
+      where C.CODENTCODI = T.CODENTCODI)
+      UNION
+      select E.EMPRNOMB as Empresa, BARRBARRATRANSFERENCIA as Barra, CL.EMPRNOMB as Cliente, TRETCODIGO as Codigo
+      from Transferencia.TRN_PERIODO P, Transferencia.VW_TRN_CODIGO_RETIRO C,
+      Transferencia.VW_SI_EMPRESA E, Transferencia.TRN_BARRA B, Transferencia.VW_SI_EMPRESA CL
+      where C.GENEMPRCODI = E.EMPRCODI and C.BARRCODI = B.BARRCODI and C.CLIEMPRCODI = CL.EMPRCODI
+      and P.PERICODI = :PERICODI and P.PERIANIOMES between extract(year from C.FECHAINICIO) * 100 + extract(month from C.FECHAINICIO)
+      and extract(year from C.FECHAFIN) * 100 + extract(month from C.FECHAFIN)
+      and not exists (select TRETTABLA, TRETCORESOCORESCCODI from Transferencia.TRN_TRANS_RETIRO T
+      where C.TRETTABLA = T.TRETTABLA and C.TRETCORESOCORESCCODI = T.TRETCORESOCORESCCODI)
+    </query>
+  </Sql>
+
+</Sqls>

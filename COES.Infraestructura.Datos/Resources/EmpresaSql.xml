@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+  
+  <Sql>
+    <key>GetById</key>
+    <query>select * from vw_si_empresa where emprcodi = :emprcodi</query>
+  </Sql>
+  
+     <Sql>
+    <key>GetByCodigo</key>
+    <query>select * from vw_si_empresa where emprnomb = :emprnomb</query>
+  </Sql>
+  
+  <Sql>
+    <key>List</key>
+    <query>
+      select * from vw_si_empresa order by emprnomb asc      
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select * from vw_si_empresa where emprnomb like '%' + :emprnomb + '%' or :emprnomb is null order by emprnomb asc
+    </query>
+  </Sql>
+  
+</Sqls>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into me_ptomedicion(
+           ptomedicodi,
+           lastdate,
+           lastuser,
+           emprcodi,
+           grupocodi,
+           tipoinfocodi,
+           osicodi,
+           equicodi,
+           codref,
+           ptomedidesc,
+           orden,
+           ptomedielenomb,
+           ptomedibarranomb,
+           origlectcodi,
+           tipoptomedicodi,
+           ptomediestado
+       )
+       values(
+           :ptomedicodi,
+           :lastdate,
+           :lastuser,
+           :emprcodi,
+           :grupocodi,
+           :tipoinfocodi,
+           :osicodi,
+           :equicodi,
+           :codref,
+           :ptomedidesc,
+           :orden,
+           :ptomedielenomb,
+           :ptomedibarranomb,
+           :origlectcodi,
+           :tipoptomedicodi,
+           :ptomediestado
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update me_ptomedicion
+       set
+           lastdate = :lastdate,
+           lastuser = :lastuser,
+           emprcodi = :emprcodi,
+           grupocodi = :grupocodi,
+           tipoinfocodi = :tipoinfocodi,
+           osicodi = :osicodi,
+           equicodi = :equicodi,
+           codref = :codref,
+           ptomedidesc = :ptomedidesc,
+           orden = :orden,
+           ptomedielenomb = :ptomedielenomb,
+           ptomedibarranomb = :ptomedibarranomb,
+           origlectcodi = :origlectcodi,
+           tipoptomedicodi = :tipoptomedicodi,
+           ptomediestado = :ptomediestado
+       where
+           ptomedicodi = :ptomedicodi 
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from me_ptomedicion
+       where
+           ptomedicodi = :ptomedicodi and
+           ptomedicodi = :ptomedicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+          pto.*,
+          eq.famcodi
+       from
+           me_ptomedicion pto
+       inner join EQ_EQUIPO eq on pto.EQUICODI = eq.EQUICODI
+       where
+           pto.ptomedicodi = :ptomedicodi
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByIdEquipo</key>
+    <query>
+      select
+      pto.ptomedicodi,pto.lastdate,pto.lastuser,pto.emprcodi,pto.grupocodi,pto.osicodi,pto.equicodi,pto.codref,
+      pto.ptomedidesc,pto.orden,pto.ptomedielenomb,pto.ptomedibarranomb,pto.origlectcodi,pto.tipoptomedicodi,pto.ptomediestado,
+      tpto.tipoinfocodi
+      from
+      me_ptomedicion pto
+      inner join
+      me_tipoptomedicion tpto on tpto.tipoptomedicodi = pto.tipoptomedicodi
+      where
+      pto.equicodi = :equicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetPtoDuplicado</key>
+    <query>
+      select
+      *
+      from
+      me_ptomedicion
+      where
+      equicodi = {0} and
+      origlectcodi = {1} and
+      tipoptomedicodi = {2}
+
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           ptomedicodi,
+           lastdate,
+           lastuser,
+           emprcodi,
+           grupocodi,
+           tipoinfocodi,
+           osicodi,
+           equicodi,
+           codref,
+           ptomedidesc,
+           orden,
+           ptomedielenomb,
+           ptomedibarranomb,
+           origlectcodi,
+           emprcodi,
+           grupocodi,
+           tipoinfocodi,
+           osicodi,
+           equicodi,
+           codref,
+           ptomedidesc,
+           orden,
+           ptomedielenomb,
+           ptomedibarranomb,
+           origlectcodi,
+           ptomedicodi
+       from
+           me_ptomedicion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+          pto.*,
+          orig.Origlectnombre,emp.Emprnomb,eq.equinomb,fam.famnomb,tpto.tipoptomedinomb
+       from
+           me_ptomedicion pto
+       inner join
+           me_origenlectura orig on orig.origlectcodi = pto.origlectcodi
+       inner join
+           si_empresa emp on emp.emprcodi = pto.emprcodi
+       inner join 
+           me_tipoptomedicion tpto on tpto.tipoptomedicodi = pto.tipoptomedicodi
+       left join
+           eq_equipo eq on eq.equicodi = pto.equicodi
+       inner join
+            eq_familia fam on fam.famcodi = eq.famcodi
+       where
+           (pto.emprcodi in ({0}) or '{0}' = '-1') and
+           (pto.origlectcodi in ({1}) or '{1}' = '-1') and
+           (pto.tipoptomedicodi  in ({2}) or '{2}' = '-1') 
+    </query>
+  </Sql>
+  <Sql>
+    <key>ListarDetallePtoMedicionFiltro</key>
+    <query>
+      select * from
+      (
+      select
+      pto.*,
+      orig.Origlectnombre,
+      emp.Emprnomb,
+      eq.equinomb,
+      fam.famnomb,
+      tpto.tipoptomedinomb,
+      (row_number() over (order by pto.PTOMEDICODI asc)) as r
+      from me_ptomedicion pto
+      inner join
+      me_origenlectura orig on orig.origlectcodi = pto.origlectcodi
+      inner join
+      si_empresa emp on emp.emprcodi = pto.emprcodi
+      inner join
+      me_tipoptomedicion tpto on tpto.tipoptomedicodi = pto.tipoptomedicodi
+      left join
+      eq_equipo eq on eq.equicodi = pto.equicodi
+      inner join
+      eq_familia fam on fam.famcodi = eq.famcodi
+      where
+      (pto.emprcodi in ({0}) or '{0}' = '-1') and
+      (pto.origlectcodi in ({1}) or '{1}' = '-1') and
+      (pto.tipoptomedicodi  in ({2}) or '{2}' = '-1')
+      )
+      where r >= ((({3}-1) * {4}) + 1) and r &lt; (({3} * {4}) + 1 )
+    </query>
+  </Sql>
+  <Sql>
+    <key>ListarPtoMedicion</key>
+    <query>
+      SELECT
+      pto.lastdate,pto.lastuser,pto.grupocodi,pto.tipoinfocodi,pto.osicodi,codref, ptomedidesc,
+      orden,ptomedielenomb,ptomedibarranomb,pto.origlectcodi,
+      pto.ptomedicodi,em.emprcodi,eq.equicodi,eq.famcodi ,eq.equinomb GRUPONOMB,
+      case eq.equipadre when 0 then eq.equinomb else eqp.equinomb end CENTRALNOMB
+      FROM ME_PTOMEDICION pto
+      join EQ_EQUIPO eq on pto.EQUICODI = eq.EQUICODI
+      left join EQ_EQUIPO eqp on eqp.EQUICODI = eq.EQUIPADRE
+      join EQ_FAMILIA fm on fm.FAMCODI = eq.FAMCODI
+      join SI_EMPRESA em on em.EMPRCODI = eq.EMPRCODI
+      where eq.famcodi &lt;> 40 and pto.ptomedicodi in ({0})
+      union
+      SELECT
+      pto.lastdate,pto.lastuser,pto.grupocodi,pto.tipoinfocodi,pto.osicodi,codref, ptomedidesc,
+      orden,ptomedielenomb,ptomedibarranomb,pto.origlectcodi,
+      pto.ptomedicodi,em.emprcodi,eq.equicodi,eq.famcodi ,eq.equinomb GRUPONOMB,
+      eqp.equinomb CENTRALNOMB
+      FROM ME_PTOMEDICION pto
+      join EQ_EQUIPO eq on pto.EQUICODI = eq.EQUICODI
+      join EQ_EQUIREL rel on eq.EQUICODI = rel.EQUICODI1
+      join EQ_EQUIPO eqp on eqp.EQUICODI = rel.EQUICODI2
+      join EQ_FAMILIA fm on fm.FAMCODI = eq.FAMCODI
+      join SI_EMPRESA em on em.EMPRCODI = eq.EMPRCODI
+      where 
+         eq.famcodi = 40 and 
+         pto.ptomedicodi in ({0})
+    </query>
+  </Sql>
+  <Sql>
+    <key>TotalListaPtoMedicion</key>
+    <query>
+      select
+      count(*) total
+      from
+      (((((me_ptomedicion pto
+      inner join me_origenlectura orig on orig.origlectcodi = pto.origlectcodi)
+      inner join si_empresa emp on emp.emprcodi = pto.emprcodi)
+      inner join me_tipoptomedicion tpto on tpto.tipoptomedicodi = pto.tipoptomedicodi)
+      left join eq_equipo eq on eq.equicodi = pto.equicodi)
+      inner join eq_familia fam on fam.famcodi = eq.famcodi)
+
+      where (pto.emprcodi in ({0}) or '{0}' = '-1') and (pto.origlectcodi in ({1}) or '{1}' = '-1')
+      and (pto.tipoptomedicodi  in ({2}) or '{2}' = '-1')     
+    </query>
+  </Sql>
+</Sqls>

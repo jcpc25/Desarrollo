@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Sqls>
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into cb_archivoenvio(
+      concepcodi,
+      enviocodi,
+      archivnombreenvio,
+      archivnombrefisico,
+      archivoestado,
+      lastdate,
+      lastuser,
+      archienvioorden
+      )
+      values(
+      {0},
+      {1},
+      '{2}',
+      '{3}',
+      {4},
+      to_date('{5}','YYYY-MM-DD HH24:MI:SS'),
+      '{6}',
+      {7}
+      )
+    </query>
+  </Sql>
+  <Sql>
+    <key>GetMaxIdOrden</key>
+    <query>
+      select nvl(max(archienvioorden), 0) + 1 from cb_archivoenvio
+      where
+      concepcodi = {0} and
+      enviocodi = {1}
+    </query>
+  </Sql>
+  <Sql>
+    <key>Update</key>
+    <query>
+      update cb_archivoenvio
+      set
+      concepcodi = :concepcodi,
+      enviocodi = :enviocodi,
+      archivnombreenvio =: archivnombreenvio,
+      archivnombrefisico =: archivnombrefisico,
+      archivoestado =: archivoestado,
+      lastdate =: lastdate,
+      lastuser =: lastuser,
+      archienvioorden =: archienvioorden,
+      where
+      concepcodi = :concepcodi and
+      enviocodi = :enviocodi
+    </query>
+  </Sql>
+  <Sql>
+    <key>UpdateEstado</key>
+    <query>
+      update cb_archivoenvio
+      set
+      archivoestado = {0}
+      where
+      concepcodi = {1} and
+      enviocodi = {2} and
+      archienvioorden = {3}
+    </query>
+  </Sql>
+   <Sql>
+    <key>Delete</key>
+    <query>
+      delete from cb_archivoenvio
+      where
+      concepcodi = :concepcodi and
+      enviocodi = :enviocodi
+    </query>
+  </Sql>
+  <Sql>
+    <key>GetById</key>
+    <query>
+      select
+      concepcodi,
+      enviocodi,
+      archivnombreenvio,
+      archivnombrefisico,
+      archivoestado,
+      lastdate,
+      lastuser,
+      archienvioorden
+      from
+      cb_archivoenvio
+      where
+      enviocodi = :enviocodi and
+      archivoestado = 1
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+      select
+      concepcodi,
+      enviocodi,
+      archivnombreenvio,
+      archivnombrefisico,
+      archivoestado,
+      lastdate,
+      lastuser,
+      archienvioorden
+      from
+      cb_archivoenvio
+    </query>
+  </Sql>
+</Sqls>

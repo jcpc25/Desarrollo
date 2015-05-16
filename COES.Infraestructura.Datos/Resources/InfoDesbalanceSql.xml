@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Sqls>
+
+ 
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      SELECT BARRCODI,SUM(SUMA) AS TOTAL,BARRNOMBRE FROM (
+select sum(c.tentdesumadia) AS SUMA,a.BARRCODI,b.BARRNOMBRE,a.PERICODI  from trn_trans_entrega a join trn_barra b on a.barrcodi=b.barrcodi
+join trn_trans_entrega_detalle c on a.TENTCODI=c.TENTCODI
+where a.PERICODI=:PERICODI
+group by a.barrcodi,b.BARRNOMBRE,a.PERICODI 
+UNION
+select sum(c.tretdesumadia)*-1 AS SUMA,a.BARRCODI,b.BARRNOMBRE,a.PERICODI from trn_trans_retiro a join  trn_barra b on a.BARRCODI =b.BARRCODI 
+JOIN trn_trans_retiro_detalle c on a.TRETCODI= c.TRETCODI
+where a.PERICODI=:PERICODI
+group by a.BARRCODI,b.BARRNOMBRE,a.PERICODI ORDER BY BARRCODI ASC  
+) T GROUP BY  BARRCODI,BARRNOMBRE
+    </query>
+  </Sql>
+
+ 
+
+</Sqls>

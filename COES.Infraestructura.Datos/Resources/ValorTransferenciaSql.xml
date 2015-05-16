@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    <query>select * from trn_valor_trans where vtrancodi = :vtrancodi</query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into trn_valor_trans
+      (
+      vtrancodi,pericodi, barrcodi,emprcodi, cosmarcodi, vtranflag, vtrancodentret, vtranversion, vtrandia,vtrantotaldia,
+      vtrantotalenergia,vtrantipoinformacion,
+      vtran1, vtran2, vtran3, vtran4, vtran5, vtran6, vtran7, vtran8, vtran9, vtran10,
+      vtran11, vtran12, vtran13, vtran14, vtran15, vtran16, vtran17, vtran18, vtran19, vtran20,
+      vtran21, vtran22, vtran23, vtran24, vtran25, vtran26, vtran27, vtran28, vtran29, vtran30,
+      vtran31, vtran32, vtran33, vtran34, vtran35, vtran36, vtran37, vtran38, vtran39, vtran40,
+      vtran41, vtran42, vtran43, vtran44, vtran45, vtran46, vtran47, vtran48, vtran49, vtran50,
+      vtran51, vtran52, vtran53, vtran54, vtran55, vtran56, vtran57, vtran58, vtran59, vtran60,
+      vtran61, vtran62, vtran63, vtran64, vtran65, vtran66, vtran67, vtran68, vtran69, vtran70,
+      vtran71, vtran72, vtran73, vtran74, vtran75, vtran76, vtran77, vtran78, vtran79, vtran80,
+      vtran81, vtran82, vtran83, vtran84, vtran85, vtran86, vtran87, vtran88, vtran89, vtran90,
+      vtran91, vtran92, vtran93, vtran94, vtran95, vtran96, vtranusername, vtranfecins
+      )
+      values
+      (
+      :vtrancodi, :pericodi,:barrcodi, :emprcodi, :cosmarcodi, :vtranflag, :vtrancodentret, :vtranversion, :vtrandia, :vtrantotaldia,
+      :vtrantotalenergia,:vtrantipoinformacion,
+      :vtran1, :vtran2, :vtran3, :vtran4, :vtran5, :vtran6, :vtran7, :vtran8, :vtran9, :vtran10,
+      :vtran11, :vtran12, :vtran13, :vtran14, :vtran15, :vtran16, :vtran17, :vtran18, :vtran19, :vtran20,
+      :vtran21, :vtran22, :vtran23, :vtran24, :vtran25, :vtran26, :vtran27, :vtran28, :vtran29, :vtran30,
+      :vtran31, :vtran32, :vtran33, :vtran34, :vtran35, :vtran36, :vtran37, :vtran38, :vtran39, :vtran40,
+      :vtran41, :vtran42, :vtran43, :vtran44, :vtran45, :vtran46, :vtran47, :vtran48, :vtran49, :vtran50,
+      :vtran51, :vtran52, :vtran53, :vtran54, :vtran55, :vtran56, :vtran57, :vtran58, :vtran59, :vtran60,
+      :vtran61, :vtran62, :vtran63, :vtran64, :vtran65, :vtran66, :vtran67, :vtran68, :vtran69, :vtran70,
+      :vtran71, :vtran72, :vtran73, :vtran74, :vtran75, :vtran76, :vtran77, :vtran78, :vtran79, :vtran80,
+      :vtran81, :vtran82, :vtran83, :vtran84, :vtran85, :vtran86, :vtran87, :vtran88, :vtran89, :vtran90,
+      :vtran91, :vtran92, :vtran93, :vtran94, :vtran95, :vtran96, :vtranusername,:vtranfecins
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>delete from trn_valor_trans where pericodi = :pericodi and vtranversion = :vtranversion</query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(vtrancodi), 0) + 1 from trn_valor_trans
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+      select distinct a.emprcodi,a.pericodi,a.vtranversion,
+
+      (select sum(b.vtrantotaldia) from trn_valor_trans b where b.vtranflag='E' and b.pericodi =a.pericodi
+      and b.vtranversion =a.vtranversion    and b.emprcodi=a.emprcodi) as ENTREGA,
+
+      (select sum(b.vtrantotaldia) from trn_valor_trans b where b.vtranflag='R' and b.pericodi =a.pericodi
+      and b.vtranversion =a.vtranversion    and b.emprcodi=a.emprcodi) as RETIRO
+
+      from trn_valor_trans a where a.pericodi=:pericodi and a.vtranversion=:vtranversion
+
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      SELECT  (SELECT EMPRNOMB FROM  VW_SI_EMPRESA WHERE VW_SI_EMPRESA.EMPRCODI =trn_valor_trans.EMPRCODI  ) AS EMPRNOMB ,
+      (SELECT BARRNOMBRE FROM TRN_BARRA WHERE TRN_BARRA.BARRCODI =trn_valor_trans.BARRCODI  )AS BARRNOMBRE,
+      VTRANCODENTRET,
+      sum(VTRANTOTALDIA) AS VALORIZACION,
+      SUM(VTRANTOTALENERGIA) AS ENERGIA,
+      VTRANTIPOINFORMACION
+      from  trn_valor_trans
+      where (EMPRCODI =:EMPRCODI OR :EMPRCODI is null) and
+      (BARRCODI =:BARRCODI OR :BARRCODI is null) and
+      (PERICODI=:PERICODI  OR :PERICODI is null)
+      group by VTRANCODENTRET,VTRANTIPOINFORMACION,EMPRCODI,BARRCODI  ORDER BY VTRANCODENTRET ASC
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetTotalByTipoFlag</key>
+    <query>
+      select pericodi,vtranversion,vtranflag,sum(vtrantotaldia)as vtrantotaldia from trn_valor_trans
+      where
+      (PERICODI=:PERICODI ) and
+      (vtranversion =:vtranversion)group by vtranflag,pericodi,vtranversion ORDER BY vtranflag ASC
+    </query>
+  </Sql>
+
+
+  <Sql>
+    <key>GetValorEmpresaByPeriVer</key>
+    <query>
+      SELECT  EMPRCODI ,
+      (SELECT SALEMPSALDO FROM TRN_SALDO_EMPRESA WHERE
+      TRN_SALDO_EMPRESA.EMPRCODI =trn_valor_trans.EMPRCODI
+      AND TRN_SALDO_EMPRESA.PERICODI =trn_valor_trans.PERICODI
+      AND TRN_SALDO_EMPRESA.SALEMPVERSION=trn_valor_trans.VTRANVERSION
+      )AS  SALEMPSALDO,
+      (SELECT  SUM(INGCOMIMPORTE)  FROM TRN_ING_COMPENSACION WHERE
+      TRN_ING_COMPENSACION.EMPRCODI=trn_valor_trans.EMPRCODI AND
+      TRN_ING_COMPENSACION.PERICODI =trn_valor_trans.PERICODI AND
+      TRN_ING_COMPENSACION.INGCOMVERSION= trn_valor_trans.VTRANVERSION
+
+      ) AS COMPENSACION,
+      (select VTRANETOTAL FROM trn_valor_trans_empresa where
+      trn_valor_trans_empresa.EMPRCODI= trn_valor_trans.EMPRCODI
+      and  trn_valor_trans_empresa.PERICODI = trn_valor_trans.PERICODI
+      AND  trn_valor_trans_empresa.VTRANEVERSION = trn_valor_trans.VTRANVERSION
+
+      ) AS VALORIZACION ,
+
+      (Select  SALRSCSALDO FROM trn_saldo_coresc WHERE
+      trn_saldo_coresc.EMPRCODI = trn_valor_trans.EMPRCODI AND
+      trn_saldo_coresc.PERICODI = trn_valor_trans.PERICODI AND
+      trn_saldo_coresc.SALRSCVERSION =  trn_valor_trans.VTRANVERSION
+      ) AS SALRSCSALDO,
+
+      PERICODI,VTRANVERSION
+      from  trn_valor_trans
+      where
+      (PERICODI=:PERICODI  )AND
+      (VTRANVERSION =:VTRANVERSION)
+      group by EMPRCODI,PERICODI,VTRANVERSION ORDER BY EMPRCODI  ASC
+    </query>
+  </Sql>
+
+  <sql>
+    <key>GetBalance</key>
+    <query>
+      select nombEmpresa, emprcodi, pericodi, entregas, retiros, neto
+      from (
+      select (select emprnomb from vw_si_empresa e where e.emprcodi=te.emprcodi) as nombEmpresa, te.emprcodi,
+      te.pericodi, sum(d.tentdesumadia) as entregas, sum(rd.tretdesumadia) as retiros,
+      (sum(d.tentdesumadia) - sum(rd.tretdesumadia))as neto
+      from trn_trans_retiro_detalle rd join trn_trans_retiro r on rd.tretcodi=r.tretcodi
+      join trn_trans_entrega te on r.pericodi=te.pericodi
+      join trn_trans_entrega_detalle d on te.tentcodi=d.tentcodi
+      where  (te.pericodi=:pericodi)
+      group by te.emprcodi, te.pericodi
+      )t
+      where (pericodi=:pericodi)
+      group by nombEmpresa, emprcodi, pericodi, entregas, retiros, neto
+    </query>
+  </sql>
+
+
+
+</Sqls>

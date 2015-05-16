@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    <query>select * from TRN_TIPO_USUARIO where TIPUSUCODI = :TIPUSUCODI</query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into TRN_TIPO_USUARIO
+      (
+      TIPUSUCODI, TIPUSUNOMBRE, TIPUSUESTADO, TIPUSUUSERNAME, TIPUSUFECINS
+      )
+      values
+      (
+      :TIPUSUCODI, :TIPUSUNOMBRE, :TIPUSUESTADO, :TIPUSUUSERNAME, :TIPUSUFECINS
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+      update TRN_TIPO_USUARIO
+      set
+      TIPUSUNOMBRE = :TIPUSUNOMBRE,
+      TIPUSUESTADO = :TIPUSUESTADO,
+      TIPUSUFECACT = :TIPUSUFECACT
+      where
+      TIPUSUCODI = :TIPUSUCODI
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from TRN_TIPO_USUARIO where TIPUSUCODI = :TIPUSUCODI
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+      select * from TRN_TIPO_USUARIO  order by TIPUSUNOMBRE asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select * from TRN_TIPO_USUARIO where (TIPUSUNOMBRE like '%' + :TIPUSUNOMBRE + '%' or :TIPUSUNOMBRE is null)
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(TIPUSUCODI), 0) + 1 from TRN_TIPO_USUARIO
+    </query>
+  </Sql>
+
+
+</Sqls>
+

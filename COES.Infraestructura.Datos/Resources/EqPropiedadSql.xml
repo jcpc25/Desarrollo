@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(propcodi), 0) + 1 from eq_propiedad
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into eq_propiedad(
+           proptabla,
+           propcampo,
+           propfiltro,
+           lastuser,
+           lastdate,
+           propmaxelem,
+           propfichaoficial,
+           propvisible,
+           propcodi,
+           famcodi,
+           propabrev,
+           propnomb,
+           propunidad,
+           orden,
+           propmask,
+           proptipo,
+           prophisto,
+           propdefinicion,
+           propprincipal,
+           propfile,
+           propcodipadre
+       )
+       values(
+           :proptabla,
+           :propcampo,
+           :propfiltro,
+           :lastuser,
+           :lastdate,
+           :propmaxelem,
+           :propfichaoficial,
+           :propvisible,
+           :propcodi,
+           :famcodi,
+           :propabrev,
+           :propnomb,
+           :propunidad,
+           :orden,
+           :propmask,
+           :proptipo,
+           :prophisto,
+           :propdefinicion,
+           :propprincipal,
+           :propfile,
+           :propcodipadre
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update eq_propiedad
+       set
+           proptabla = :proptabla,
+           propcampo = :propcampo,
+           propfiltro = :propfiltro,
+           lastuser = :lastuser,
+           lastdate = :lastdate,
+           propmaxelem = :propmaxelem,
+           propfichaoficial = :propfichaoficial,
+           propvisible = :propvisible,
+           famcodi = :famcodi,
+           propabrev = :propabrev,
+           propnomb = :propnomb,
+           propunidad = :propunidad,
+           orden = :orden,
+           propmask = :propmask,
+           proptipo = :proptipo,
+           prophisto = :prophisto,
+           propdefinicion = :propdefinicion,
+           propprincipal = :propprincipal,
+           propfile = :propfile,
+           propcodipadre = :propcodipadre
+       where
+           propcodi = :propcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from eq_propiedad
+       where
+           propcodi = :propcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           proptabla,
+           propcampo,
+           propfiltro,
+           lastuser,
+           lastdate,
+           propmaxelem,
+           propfichaoficial,
+           propvisible,
+           propcodi,
+           famcodi,
+           propabrev,
+           propnomb,
+           propunidad,
+           orden,
+           propmask,
+           proptipo,
+           prophisto,
+           propdefinicion,
+           propprincipal,
+           propfile,
+           propcodipadre
+       where
+           propcodi = :propcodi
+       from
+           eq_propiedad
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           proptabla,
+           propcampo,
+           propfiltro,
+           lastuser,
+           lastdate,
+           propmaxelem,
+           propfichaoficial,
+           propvisible,
+           propcodi,
+           famcodi,
+           propabrev,
+           propnomb,
+           propunidad,
+           orden,
+           propmask,
+           proptipo,
+           prophisto,
+           propdefinicion,
+           propprincipal,
+           propfile,
+           propcodipadre
+       from
+           eq_propiedad
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           proptabla,
+           propcampo,
+           propfiltro,
+           lastuser,
+           lastdate,
+           propmaxelem,
+           propfichaoficial,
+           propvisible,
+           propcodi,
+           famcodi,
+           propabrev,
+           propnomb,
+           propunidad,
+           orden,
+           propmask,
+           proptipo,
+           prophisto,
+           propdefinicion,
+           propprincipal,
+           propfile,
+           propcodipadre
+       from
+           eq_propiedad
+    </query>
+  </Sql>
+</Sqls>

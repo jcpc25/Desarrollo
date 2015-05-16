@@ -1,0 +1,60 @@
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\COES.Servicios.Aplicacion.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\COES.Servicios.Aplicacion.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.DTO.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.Interfaces.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\COES.Framework.Base.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\COES.Infraestructura.Datos.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\EPPlus.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\COES.Framework.Base.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.DTO.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.Interfaces.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\COES.Infraestructura.Datos.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\bin\Debug\EPPlus.xml
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\obj\Debug\COES.Servicios.Aplicacion.csprojResolveAssemblyReference.cache
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\obj\Debug\COES.Servicios.Aplicacion.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Servicios.Aplicacion\obj\Debug\COES.Servicios.Aplicacion.pdb
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\COES.Servicios.Aplicacion.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\COES.Servicios.Aplicacion.pdb
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.DTO.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.Interfaces.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\COES.Framework.Base.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\COES.Infraestructura.Datos.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\EPPlus.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\COES.Framework.Base.pdb
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.DTO.pdb
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.Interfaces.pdb
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\COES.Infraestructura.Datos.pdb
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\bin\Debug\EPPlus.xml
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\obj\Debug\COES.Servicios.Aplicacion.csprojResolveAssemblyReference.cache
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\obj\Debug\COES.Servicios.Aplicacion.dll
+D:\Proyectos\COES-APP\COES.Servicios.Aplicacion\obj\Debug\COES.Servicios.Aplicacion.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\COES.Servicios.Aplicacion.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\COES.Servicios.Aplicacion.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.DTO.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.Interfaces.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\COES.Framework.Base.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\COES.Infraestructura.Datos.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\EPPlus.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.Unity.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\COES.Framework.Base.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.DTO.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\COES.Dominio.Interfaces.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\COES.Infraestructura.Datos.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\bin\Debug\EPPlus.xml
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\obj\Debug\COES.Servicios.Aplicacion.csprojResolveAssemblyReference.cache
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\obj\Debug\COES.Servicios.Aplicacion.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Servicios.Aplicacion\obj\Debug\COES.Servicios.Aplicacion.pdb

@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    
+    <query></query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+
+      INSERT INTO TRN_TRANS_ENTREGA_DETALLE      
+      (TENTCODI,TENTDECODI,TENTDEVERSION,
+      TENTDEDIA,TENTDEPROMEDIODIA,TENTDESUMADIA,
+      TENTDE1,TENTDE2,TENTDE3,TENTDE4,TENTDE5,
+      TENTDE6,TENTDE7,TENTDE8,TENTDE9,TENTDE10,
+
+      TENTDE11,TENTDE12,TENTDE13,TENTDE14,TENTDE15,
+      TENTDE16,TENTDE17,TENTDE18,TENTDE19,TENTDE20,
+
+      TENTDE21,TENTDE22,TENTDE23,TENTDE24,TENTDE25,
+      TENTDE26,TENTDE27,TENTDE28,TENTDE29,TENTDE30,
+
+      TENTDE31,TENTDE32,TENTDE33,TENTDE34,TENTDE35,
+      TENTDE36,TENTDE37,TENTDE38,TENTDE39,TENTDE40,
+
+      TENTDE41,TENTDE42,TENTDE43,TENTDE44,TENTDE45,
+      TENTDE46,TENTDE47,TENTDE48,TENTDE49,TENTDE50,
+
+      TENTDE51,TENTDE52,TENTDE53,TENTDE54,TENTDE55,
+      TENTDE56,TENTDE57,TENTDE58,TENTDE59,TENTDE60,
+
+      TENTDE61,TENTDE62,TENTDE63,TENTDE64,TENTDE65,
+      TENTDE66,TENTDE67,TENTDE68,TENTDE69,TENTDE70,
+
+      TENTDE71,TENTDE72,TENTDE73,TENTDE74,TENTDE75,
+      TENTDE76,TENTDE77,TENTDE78,TENTDE79,TENTDE80,
+
+      TENTDE81,TENTDE82,TENTDE83,TENTDE84,TENTDE85,
+      TENTDE86,TENTDE87,TENTDE88,TENTDE89,TENTDE90,
+
+      TENTDE91,TENTDE92,TENTDE93,TENTDE94,TENTDE95,
+      TENTDE96,TENTDEUSERNAME,TENTDEFECINS
+
+
+      )VALUES
+      (
+      :TENTCODI,:TENTDECODI,:TENTDEVERSION,:TENTDEDIA,:TENTDEPROMEDIODIA,:TENTDESUMADIA,
+      :TENTDE1,:TENTDE2,:TENTDE3,:TENTDE4,:TENTDE5,
+      :TENTDE6,:TENTDE7,:TENTDE8,:TENTDE9,:TENTDE10,
+
+      :TENTDE11,:TENTDE12,:TENTDE13,:TENTDE14,:TENTDE15,
+      :TENTDE16,:TENTDE17,:TENTDE18,:TENTDE19,:TENTDE20,
+
+      :TENTDE21,:TENTDE22,:TENTDE23,:TENTDE24,:TENTDE25,
+      :TENTDE26,:TENTDE27,:TENTDE28,:TENTDE29,:TENTDE30,
+
+      :TENTDE31,:TENTDE32,:TENTDE33,:TENTDE34,:TENTDE35,
+      :TENTDE36,:TENTDE37,:TENTDE38,:TENTDE39,:TENTDE40,
+
+      :TENTDE41,:TENTDE42,:TENTDE43,:TENTDE44,:TENTDE45,
+      :TENTDE46,:TENTDE47,:TENTDE48,:TENTDE49,:TENTDE50,
+
+      :TENTDE51,:TENTDE52,:TENTDE53,:TENTDE54,:TENTDE55,
+      :TENTDE56,:TENTDE57,:TENTDE58,:TENTDE59,:TENTDE60,
+
+      :TENTDE61,:TENTDE62,:TENTDE63,:TENTDE64,:TENTDE65,
+      :TENTDE66,:TENTDE67,:TENTDE68,:TENTDE69,:TENTDE70,
+
+      :TENTDE71,:TENTDE72,:TENTDE73,:TENTDE74,:TENTDE75,
+      :TENTDE76,:TENTDE77,:TENTDE78,:TENTDE79,:TENTDE80,
+
+      :TENTDE81,:TENTDE82,:TENTDE83,:TENTDE84,:TENTDE85,
+      :TENTDE86,:TENTDE87,:TENTDE88,:TENTDE89,:TENTDE90,
+
+      :TENTDE91,:TENTDE92,:TENTDE93,:TENTDE94,:TENTDE95,
+      :TENTDE96,:TENTDEUSERNAME,:TENTDEFECINS
+      )
+    
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from trn_trans_entrega_detalle where tentcodi in (select tentcodi from TRN_TRANS_ENTREGA
+      where emprcodi  = :emprcodi and pericodi = :pericodi and tentversion = :tentversion )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+      select   TENTCODIGO from trn_trans_entrega where
+      (EMPRCODI = :EMPRCODI ) and
+      (PERICODI= :PERICODI OR :PERICODI IS NULL)
+      order by   tentcodigo asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select * from trn_trans_entrega_detalle a join trn_trans_entrega b on
+      a.tentcodi=b.tentcodi
+      where
+      (B.EMPRCODI = :EMPRCODI ) and
+      (B.PERICODI= :PERICODI OR :PERICODI IS NULL)and
+      (B.TENTCODIGO = :TENTCODIGO OR :TENTCODIGO IS NULL)and
+      (B.TENTVERSION = :TENTVERSION OR :TENTVERSION IS NULL)
+      order by a.tentdedia asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByPeriodoVersion</key>
+    <query>
+      select emprcodi,barrcodi,tentcodigo,equicodi,pericodi,tentversion,tenttipoinformacion from TRN_TRANS_ENTREGA
+      where pericodi = :pericodi and tentversion = :tentversion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(TENTDECODI), 0) + 1 from TRN_TRANS_ENTREGA_DETALLE
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>BalanceEnergiaActiva</key>
+    <query>
+      select pericodi, barrcodi, nombBarra, tentcodigo, Energia
+      from(
+      select te.pericodi, te.barrcodi, (select barrnombre from trn_barra b where b.barrcodi=te.barrcodi) as nombBarra,
+      te.tentcodigo, sum(d.tentdesumadia) as Energia from trn_trans_entrega te join trn_trans_entrega_detalle d
+      on te.tentcodi=d.tentcodi
+      where (te.pericodi=:pericodi or :pericodi is null)
+      group by te.pericodi, te.barrcodi, te.tentcodigo
+      union
+      select r.pericodi, r.barrcodi, (select barrnombre from trn_barra b where b.barrcodi=r.barrcodi) as nombBarra,
+      r.tretcodigo, sum(rd.tretdesumadia) as Energia from trn_trans_retiro r join trn_trans_retiro_detalle rd
+      on r.tretcodi=rd.tretcodi
+      where (r.pericodi=:pericodi or :pericodi is null)
+      group by r.pericodi, r.barrcodi, r.tretcodigo
+      )t
+      group by pericodi, barrcodi, nombBarra, tentcodigo, Energia
+    </query>
+  </Sql>
+
+</Sqls>

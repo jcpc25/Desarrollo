@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+      <!--select * from trn_cliente where clicodi = :clicodi -->
+      <!--and cliestado not in ('INA')-->
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+
+      insert into TRN_SALDO_EMPRESA
+      (
+      SALEMPCODI,PERICODI, EMPRCODI, SALEMPVERSION, SALEMPSALDO,SALEMPFECINS,SALEMPUSERNAME
+      )
+      values
+      (
+      :SALEMPCODI,:PERICODI, :EMPRCODI, :SALEMPVERSION,:SALEMPSALDO, :SALEMPFECINS,:SALEMPUSERNAME
+      )
+
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+      <!--update trn_cliente
+      set
+      clinombreabrev = :clinombreabrev,
+      clinombre = :clinombre,
+      cliruc = :cliruc,
+      cliestado = :cliestado,
+      clifecact = :clifecact
+      where
+      clicodi = :clicodi-->
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from TRN_SALDO_EMPRESA
+      where
+      pericodi = :pericodi and
+      salempversion = :salempversion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+      <!--select * from trn_cliente
+      -->
+      <!--where cliestado not in ('INA')-->
+      <!--
+      order by clinombre asc-->
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      <!--select * from trn_cliente where (clinombre like '%' + :clinombre + '%' or :clinombre is null)
+      -->
+      <!--and cliestado not in ('INA')-->
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(SALEMPCODI), 0) + 1 from TRN_SALDO_EMPRESA
+    </query>
+  </Sql>
+
+
+</Sqls>

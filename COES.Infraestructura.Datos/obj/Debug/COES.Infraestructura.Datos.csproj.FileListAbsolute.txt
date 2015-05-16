@@ -1,0 +1,39 @@
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\bin\Debug\COES.Infraestructura.Datos.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\bin\Debug\COES.Infraestructura.Datos.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.DTO.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.Interfaces.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\bin\Debug\COES.Framework.Base.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\bin\Debug\COES.Framework.Base.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.DTO.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.Interfaces.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.csprojResolveAssemblyReference.cache
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.Consultas.resources
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.csproj.GenerateResource.Cache
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.pdb
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\bin\Debug\COES.Infraestructura.Datos.dll
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\bin\Debug\COES.Infraestructura.Datos.pdb
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.DTO.dll
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.Interfaces.dll
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\bin\Debug\COES.Framework.Base.dll
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\bin\Debug\COES.Framework.Base.pdb
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.DTO.pdb
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.Interfaces.pdb
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.csprojResolveAssemblyReference.cache
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.Consultas.resources
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.csproj.GenerateResource.Cache
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.dll
+D:\Proyectos\COES-APP\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\bin\Debug\COES.Infraestructura.Datos.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\bin\Debug\COES.Infraestructura.Datos.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.DTO.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.Interfaces.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\bin\Debug\COES.Framework.Base.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\bin\Debug\COES.Framework.Base.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.DTO.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\bin\Debug\COES.Dominio.Interfaces.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.csprojResolveAssemblyReference.cache
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.Consultas.resources
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.csproj.GenerateResource.Cache
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Infraestructura.Datos\obj\Debug\COES.Infraestructura.Datos.pdb

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into eq_equirel(
+           equicodi1,
+           tiporelcodi,
+           equicodi2
+       )
+       values(
+           :equicodi1,
+           :tiporelcodi,
+           :equicodi2
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update eq_equirel
+       set
+       where
+           equicodi1 = :equicodi1 and
+           tiporelcodi = :tiporelcodi and
+           equicodi2 = :equicodi2
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from eq_equirel
+       where
+           equicodi1 = :equicodi1 and
+           tiporelcodi = :tiporelcodi and
+           equicodi2 = :equicodi2
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           equicodi1,
+           tiporelcodi,
+           equicodi2
+       where
+           equicodi1 = :equicodi1 and
+           tiporelcodi = :tiporelcodi and
+           equicodi2 = :equicodi2
+       from
+           eq_equirel
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           equicodi1,
+           tiporelcodi,
+           equicodi2
+       from
+           eq_equirel
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           equicodi1,
+           tiporelcodi,
+           equicodi2
+       from
+           eq_equirel
+    </query>
+  </Sql>
+</Sqls>

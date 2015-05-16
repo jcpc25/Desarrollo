@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into en_ensayoformato(
+           ensayocodi,
+           formatocodi,
+           ensformatnombfisico,
+           ensformatnomblogico,
+           lastdate,
+           lastuser,
+           ensformtestado
+       )
+       values(
+      {0},
+      {1},
+      '{2}',
+      '{3}',
+      to_date('{4}','YYYY-MM-DD HH24:MI:SS'),
+      '{5}',
+      {6}    
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+      update en_ensayoformato
+      set
+      ensformatnombfisico = :ensformatnombfisico,
+      ensformatnomblogico = :ensformatnomblogico,
+      lastdate = :lastdate,
+      lastuser = :lastuser,
+      ensformtestado = :ensformtestado
+      where
+      ensayocodi = :ensayocodi and
+      formatocodi = :formatocodi
+    </query>
+  </Sql>
+  <Sql>
+    <key>UpdateEstado</key>
+    <query>
+      update en_ensayoformato
+      set    
+      ensformtestado = {0}
+      where
+      ensayocodi = {1} and
+      formatocodi = {2}
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from en_ensayoformato
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+      select
+      ensayocodi,
+      formatocodi,
+      ensformatnombfisico,
+      ensformatnomblogico,
+      lastdate,
+      lastuser,
+      ensformtestado
+      from
+      en_ensayoformato
+      where
+      ensayocodi = {0} and
+      formatocodi = {1}
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           ensayocodi,
+           formatocodi,
+           ensformatnombfisico,
+           ensformatnomblogico,
+           lastdate,
+           lastuser,
+           ensformtestado
+       from
+           en_ensayoformato
+    </query>
+  </Sql>
+  <Sql>
+    <key>ListFormatoXEnsayo</key>
+    <query>
+      select
+      en.ensayocodi,
+      en.FORMATOCODI,
+      ensformatnombfisico,
+      ensformatnomblogico,
+      lastdate,
+      lastuser,
+      en.ENSFORMTESTADO,
+      fr.FORMATODESC,
+      ex.ESTADONOMBRE,
+      ex.estadocolor
+      from
+      en_ensayoformato en
+      inner join EN_FORMATO fr on fr.FORMATOCODI = en.FORMATOCODI
+      inner join en_estado ex on ex.estadocodi =  en.ensformtestado
+      where
+      en.ensayocodi = {0}
+      order by en.ensayocodi
+    </query>
+  </Sql>
+  <Sql>
+    <key>ListaFormatosEmpresaCentral</key>
+    <query>
+      select
+      *
+      from
+      en_ensayoformato ef
+      where ef.ensayocodi =  (
+      select max(ensayocodi) from en_ensayo where EMPRCODI = {0} and EQUICODI = {1})
+    </query>
+  </Sql>
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           ensayocodi,
+           formatocodi,
+           ensformatnombfisico,
+           ensformatnomblogico,
+           lastdate,
+           lastuser,
+           ensformtestado
+       from
+           en_ensayoformato
+    </query>
+  </Sql>
+</Sqls>

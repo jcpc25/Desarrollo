@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AreaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\AreaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="BarraSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\BarraSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CentralGeneracionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CentralGeneracionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CodigoEntregaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CodigoEntregaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CodigoRetiroSinContratoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CodigoRetiroSinContratoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CodigoRetiroSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CodigoRetiroSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CompensacionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CompensacionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CostoMarginalSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CostoMarginalSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="DatosDesviacionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\datosdesviacionsql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EmpresaPagoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EmpresaPagoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EmpresaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EmpresaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EqAreaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EqAreaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EqEquipoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EqEquipoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EqEquirelSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EqEquirelSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EqFamiliaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EqFamiliaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EqFamrelSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EqFamrelSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EqPropequiSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EqPropequiSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EqPropiedadSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EqPropiedadSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EqRelacionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EqRelacionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EqTipoareaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EqTipoareaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EqTiporelSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EqTiporelSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EveCausaeventoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EveCausaeventoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EventoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EventoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ExportExcel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ExportExcel.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ExtLogenvioSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ExtLogenvioSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FactorPerdidaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\FactorPerdidaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IeodCuadroSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\IeodCuadroSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InfoDesbalanceSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\InfoDesbalanceSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InfoDesviacionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\InfoDesviacionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InfoFaltanteSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\InfoFaltanteSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IngresoCompensacionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\IngresoCompensacionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IngresoPotenciaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\IngresoPotenciaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ManManttoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ManManttoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ManRegistroSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ManRegistroSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeMedicion48Sql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeMedicion48Sql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeMedicion96Sql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeMedicion96Sql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MePerfilRuleAreaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MePerfilRuleAreaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MePerfilRuleSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MePerfilRuleSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ParametroRpfSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ParametroRpfSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PerfilScadaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PerfilScadaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PeriodoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PeriodoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PerturbacionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PerturbacionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PrBarraSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PrBarraSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PrCombustible" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PrCombustible.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PrConceptoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PrConceptoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PrEquipodatSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PrEquipodatSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PrGrupodatSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PrGrupodatSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PrGrupoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PrGrupoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PrTipogrupoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PrTipogrupoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="RatioCumplimientoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\RatioCumplimientoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecalculoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\RecalculoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RpfEnergiaPotenciaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\rpfenergiapotenciasql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SaldoEmpresaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SaldoEmpresaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ServicioRpfSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ServicioRpfSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SiEmpresaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SiEmpresaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SiFuenteenergiaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SiFuenteenergiaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SiTipoempresaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SiTipoempresaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SiTipogeneracionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SiTipogeneracionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SubCausaEventoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SubCausaEventoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="TipoContratoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TipoContratoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TipoEmpresaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TipoEmpresaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TipoEventoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TipoEventoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TipoTramiteSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TipoTramiteSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TipoUsuarioSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TipoUsuarioSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TramiteSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TramiteSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransferenciaEntregaDetalleSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TransferenciaEntregaDetalleSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransferenciaEntregaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TransferenciaEntregaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransferenciaRetiroDetalleSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TransferenciaRetiroDetalleSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransferenciaRetiroSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TransferenciaRetiroSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ValorTotalEmpresaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ValorTotalEmpresaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ValorTransferenciaEmpresaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ValorTransferenciaEmpresaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ValorTransferenciaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ValorTransferenciaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WbGeneracionrerSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\WbGeneracionrerSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="InformePreliminarSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\InformePreliminarSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IngresoRetiroSCSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\IngresoRetiroSCSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EveEvenclaseSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EveEvenclaseSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EveManttoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EveManttoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SaldoCodigoRetiroSCSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SaldoCodigoRetiroSCSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MdCambioenvioSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MdCambioenvioSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MdEnvioSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MdEnvioSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MdPublicacionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MdPublicacionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MdValidacionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MdValidacionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MePtomedicionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MePtomedicionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ExtArchivoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ExtArchivoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ExtLogproSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ExtLogproSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeLecturaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeLecturaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeOrigenlecturaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeOrigenlecturaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SiTipoinformacionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\SiTipoinformacionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeTipopuntomedicionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeTipopuntomedicionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FwCounterSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\FwCounterSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeDetformatoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeDetformatoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeFormatoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeFormatoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeFormatohojaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeFormatohojaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeFormatoSql1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeFormatoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeHojaptomedSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeHojaptomedSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FwAreaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\FwAreaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeMedidorSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeMedidorSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MePeriodomedidorSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MePeriodomedidorSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeAmpliacionfechaSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeAmpliacionfechaSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeHeadcolumnSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeHeadcolumnSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CbArchivoEnvioSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CbArchivoEnvioSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CbCombustibleDatosSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CbCombustibleDatosSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CbConceptocombSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CbConceptocombSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CbEnvioSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CbEnvioSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ExtEstadoEnvioSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ExtEstadoEnvioSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeMedicion1Sql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeMedicion1Sql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MeMedicion24Sql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MeMedicion24Sql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="WbMedidoresValidacionSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\WbMedidoresValidacionSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EnEnsayoformatoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EnEnsayoformatoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EnEnsayoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EnEnsayoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EnEnsayounidadSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EnEnsayounidadSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EnEstadosSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EnEstadosSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EnEstensayoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EnEstensayoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EnEstformatoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EnEstformatoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EnFormatoSql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EnFormatoSql.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+</root>

@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{71A87DD1-8424-4516-92F6-559BD0ECA8FF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>COES.Infraestructura.Datos</RootNamespace>
+    <AssemblyName>COES.Infraestructura.Datos</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=e44a2bc38ed2c13c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Consultas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Consultas.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Sic\CbArchivoEnvioHelper.cs" />
+    <Compile Include="Helper\Sic\CbCombustibledatosHelper.cs" />
+    <Compile Include="Helper\Sic\CbConceptocombHelper.cs" />
+    <Compile Include="Helper\Sic\CbEnvioHelper.cs" />
+    <Compile Include="Helper\Sic\DesviacionHelper.cs" />
+    <Compile Include="Helper\Sic\EjecutadoRuleHelper.cs" />
+    <Compile Include="Helper\Sic\EmpresaHelper.cs" />
+    <Compile Include="Helper\Sic\EnEnsayoformatoHelper.cs" />
+    <Compile Include="Helper\Sic\EnEnsayoHelper.cs" />
+    <Compile Include="Helper\Sic\EnEnsayounidadHelper.cs" />
+    <Compile Include="Helper\Sic\EnEstadoHelper.cs" />
+    <Compile Include="Helper\Sic\EnEstensayoHelper.cs" />
+    <Compile Include="Helper\Sic\EnEstformatoHelper.cs" />
+    <Compile Include="Helper\Sic\EnFormatoHelper.cs" />
+    <Compile Include="Helper\Sic\EqAreaHelper.cs" />
+    <Compile Include="Helper\Sic\EqEquipoHelper.cs" />
+    <Compile Include="Helper\Sic\EqEquirelHelper.cs" />
+    <Compile Include="Helper\Sic\EqFamiliaHelper.cs" />
+    <Compile Include="Helper\Sic\EqFamrelHelper.cs" />
+    <Compile Include="Helper\Sic\EqPropequiHelper.cs" />
+    <Compile Include="Helper\Sic\EqPropiedadHelper.cs" />
+    <Compile Include="Helper\Sic\EqRelacionHelper.cs" />
+    <Compile Include="Helper\Sic\EqTipoareaHelper.cs" />
+    <Compile Include="Helper\Sic\EqTiporelHelper.cs" />
+    <Compile Include="Helper\Sic\EveCausaeventoHelper.cs" />
+    <Compile Include="Helper\Sic\EveEvenclaseHelper.cs" />
+    <Compile Include="Helper\Sic\EveManttoHelper.cs" />
+    <Compile Include="Helper\Sic\EventoHelper.cs" />
+    <Compile Include="Helper\Sic\ExtArchivoHelper.cs" />
+    <Compile Include="Helper\Sic\ExtEstadoEnvioHelper.cs" />
+    <Compile Include="Helper\Sic\ExtLogenvioHelper.cs" />
+    <Compile Include="Helper\Sic\ExtLogproHelper.cs" />
+    <Compile Include="Helper\Sic\FwAreaHelper.cs" />
+    <Compile Include="Helper\Sic\FwCounterHelper.cs" />
+    <Compile Include="Helper\Sic\IeodCuadroHelper.cs" />
+    <Compile Include="Helper\Sic\ManManttoHelper.cs" />
+    <Compile Include="Helper\Sic\ManRegistroHelper.cs" />
+    <Compile Include="Helper\Sic\MdCambioenvioHelper.cs" />
+    <Compile Include="Helper\Sic\MdEnvioHelper.cs" />
+    <Compile Include="Helper\Sic\MdPublicacionHelper.cs" />
+    <Compile Include="Helper\Sic\MdValidacionHelper.cs" />
+    <Compile Include="Helper\Sic\MeAmpliacionfechaHelper.cs" />
+    <Compile Include="Helper\Sic\MeFormatoHelper.cs" />
+    <Compile Include="Helper\Sic\MeFormatohojaHelper.cs" />
+    <Compile Include="Helper\Sic\MeHeadcolumnHelper.cs" />
+    <Compile Include="Helper\Sic\MeHojaptomedHelper.cs" />
+    <Compile Include="Helper\Sic\MeLecturaHelper.cs" />
+    <Compile Include="Helper\Sic\MeMedicion1Helper.cs" />
+    <Compile Include="Helper\Sic\MeMedicion24Helper.cs" />
+    <Compile Include="Helper\Sic\MeMedicion48Helper.cs" />
+    <Compile Include="Helper\Sic\MeMedidorHelper.cs" />
+    <Compile Include="Helper\Sic\MeOrigenlecturaHelper.cs" />
+    <Compile Include="Helper\Sic\MePerfilRuleAreaHelper.cs" />
+    <Compile Include="Helper\Sic\MePerfilRuleHelper.cs" />
+    <Compile Include="Helper\Sic\MePeriodomedidorHelper.cs" />
+    <Compile Include="Helper\Sic\MePtomedicionHelper.cs" />
+    <Compile Include="Helper\Sic\MeTipopuntomedicionHelper.cs" />
+    <Compile Include="Helper\Sic\ParametroRpfHelper.cs" />
+    <Compile Include="Helper\Sic\PerturbacionHelper.cs" />
+    <Compile Include="Helper\Sic\PrCombustibleHelper.cs" />
+    <Compile Include="Helper\Sic\PrConceptoHelper.cs" />
+    <Compile Include="Helper\Sic\PrEquipodatHelper.cs" />
+    <Compile Include="Helper\Sic\PrGrupodatHelper.cs" />
+    <Compile Include="Helper\Sic\PrGrupoHelper.cs" />
+    <Compile Include="Helper\Sic\MeMedicion96Helper.cs" />
+    <Compile Include="Helper\Sic\PrTipogrupoHelper.cs" />
+    <Compile Include="Helper\Sic\RpfEnergiaPotenciaHelper.cs" />
+    <Compile Include="Helper\Sic\ScadaHelper.cs" />
+    <Compile Include="Helper\Sic\ServicioRpfHelper.cs" />
+    <Compile Include="Helper\Sic\SiEmpresaHelper.cs" />
+    <Compile Include="Helper\Sic\SiFuenteenergiaHelper.cs" />
+    <Compile Include="Helper\Sic\SiTipoempresaHelper.cs" />
+    <Compile Include="Helper\Sic\SiTipogeneracionHelper.cs" />
+    <Compile Include="Helper\Sic\SiTipoinformacionHelper.cs" />
+    <Compile Include="Helper\Sic\SubCausaEventoHelper.cs" />
+    <Compile Include="Helper\Sic\TipoEventoHelper.cs" />
+    <Compile Include="Helper\Sic\WbGeneracionrerHelper.cs" />
+    <Compile Include="Helper\Sic\WbMedidoresValidacionHelper.cs" />
+    <Compile Include="Helper\Transferencias\AreaHelper.cs" />
+    <Compile Include="Helper\Transferencias\BarraHelper.cs" />
+    <Compile Include="Helper\Transferencias\CentralGeneracionHelper.cs" />
+    <Compile Include="Helper\Transferencias\CodigoEntregaHelper.cs" />
+    <Compile Include="Helper\Transferencias\CodigoRetiroHelper.cs" />
+    <Compile Include="Helper\Transferencias\CodigoRetiroSinContratoHelper.cs" />
+    <Compile Include="Helper\Transferencias\CompensacionHelper.cs" />
+    <Compile Include="Helper\Transferencias\CostoMarginalHelper.cs" />
+    <Compile Include="Helper\Transferencias\EmpresaHelper.cs" />
+    <Compile Include="Helper\Transferencias\EmpresaPagoHelper.cs" />
+    <Compile Include="Helper\Transferencias\ExportExelHelper.cs" />
+    <Compile Include="Helper\Transferencias\FactorPerdidaHelper.cs" />
+    <Compile Include="Helper\Transferencias\InfoDesbalanceHelper.cs" />
+    <Compile Include="Helper\Transferencias\InfoDesviacionHelper.cs" />
+    <Compile Include="Helper\Transferencias\InfoFaltanteHelper.cs" />
+    <Compile Include="Helper\Transferencias\InformePreliminarHelper.cs" />
+    <Compile Include="Helper\Transferencias\IngresoCompensacionHelper.cs" />
+    <Compile Include="Helper\Transferencias\IngresoPotenciaHelper.cs" />
+    <Compile Include="Helper\Transferencias\IngresoRetiroSCHelper.cs" />
+    <Compile Include="Helper\Transferencias\PeriodoHelper.cs" />
+    <Compile Include="Helper\Transferencias\RatioCumplimientoHelper.cs" />
+    <Compile Include="Helper\Transferencias\RecalculoHelper.cs" />
+    <Compile Include="Helper\Transferencias\SaldoCodigoRetiroSCHelper.cs" />
+    <Compile Include="Helper\Transferencias\SaldoEmpresaHelper.cs" />
+    <Compile Include="Helper\Transferencias\TipoContratoHelper.cs" />
+    <Compile Include="Helper\Transferencias\TipoEmpresaHelper.cs" />
+    <Compile Include="Helper\Transferencias\TipoTramiteHelper.cs" />
+    <Compile Include="Helper\Transferencias\TipoUsuarioHelper.cs" />
+    <Compile Include="Helper\Transferencias\TramiteHelper.cs" />
+    <Compile Include="Helper\Transferencias\TransferenciaEntregaDetalleHelper.cs" />
+    <Compile Include="Helper\Transferencias\TransferenciaEntregaHelper.cs" />
+    <Compile Include="Helper\Transferencias\TransferenciaRetiroDetalleHelper.cs" />
+    <Compile Include="Helper\Transferencias\TransferenciaRetiroHelper.cs" />
+    <Compile Include="Helper\Transferencias\ValorTotalEmpresaHelper.cs" />
+    <Compile Include="Helper\Transferencias\ValorTransferenciaEmpresaHelper.cs" />
+    <Compile Include="Helper\Transferencias\ValorTransferenciaHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Respositorio\Sic\CbArchivoEnvioRepository.cs" />
+    <Compile Include="Respositorio\Sic\CbCombustibledatosRepository.cs" />
+    <Compile Include="Respositorio\Sic\CbConceptocombRepository.cs" />
+    <Compile Include="Respositorio\Sic\CbEnvioRepository.cs" />
+    <Compile Include="Respositorio\Sic\EnEnsayoformatoRepository.cs" />
+    <Compile Include="Respositorio\Sic\EnEnsayoRepository.cs" />
+    <Compile Include="Respositorio\Sic\EnEnsayounidadRepository.cs" />
+    <Compile Include="Respositorio\Sic\EnEstadoRepository.cs" />
+    <Compile Include="Respositorio\Sic\EnEstensayoRepository.cs" />
+    <Compile Include="Respositorio\Sic\EnEstformatoRepository.cs" />
+    <Compile Include="Respositorio\Sic\EnFormatoRepository.cs" />
+    <Compile Include="Respositorio\Sic\EveEvenclaseRepository.cs" />
+    <Compile Include="Respositorio\Sic\EveManttoRepository.cs" />
+    <Compile Include="Respositorio\Sic\ExtArchivoRepository.cs" />
+    <Compile Include="Respositorio\Sic\ExtEstadoEnvioRepository.cs" />
+    <Compile Include="Respositorio\Sic\ExtLogenvioRepository.cs" />
+    <Compile Include="Respositorio\Sic\ExtLogproRepository.cs" />
+    <Compile Include="Respositorio\Sic\FwAreaRepository.cs" />
+    <Compile Include="Respositorio\Sic\FwCounterRepository.cs" />
+    <Compile Include="Respositorio\Sic\ManManttoRepository.cs" />
+    <Compile Include="Respositorio\Sic\DesviacionRepository.cs" />
+    <Compile Include="Respositorio\Sic\EjecutadoRuleRepository.cs" />
+    <Compile Include="Respositorio\Sic\EmpresaRespository.cs" />
+    <Compile Include="Respositorio\Sic\EqAreaRepository.cs" />
+    <Compile Include="Respositorio\Sic\EqEquipoRepository.cs" />
+    <Compile Include="Respositorio\Sic\EqEquirelRepository.cs" />
+    <Compile Include="Respositorio\Sic\EqFamiliaRepository.cs" />
+    <Compile Include="Respositorio\Sic\EqFamrelRepository.cs" />
+    <Compile Include="Respositorio\Sic\EqPropequiRepository.cs" />
+    <Compile Include="Respositorio\Sic\EqPropiedadRepository.cs" />
+    <Compile Include="Respositorio\Sic\EqRelacionRepository.cs" />
+    <Compile Include="Respositorio\Sic\EqTipoareaRepository.cs" />
+    <Compile Include="Respositorio\Sic\EqTiporelRepository.cs" />
+    <Compile Include="Respositorio\Sic\EveCausaeventoRepository.cs" />
+    <Compile Include="Respositorio\Sic\EveEventoRepository.cs" />
+    <Compile Include="Respositorio\Sic\EveInformePerturbacionRepository.cs" />
+    <Compile Include="Respositorio\Sic\EveSubCausaEventoRepository.cs" />
+    <Compile Include="Respositorio\Sic\EveTipoEventoRepository.cs" />
+    <Compile Include="Respositorio\Sic\IeodCuadroRepository.cs" />
+    <Compile Include="Respositorio\Sic\ManRegistroRepository.cs" />
+    <Compile Include="Respositorio\Sic\MdCambioenvioRepository.cs" />
+    <Compile Include="Respositorio\Sic\MdEnvioRepository.cs" />
+    <Compile Include="Respositorio\Sic\MdPublicacionRepository.cs" />
+    <Compile Include="Respositorio\Sic\MdValidacionRepository.cs" />
+    <Compile Include="Respositorio\Sic\MeAmpliacionfechaRepository.cs" />
+    <Compile Include="Respositorio\Sic\MeFormatohojaRepository.cs" />
+    <Compile Include="Respositorio\Sic\MeFormatoRepository.cs" />
+    <Compile Include="Respositorio\Sic\MeHeadcolumnRepository.cs" />
+    <Compile Include="Respositorio\Sic\MeHojaptomedRepository.cs" />
+    <Compile Include="Respositorio\Sic\MeLecturaRepository.cs" />
+    <Compile Include="Respositorio\Sic\MeMedicion1Repository.cs" />
+    <Compile Include="Respositorio\Sic\MeMedicion24Repository.cs" />
+    <Compile Include="Respositorio\Sic\MeMedicion48Repository.cs" />
+    <Compile Include="Respositorio\Sic\MeMedicion96Repository.cs" />
+    <Compile Include="Respositorio\Sic\MeMedidorRepository.cs" />
+    <Compile Include="Respositorio\Sic\MeOrigenlecturaRepository.cs" />
+    <Compile Include="Respositorio\Sic\MePerfilRuleAreaRepository.cs" />
+    <Compile Include="Respositorio\Sic\MePerfilRuleRepository.cs" />
+    <Compile Include="Respositorio\Sic\MePeriodomedidorRepository.cs" />
+    <Compile Include="Respositorio\Sic\MePtomedicionRepository.cs" />
+    <Compile Include="Respositorio\Sic\MeTipopuntomedicionRepository.cs" />
+    <Compile Include="Respositorio\Sic\ParametroRpfRepository.cs" />
+    <Compile Include="Respositorio\Sic\PrCombustibleRepository.cs" />
+    <Compile Include="Respositorio\Sic\PrConceptoRepository.cs" />
+    <Compile Include="Respositorio\Sic\PrEquipodatRepository.cs" />
+    <Compile Include="Respositorio\Sic\PrGrupodatRepository.cs" />
+    <Compile Include="Respositorio\Sic\PrGrupoRepository.cs" />
+    <Compile Include="Respositorio\Sic\PrTipogrupoRepository.cs" />
+    <Compile Include="Respositorio\Sic\RpfEnergiaPotenciaRepository.cs" />
+    <Compile Include="Respositorio\Sic\ScadaRepository.cs" />
+    <Compile Include="Respositorio\Sic\ServicioRpfRepository.cs" />
+    <Compile Include="Respositorio\Sic\SiEmpresaRepository.cs" />
+    <Compile Include="Respositorio\Sic\SiFuenteenergiaRepository.cs" />
+    <Compile Include="Respositorio\Sic\SiTipoempresaRepository.cs" />
+    <Compile Include="Respositorio\Sic\SiTipogeneracionRepository.cs" />
+    <Compile Include="Respositorio\Sic\SiTipoinformacionRepository.cs" />
+    <Compile Include="Respositorio\Sic\WbGeneracionrerRepository.cs" />
+    <Compile Include="Respositorio\Sic\WbMedidoresValidacionRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\AreaRespository.cs" />
+    <Compile Include="Respositorio\Transferencias\BarraRespository.cs" />
+    <Compile Include="Respositorio\Transferencias\CentralGeneracionRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\CodigoEntregaRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\CodigoRetiroRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\CodigoRetiroSinContratoRespository.cs" />
+    <Compile Include="Respositorio\Transferencias\CompensacionRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\CostoMarginalRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\EmpresaPagoRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\EmpresaRespository.cs" />
+    <Compile Include="Respositorio\Transferencias\ExportExcelGRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\ExportExcelRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\FactorPerdidaRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\InfoDesbalanceRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\InfoDesviacionRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\InfoFaltanteRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\InformePreliminarRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\IngresoCompensacionRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\IngresoPotenciaRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\IngresoRetiroSCRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\PeriodoRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\RatioCumplimientoRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\RecalculoRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\SaldoCodigoRetiroSCRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\SaldoEmpresaRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\TipoContratoRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\TipoEmpresaRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\TipoTramiteRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\TipoUsuarioRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\TramiteRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\TransferenciaEntregaDetalleRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\TransferenciaEntregaRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\TransferenciaRetiroDetalleRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\TransferenciaRetiroRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\ValorTotalEmpresaRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\ValorTransferenciaEmpresaRepository.cs" />
+    <Compile Include="Respositorio\Transferencias\ValorTransferenciaRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\Scada\" />
+    <Folder Include="Resources\Sic\" />
+    <Folder Include="Respositorio\Scada\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\COES.Base\COES.Base.csproj">
+      <Project>{2f0b7b6a-0c6a-42b2-8c44-11697cf04242}</Project>
+      <Name>COES.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COES.Dominio.DTO\COES.Dominio.DTO.csproj">
+      <Project>{28fff8f3-12ce-41b1-839b-2fd36d3c50a8}</Project>
+      <Name>COES.Dominio.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COES.Dominio.Interfaces\COES.Dominio.Interfaces.csproj">
+      <Project>{64357c3c-6730-4361-9c9a-93778920d054}</Project>
+      <Name>COES.Dominio.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EventoSql.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\PerfilScadaSql.xml" />
+    <None Include="Resources\TipoEventoSql.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PerturbacionSql.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SubCausaEventoSql.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ServicioRpfSql.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IeodCuadroSql.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ParametroRpfSql.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\CbArchivoEnvioSql.xml" />
+    <Content Include="Resources\CbCombustibleDatosSql.xml" />
+    <Content Include="Resources\CbConceptocombSql.xml" />
+    <Content Include="Resources\CbEnvioSql.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\EnEnsayoformatoSql.xml" />
+    <Content Include="Resources\EnEnsayoSql.xml" />
+    <Content Include="Resources\EnEnsayounidadSql.xml" />
+    <Content Include="Resources\EnEstadosSql.xml" />
+    <Content Include="Resources\EnEstensayoSql.xml" />
+    <Content Include="Resources\EnEstformatoSql.xml" />
+    <Content Include="Resources\EnFormatoSql.xml" />
+    <Content Include="Resources\ExtEstadoEnvioSql.xml" />
+    <Content Include="Resources\FwAreaSql.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\FwCounterSql.xml" />
+    <Content Include="Resources\MeAmpliacionfechaSql.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\MeDetformatoSql.xml" />
+    <Content Include="Resources\MeFormatohojaSql.xml" />
+    <Content Include="Resources\MeFormatoSql.xml" />
+    <Content Include="Resources\MeHeadcolumnSql.xml" />
+    <Content Include="Resources\MeHojaptomedSql.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\MeLecturaSql.xml" />
+    <Content Include="Resources\MeMedicion1Sql.xml" />
+    <Content Include="Resources\MeMedicion24Sql.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\MeMedidorSql.xml" />
+    <Content Include="Resources\MeOrigenlecturaSql.xml" />
+    <Content Include="Resources\MePeriodomedidorSql.xml" />
+    <Content Include="Resources\MeTipopuntomedicionSql.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\SiTipoinformacionSql.xml" />
+    <Content Include="Resources\WbMedidoresValidacionSql.xml" />
+    <None Include="Resources\ValorTransferenciaSql.xml" />
+    <None Include="Resources\ValorTransferenciaEmpresaSql.xml" />
+    <None Include="Resources\ValorTotalEmpresaSql.xml" />
+    <None Include="Resources\TransferenciaRetiroSql.xml" />
+    <None Include="Resources\TransferenciaRetiroDetalleSql.xml" />
+    <None Include="Resources\TransferenciaEntregaSql.xml" />
+    <None Include="Resources\TransferenciaEntregaDetalleSql.xml" />
+    <None Include="Resources\TramiteSql.xml" />
+    <None Include="Resources\TipoUsuarioSql.xml" />
+    <None Include="Resources\TipoTramiteSql.xml" />
+    <None Include="Resources\TipoEmpresaSql.xml" />
+    <None Include="Resources\TipoContratoSql.xml" />
+    <None Include="Resources\SaldoEmpresaSql.xml" />
+    <None Include="Resources\SaldoCodigoRetiroSCSql.xml" />
+    <None Include="Resources\AreaSql.xml" />
+    <None Include="Resources\BarraSql.xml" />
+    <None Include="Resources\CentralGeneracionSql.xml" />
+    <None Include="Resources\CodigoEntregaSql.xml" />
+    <None Include="Resources\CodigoRetiroSinContratoSql.xml" />
+    <None Include="Resources\CodigoRetiroSql.xml" />
+    <None Include="Resources\CompensacionSql.xml" />
+    <None Include="Resources\CostoMarginalSql.xml" />
+    <Content Include="Resources\DatosDesviacionSql.xml" />
+    <None Include="Resources\SiEmpresaSql.xml" />
+    <None Include="Resources\SiTipogeneracionSql.xml" />
+    <None Include="Resources\WbGeneracionrerSql.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\SiTipoempresaSql.xml" />
+    <None Include="Resources\MeScadaRuleSql.xml" />
+    <None Include="Resources\MePerfilRuleSql.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\MePerfilRuleAreaSql.xml" />
+    <None Include="Resources\EveCausaeventoSql.xml" />
+    <None Include="Resources\PrTipogrupoSql.xml" />
+    <None Include="Resources\MeMedicion96Sql.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\ManRegistroSql.xml" />
+    <None Include="Resources\EqAreaSql.xml" />
+    <None Include="Resources\EqEquirelSql.xml" />
+    <None Include="Resources\EqFamrelSql.xml" />
+    <None Include="Resources\EqPropequiSql.xml" />
+    <None Include="Resources\EqPropiedadSql.xml" />
+    <None Include="Resources\EqRelacionSql.xml" />
+    <None Include="Resources\EqTipoareaSql.xml" />
+    <None Include="Resources\EqTiporelSql.xml" />
+    <None Include="Resources\ManManttoSql.xml" />
+    <None Include="Resources\ExtLogenvioSql.xml" />
+    <None Include="Resources\PrConceptoSql.xml" />
+    <None Include="Resources\PrEquipodatSql.xml" />
+    <None Include="Resources\PrGrupodatSql.xml" />
+    <None Include="Resources\EqFamiliaSql.xml" />
+    <None Include="Resources\EveEvenclaseSql.xml" />
+    <None Include="Resources\EveManttoSql.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\EmpresaPagoSql.xml" />
+    <None Include="Resources\EmpresaSql.xml" />
+    <None Include="Resources\ExportExcel.xml" />
+    <None Include="Resources\FactorPerdidaSql.xml" />
+    <None Include="Resources\InfoDesbalanceSql.xml" />
+    <None Include="Resources\InfoDesviacionSql.xml" />
+    <None Include="Resources\InfoFaltanteSql.xml" />
+    <None Include="Resources\InformePreliminarSql.xml" />
+    <None Include="Resources\IngresoCompensacionSql.xml" />
+    <None Include="Resources\IngresoPotenciaSql.xml" />
+    <None Include="Resources\IngresoRetiroSCSql.xml" />
+    <None Include="Resources\MeMedicion48Sql.xml" />
+    <None Include="Resources\PeriodoSql.xml" />
+    <None Include="Resources\PrBarraSql.xml" />
+    <None Include="Resources\RatioCumplimientoSql.xml" />
+    <None Include="Resources\RecalculoSql.xml" />
+    <Content Include="Resources\ExtArchivoSql.xml" />
+    <Content Include="Resources\ExtLogproSql.xml" />
+    <Content Include="Resources\MdCambioenvioSql.xml" />
+    <Content Include="Resources\MdEnvioSql.xml" />
+    <Content Include="Resources\MdPublicacionSql.xml" />
+    <Content Include="Resources\MdValidacionSql.xml" />
+    <Content Include="Resources\MePtomedicionSql.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\RpfEnergiaPotenciaSql.xml" />
+    <None Include="Resources\SiFuenteenergiaSql.xml" />
+    <None Include="Resources\EqEquipoSql.xml" />
+    <None Include="Resources\PrGrupoSql.xml" />
+    <None Include="Resources\PrCombustible.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Consultas.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Consultas.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

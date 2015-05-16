@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Sqls>
+
+  <Sql>
+    <key>GetByCodigo</key>
+    <query>
+      select * from vw_trn_ratio_cumplimiento where (tipoemprcodi= :tipoemprcodi or :tipoemprcodi is null) 
+      and (pericodi =:pericodi or :pericodi is null)
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select * from vw_trn_ratio_cumplimiento where (emprnomb like '%' + :emprnomb + '%' or :emprnomb is null)
+    </query>
+  </Sql>
+
+</Sqls>

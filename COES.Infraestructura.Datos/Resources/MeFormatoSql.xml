@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(formatcodi), 0) + 1 from me_formato
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into me_formato(
+      formatcodi,
+      lastdate,
+      lastuser,
+      areacode,
+      formatresolucion,
+      formatextension,
+      formatperiodo,
+      formatnombre,
+      formathorizonte,
+      formatversion
+      )
+      values(
+      :formatcodi,
+      :lastdate,
+      :lastuser,
+      :areacode,
+      :formatresolucion,
+      :formatextension,
+      :formatperiodo,
+      :formatnombre,
+      :formathorizonte,
+      :formatversion
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update me_formato
+       set
+           lastdate = :lastdate,
+           lastuser = :lastuser,
+           areacode = :areacode,
+           formatresolucion = :formatresolucion,
+           formatextension = :formatextension,
+           formatperiodo = :formatperiodo,
+           formatnombre = :formatnombre,
+           formathorizonte = :formathorizonte,
+           formatversion = 1
+       where
+           formatcodi = :formatcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from me_formato
+       where
+           formatcodi = :formatcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           *
+       from
+           me_formato           
+       where
+           formatcodi = :formatcodi
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+         f.*, ar.areaname
+       from
+           me_formato f
+       inner join fw_area ar on ar.areacode = f.areacode
+       
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select
+      f.*, ar.areaname
+      from
+      me_formato f
+      inner join fw_area ar on ar.areacode = f.areacode
+      where ar.areacode = {0} or 0 ={0}
+    </query>
+  </Sql>
+</Sqls>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(tiporelcodi), 0) + 1 from eq_tiporel
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into eq_tiporel(
+           tiporelcodi,
+           tiporelnomb
+       )
+       values(
+           :tiporelcodi,
+           :tiporelnomb
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update eq_tiporel
+       set
+           tiporelnomb = :tiporelnomb
+       where
+           tiporelcodi = :tiporelcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from eq_tiporel
+       where
+           tiporelcodi = :tiporelcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           tiporelcodi,
+           tiporelnomb
+       where
+           tiporelcodi = :tiporelcodi
+       from
+           eq_tiporel
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           tiporelcodi,
+           tiporelnomb
+       from
+           eq_tiporel
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           tiporelcodi,
+           tiporelnomb
+       from
+           eq_tiporel
+    </query>
+  </Sql>
+</Sqls>

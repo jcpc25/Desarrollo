@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Sqls>
+  
+  <Sql>
+    <key>GetById</key>
+    <query></query>
+  </Sql>
+  
+  <Sql>
+    <key>Save</key>
+    <query>
+      INSERT INTO TRN_TRANS_RETIRO
+      (TRETCODI,PERICODI,BARRCODI,GENEMPRCODI,CLIEMPRCODI,TRETTABLA,TRETCORESOCORESCCODI, TRETCODIGO,
+      TRETVERSION,TRETTIPOINFORMACION,TRETESTADO,TRETUSERNAME,TRETFECINS)
+      VALUES
+      (:TRETCODI,:PERICODI,:BARRCODI,:GENEMPRCODI,:CLIEMPRCODI,:TRETTABLA,:TRETCORESOCORESCCODI, :TRETCODIGO,
+      :TRETVERSION,:TRETTIPOINFORMACION,:TRETESTADO,:TRETUSERNAME,:TRETFECINS)
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>Update</key>
+    <query>
+    
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from TRN_TRANS_RETIRO where
+      GENEMPRCODI= :GENEMPRCODI and
+      PERICODI= :PERICODI and
+      TRETVERSION =:TRETVERSION
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>List</key>
+    <query>
+      SELECT  TRETCODIGO,
+      (select EMPRNOMB from VW_SI_EMPRESA where  VW_SI_EMPRESA.emprcodi = TRN_TRANS_RETIRO.GENEMPRCODI) as EMPRNOMBRE,
+      (select EMPRNOMB from VW_SI_EMPRESA where VW_SI_EMPRESA.emprcodi = TRN_TRANS_RETIRO.CLIEMPRCODI) AS CLINOMBRE,
+      BARRNOMBRE ,
+      TRETTIPOINFORMACION,( select sum(
+      TRETDE1+
+      TRETDE2+
+      TRETDE3+
+      TRETDE4+
+      TRETDE5+
+      TRETDE6+
+      TRETDE7+
+      TRETDE8+
+      TRETDE9+
+      TRETDE10+
+      TRETDE11+
+      TRETDE12+
+      TRETDE13+
+      TRETDE14+
+      TRETDE15+
+      TRETDE16+
+      TRETDE17+
+      TRETDE18+
+      TRETDE19+
+      TRETDE20+
+      TRETDE21+
+      TRETDE22+
+      TRETDE23+
+      TRETDE24+
+      TRETDE25+
+      TRETDE26+
+      TRETDE27+
+      TRETDE28+
+      TRETDE29+
+      TRETDE30+
+      TRETDE31+
+      TRETDE32+
+      TRETDE33+
+      TRETDE34+
+      TRETDE35+
+      TRETDE36+
+      TRETDE37+
+      TRETDE38+
+      TRETDE39+
+      TRETDE40+
+      TRETDE41+
+      TRETDE42+
+      TRETDE43+
+      TRETDE44+
+      TRETDE45+
+      TRETDE46+
+      TRETDE47+
+      TRETDE48+
+      TRETDE49+
+      TRETDE50+
+      TRETDE51+
+      TRETDE52+
+      TRETDE53+
+      TRETDE54+
+      TRETDE55+
+      TRETDE56+
+      TRETDE57+
+      TRETDE58+
+      TRETDE59+
+      TRETDE60+
+      TRETDE61+
+      TRETDE62+
+      TRETDE63+
+      TRETDE64+
+      TRETDE65+
+      TRETDE66+
+      TRETDE67+
+      TRETDE68+
+      TRETDE69+
+      TRETDE70+
+      TRETDE71+
+      TRETDE72+
+      TRETDE73+
+      TRETDE74+
+      TRETDE75+
+      TRETDE76+
+      TRETDE77+
+      TRETDE78+
+      TRETDE79+
+      TRETDE80+
+      TRETDE81+
+      TRETDE82+
+      TRETDE83+
+      TRETDE84+
+      TRETDE85+
+      TRETDE86+
+      TRETDE87+
+      TRETDE88+
+      TRETDE89+
+      TRETDE90+
+      TRETDE91+
+      TRETDE92+
+      TRETDE93+
+      TRETDE94+
+      TRETDE95+
+      TRETDE96)
+      from trn_trans_retiro_detalle where  trn_trans_retiro_detalle.tretcodi = TRN_TRANS_RETIRO.tretcodi
+      )as total
+      FROM TRN_TRANS_RETIRO
+      join TRN_BARRA ON  TRN_BARRA.BARRCODI = TRN_TRANS_RETIRO.BARRCODI
+      WHERE
+      (GENEMPRCODI = :GENEMPRCODI ) and
+      (PERICODI= :PERICODI OR :PERICODI IS NULL) and
+      (TRETVERSION= :TRETVERSION OR :TRETVERSION IS NULL)
+      ORDER BY TRETCORESOCORESCCODI ASC
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(TRETCODI), 0) + 1 from TRN_TRANS_RETIRO
+    </query>
+  </Sql>
+  
+</Sqls>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into md_validacion(
+           lastdate,
+           lastuser,
+           validaestado,
+           validafecha,
+           validames,
+           emprcodi
+       )
+       values(
+           :lastdate,
+           :lastuser,
+           :validaestado,
+           :validafecha,
+           :validames,
+           :emprcodi
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update md_validacion
+       set
+           lastdate = :lastdate,
+           lastuser = :lastuser,
+           validaestado = :validaestado,
+           validafecha = :validafecha
+       where
+           validames = :validames and
+           emprcodi = :emprcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from md_validacion
+       where
+           validames = :validames and
+           emprcodi = :emprcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           lastdate,
+           lastuser,
+           validaestado,
+           validafecha,
+           validames,
+           emprcodi
+       where
+           validames = :validames and
+           emprcodi = :emprcodi
+       from
+           md_validacion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           lastdate,
+           lastuser,
+           validaestado,
+           validafecha,
+           validames,
+           emprcodi
+       from
+           md_validacion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           lastdate,
+           lastuser,
+           validaestado,
+           validafecha,
+           validames,
+           emprcodi
+       from
+           md_validacion
+    </query>
+  </Sql>
+</Sqls>

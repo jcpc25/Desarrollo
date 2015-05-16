@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into me_medicion24(
+           lectcodi,
+           medifecha,
+           tipoinfocodi,
+           ptomedicodi,
+           meditotal,
+           mediestado,
+           h1,
+           h2,
+           h3,
+           h4,
+           h5,
+           h6,
+           h7,
+           h8,
+           h9,
+           h10,
+           h11,
+           h12,
+           h13,
+           h14,
+           h15,
+           h16,
+           h17,
+           h18,
+           h19,
+           h20,
+           h21,
+           h22,
+           h23,
+           h24,
+           lastuser,
+           lastdate
+       )
+       values(
+           :lectcodi,
+           :medifecha,
+           :tipoinfocodi,
+           :ptomedicodi,
+           :meditotal,
+           :mediestado,
+           :h1,
+           :h2,
+           :h3,
+           :h4,
+           :h5,
+           :h6,
+           :h7,
+           :h8,
+           :h9,
+           :h10,
+           :h11,
+           :h12,
+           :h13,
+           :h14,
+           :h15,
+           :h16,
+           :h17,
+           :h18,
+           :h19,
+           :h20,
+           :h21,
+           :h22,
+           :h23,
+           :h24,
+           :lastuser,
+           :lastdate
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update me_medicion24
+       set
+           lectcodi = :lectcodi,
+           medifecha = :medifecha,
+           tipoinfocodi = :tipoinfocodi,
+           ptomedicodi = :ptomedicodi,
+           meditotal = :meditotal,
+           mediestado = :mediestado,
+           h1 = :h1,
+           h2 = :h2,
+           h3 = :h3,
+           h4 = :h4,
+           h5 = :h5,
+           h6 = :h6,
+           h7 = :h7,
+           h8 = :h8,
+           h9 = :h9,
+           h10 = :h10,
+           h11 = :h11,
+           h12 = :h12,
+           h13 = :h13,
+           h14 = :h14,
+           h15 = :h15,
+           h16 = :h16,
+           h17 = :h17,
+           h18 = :h18,
+           h19 = :h19,
+           h20 = :h20,
+           h21 = :h21,
+           h22 = :h22,
+           h23 = :h23,
+           h24 = :h24,
+           lastuser = :lastuser,
+           lastdate = :lastdate
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from me_medicion24
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           lectcodi,
+           medifecha,
+           tipoinfocodi,
+           ptomedicodi,
+           meditotal,
+           mediestado,
+           h1,
+           h2,
+           h3,
+           h4,
+           h5,
+           h6,
+           h7,
+           h8,
+           h9,
+           h10,
+           h11,
+           h12,
+           h13,
+           h14,
+           h15,
+           h16,
+           h17,
+           h18,
+           h19,
+           h20,
+           h21,
+           h22,
+           h23,
+           h24,
+           lastuser,
+           lastdate
+       where
+       from
+           me_medicion24
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           lectcodi,
+           medifecha,
+           tipoinfocodi,
+           ptomedicodi,
+           meditotal,
+           mediestado,
+           h1,
+           h2,
+           h3,
+           h4,
+           h5,
+           h6,
+           h7,
+           h8,
+           h9,
+           h10,
+           h11,
+           h12,
+           h13,
+           h14,
+           h15,
+           h16,
+           h17,
+           h18,
+           h19,
+           h20,
+           h21,
+           h22,
+           h23,
+           h24,
+           lastuser,
+           lastdate
+       from
+           me_medicion24
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           lectcodi,
+           medifecha,
+           tipoinfocodi,
+           ptomedicodi,
+           meditotal,
+           mediestado,
+           h1,
+           h2,
+           h3,
+           h4,
+           h5,
+           h6,
+           h7,
+           h8,
+           h9,
+           h10,
+           h11,
+           h12,
+           h13,
+           h14,
+           h15,
+           h16,
+           h17,
+           h18,
+           h19,
+           h20,
+           h21,
+           h22,
+           h23,
+           h24,
+           lastuser,
+           lastdate
+        from
+           me_medicion24
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetHidrologia</key>
+    <query>
+      select
+      m24.*, tpto.tipoptomedinomb,eq.equinomb,ti.tipoinfoabrev
+      from
+      me_medicion24 m24
+      inner join me_ptomedicion pto on pto.ptomedicodi = m24.ptomedicodi
+      inner join eq_equipo eq on eq.equicodi = pto.equicodi
+      inner join me_tipoptomedicion tpto on tpto.tipoptomedicodi = pto.tipoptomedicodi
+      inner join si_tipoinformacion ti on ti.tipoinfocodi = m24.tipoinfocodi
+      where m24.lectcodi = {0} and pto.origlectcodi ={1} and m24.medifecha >= to_date('{2}','YYYY-MM-DD') AND
+      m24.medifecha &lt;= to_date('{3}','YYYY-MM-DD')
+    </query>
+  </Sql>  
+  
+  <Sql>
+    <key>DeleteEnvioArchivo</key>
+    <query>
+      delete from me_medicion24 where lectcodi = {0} and medifecha >= to_date('{1}','YYYY-MM-DD') and
+      medifecha &lt;= to_date('{2}','YYYY-MM-DD') and ptomedicodi in (
+      select distinct hp.ptomedicodi from me_hojaptomed hp
+      inner join me_ptomedicion pto on pto.ptomedicodi = hp.ptomedicodi
+      where hp.formatcodi = {3} and pto.emprcodi = {4}
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetEnvioArchivo</key>
+    <query>
+      select me.* from me_medicion24 me
+      inner join me_hojaptomed hp on hp.ptomedicodi = me.ptomedicodi and hp.tipoinfocodi = me.tipoinfocodi
+      inner join me_formatohoja fh on fh.formatcodi = hp.formatcodi
+      inner join me_ptomedicion pto on pto.ptomedicodi = hp.ptomedicodi
+      where hp.formatcodi = {0} and pto.emprcodi = {1} and medifecha >= to_date('{2}','YYYY-MM-DD') AND
+      medifecha &lt;= to_date('{3}','YYYY-MM-DD')
+      order by hp.hojaptoorden asc
+    </query>
+  </Sql>
+  
+</Sqls>

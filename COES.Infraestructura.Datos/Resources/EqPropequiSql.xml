@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into eq_propequi(
+           propcodi,
+           equicodi,
+           fechapropequi,
+           valor,
+           lastuser
+       )
+       values(
+           :propcodi,
+           :equicodi,
+           :fechapropequi,
+           :valor,
+           :lastuser
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update eq_propequi
+       set
+           valor = :valor,
+           lastuser = :lastuser
+       where
+           propcodi = :propcodi and
+           equicodi = :equicodi and
+           fechapropequi = :fechapropequi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from eq_propequi
+       where
+           propcodi = :propcodi and
+           equicodi = :equicodi and
+           fechapropequi = :fechapropequi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           propcodi,
+           equicodi,
+           fechapropequi,
+           valor,
+           lastuser
+       where
+           propcodi = :propcodi and
+           equicodi = :equicodi and
+           fechapropequi = :fechapropequi
+       from
+           eq_propequi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           propcodi,
+           equicodi,
+           fechapropequi,
+           valor,
+           lastuser
+       from
+           eq_propequi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           propcodi,
+           equicodi,
+           fechapropequi,
+           valor,
+           lastuser
+       from
+           eq_propequi
+    </query>
+  </Sql>
+  <Sql>
+    <key>PropiedadesFichaTecnicaVigentesxEquipo</key>
+    <query>
+      select prop.PROPCODI,fn_sdatoactualpropiedad({0}, prop.propcodi) VALOR,prop.PROPUNIDAD, prop.PROPFILE from eq_propiedad prop where prop.famcodi={1}  and prop.propfichaoficial='S'
+    </query>
+  </Sql>
+</Sqls>

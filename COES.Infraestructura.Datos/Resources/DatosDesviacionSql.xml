@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into sic.psu_desviogen
+      (
+      lectcodi, desvfecha, ptomedicodi, medorigdesv, lastuser, lastdate
+      )
+      values
+      (
+      :lectcodi, :desvfecha, :ptomedicodi, :medorigdesv, :lastuser, :lastdate
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from sic.psu_desviogen where desvfecha = :desvfecha
+    </query>
+  </Sql>
+
+  
+
+</Sqls>

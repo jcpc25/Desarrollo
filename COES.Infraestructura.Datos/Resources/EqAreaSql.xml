@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(areacodi), 0) + 1 from eq_area
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into eq_area(
+           areacodi,
+           tareacodi,
+           areaabrev,
+           areanomb,
+           areapadre
+       )
+       values(
+           :areacodi,
+           :tareacodi,
+           :areaabrev,
+           :areanomb,
+           :areapadre
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update eq_area
+       set
+           tareacodi = :tareacodi,
+           areaabrev = :areaabrev,
+           areanomb = :areanomb,
+           areapadre = :areapadre
+       where
+           areacodi = :areacodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from eq_area
+       where
+           areacodi = :areacodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+      select
+      areacodi,
+      tareacodi,
+      areaabrev,
+      areanomb,
+      areapadre
+      from
+      eq_area
+      where
+      areacodi = :areacodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           areacodi,
+           tareacodi,
+           areaabrev,
+           areanomb,
+           areapadre
+       from
+           eq_area
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           areacodi,
+           tareacodi,
+           areaabrev,
+           areanomb,
+           areapadre
+       from
+           eq_area
+    </query>
+  </Sql>
+  <Sql>
+    <key>AreasPorFiltro</key>
+    <query>
+      select * from (
+      select a.areacodi, a.tareacodi, a.areaabrev, a.areanomb, a.areapadre, ta.tareanomb,(row_number() over (order by a.areanomb)) as r
+      from eq_area a
+      inner join eq_tipoarea ta on ta.tareacodi=a.tareacodi
+      where (a.tareacodi=:tareacodi or -99=:TAREACODI) and
+      a.areanomb like '%'||:AREANOMB||'%' )
+      where r >= ((( :nropaginas-1) * :nroFilas) + 1) and r &lt; (( :nropaginas *  :nroFilas) + 1 )
+    </query>
+  </Sql>
+  <Sql>
+    <key>CantidadAreasPorFiltro</key>
+    <query>select count(*) from eq_area a inner join eq_tipoarea ta on ta.tareacodi=a.tareacodi where (a.tareacodi = :TAREACODI or -99 = :TAREACODI) and a.areanomb like '%'||:AREANOMB||'%'</query>
+  </Sql>
+</Sqls>

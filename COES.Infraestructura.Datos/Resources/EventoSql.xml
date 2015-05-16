@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select
+      *
+      from (
+      select
+      equipo.equiabrev,
+      evento.evencodi,
+      evento.emprcodi,
+      evento.equicodi,
+      evento.tipoevencodi,
+      evento.evenini,
+      evento.evenfin,
+      evento.evenpadre,
+      equipo.famcodi,
+      equipo.areacodi,
+      equipo.equitension,
+      case evento.eveninterrup when 'S' then 'SI' else 'NO' end eveninterrup,
+      (select round(sum(interrminu*interrmw/60), 2) as servida from eve_interrupcion where evencodi = evento.evencodi) as energiainterrumpida,
+      (select round(sum(interrmw),2) as suma from eve_interrupcion where ((interrnivel is null or interrnivel = 'N')) and evencodi = evento.evencodi) as interrupcionmw,
+      (select round(sum(interrmw),2) as suma from eve_interrupcion where ((interrnivel  = 'S')) and evencodi = evento.evencodi) as disminucionmw,
+      subcausa.subcausaabrev,
+      evento.subcausacodi,
+      tipoevento.tipoevenabrev,
+      area.areanomb,
+      familia.famabrev,
+      tipoarea.tareaabrev,
+      empresa.emprnomb,
+      familia.tareacodi,
+      evento.lastuser,
+      evento.lastdate,
+      evento.evenasunto,
+      evento.evenpreliminar,
+      causa.causaevenabrev,
+      evento.evenrelevante,
+      tipo_empresa.tipoemprdesc,
+      (row_number() over (order by evento.evencodi)) as r
+      from eve_evento evento
+      inner join eq_equipo equipo on evento.equicodi = equipo.equicodi
+      inner join eq_familia familia on equipo.famcodi = familia.famcodi
+      inner join eve_subcausaevento subcausa on evento.subcausacodi = subcausa.subcausacodi
+      inner join eve_tipoevento tipoevento on evento.tipoevencodi = tipoevento.tipoevencodi
+      inner join si_empresa empresa on equipo.emprcodi = empresa.emprcodi
+      inner join si_tipoempresa tipo_empresa on empresa.tipoemprcodi = tipo_empresa.tipoemprcodi
+      inner join eq_area area on equipo.areacodi = area.areacodi
+      inner join eq_tipoarea tipoarea on area.tareacodi = tipoarea.tareacodi
+      inner join eve_causaevento causa on subcausa.causaevencodi = causa.causaevencodi
+      where (evento.tipoevencodi = {0} or {0} = 0) and
+      (empresa.emprcodi = {1} or {1} = 0) and
+      (tipo_empresa.tipoemprcodi = {10} or {10} = 0) and
+      (familia.famcodi = {2} or {2} = 0) and
+      (evento.evenpreliminar = '{3}' or '{3}' = '-1') and
+      (evento.evenperturbacion = '{9}' or '{9}' = '-1') and
+      (evento.eveninterrup = '{11}' or '{11}' = '-1') and
+      (( evenini >=  TO_DATE('{4} 00:00:00','YYYY-MM-DD HH24:MI:SS')  and evenini &lt;  TO_DATE('{5} 00:00:00','YYYY-MM-DD HH24:MI:SS')  ) or
+      ( evenfin >  TO_DATE('{4} 00:00:00','YYYY-MM-DD HH24:MI:SS')  and evenfin &lt;=  TO_DATE('{5} 00:00:00','YYYY-MM-DD HH24:MI:SS')  ) or
+      ( evenini &lt;  TO_DATE('{4} 00:00:00','YYYY-MM-DD HH24:MI:SS')  and evenfin >  TO_DATE('{5} 00:00:00','YYYY-MM-DD HH24:MI:SS')  ))
+      {8}
+      order by empresa.emprnomb asc
+      )
+      where r >= ((({6}-1) * {7}) + 1) and r &lt; (({6} * {7}) + 1 )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>TotalRecords</key>
+    <query>
+      select
+      count(*)
+      from eve_evento evento
+      inner join eq_equipo equipo on evento.equicodi = equipo.equicodi
+      inner join eq_familia familia on equipo.famcodi = familia.famcodi
+      inner join eve_subcausaevento subcausa on evento.subcausacodi = subcausa.subcausacodi
+      inner join eve_tipoevento tipoevento on evento.tipoevencodi = tipoevento.tipoevencodi
+      inner join si_empresa empresa on equipo.emprcodi = empresa.emprcodi
+      inner join si_tipoempresa tipo_empresa on empresa.tipoemprcodi = tipo_empresa.tipoemprcodi
+      inner join eq_area area on equipo.areacodi = area.areacodi
+      inner join eq_tipoarea tipoarea on area.tareacodi = tipoarea.tareacodi
+      inner join eve_causaevento causa on subcausa.causaevencodi = causa.causaevencodi
+      where (evento.tipoevencodi = {0} or {0} = 0) and
+      (empresa.emprcodi = {1} or {1} = 0) and
+      (tipo_empresa.tipoemprcodi = {8} or {8} = 0) and
+      (familia.famcodi = {2} or {2} = 0) and
+      (evento.evenpreliminar = '{3}' or '{3}' = '-1') and
+      (evento.evenpreliminar = '{3}' or '{3}' = '-1') and
+      (evento.evenperturbacion = '{7}' or '{7}' = '-1') and
+      (evento.eveninterrup = '{9}' or '{9}' = '-1') and
+      (( evenini >=  TO_DATE('{4} 00:00:00','YYYY-MM-DD HH24:MI:SS')  and evenini &lt;  TO_DATE('{5} 00:00:00','YYYY-MM-DD HH24:MI:SS')  ) or
+      ( evenfin >  TO_DATE('{4} 00:00:00','YYYY-MM-DD HH24:MI:SS')  and evenfin &lt;=  TO_DATE('{5} 00:00:00','YYYY-MM-DD HH24:MI:SS')  ) or
+      ( evenini &lt;  TO_DATE('{4} 00:00:00','YYYY-MM-DD HH24:MI:SS')  and evenfin >  TO_DATE('{5} 00:00:00','YYYY-MM-DD HH24:MI:SS')  ))
+      {6}
+    </query>
+    
+  </Sql>
+
+  <Sql>
+    <key>SqlBuscarEquipo</key>
+    <query>
+      select
+      *
+      from (
+      select empresa.emprnomb, empresa.emprcodi, area.areanomb, familia.famabrev, equipo.equiabrev, tipoarea.tareaabrev, equipo.equicodi,
+      (row_number() over (order by equipo.equicodi)) as r
+      from eq_equipo equipo
+      inner join eq_area area on equipo.areacodi = area.areacodi
+      inner join eq_tipoarea tipoarea on area.tareacodi = tipoarea.tareacodi
+      inner join eq_familia familia on equipo.famcodi = familia.famcodi
+      inner join si_empresa empresa on equipo.emprcodi = empresa.emprcodi
+      where equipo.equiestado in ('A','P','')
+      and (empresa.emprcodi = {0} or {0} = 0)
+      and (familia.famcodi = {1} or {1} = 0)
+      and (area.areacodi = {2} or {2} = 0)
+      and (upper(equipo.equinomb) like '%{3}%' or '{3}' = '' )
+      order by equipo.equinomb asc
+      )
+      where r >= ((({4}-1) * {5}) + 1) and r &lt; (({4} * {5}) + 1 )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>SqlObtenerNroRegistroEquipo</key>
+    <query>
+      select count(*)
+      from eq_equipo equipo
+      inner join eq_area area on equipo.areacodi = area.areacodi
+      inner join eq_tipoarea tipoarea on area.tareacodi = tipoarea.tareacodi
+      inner join eq_familia familia on equipo.famcodi = familia.famcodi
+      inner join si_empresa empresa on equipo.emprcodi = empresa.emprcodi
+      where equipo.equiestado in ('A','P','')
+      and (empresa.emprcodi = {0} or {0} = 0)
+      and (familia.famcodi = {1} or {1} = 0)
+      and (area.areacodi = {2} or {2} = 0)
+      and (upper(equipo.equinomb) like '%{3}%' or '{3}' = '' )
+      order by equipo.equinomb asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>SqlActualizarInformePerturbacion</key>
+    <query>
+      update eve_evento set evenperturbacion = '{0}' where evencodi = {1}
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>SqlListarFamilias</key>
+    <query>      
+      select famcodi, famabrev, famnomb from eq_familia
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>SqlListarEmpresas</key>
+    <query>
+      select emprcodi, emprnomb
+      from si_empresa where emprsein = 'S' and tipoemprcodi in (1,2,3)
+      order by emprnomb asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>SqlListarEmpresasPorTipo</key>
+    <query>
+      select emprcodi, emprnomb
+      from si_empresa where emprsein = 'S' and tipoemprcodi = :tipoemprcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>SqlObtenerEvento</key>
+    <query>
+      select
+      evento.evencodi,evento.emprcodirespon,evento.equicodi,
+      evento.evenclasecodi,evento.emprcodi,evento.tipoevencodi,
+      evento.evenini,evento.evenmwindisp,evento.evenfin,
+      evento.subcausacodi,evento.evenasunto,evento.evenpadre,
+      evento.eveninterrup,evento.lastuser,evento.lastdate,
+      evento.evenpreini,evento.evenpostfin,evento.evendesc,
+      evento.eventension,evento.evenaopera,evento.evenpreliminar,
+      evento.evenrelevante,evento.evenctaf,evento.eveninffalla,
+      evento.eveninffallan2,evento.deleted,evento.eventipofalla,
+      evento.eventipofallafase,evento.smsenviado,evento.smsenviar,
+      evento.evenactuacion,equipo.equinomb,evento.evencomentarios,
+      evento.evenperturbacion
+      from eve_evento evento
+      inner join eq_equipo equipo on evento.equicodi = equipo.equicodi
+      where evento.evencodi = :evencodi
+
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>SqlObtenerResumenEvento</key>
+    <query>
+      select
+      evento.evencodi,
+      evento.evenini,
+      empresa.emprnomb,
+      equipo.equinomb,
+      evento.evenasunto,
+      evento.evendesc,
+      evento.tipoevencodi,
+      evento.evenperturbacion
+      from eve_evento evento
+      inner join eq_equipo equipo on evento.equicodi = equipo.equicodi
+      inner join si_empresa empresa on equipo.emprcodi = empresa.emprcodi
+      where evento.evencodi = :evencodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>SqlObtenerAreaPorEmpresa</key>
+    <query>
+      select distinct area.areacodi, area.areanomb, tipoarea.tareaabrev from eq_area area
+      inner join eq_equipo equipo on area.areacodi = equipo.areacodi
+      inner join eq_tipoarea tipoarea on area.tareacodi = tipoarea.tareacodi
+      where equipo.emprcodi = :emprcodi or :emprcodi = 0
+      order by area.areanomb asc
+    </query>
+  </Sql>
+  
+</Sqls>

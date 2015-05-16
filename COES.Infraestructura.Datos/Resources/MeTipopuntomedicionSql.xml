@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(tipoptomedicodi), 0) + 1 from me_tipopuntomedicion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into me_tipopuntomedicion(
+           famcodi,
+           tipoptomedinomb,
+           tipoptomedicodi
+       )
+       values(
+           :famcodi,
+           :tipoptomedinomb,
+           :tipoptomedicodi
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update me_tipopuntomedicion
+       set
+           famcodi = :famcodi,
+           tipoptomedinomb = :tipoptomedinomb
+       where
+           tipoptomedicodi = :tipoptomedicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from me_tipopuntomedicion
+       where
+           tipoptomedicodi = :tipoptomedicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           famcodi,
+           tipoptomedinomb,
+           tipoptomedicodi
+       where
+           tipoptomedicodi = :tipoptomedicodi
+       from
+           me_tipopuntomedicion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           tpto.famcodi,
+           tpto.tipoptomedinomb,
+           tpto.tipoptomedicodi
+       from
+           me_tipoptomedicion tpto
+       inner join
+           ME_TIPOPTOXORIGLECT torig on torig.tipoptomedicodi = tpto.tipoptomedicodi
+       where 
+           ( torig.origlectcodi  in ({0}) or '{0}' = '-1') 
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           famcodi,
+           tipoptomedinomb,
+           tipoptomedicodi
+       from
+           me_tipopuntomedicion
+    </query>
+  </Sql>
+</Sqls>

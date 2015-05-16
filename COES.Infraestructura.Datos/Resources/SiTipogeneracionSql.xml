@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(tgenercodi), 0) + 1 from si_tipogeneracion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into si_tipogeneracion(
+           tgenercodi,
+           tgenerabrev,
+           tgenernomb
+       )
+       values(
+           :tgenercodi,
+           :tgenerabrev,
+           :tgenernomb
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update si_tipogeneracion
+       set
+           tgenerabrev = :tgenerabrev,
+           tgenernomb = :tgenernomb
+       where
+           tgenercodi = :tgenercodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from si_tipogeneracion
+       where
+           tgenercodi = :tgenercodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           tgenercodi,
+           tgenerabrev,
+           tgenernomb
+       where
+           tgenercodi = :tgenercodi
+       from
+           si_tipogeneracion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           tgenercodi,
+           tgenerabrev,
+           tgenernomb
+       from
+           si_tipogeneracion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select
+        tgenercodi,
+        tgenerabrev,
+        tgenernomb
+      from
+        si_tipogeneracion
+      order by tgenernomb asc
+    </query>
+  </Sql>
+</Sqls>

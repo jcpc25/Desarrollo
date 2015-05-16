@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into me_ampliacionfecha(
+           amplifecha,
+           emprcodi,
+           formatcodi,
+           amplifechaplazo,
+           lastuser,
+           lastdate
+       )
+       values(
+           :amplifecha,
+           :emprcodi,
+           :formatcodi,
+           :amplifechaplazo,
+           :lastuser,
+           :lastdate
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update me_ampliacionfecha
+       set
+           amplifecha = :amplifecha,
+           emprcodi = :emprcodi,
+           formatcodi = :formatcodi,
+           amplifechaplazo = :amplifechaplazo,
+           lastuser = :lastuser,
+           lastdate = :lastdate
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from me_ampliacionfecha
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select am.* from me_ampliacionfecha am
+       inner join (
+         select max(lastdate) fechamax,amplifecha,emprcodi,formatcodi from me_ampliacionfecha
+         group by emprcodi,formatcodi,amplifecha ) fecmax on fecmax.fechamax = am.lastdate and 
+         fecmax.emprcodi = am.emprcodi and fecmax.formatcodi = am.formatcodi
+       where
+           am.amplifecha = to_date('{0}','YYYY-MM-DD') and am.emprcodi = {1} and am.formatcodi = {2}
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>ListaAmpliacion</key>
+    <query>
+      select am.*,f.formatnombre,e.emprnomb from me_ampliacionfecha am
+      inner join me_formato f on f.formatcodi = am.formatcodi
+      inner join si_empresa e on e.emprcodi = am.emprcodi
+      inner join (
+      select max(lastdate) fechamax,amplifecha,emprcodi,formatcodi from me_ampliacionfecha
+      group by emprcodi,formatcodi,amplifecha ) fecmax on fecmax.fechamax = am.lastdate and
+      fecmax.emprcodi = am.emprcodi and fecmax.formatcodi = am.formatcodi
+      where
+      am.lastdate >= to_date('{0}','YYYY-MM-DD') and
+      am.lastdate &lt; to_date('{1}','YYYY-MM-DD') 
+          and am.emprcodi = {2} and am.formatcodi = {3}
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           amplifecha,
+           emprcodi,
+           formatcodi,
+           amplifechaplazo,
+           lastuser,
+           lastdate
+       from
+           me_ampliacionfecha
+    </query>
+  </Sql>
+</Sqls>

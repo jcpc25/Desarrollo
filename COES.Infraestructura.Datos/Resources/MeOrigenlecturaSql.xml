@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into me_origenlectura(
+           origlectnombre,
+           origlectcodi
+       )
+       values(
+           :origlectnombre,
+           :origlectcodi
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update me_origenlectura
+       set
+           origlectnombre = :origlectnombre
+       where
+           origlectcodi = :origlectcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from me_origenlectura
+       where
+           origlectcodi = :origlectcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           origlectnombre,
+           origlectcodi
+       where
+           origlectcodi = :origlectcodi
+       from
+           me_origenlectura
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           origlectnombre,
+           origlectcodi
+       from
+           me_origenlectura
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           origlectnombre,
+           origlectcodi
+       from
+           me_origenlectura
+    </query>
+  </Sql>
+</Sqls>

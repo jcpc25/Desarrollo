@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(concepcodi), 0) + 1 from pr_concepto
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into pr_concepto(
+           catecodi,
+           concepcodi,
+           concepabrev,
+           concepdesc,
+           concepunid,
+           conceptipo,
+           conceporden
+       )
+       values(
+           :catecodi,
+           :concepcodi,
+           :concepabrev,
+           :concepdesc,
+           :concepunid,
+           :conceptipo,
+           :conceporden
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update pr_concepto
+       set
+           catecodi = :catecodi,
+           concepabrev = :concepabrev,
+           concepdesc = :concepdesc,
+           concepunid = :concepunid,
+           conceptipo = :conceptipo,
+           conceporden = :conceporden
+       where
+           concepcodi = :concepcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from pr_concepto
+       where
+           concepcodi = :concepcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           catecodi,
+           concepcodi,
+           concepabrev,
+           concepdesc,
+           concepunid,
+           conceptipo,
+           conceporden
+       from
+           pr_concepto
+       where
+           concepcodi = :concepcodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           catecodi,
+           concepcodi,
+           concepabrev,
+           concepdesc,
+           concepunid,
+           conceptipo,
+           conceporden
+       from
+           pr_concepto
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           catecodi,
+           concepcodi,
+           concepabrev,
+           concepdesc,
+           concepunid,
+           conceptipo,
+           conceporden
+       from
+           pr_concepto
+    </query>
+  </Sql>
+</Sqls>

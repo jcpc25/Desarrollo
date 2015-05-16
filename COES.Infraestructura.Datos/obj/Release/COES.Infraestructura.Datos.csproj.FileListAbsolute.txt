@@ -1,0 +1,2 @@
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\obj\Release\COES.Infraestructura.Datos.Consultas.resources
+D:\Solucion\FrameworkCOES\Framework COES\COES.Infraestructura.Datos\obj\Release\COES.Infraestructura.Datos.csproj.GenerateResource.Cache

@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Sqls>
+  <Sql>
+    <key>List</key>
+    <query>
+   
+      select
+      trn_codigo_entrega.CODENTCODI,
+      vw_si_empresa.EMPRNOMB,
+      TRN_BARRA.BARRBARRATRANSFERENCIA,
+      trn_codigo_entrega.CODENTCODIGO,
+      'Entrega' as Tipo,
+      VW_EQ_CENTRAL_GENERACION.EQUINOMB,
+      vw_si_empresa.EMPRCODI
+      from trn_codigo_entrega
+      join vw_si_empresa on trn_codigo_entrega.emprcodi = vw_si_empresa.emprcodi
+      join TRN_BARRA on trn_codigo_entrega.BARRCODI= TRN_BARRA.BARRCODI
+      join VW_EQ_CENTRAL_GENERACION on trn_codigo_entrega.EQUICODI = VW_EQ_CENTRAL_GENERACION.EQUICODI
+      where trn_codigo_entrega.EMPRCODI = :EMPRCODI
+      union
+      select trn_codigo_retiro_solicitud.CORESOCODI,
+      (select vw_si_empresa.EMPRNOMB from vw_si_empresa where  vw_si_empresa.emprcodi = trn_codigo_retiro_solicitud.GENEMPRCODI),
+      (select TRN_BARRA.BARRBARRATRANSFERENCIA from trn_barra where trn_barra.barrcodi =trn_codigo_retiro_solicitud.BARRCODI ),
+      trn_codigo_retiro_solicitud.CORESOCODIGO,
+      'Retiro' as Tipo,
+      (select vw_si_empresa.EMPRNOMB from vw_si_empresa where  vw_si_empresa.emprcodi = trn_codigo_retiro_solicitud.CLIEMPRCODI) ,
+      trn_codigo_retiro_solicitud.GENEMPRCODI
+
+      from trn_codigo_retiro_solicitud
+      where  trn_codigo_retiro_solicitud.GENEMPRCODI = :EMPRCODI AND trn_codigo_retiro_solicitud.CORESOESTADO not in 'GEN'
+      order by Tipo asc
+
+    </query>
+  </Sql>
+
+
+<Sql>
+    <key>GetByCriteriaPeriVer</key>
+    <query>
+     SELECT EMPRCODI,(SELECT EMPRNOMB FROM VW_SI_EMPRESA WHERE VW_SI_EMPRESA.EMPRCODI=trn_valor_trans.EMPRCODI) AS EMPRNOMB,
+  
+      (select VTRANETOTAL FROM trn_valor_trans_empresa where
+      trn_valor_trans_empresa.EMPRCODI= trn_valor_trans.EMPRCODI
+      and  trn_valor_trans_empresa.PERICODI = trn_valor_trans.PERICODI
+      AND  trn_valor_trans_empresa.VTRANEVERSION = trn_valor_trans.VTRANVERSION
+
+      ) AS VT,
+      (SELECT SALEMPSALDO FROM TRN_SALDO_EMPRESA WHERE
+      TRN_SALDO_EMPRESA.EMPRCODI =trn_valor_trans.EMPRCODI
+      AND TRN_SALDO_EMPRESA.PERICODI =trn_valor_trans.PERICODI
+      AND TRN_SALDO_EMPRESA.SALEMPVERSION=trn_valor_trans.VTRANVERSION
+      )AS  ST,
+      (SELECT  SUM(INGCOMIMPORTE)  FROM TRN_ING_COMPENSACION WHERE
+      TRN_ING_COMPENSACION.EMPRCODI=trn_valor_trans.EMPRCODI AND
+      TRN_ING_COMPENSACION.PERICODI =trn_valor_trans.PERICODI AND
+      TRN_ING_COMPENSACION.INGCOMVERSION= trn_valor_trans.VTRANVERSION
+
+      ) AS COMPENSACION ,(select vtotemtotal from trn_valor_total_empresa where
+      trn_valor_total_empresa.EMPRCODI =trn_valor_trans.EMPRCODI AND
+      trn_valor_total_empresa.VTOTEMVERSION = trn_valor_trans.VTRANVERSION AND
+      trn_valor_total_empresa.PERICODI = trn_valor_trans.PERICODI
+      
+      )AS TOTAL ,PERICODI,VTRANVERSION
+      from  trn_valor_trans
+      where
+      (PERICODI=:PERICODI  )AND
+      (VTRANVERSION =:VTRANVERSION)
+      group by EMPRCODI,PERICODI,VTRANVERSION ORDER BY EMPRCODI  ASC
+    </query>
+  </Sql>
+
+
+<Sql>
+    <key>GetByCriteriaEmprPeriVer</key>
+    <query>
+      SELECT A.PERICODI,A.INGCOMVERSION,A.EMPRCODI,A.INGCOMIMPORTE,B.CABCOMNOMBRE FROM TRN_ING_COMPENSACION  A JOIN TRN_CABE_COMPENSACION B ON A.CABCOMCODI = B.CABCOMCODI
+      WHERE A.EMPRCODI=:EMPRCODI AND A.PERICODI=:PERICODI AND A.INGCOMVERSION=:INGCOMVERSION ORDER BY A.CABCOMCODI ASC 
+      
+    </query>
+  </Sql>
+
+
+
+<Sql>
+    <key>GetMatrizByCriteriPeriVer</key>
+    <query>
+        select (select emprnomb from vw_si_empresa where vw_si_empresa.emprcodi=trn_empresa_pago.emprcodi)as EMPRNOMB,
+          (select emprnomb from vw_si_empresa where vw_si_empresa.emprcodi=trn_empresa_pago.EMPPAGCODEMPPAGO)as EMPRNOMBPAGO,
+          EMPPAGMONTO FROM  TRN_EMPRESA_PAGO where  emprcodi=:emprcodi and  pericodi=:pericodi and emppagversion=:emppagversion  ORDER BY EMPPAGCODI ASC
+       
+    </query>
+  </Sql>
+  
+  <Sql>
+    <key>GetMatrizEmprByCriteriPeriVer</key>
+    <query>
+        select distinct a.EMPRCODI,b.EMPRNOMB,a.EMPPAGCODI       
+           FROM  TRN_EMPRESA_PAGO a join vw_si_empresa b on a.EMPRCODI=b.EMPRCODI
+           where a.pericodi=:pericodi and a.emppagversion=:emppagversion order by EMPPAGCODI asc
+    </query>
+  </Sql>
+
+
+
+
+</Sqls>

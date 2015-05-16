@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+        <Sql>
+        <key>GetById</key>
+        <query>
+          select trn_codigo_entrega.*,
+          VW_EQ_CENTRAL_GENERACION.EQUINOMB,
+          TRN_BARRA.BARRBARRATRANSFERENCIA,
+          vw_si_empresa.emprnomb
+          from trn_codigo_entrega join VW_EQ_CENTRAL_GENERACION on VW_EQ_CENTRAL_GENERACION.EQUICODI = trn_codigo_entrega.EQUICODI 
+                                  join TRN_BARRA on TRN_BARRA.barrcodi = trn_codigo_entrega.barrcodi
+                                  join vw_si_empresa on vw_si_empresa.emprcodi = trn_codigo_entrega.emprcodi 
+          where (codentcodi = :codentcodi)
+        </query>
+        </Sql>
+ <Sql>
+    <key>Save</key>
+    <query>
+      insert into trn_codigo_entrega
+      ( codentcodi, emprcodi, barrcodi, equicodi, codentcodigo, codentfechainicio, codentfechafin, codentestado, codentusername, codentfecins )
+      values ( :codentcodi, :emprcodi, :barrcodi, :equicodi, :codentcodigo, :codentfechainicio, :codentfechafin, :codentestado, :codentusername, :codentfecins )
+    </query>
+  </Sql>
+   <Sql>
+    <key>Update</key>
+    <query>
+      update trn_codigo_entrega set
+      emprcodi = :emprcodi,
+      barrcodi = :barrcodi,
+      equicodi = :equicodi,
+      codentcodigo = :codentcodigo,
+      codentfechainicio = :codentfechainicio,
+      codentfechafin = :codentfechafin,
+      codentestado = :codentestado,
+      codentfecact = :codentfecact
+      where codentcodi = :codentcodi
+    </query>
+  </Sql>
+  <Sql>
+    <key>Delete</key>
+    <query>delete from trn_codigo_entrega where codentcodi = :codentcodi</query>
+  </Sql>
+   <Sql>
+    <key>List</key>
+    <query>
+      select trn_codigo_entrega.*,
+      VW_EQ_CENTRAL_GENERACION.EQUINOMB, TRN_BARRA.BARRBARRATRANSFERENCIA, vw_si_empresa.emprnomb
+      from trn_codigo_entrega join VW_EQ_CENTRAL_GENERACION on VW_EQ_CENTRAL_GENERACION.EQUICODI = trn_codigo_entrega.EQUICODI
+                              join trn_barra on trn_barra.barrcodi = trn_codigo_entrega.barrcodi
+                              join vw_si_empresa on vw_si_empresa.emprcodi = trn_codigo_entrega.emprcodi</query>
+  </Sql>
+   <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select trn_codigo_entrega.*,
+      VW_EQ_CENTRAL_GENERACION.EQUINOMB,
+      TRN_BARRA.BARRBARRATRANSFERENCIA,
+      vw_si_empresa.emprnomb
+      from trn_codigo_entrega join VW_EQ_CENTRAL_GENERACION on VW_EQ_CENTRAL_GENERACION.EQUICODI = trn_codigo_entrega.EQUICODI
+                              join TRN_BARRA on TRN_BARRA.barrcodi = trn_codigo_entrega.barrcodi
+                              join vw_si_empresa on vw_si_empresa.emprcodi = trn_codigo_entrega.emprcodi
+      where (vw_si_empresa.EMPRNOMB =:EMPRNOMB  or :EMPRNOMB is null)
+      and (TRN_BARRA.BARRBARRATRANSFERENCIA =:BARRBARRATRANSFERENCIA or :BARRBARRATRANSFERENCIA is null)
+      and (VW_EQ_CENTRAL_GENERACION.EQUINOMB =:EQUINOMB or :EQUINOMB is null)
+      and (trn_codigo_entrega.CODENTFECHAINICIO &gt;=:CODENTFECHAINICIO or :CODENTFECHAINICIO is null)
+      and (trn_codigo_entrega.CODENTFECHAFIN &lt;=:CODENTFECHAFIN or :CODENTFECHAFIN is null)
+      and (trn_codigo_entrega.CODENTESTADO =:CODENTESTADO or :CODENTESTADO is null)
+      order by trn_codigo_entrega.CODENTCODI DESC
+    </query>
+  </Sql>
+  
+   <Sql>
+    <key>GetMaxId</key>
+    <query>select nvl(max(codentcodi), 0) + 1 from trn_codigo_entrega</query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCodigoEntregaCodigo</key>
+    <query>
+      select trn_codigo_entrega.*, VW_EQ_CENTRAL_GENERACION.EQUINOMB, TRN_BARRA.BARRBARRATRANSFERENCIA, vw_si_empresa.emprnomb
+      from trn_codigo_entrega join VW_EQ_CENTRAL_GENERACION on VW_EQ_CENTRAL_GENERACION.EQUICODI = trn_codigo_entrega.EQUICODI
+                              join TRN_BARRA on TRN_BARRA.barrcodi = trn_codigo_entrega.barrcodi
+                              join vw_si_empresa on vw_si_empresa.emprcodi = trn_codigo_entrega.emprcodi
+      where (codentcodigo = :codentcodigo)
+    </query>
+  </Sql>
+  
+  
+  
+  
+</Sqls>

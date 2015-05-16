@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into me_periodomedidor(
+           medicodi,
+           earcodi,
+           permedifechaini,
+           permedifechafin
+       )
+       values(
+           :medicodi,
+           :earcodi,
+           :permedifechaini,
+           :permedifechafin
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update me_periodomedidor
+       set
+           medicodi = :medicodi,
+           earcodi = :earcodi,
+           permedifechaini = :permedifechaini,
+           permedifechafin = :permedifechafin
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from me_periodomedidor
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           medicodi,
+           earcodi,
+           permedifechaini,
+           permedifechafin
+       where
+       from
+           me_periodomedidor
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           medicodi,
+           earcodi,
+           permedifechaini,
+           permedifechafin
+       from
+           me_periodomedidor
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           medicodi,
+           earcodi,
+           permedifechaini,
+           permedifechafin
+       from
+           me_periodomedidor
+    </query>
+  </Sql>
+</Sqls>

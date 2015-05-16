@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Sqls>
+
+  <Sql>
+    <key>GetById</key>
+    <query>select * from trn_factor_perdida where facpercodi = :facpercodi</query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into trn_factor_perdida
+      (
+      facpercodi, barrcodi, facperbarrnombre, pericodi, facperbase, facperversion, facperdia,
+      facper1, facper2, facper3, facper4, facper5, facper6, facper7, facper8, facper9, facper10, facper11, facper12,
+      facper13, facper14, facper15, facper16, facper17, facper18, facper19, facper20, facper21, facper22, facper23, facper24,
+      facper25, facper26, facper27, facper28, facper29, facper30, facper31, facper32, facper33, facper34, facper35, facper36,
+      facper37, facper38, facper39, facper40, facper41, facper42, facper43, facper44, facper45, facper46, facper47, facper48,
+      facperusername, facperfecins
+      )
+      values
+      (
+      :facpercodi, :barrcodi, :barrnombre, :pericodi, :facperbase, :facperversion, :facperdia,
+      :facper1, :facper2, :facper3, :facper4, :facper5, :facper6, :facper7, :facper8, :facper9, :facper10, :facper11, :facper12,
+      :facper13, :facper14, :facper15, :facper16, :facper17, :facper18, :facper19, :facper20, :facper21, :facper22, :facper23, :facper24,
+      :facper25, :facper26, :facper27, :facper28, :facper29, :facper30, :facper31, :facper32, :facper33, :facper34, :facper35, :facper36,
+      :facper37, :facper38, :facper39, :facper40, :facper41, :facper42, :facper43, :facper44, :facper45, :facper46, :facper47, :facper48,
+      :facperusername, :facperfecins
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>delete from trn_factor_perdida where pericodi = :pericodi and facperversion = :facperversion</query>
+  </Sql>
+  
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(facpercodi), 0) + 1 from trn_factor_perdida
+    </query>
+  </Sql>
+
+  
+<Sql>
+    <key>ListByPeriodoVersion</key>
+    <query>
+      select * from trn_factor_perdida where pericodi = :pericodi and facperversion = :facperversion Order by facpercodi
+    </query>
+  </Sql>
+  
+</Sqls>

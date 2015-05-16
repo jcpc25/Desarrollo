@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+  
+<Sql>
+  <key>GetByCriteria</key>
+  <query>
+    select (select b.emprnomb from vw_si_empresa b where b.emprcodi=a.emprcodi) as EMPRESA,
+    (select c.vtranetotal from trn_valor_trans_empresa c
+    where c.emprcodi= a.emprcodi and c.pericodi=a.pericodi and c.vtraneversion=a.vtotemversion) as VALORIZACION,
+    (select sum(d.ingcomimporte)  from  TRN_ING_COMPENSACION d
+    where d.emprcodi=a.emprcodi and d.PERICODI = a.pericodi and d.INGCOMVERSION = a.vtotemversion ) as COMPENSACION ,
+    (select  f.ingpotimporte   from  trn_ing_potencia f
+    where f.emprcodi=a.emprcodi and f.pericodi = a.pericodi and f.ingpotversion = a.vtotemversion) as IP,
+    (select  e.SALEMPSALDO from  TRN_SALDO_EMPRESA e
+    where e.emprcodi=a.emprcodi and e.pericodi=a.pericodi and e.salempversion=a.vtotemversion) as SALDOTRANSMISION,
+    a.VTOTEMTOTAL
+    from trn_valor_total_empresa a where a.pericodi= :pericodi and a.vtotemversion = :vtotemversion
+  </query>
+</Sql>
+  
+  </Sqls>

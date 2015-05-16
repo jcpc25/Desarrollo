@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(barracodi), 0) + 1 from pr_barra
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into pr_barra(
+           barracodi,
+           barranomb,
+           barraabrev,
+           barratens,
+           barratensmin,
+           barratensmax,
+           barranivel
+       )
+       values(
+           :barracodi,
+           :barranomb,
+           :barraabrev,
+           :barratens,
+           :barratensmin,
+           :barratensmax,
+           :barranivel
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update pr_barra
+       set
+           barranomb = :barranomb,
+           barraabrev = :barraabrev,
+           barratens = :barratens,
+           barratensmin = :barratensmin,
+           barratensmax = :barratensmax,
+           barranivel = :barranivel
+       where
+           barracodi = :barracodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from pr_barra
+       where
+           barracodi = :barracodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           barracodi,
+           barranomb,
+           barraabrev,
+           barratens,
+           barratensmin,
+           barratensmax,
+           barranivel
+       where
+           barracodi = :barracodi
+       from
+           pr_barra
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           barracodi,
+           barranomb,
+           barraabrev,
+           barratens,
+           barratensmin,
+           barratensmax,
+           barranivel
+       from
+           pr_barra
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           barracodi,
+           barranomb,
+           barraabrev,
+           barratens,
+           barratensmin,
+           barratensmax,
+           barranivel
+       from
+           pr_barra
+    </query>
+  </Sql>
+</Sqls>

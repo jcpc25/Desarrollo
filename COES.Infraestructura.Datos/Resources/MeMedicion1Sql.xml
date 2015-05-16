@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into me_medicion1(
+           lectcodi,
+           medifecha,
+           tipoinfocodi,
+           ptomedicodi,
+           h1,
+           lastuser,
+           lastdate
+       )
+       values(
+           :lectcodi,
+           :medifecha,
+           :tipoinfocodi,
+           :ptomedicodi,
+           :h1,
+           :lastuser,
+           :lastdate
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update me_medicion1
+       set
+           h1 = :h1,
+           lastuser = :lastuser,
+           lastdate = :lastdate,
+           h1 = :h1,
+           lastuser = :lastuser,
+           lastdate = :lastdate
+       where
+           lectcodi = :lectcodi and
+           medifecha = :medifecha and
+           tipoinfocodi = :tipoinfocodi and
+           ptomedicodi = :ptomedicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from me_medicion1
+       where
+           lectcodi = :lectcodi and
+           medifecha = :medifecha and
+           tipoinfocodi = :tipoinfocodi and
+           ptomedicodi = :ptomedicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           lectcodi,
+           medifecha,
+           tipoinfocodi,
+           ptomedicodi,
+           h1,
+           lastuser,
+           lastdate
+       where
+           lectcodi = :lectcodi and
+           medifecha = :medifecha and
+           tipoinfocodi = :tipoinfocodi and
+           ptomedicodi = :ptomedicodi
+       from
+           me_medicion1
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           lectcodi,
+           medifecha,
+           tipoinfocodi,
+           ptomedicodi,
+           h1,
+           lastuser,
+           lastdate
+       from
+           me_medicion1
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           lectcodi,
+           medifecha,
+           tipoinfocodi,
+           ptomedicodi,
+           h1,
+           lastuser,
+           lastdate
+       from
+           me_medicion1
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>DeleteEnvioArchivo</key>
+    <query>
+      delete from me_medicion1 where lectcodi = {0} and medifecha >= to_date('{1}','YYYY-MM-DD') and
+      medifecha &lt;= to_date('{2}','YYYY-MM-DD') and ptomedicodi in (
+      select distinct hp.ptomedicodi from me_hojaptomed hp
+      inner join me_ptomedicion pto on pto.ptomedicodi = hp.ptomedicodi
+      where hp.formatcodi = {3} and pto.emprcodi = {4}
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetEnvioArchivo</key>
+    <query>
+      select me.* from me_medicion1 me
+      inner join me_hojaptomed hp on hp.ptomedicodi = me.ptomedicodi and hp.tipoinfocodi = me.tipoinfocodi
+      inner join me_formatohoja fh on fh.formatcodi = hp.formatcodi
+      inner join me_ptomedicion pto on pto.ptomedicodi = hp.ptomedicodi
+      where hp.formatcodi = {0} and pto.emprcodi = {1} and medifecha >= to_date('{2}','YYYY-MM-DD') AND
+      medifecha &lt;= to_date('{3}','YYYY-MM-DD')
+      order by hp.hojaptoorden asc
+    </query>
+  </Sql>
+  <Sql>
+    <key>GetHidrologia</key>
+    <query>
+      select
+      m1.*, tpto.tipoptomedinomb,eq.equinomb,ti.tipoinfoabrev
+      from
+      me_medicion1 m1
+      inner join me_ptomedicion pto on pto.ptomedicodi = m1.ptomedicodi
+      inner join eq_equipo eq on eq.equicodi = pto.equicodi
+      inner join me_tipoptomedicion tpto on tpto.tipoptomedicodi = pto.tipoptomedicodi
+      inner join si_tipoinformacion ti on ti.tipoinfocodi = m1.tipoinfocodi
+      inner join si_empresa empr on empr.emprcodi = eq.emprcodi
+      where m1.lectcodi = {0} and pto.origlectcodi = {1} and
+      (empr.emprcodi in ({2}) or '{2}' = '-1') and
+      m1.medifecha >= to_date('{3}','YYYY-MM-DD') AND
+      m1.medifecha &lt;= to_date('{4}','YYYY-MM-DD')
+    </query>
+  </Sql>
+</Sqls>

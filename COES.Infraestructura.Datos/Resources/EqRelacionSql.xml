@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+       select nvl(max(relacioncodi), 0) + 1 from eq_relacion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into eq_relacion(
+           relacioncodi,
+           equicodi,
+           codincp,
+           nombrencp,
+           codbarra,
+           idgener,
+           descripcion,
+           nombarra,
+           estado
+       )
+       values(
+           :relacioncodi,
+           :equicodi,
+           :codincp,
+           :nombrencp,
+           :codbarra,
+           :idgener,
+           :descripcion,
+           :nombarra,
+           :estado
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update eq_relacion
+       set
+           equicodi = :equicodi,
+           codincp = :codincp,
+           nombrencp = :nombrencp,
+           codbarra = :codbarra,
+           idgener = :idgener,
+           descripcion = :descripcion,
+           nombarra = :nombarra,
+           estado = :estado
+       where
+           relacioncodi = :relacioncodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from eq_relacion
+       where
+           relacioncodi = :relacioncodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           relacioncodi,
+           equicodi,
+           codincp,
+           nombrencp,
+           codbarra,
+           idgener,
+           descripcion,
+           nombarra,
+           estado
+       where
+           relacioncodi = :relacioncodi
+       from
+           eq_relacion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           relacioncodi,
+           equicodi,
+           codincp,
+           nombrencp,
+           codbarra,
+           idgener,
+           descripcion,
+           nombarra,
+           estado
+       from
+           eq_relacion
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           relacioncodi,
+           equicodi,
+           codincp,
+           nombrencp,
+           codbarra,
+           idgener,
+           descripcion,
+           nombarra,
+           estado
+       from
+           eq_relacion
+    </query>
+  </Sql>
+</Sqls>

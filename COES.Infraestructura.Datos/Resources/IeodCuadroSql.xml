@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select cuadro.*, empresa.emprcodi, empresa.emprnomb, area.areanomb, tipoarea.tareaabrev, equipo.equiabrev, equipo.equinomb, familia.famabrev
+      from eve_ieodcuadro cuadro
+      inner join eq_equipo equipo on cuadro.equicodi = equipo.equicodi
+      inner join si_empresa empresa on equipo.emprcodi = empresa.emprcodi
+      inner join eq_area area on equipo.areacodi = area.areacodi
+      inner join eq_tipoarea tipoarea on area.tareacodi = tipoarea.tareacodi
+      inner join eq_familia familia on equipo.famcodi = familia.famcodi
+      where cuadro.ichorini >= TO_DATE('{0} 00:00:00','YYYY-MM-DD HH24:MI:SS') and cuadro.ichorfin &lt;= TO_DATE('{1} 23:59:59','YYYY-MM-DD HH24:MI:SS')
+    and cuadro.subcausacodi in (318,319)
+  </query>
+  </Sql>
+
+  <Sql>
+    <key>SqlObtenerReporte</key>
+    <query>
+      select
+      case equicodi
+      when 1199 then 'URS-A-001'
+      when 22 then 'URS-A-002'
+      when 23 then 'URS-A-002'
+      when 25 then 'URS-A-002'
+      when 11571 then 'URS-A-003'
+      when 267 then 'URS-M-001'
+      when 264 then 'URS-M-001'
+      when 19 then 'URS-M-002'
+      when 24 then 'URS-M-002'
+      when 28 then 'URS-M-003'
+      when 29 then 'URS-M-003'
+      when 20 then 'URS-M-004'
+      when 21 then 'URS-M-004'
+      when 978 then 'URS-M-004'
+      when 12329 then 'URS-M-005'
+      when 18 then 'URS-M-006'
+      when 34 then 'URS-M-006'
+      when 35 then 'URS-M-006'
+      else  'URS' end  as rus,
+      (to_char(ichorini, 'HH24') || ':' || to_char(ichorini, 'MI') || '-' ||
+      to_char(ichorfin, 'HH24') || ':' || to_char(ichorfin, 'MI')) as hora,
+      cuadro.subcausacodi, ichorini, ichorfin, icvalor1
+      from eve_ieodcuadro cuadro
+      where cuadro.ichorini >= TO_DATE('{0} 00:00:00','YYYY-MM-DD HH24:MI:SS') and cuadro.ichorfin &lt;= TO_DATE('{1} 23:59:59','YYYY-MM-DD HH24:MI:SS')
+      and cuadro.subcausacodi in (318,319) and cuadro.icvalor1 > 0
+    </query>
+  </Sql>
+  
+  
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select maxcount + 1 from fw_counter where tablename = 'EVE_IEODCUADRO'
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into eve_ieodcuadro(iccodi,equicodi,subcausacodi,ichorini,ichorfin,iccheck1,icvalor1,lastuser,lastdate,evenclasecodi,iccheck2)
+      Values (:iccodi,:equicodi,:subcausacodi,:ichorini,:ichorfin,:iccheck1,:icvalor1,:lastuser,:lastdate,:evenclasecodi,:iccheck2)
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from eve_ieodcuadro
+      where ichorini >= TO_DATE('{0} 00:00:00','YYYY-MM-DD HH24:MI:SS') and ichorfin &lt;= TO_DATE('{0} 23:59:59','YYYY-MM-DD HH24:MI:SS')
+      and subcausacodi in (318,319)
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>UpdateCounter</key>
+    <query>
+      update fw_counter set maxcount = :maxcount
+      where tablename = 'EVE_IEODCUADRO'
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>ConfiguracionEquipo</key>
+    <query>
+      select empresa.emprnomb, empresa.emprcodi, area.areanomb, familia.famabrev, equipo.equiabrev, tipoarea.tareaabrev, equipo.equicodi
+      from eq_equipo equipo
+      inner join eq_area area on equipo.areacodi = area.areacodi
+      inner join eq_tipoarea tipoarea on area.tareacodi = tipoarea.tareacodi
+      inner join eq_familia familia on equipo.famcodi = familia.famcodi
+      inner join si_empresa empresa on equipo.emprcodi = empresa.emprcodi
+      where  equipo.equicodi in (1199,22,23,25,11571,267,264,19,24,28,29,20,21,978,12329,18,34,35)
+      order by equipo.equinomb asc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>ValidarExistencia</key>
+    <query>     
+      select a.* from eve_ieodcuadro a inner join eq_equipo b on (a.equicodi = b.equicodi or a.equicodi = b.equipadre)
+      inner join me_ptomedicion c on b.equicodi = c.equicodi
+      where a.subcausacodi = 319 and c.ptomedicodi = {0} and a.icvalor1 > 0 and
+      ((a.ichorini &lt;= to_date('{1}','YYYY-MM-DD HH24:MI:SS') and a.ichorfin >= to_date('{1}','YYYY-MM-DD HH24:MI:SS'))
+      or
+      (a.ichorini &lt;= to_date('{2}','YYYY-MM-DD HH24:MI:SS') and a.ichorfin >= to_date('{2}','YYYY-MM-DD HH24:MI:SS')))      
+    </query>
+  </Sql>  
+  
+</Sqls>

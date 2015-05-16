@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into eve_evenclase(
+           evenclasecodi,
+           evenclasedesc,
+           tipoevencodi,
+           evenclasetipo,
+           evenclaseabrev,
+           evenclasecodi,
+           evenclasedesc,
+           tipoevencodi,
+           evenclasetipo,
+           evenclaseabrev
+       )
+       values(
+           :evenclasecodi,
+           :evenclasedesc,
+           :tipoevencodi,
+           :evenclasetipo,
+           :evenclaseabrev,
+           :evenclasecodi,
+           :evenclasedesc,
+           :tipoevencodi,
+           :evenclasetipo,
+           :evenclaseabrev
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update eve_evenclase
+       set
+           evenclasedesc = :evenclasedesc,
+           tipoevencodi = :tipoevencodi,
+           evenclasetipo = :evenclasetipo,
+           evenclaseabrev = :evenclaseabrev,
+           evenclasedesc = :evenclasedesc,
+           tipoevencodi = :tipoevencodi,
+           evenclasetipo = :evenclasetipo,
+           evenclaseabrev = :evenclaseabrev
+       where
+           evenclasecodi = :evenclasecodi and
+           evenclasecodi = :evenclasecodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from eve_evenclase
+       where
+           evenclasecodi = :evenclasecodi and
+           evenclasecodi = :evenclasecodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           evenclasecodi,
+           evenclasedesc,
+           tipoevencodi,
+           evenclasetipo,
+           evenclaseabrev,
+           evenclasecodi,
+           evenclasedesc,
+           tipoevencodi,
+           evenclasetipo,
+           evenclaseabrev
+       where
+           evenclasecodi = :evenclasecodi and
+           evenclasecodi = :evenclasecodi
+       from
+           eve_evenclase
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           evenclasecodi,
+           evenclasedesc,
+           tipoevencodi,
+           evenclasetipo,
+           evenclaseabrev,
+           evenclasecodi,
+           evenclasedesc,
+           tipoevencodi,
+           evenclasetipo,
+           evenclaseabrev
+       from
+           eve_evenclase
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           evenclasecodi,
+           evenclasedesc,
+           tipoevencodi,
+           evenclasetipo,
+           evenclaseabrev,
+           evenclasecodi,
+           evenclasedesc,
+           tipoevencodi,
+           evenclasetipo,
+           evenclaseabrev
+       from
+           eve_evenclase
+    </query>
+  </Sql>
+</Sqls>

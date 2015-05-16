@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into en_formato(
+           formatocodi,
+           formatodesc,
+           tipoarchivo
+       )
+       values(
+           :formatocodi,
+           :formatodesc,
+           :tipoarchivo
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update en_formato
+       set
+           formatocodi = :formatocodi,
+           formatodesc = :formatodesc,
+           tipoarchivo = :tipoarchivo
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from en_formato
+       where
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           formatocodi,
+           formatodesc,
+           tipoarchivo
+       where
+       from
+           en_formato
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           formatocodi,
+           formatodesc,
+           tipoarchivo
+       from
+           en_formato
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           formatocodi,
+           formatodesc,
+           tipoarchivo
+       from
+           en_formato
+    </query>
+  </Sql>
+</Sqls>

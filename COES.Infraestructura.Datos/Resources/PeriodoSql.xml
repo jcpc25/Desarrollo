@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Sqls>
+  <Sql>
+    <key>GetById</key>
+    <query>select * from trn_periodo where pericodi = :pericodi</query>
+  </Sql>
+
+  <Sql>
+    <key>Save</key>
+    <query>
+      insert into trn_periodo
+      (
+      pericodi, perinombre,perianio,perimes, perifechavalorizacion, perifechalimite, perifechaobservacion,
+      periestado, periusername, perifecins, perianiomes, perihoralimite
+      )
+      values
+      (
+      :pericodi, :perinombre, :perianio, :perimes, :perifechavalorizacion, :perifechalimite, :perifechaobservacion,
+      :periestado, :periusername, :perifecins, :perianiomes, :perihoralimite
+      )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+      update trn_periodo
+      set
+      perinombre = :perinombre,
+      perianio = :perianio,
+      perimes = :perimes,
+      perifechavalorizacion = :perifechavalorizacion,
+      perifechalimite = :perifechalimite,
+      perifechaobservacion = :perifechaobservacion,
+      periestado = :periestado,
+      perifecact = :perifecact,
+      perianiomes = :perianiomes,
+      perihoralimite=:perihoralimite
+      where
+      pericodi = :pericodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+      delete from trn_periodo where pericodi = :pericodi
+    </query>
+  </Sql>
+
+  <Sql>
+		<key>List</key>
+		<query>
+      select * from trn_periodo
+      order by perianio desc, perimes desc
+    </query>
+	</Sql>
+
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+      select * from trn_periodo where (perinombre like '%' + :perinombre + '%' or :perinombre is null)
+      order by perianio desc, perimes desc
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetMaxId</key>
+    <query>
+      select nvl(max(pericodi), 0) + 1 from trn_periodo
+    </query>
+  </Sql>
+</Sqls>
+

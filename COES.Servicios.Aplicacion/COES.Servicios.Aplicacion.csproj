@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5FF9CD43-AB2F-42F2-B8B2-0D2C95EF41B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>COES.Servicios.Aplicacion</RootNamespace>
+    <AssemblyName>COES.Servicios.Aplicacion</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EPPlus, Version=4.0.1.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPPlus.4.0.1.1\lib\net20\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Combustibles\CombustibleAppServicio.cs" />
+    <Compile Include="Despacho\DespachoAppServicio.cs" />
+    <Compile Include="Despacho\PrCombustibleAppServicio.cs" />
+    <Compile Include="Ensayo\EnsayoAppServicio.cs" />
+    <Compile Include="Equipamiento\EquipamientoAppServicio.cs" />
+    <Compile Include="Eventos\AnalisisFallasAppServicio.cs" />
+    <Compile Include="Eventos\EventoAppServicio.cs" />
+    <Compile Include="Eventos\HoraOperacionAppServicio.cs" />
+    <Compile Include="Eventos\MantenimientoAppServicio.cs" />
+    <Compile Include="Factory\FactoryScada.cs" />
+    <Compile Include="Factory\FactorySic.cs" />
+    <Compile Include="Factory\FactoryTransferencia.cs" />
+    <Compile Include="General\DesviacionAppServicio.cs" />
+    <Compile Include="General\GeneralAppServicio.cs" />
+    <Compile Include="General\PruebaAppServicio.cs" />
+    <Compile Include="Helper\Constantes.cs" />
+    <Compile Include="Helper\Util.cs" />
+    <Compile Include="HidraulicoRPF\RpfEnergiaPotenciaAppServicio.cs" />
+    <Compile Include="Hidrologia\HidrologiaAppServicio.cs" />
+    <Compile Include="Mantto\ManttoAppServicio.cs" />
+    <Compile Include="Mediciones\ConsultaMedidoresAppServicio.cs" />
+    <Compile Include="Mediciones\GeneracionRERAppServicio.cs" />
+    <Compile Include="Mediciones\MedidoresAppServicio.cs" />
+    <Compile Include="Mediciones\ReporteMedidoresAppServicio.cs" />
+    <Compile Include="Mediciones\ValidacionReporteAppServicio.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scada\PerfilScadaServicio.cs" />
+    <Compile Include="ServicioRPF\ConfiguracionRPF.cs" />
+    <Compile Include="ServicioRPF\RpfAppServicio.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioArea.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioBarra.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioCentralGeneracion.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioCodigoEntrega.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioCodigoRetiro.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioCodigoRetiroSinContrato.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioCompensacion.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioCostoMarginal.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioEmpresa.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioEmpresaPago.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioExportarExcel.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioExportarExcelG.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioFactorPerdida.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioInfoDesbalance.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioInfoDesviacion.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioInfoFaltante.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioInformePreliminar.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioIngresoCompensacion.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioIngresoPotencia.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioIngresoRetiroSC.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioPeriodo.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioRatioCumplimiento.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioRecalculo.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioSaldoCodigoRetiroSC.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioSaldoEmpresa.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioTipoContrato.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioTipoEmpresa.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioTipoTramite.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioTipoUsuario.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioTramite.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioValorTotalEmpresa.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioValorTransferencia.cs" />
+    <Compile Include="Transferencias\GeneralAppServicioValorTransferenciaEmpresa.cs" />
+    <Compile Include="Transferencias\GerenalAppServicioTransferenciaEntrega.cs" />
+    <Compile Include="Transferencias\GerenalAppServicioTransferenciaEntregaDetalle.cs" />
+    <Compile Include="Transferencias\GerenalAppServicioTransferenciaRetiro.cs" />
+    <Compile Include="Transferencias\GerenalAppServicioTransferenciaRetiroDetalle.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\COES.Base\COES.Base.csproj">
+      <Project>{2f0b7b6a-0c6a-42b2-8c44-11697cf04242}</Project>
+      <Name>COES.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COES.Dominio.DTO\COES.Dominio.DTO.csproj">
+      <Project>{28fff8f3-12ce-41b1-839b-2fd36d3c50a8}</Project>
+      <Name>COES.Dominio.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COES.Dominio.Interfaces\COES.Dominio.Interfaces.csproj">
+      <Project>{64357c3c-6730-4361-9c9a-93778920d054}</Project>
+      <Name>COES.Dominio.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COES.Infraestructura.Datos\COES.Infraestructura.Datos.csproj">
+      <Project>{71a87dd1-8424-4516-92f6-559bd0eca8ff}</Project>
+      <Name>COES.Infraestructura.Datos</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

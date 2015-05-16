@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into md_cambioenvio(
+           tipoinfocodi,
+           enviocodiold,
+           medifecha,
+           ptomedicodi,
+           enviocodinew,
+           cmbvalorold,
+           cmbvalornew
+       )
+       values(
+           :tipoinfocodi,
+           :enviocodiold,
+           :medifecha,
+           :ptomedicodi,
+           :enviocodinew,
+           :cmbvalorold,
+           :cmbvalornew
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update md_cambioenvio
+       set
+           enviocodinew = :enviocodinew,
+           cmbvalorold = :cmbvalorold,
+           cmbvalornew = :cmbvalornew
+       where
+           tipoinfocodi = :tipoinfocodi and
+           enviocodiold = :enviocodiold and
+           medifecha = :medifecha and
+           ptomedicodi = :ptomedicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from md_cambioenvio
+       where
+           tipoinfocodi = :tipoinfocodi and
+           enviocodiold = :enviocodiold and
+           medifecha = :medifecha and
+           ptomedicodi = :ptomedicodi
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           tipoinfocodi,
+           enviocodiold,
+           medifecha,
+           ptomedicodi,
+           enviocodinew,
+           cmbvalorold,
+           cmbvalornew
+       where
+           tipoinfocodi = :tipoinfocodi and
+           enviocodiold = :enviocodiold and
+           medifecha = :medifecha and
+           ptomedicodi = :ptomedicodi
+       from
+           md_cambioenvio
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           tipoinfocodi,
+           enviocodiold,
+           medifecha,
+           ptomedicodi,
+           enviocodinew,
+           cmbvalorold,
+           cmbvalornew
+       from
+           md_cambioenvio
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           tipoinfocodi,
+           enviocodiold,
+           medifecha,
+           ptomedicodi,
+           enviocodinew,
+           cmbvalorold,
+           cmbvalornew
+       from
+           md_cambioenvio
+    </query>
+  </Sql>
+</Sqls>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sqls>
+
+
+  <Sql>
+    <key>Save</key>
+    <query>
+       insert into eq_famrel(
+           tiporelcodi,
+           famcodi1,
+           famcodi2,
+           famnumconec,
+           famreltension
+       )
+       values(
+           :tiporelcodi,
+           :famcodi1,
+           :famcodi2,
+           :famnumconec,
+           :famreltension
+       )
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Update</key>
+    <query>
+       update eq_famrel
+       set
+           famnumconec = :famnumconec,
+           famreltension = :famreltension
+       where
+           tiporelcodi = :tiporelcodi and
+           famcodi1 = :famcodi1 and
+           famcodi2 = :famcodi2
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>Delete</key>
+    <query>
+       delete from eq_famrel
+       where
+           tiporelcodi = :tiporelcodi and
+           famcodi1 = :famcodi1 and
+           famcodi2 = :famcodi2
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetById</key>
+    <query>
+       select
+           tiporelcodi,
+           famcodi1,
+           famcodi2,
+           famnumconec,
+           famreltension
+       where
+           tiporelcodi = :tiporelcodi and
+           famcodi1 = :famcodi1 and
+           famcodi2 = :famcodi2
+       from
+           eq_famrel
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>List</key>
+    <query>
+       select
+           tiporelcodi,
+           famcodi1,
+           famcodi2,
+           famnumconec,
+           famreltension
+       from
+           eq_famrel
+    </query>
+  </Sql>
+
+  <Sql>
+    <key>GetByCriteria</key>
+    <query>
+       select
+           tiporelcodi,
+           famcodi1,
+           famcodi2,
+           famnumconec,
+           famreltension
+       from
+           eq_famrel
+    </query>
+  </Sql>
+</Sqls>
