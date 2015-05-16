@@ -1,0 +1,12 @@
+D:\Solucion\FrameworkCOES\Framework COES\COES.Base\bin\Debug\COES.Framework.Base.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Base\bin\Debug\COES.Framework.Base.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.Base\obj\Debug\COES.Framework.Base.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.Base\obj\Debug\COES.Framework.Base.pdb
+D:\Proyectos\COES-APP\COES.Base\bin\Debug\COES.Framework.Base.dll
+D:\Proyectos\COES-APP\COES.Base\bin\Debug\COES.Framework.Base.pdb
+D:\Proyectos\COES-APP\COES.Base\obj\Debug\COES.Framework.Base.dll
+D:\Proyectos\COES-APP\COES.Base\obj\Debug\COES.Framework.Base.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Base\bin\Debug\COES.Framework.Base.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Base\bin\Debug\COES.Framework.Base.pdb
+D:\COES\HIDROLOGIA\COES - APP\COES.Base\obj\Debug\COES.Framework.Base.dll
+D:\COES\HIDROLOGIA\COES - APP\COES.Base\obj\Debug\COES.Framework.Base.pdb
