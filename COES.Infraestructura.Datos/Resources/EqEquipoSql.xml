@@ -408,7 +408,7 @@
   <Sql>
     <key>ListaRecursosxCuenca</key>
     <query>
-      select fam.famnomb ,eq.equinomb from eq_equipo eq
+      select eq.*, fam.famnomb from eq_equipo eq
       inner join eq_familia fam on fam.famcodi = eq.famcodi
       where eq.equipadre = {0}
     </query>
