@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b4d54d31-4fa7-47cf-8134-a29ec0867cf4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://sicoes.coes.org.pe:8081/wsSICOES/wsDemanda.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="wsDemanda.xsd" MetadataType="Schema" ID="157d0b32-54e9-4a7d-8095-65c3339f473b" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsSICOES/wsDemanda.svc?xsd=xsd3" />
+    <MetadataFile FileName="wsDemanda1.xsd" MetadataType="Schema" ID="b746a810-f235-4e63-a7ce-19ca9fd4a059" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsSICOES/wsDemanda.svc?xsd=xsd2" />
+    <MetadataFile FileName="wsDemanda2.xsd" MetadataType="Schema" ID="5b327002-1ef2-482e-b6e6-4c22354a3615" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsSICOES/wsDemanda.svc?xsd=xsd1" />
+    <MetadataFile FileName="wsDemanda3.xsd" MetadataType="Schema" ID="b27b503e-fea6-43ba-928a-eb9d85775ec1" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsSICOES/wsDemanda.svc?xsd=xsd0" />
+    <MetadataFile FileName="wsDemanda4.xsd" MetadataType="Schema" ID="d3c17604-a182-4c7c-8b15-71119f2e8fd9" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsSICOES/wsDemanda.svc?xsd=xsd4" />
+    <MetadataFile FileName="Demanda.wsdl" MetadataType="Wsdl" ID="8c86beb2-acda-40d2-aafb-2079afa8bb05" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsSICOES/wsDemanda.svc?wsdl" />
+    <MetadataFile FileName="wsDemanda.disco" MetadataType="Disco" ID="db6b733a-ada2-4491-b1c8-75302f39c52a" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsSICOES/wsDemanda.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

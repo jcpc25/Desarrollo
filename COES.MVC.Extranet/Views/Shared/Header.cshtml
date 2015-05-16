@@ -1,0 +1,58 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $('#CerrarSesion').click(function () {
+            confirmOperacion();
+        });
+
+        $('#btnOkCerrarSesion').click(function () {
+            $.ajax({
+                type: "POST",
+                url: initialURL + "/home/CerrarSesion",
+                cache: false,
+                dataType: 'json',
+                success: function (evt) {                  
+                    location.href = initialURL + "/webform/Account/login.aspx";
+                },
+                error: function (req, status, error) {
+                    alert("Ha ocurrido un error.");
+                }
+            });
+        });
+
+        $('#btnCancelCerrarSesion').click(function () {
+            $('#confirmarClose').bPopup().close();
+        });
+    });
+
+    function confirmOperacion() {
+        $('#confirmarClose').bPopup({
+            easing: 'easeOutBack',
+            speed: 450,
+            transition: 'slideDown'
+        });
+    }
+</script>
+
+<div class="header">
+     <div class="header-content">
+         <div class="logo">            
+             <div class="logo-text">EXTRANET SGO-COES</div>
+             <div class="logo-user">Bienvenido: @ViewBag.UserName</div> 
+         </div>
+         <div class="header-action">                    
+             <div class="header-action-item"><a href="http://www.coes.org.pe">Portal Web</a></div>
+             <div class="header-action-item"><a href="#" id="CerrarSesion">Salir</a></div>                         
+         </div>
+     </div>
+</div>
+
+<div id="confirmarClose">
+    <div class="popup-title"><span>Confirmar Operación</span></div>
+    <div class="popup-text">
+        ¿Está seguro de cerrar sesión?
+    </div>
+    <div class="formulario-boton">
+        <input id="btnOkCerrarSesion" type="button" value="Aceptar" />
+        <input id="btnCancelCerrarSesion" type="button" value="Cancelar" />
+    </div>  
+</div>

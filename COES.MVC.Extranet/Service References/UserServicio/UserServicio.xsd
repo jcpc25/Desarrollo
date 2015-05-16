@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="www.coes.org.pe" elementFormDefault="qualified" targetNamespace="www.coes.org.pe" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://sgocoes/wsCOESGeneral/UserServicio.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/COES.Aplicacion.General.DTO" />
+  <xs:element name="ListarTodosUsuarios">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarTodosUsuariosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/COES.Aplicacion.General.DTO" minOccurs="0" name="ListarTodosUsuariosResult" nillable="true" type="q1:ArrayOfUserDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarUsuariosxArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="iAreaId" type="xs:short" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarUsuariosxAreaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/COES.Aplicacion.General.DTO" minOccurs="0" name="ListarUsuariosxAreaResult" nillable="true" type="q2:ArrayOfUserDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarUsuariosxCompania">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sCompaniaId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarUsuariosxCompaniaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/COES.Aplicacion.General.DTO" minOccurs="0" name="ListarUsuariosxCompaniaResult" nillable="true" type="q3:ArrayOfUserDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarUsuariosxNombre">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="indicePagina" type="xs:int" />
+        <xs:element minOccurs="0" name="coincidencia" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="totalPaginas" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarUsuariosxNombreResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/COES.Aplicacion.General.DTO" minOccurs="0" name="ListarUsuariosxNombreResult" nillable="true" type="q4:ArrayOfUserDTO" />
+        <xs:element minOccurs="0" name="totalPaginas" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TraerUsuario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="iUsuarioId" type="xs:short" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TraerUsuarioResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/COES.Aplicacion.General.DTO" minOccurs="0" name="TraerUsuarioResult" nillable="true" type="q5:UserDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TraerUsuarioxLogin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sLogin" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TraerUsuarioxLoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/COES.Aplicacion.General.DTO" minOccurs="0" name="TraerUsuarioxLoginResult" nillable="true" type="q6:UserDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

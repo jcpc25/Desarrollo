@@ -1,0 +1,237 @@
+﻿@model COES.MVC.Extranet.Models.GeneracionRERModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Content/Scripts/plupload.full.min.js"></script>
+<script src="~/Content/Scripts/generacionrer.js"></script>
+
+<div class="form-title">GENERACIÓN RER - CARGA DE DATOS</div>
+
+<div style="float:right; margin-right:40px">
+    <a style="color:#0094ff; font-weight:bold; text-decoration:none" href="http://contenido.coes.org.pe/alfrescostruts/download.do?nodeId=2fa11601-31da-4c9c-8bae-02e5c5d2d9fd" target="_blank">Descargar Manual de Usuario</a>
+</div>
+<div style="clear:both"></div>
+
+<div class="form-main">
+    <table>
+        <tr>
+            <td valign="top">
+                <div class="action-message" id="mensaje">
+                    Complete los datos, seleccione y procese archivo.
+                </div>
+                <div class="form-content">
+                    <div class="form-item">
+                        <div class="form-label">Empresa:</div>
+                        <div class="form-control">
+                            <select id="cbEmpresa">
+                                @if (Model.ListaEmpresas.Count > 0)
+                                {
+                                    if (Model.ListaEmpresas.Count > 1)
+                                    {
+                                        <option value="">-SELECCIONE-</option>
+                                    }
+                                    foreach (var item in Model.ListaEmpresas)
+                                    {
+                                        <option value="@item.EMPRCODI">@item.EMPRNOMB</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="">-SELECCIONE-</option>
+                                }
+
+                            </select>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div class="form-item">
+                        <div class="form-label">Horizonte de tiempo:</div>
+                        <div class="form-control">
+                            <select id="cbHorizonte">
+                                <option value="0">DIARIO</option>
+                                <option value="1">SEMANAL</option>
+                            </select>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div class="form-item" id="cntFecha">
+                        <div class="form-label">Fecha:</div>
+                        <div class="form-control">
+                            <input type="text" id="txtFecha" value="@Model.Fecha" />
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div class="form-item" id="cntSemana" style="display:none">
+                        <div class="form-label">Semana:</div>
+                        <div class="form-control">
+                            <select id="cbSemana">
+                                <option value="">-SELECCIONE-</option>
+                                @{
+                                    int i = 1;
+                                    foreach (var item in Model.ListaSemanas)
+                                    {
+                                        if(Model.NroSemana == i)
+                                        {
+                                            <option value="@i" selected="selected">@item</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@i">@item</option>
+                                        }
+
+                                        i++;
+                                    }
+}
+                            </select>
+                            <input type="hidden" id="hfSemana" value="@Model.NroSemana" />
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="form-label">Archivo (Extensión: .xlsx o .xls, Peso Max: 3MB ):</div>
+                        <div class="form-control">
+                            <a id="btnSelectFile" href="javascript:;">
+                                <img src="~/Content/Images/btnFile.png" />
+                            </a>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div id="fileInfo"></div>
+                    <div id="container" class="contaniner-btn" style="text-align:center; margin-top:10px;">
+                        <a id="btnProcesarFile" href="javascript:;">
+                            <img src="~/Content/Images/btnProcesar.png" />
+                        </a>
+                    </div>
+
+                    <script type="text/javascript">
+
+                        var uploader = new plupload.Uploader({
+                            runtimes: 'html5,flash,silverlight,html4',
+                            browse_button: 'btnSelectFile',
+                            container: document.getElementById('container'),
+                            url: siteRoot + 'generacionrer/Upload',
+                            flash_swf_url: 'Scripts/Moxie.swf',
+                            silverlight_xap_url: 'Scripts/Moxie.xap',
+                            multi_selection: false,
+                            filters: {
+                                max_file_size: '3mb',
+                                mime_types: [
+                                    { title: "Archivos Excel .xlsx", extensions: "xlsx" }
+                                ]
+                            },
+                            init: {
+                                PostInit: function () {
+                                    document.getElementById('btnProcesarFile').onclick = function () {
+                                        if (uploader.files.length > 0) {
+                                            var valida = validacion();
+                                            if (valida == "") {
+                                                cargarEtapa();
+                                                limpiarMensaje();
+                                                uploader.start();
+
+                                            }
+                                            else
+                                            {
+                                                mostrarAlerta(valida);
+                                            }
+                                        }
+                                        else
+                                            loadValidacionFile("Seleccione archivo.");
+                                        return false;
+                                    };
+                                },
+                                FilesAdded: function (up, files) {
+                                    if (uploader.files.length == 2) {
+                                        uploader.removeFile(uploader.files[0]);
+                                    }
+                                    plupload.each(files, function (file) {
+                                        loadInfoFile(file.name, plupload.formatSize(file.size));
+                                    });
+                                    limpiarTodo();
+                                    limpiarMensaje();
+                                    $('#consulta').html("");
+                                    $('#btnProcesarFile').css('display', 'block');
+                                    up.refresh();
+                                },
+                                UploadProgress: function (up, file) {
+                                    mostrarProgreso(file.percent);
+                                },
+                                UploadComplete: function (up, file) {
+                                    validarArchivo();
+                                },
+                                Error: function (up, err) {
+                                    loadValidacionFile(err.code + "-" + err.message);
+                                }
+                            }
+                        });
+
+                        uploader.init();
+
+                    </script>
+                </div>
+            </td>
+            <td style="width:40px"></td>
+            <td valign="top">
+                <div class="content-download">
+                    <strong>Descargar formato</strong>
+                    <br />
+                    <br />
+                    Por favor seleccione la empresa y luego <a href="JavaScript:descargarFormato();">presione aquí</a> para poder descargar el formato.
+                    No cambie los códigos incluidos en el formato ya que son necesarios para realizar la carga.
+                </div>
+
+                <div id="fechasSemana" style="display:none">
+                    <strong>Fecha inicio:</strong>
+                    <span id="txtFechaInicio">@Model.FechaInicio</span>
+
+                    <strong>Fecha fin:</strong>
+                    <span id="txtFechaFin">@Model.FechaFin</span>
+                </div>
+
+                <div id="contentPlazo" style="width:400px;" class="texto-alerta">
+                    @Model.ValidacionPlazo
+                </div>
+
+            </td>
+        </tr>
+    </table>
+
+    <div class="etapa-content" id="contentEtapa" style="display:none">
+        <div class="etapa-item">
+            <div class="etapa-label">1. Subir el archivo:</div>
+            <div class="etapa-control"><div id="percentCargaArchivo"></div></div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="etapa-item">
+            <div class="etapa-label">2. Validación del Formato:</div>
+            <div class="etapa-control">
+                <div id="percentValidacion"></div>
+                <div id="validacion"></div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="etapa-item">
+            <div class="etapa-label">3. Grabado de datos:</div>
+            <div class="etapa-control">
+                <div id="percentGrabado"></div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div id="consulta">
+
+    </div>
+
+
+
+
+</div>
+
+<div id="validaciones">
+    <span class="button b-close"><span>X</span></span>
+    <div class="popup-title"><span>Validación de datos</span></div>
+    <div id="validacionDatos"></div>
+</div>

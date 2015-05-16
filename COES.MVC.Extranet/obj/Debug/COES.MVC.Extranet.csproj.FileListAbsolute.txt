@@ -1,0 +1,76 @@
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Net.Http.Formatting.xml
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.Helpers.xml
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.Http.xml
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.Http.WebHost.xml
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.Razor.xml
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.WebPages.xml
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.WebPages.Deployment.xml
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.WebPages.Razor.xml
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.MVC.Extranet.dll.config
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.MVC.Extranet.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.MVC.Extranet.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.Dominio.DTO.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.Framework.Base.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.Servicios.Aplicacion.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\EPPlus.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\Microsoft.Web.Infrastructure.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\Newtonsoft.Json.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Net.Http.Formatting.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.Helpers.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.Http.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.Http.WebHost.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.Razor.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.WebPages.Deployment.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.WebPages.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\System.Web.WebPages.Razor.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\log4net.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.Dominio.Interfaces.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.Infraestructura.Datos.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\Microsoft.Practices.ServiceLocation.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\Microsoft.Practices.Unity.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\Microsoft.Practices.Unity.Interception.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.Framework.Base.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.Dominio.DTO.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.Servicios.Aplicacion.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\EPPlus.xml
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.Dominio.Interfaces.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\bin\COES.Infraestructura.Datos.pdb
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\obj\Debug\COES.MVC.Extranet.csprojResolveAssemblyReference.cache
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\obj\Debug\COES.MVC.Extranet.dll
+D:\Solucion\FrameworkCOES\Framework COES\COES.MVC.Extranet\obj\Debug\COES.MVC.Extranet.pdb
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.MVC.Extranet.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.MVC.Extranet.pdb
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.Dominio.DTO.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.Framework.Base.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.Servicios.Aplicacion.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\EPPlus.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\Microsoft.Web.Infrastructure.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\Newtonsoft.Json.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\System.Web.Helpers.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\System.Web.Razor.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\System.Web.WebPages.Deployment.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\System.Web.WebPages.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\System.Web.WebPages.Razor.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\log4net.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.Dominio.Interfaces.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.Infraestructura.Datos.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\Microsoft.Practices.ServiceLocation.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\Microsoft.Practices.Unity.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\Microsoft.Practices.Unity.Interception.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.Framework.Base.pdb
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.Dominio.DTO.pdb
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.Servicios.Aplicacion.pdb
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\System.Web.Helpers.xml
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\System.Web.Razor.xml
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\System.Web.WebPages.xml
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\System.Web.WebPages.Deployment.xml
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\System.Web.WebPages.Razor.xml
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.Dominio.Interfaces.pdb
+D:\Proyectos\COES-APP\COES.MVC.Extranet\bin\COES.Infraestructura.Datos.pdb
+D:\Proyectos\COES-APP\COES.MVC.Extranet\obj\Debug\COES.MVC.Extranet.csprojResolveAssemblyReference.cache
+D:\Proyectos\COES-APP\COES.MVC.Extranet\obj\Debug\COES.MVC.Extranet.dll
+D:\Proyectos\COES-APP\COES.MVC.Extranet\obj\Debug\COES.MVC.Extranet.pdb

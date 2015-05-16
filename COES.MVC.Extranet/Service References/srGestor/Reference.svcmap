@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1c57c5b5-8bf6-4bed-a840-9411a61da0f2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://sicoes.coes.org.pe:8081/wsxcms/wsGC.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="wsGC.xsd" MetadataType="Schema" ID="07afc04e-872e-4ee7-8f37-244a5d59ea31" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsxcms/wsGC.svc?xsd=xsd3" />
+    <MetadataFile FileName="CMSManager.wsdl" MetadataType="Wsdl" ID="0b645928-2136-4ae1-801d-77adc9031648" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsxcms/wsGC.svc?wsdl" />
+    <MetadataFile FileName="wsGC1.xsd" MetadataType="Schema" ID="4168f582-a4aa-4c0a-a3e7-ea498211db63" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsxcms/wsGC.svc?xsd=xsd1" />
+    <MetadataFile FileName="wsGC2.xsd" MetadataType="Schema" ID="8adafb8c-b941-4b73-8c4d-f8b0d8075b5f" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsxcms/wsGC.svc?xsd=xsd0" />
+    <MetadataFile FileName="wsGC3.xsd" MetadataType="Schema" ID="755ce792-a607-4d49-9b0a-b6444a0a59ff" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsxcms/wsGC.svc?xsd=xsd2" />
+    <MetadataFile FileName="wsGC.disco" MetadataType="Disco" ID="2828630c-954e-440f-8ea8-9547da57bc2a" SourceId="1" SourceUrl="http://sicoes.coes.org.pe:8081/wsxcms/wsGC.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

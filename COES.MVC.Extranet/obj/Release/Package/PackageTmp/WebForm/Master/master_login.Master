@@ -1,0 +1,67 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="~/WebForm/Master/master_login.Master.cs" Inherits="WSIC2010.master_login" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="../Styles/base.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/login.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/marco_app.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/marco_base_fin.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/marco_filas.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/marco_basico.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/marco_general.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/marco_menu_fin.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/marco_root.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/marco_sistema.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/marco_web.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/root.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/sistema.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/Site3.css" type="text/css" rel="Stylesheet"/>
+    <link href="../Styles/wcoes.css" type="text/css" rel="Stylesheet"/>
+    <style type="text/css">
+        body
+        {
+            background-color:#fff;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"/>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="marco_base_top_head" style="background-color:#465c71">
+        <div class="marco_base_top_a">
+            <div class="marco_base_top_titulo">
+                 <label class="titulo_master">Extranet SGO-COES</label>
+                 <h4><asp:Label ID="LabelUserName" runat="server" Text=""></asp:Label></h4>
+            </div>
+        </div>
+        <div class="marco_base_top_qlink">
+            <div class="marco_top_basic_qlink" style="background-color:#a6c9ed;">
+                 <asp:LinkButton ID="LinkButtonLogin" runat="server" onclick="LinkButtonLogin_Click">Ingresar</asp:LinkButton>
+                 <asp:LinkButton ID="LinkButtonLogout" runat="server" onclick="LinkButtonLogout_Click" Visible="false">Salir</asp:LinkButton>
+                 <asp:HyperLink ID="enlaceWeb" runat="server" NavigateUrl="http://www.coes.org.pe" Target="_blank">Portal Web</asp:HyperLink>
+                 <asp:HyperLink ID="enlacesst_sct" runat="server" NavigateUrl="http://sicoes.coes.org.pe/appext/SSTSCT/" Target="_blank">SST-SCT</asp:HyperLink>
+            </div>
+        </div>
+    </div>
+    <div class="marco_base_main">
+            <div class="marco_sistema_menu">
+                
+            </div>
+            <br />
+            <div class="marco-padding">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            </div>
+    </div>
+    <div class="marco_base_pie">
+                <div class="marco_base_pie_main">
+                    <span>COES © Todos los derechos reservados</span>
+                    <br />
+                    <span>C. Manuel Roaud y Paz Soldan 364. San Isidro, Lima - PERÚ Teléfono: (511) 611-8585</span>
+                </div>
+            </div>
+    </form>
+</body>
+</html>

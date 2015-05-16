@@ -1,0 +1,135 @@
+﻿@model COES.MVC.Extranet.Models.GeneracionRERModel
+
+@{
+    ViewBag.Title = "Consulta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Content/Scripts/consultarer.js"></script>
+
+<div class="form-title">GENERACIÓN RER - CONSULTA DE DATOS</div>
+
+<div class="form-main">     
+   
+    <div class="action-message" id="mensaje">
+        Por favor complete los datos.
+    </div>
+
+    <div class="form-content">
+        <div class="form-item">
+            <div class="form-label">Empresa:</div>
+            <div class="form-control">
+                <select id="cbEmpresa">
+                    @if (Model.ListaEmpresas.Count > 0)
+                    {
+                        if (Model.ListaEmpresas.Count > 1)
+                        {
+                            <option value="">-SELECCIONE-</option>
+                        }
+                        foreach (var item in Model.ListaEmpresas)
+                        {
+                            <option value="@item.EMPRCODI">@item.EMPRNOMB</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="">-SELECCIONE-</option>
+                    }
+
+                </select>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="form-item">
+            <div class="form-label">Horizonte de tiempo:</div>
+            <div class="form-control">
+                <select id="cbHorizonte">
+                    <option value="0">DIARIO</option>
+                    <option value="1">SEMANAL</option>
+                </select>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="form-item" id="cntFecha">
+            <div class="form-label">Fecha:</div>
+            <div class="form-control">
+                <input type="text" id="txtFecha" value="@Model.Fecha" />
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="form-item" id="cntAnio" style="display:none" >
+            <div class="form-label">Año:</div>
+            <div class="form-control">
+                <select id="cbAnio">
+                    <option value="">-SELECCIONE-</option>
+                    @{                       
+                        foreach (var item in Model.ListaAnios)
+                        {
+                            if (Model.Anio == item)
+                            {
+                                <option value="@item" selected="selected">@item</option>
+                            }
+                            else
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        }
+                    }
+                </select>               
+            </div>
+
+        </div>
+
+        <div class="form-item" id="cntSemana" style="display:none">
+            <div class="form-label">Semana:</div>
+            <div class="form-control">
+                <select id="cbSemana">
+                    <option value="">-SELECCIONE-</option>
+                    @{
+                        int i = 1;
+                        foreach (var item in Model.ListaSemanas)
+                        {
+                            if (Model.NroSemana == i)
+                            {
+                                <option value="@i" selected="selected">@item</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@item</option>
+                            }
+
+                            i++;
+                        }
+                    }
+                </select>
+                <input type="hidden" id="hfSemana" value="@Model.NroSemana" />
+            </div>
+        </div>      
+
+        <div class="form-item">
+            <div class="form-action">
+                <a href="JavaScript:consultarDatos();"><img src="~/Content/Images/btnConsultar.png" alt="Consultar datos" /></a>
+            </div>
+        </div>
+       
+                       
+
+    </div>
+
+    <div id="fechasSemana" style="display:none">
+        <strong>Fecha inicio:</strong>
+        <span id="txtFechaInicio">@Model.FechaInicio</span>
+
+        <strong>Fecha fin:</strong>
+        <span id="txtFechaFin">@Model.FechaFin</span>
+    </div>          
+
+
+
+    <div style="clear:both"></div>
+
+    <div id="listado">
+    
+    </div>
+
+</div>
