@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{64357C3C-6730-4361-9C9A-93778920D054}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>COES.Dominio.Interfaces</RootNamespace>
+    <AssemblyName>COES.Dominio.Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sic\ICbArchivoEnvioRepository.cs" />
+    <Compile Include="Sic\ICbCombustibledatosRepository.cs" />
+    <Compile Include="Sic\ICbConceptocombRepository.cs" />
+    <Compile Include="Sic\ICbEnvioRepository.cs" />
+    <Compile Include="Sic\IDesviacionRepository.cs" />
+    <Compile Include="Sic\IEmpresaRepository.cs" />
+    <Compile Include="Sic\IEnEnsayoformatoRepository.cs" />
+    <Compile Include="Sic\IEnEnsayoRepository.cs" />
+    <Compile Include="Sic\IEnEnsayounidadRepository.cs" />
+    <Compile Include="Sic\IEnEstadosRepository.cs" />
+    <Compile Include="Sic\IEnEstensayoRepository.cs" />
+    <Compile Include="Sic\IEnEstformatoRepository.cs" />
+    <Compile Include="Sic\IEnFormatoRepository.cs" />
+    <Compile Include="Sic\IEqAreaRepository.cs" />
+    <Compile Include="Sic\IEqEquipoRepository.cs" />
+    <Compile Include="Sic\IEqEquirelRepository.cs" />
+    <Compile Include="Sic\IEqFamiliaRepository.cs" />
+    <Compile Include="Sic\IEqFamrelRepository.cs" />
+    <Compile Include="Sic\IEqPropequiRepository.cs" />
+    <Compile Include="Sic\IEqPropiedadRepository.cs" />
+    <Compile Include="Sic\IEqRelacionRepository.cs" />
+    <Compile Include="Sic\IEqTipoareaRepository.cs" />
+    <Compile Include="Sic\IEqTiporelRepository.cs" />
+    <Compile Include="Sic\IEveCausaeventoRepository.cs" />
+    <Compile Include="Sic\IEveEvenclaseRepository.cs" />
+    <Compile Include="Sic\IEveManttoRepository.cs" />
+    <Compile Include="Sic\IExtArchivoRepository.cs" />
+    <Compile Include="Sic\IExtEstadoEnvioRepository.cs" />
+    <Compile Include="Sic\IExtLogenvioRepository.cs" />
+    <Compile Include="Sic\IExtLogproRepository.cs" />
+    <Compile Include="Sic\IFwAreaRepository.cs" />
+    <Compile Include="Sic\IFwCounterRepository.cs" />
+    <Compile Include="Sic\IManManttoRepository.cs" />
+    <Compile Include="Sic\IManRegistroRepository.cs" />
+    <Compile Include="Sic\IMdCambioenvioRepository.cs" />
+    <Compile Include="Sic\IMdEnvioRepository.cs" />
+    <Compile Include="Sic\IMdPublicacionRepository.cs" />
+    <Compile Include="Sic\IMdValidacionRepository.cs" />
+    <Compile Include="Sic\IMeAmpliacionfechaRepository.cs" />
+    <Compile Include="Sic\IMeFormatohojaRepository.cs" />
+    <Compile Include="Sic\IMeFormatoRepository.cs" />
+    <Compile Include="Sic\IMeHeadcolumnRepository.cs" />
+    <Compile Include="Sic\IMeHojaptomedRepository.cs" />
+    <Compile Include="Sic\IMeLecturaRepository.cs" />
+    <Compile Include="Sic\IMeMedicion1Repository.cs" />
+    <Compile Include="Sic\IMeMedicion24Repository.cs" />
+    <Compile Include="Sic\IMeMedicion96Repository.cs" />
+    <Compile Include="Sic\IMeMedicion48Repository.cs" />
+    <Compile Include="Sic\IMeMedidorRepository.cs" />
+    <Compile Include="Sic\IMeOrigenlecturaRepository.cs" />
+    <Compile Include="Sic\IMePerfilRuleAreaRepository.cs" />
+    <Compile Include="Sic\IMePerfilRuleRepository.cs" />
+    <Compile Include="Sic\IMePeriodomedidorRepository.cs" />
+    <Compile Include="Sic\IMePtomedicionRepository.cs" />
+    <Compile Include="Sic\IMeTipopuntomedicionRepository.cs" />
+    <Compile Include="Sic\IPrCombustibleRepository.cs" />
+    <Compile Include="Sic\IPrConceptoRepository.cs" />
+    <Compile Include="Sic\IPrEquipodatRepository.cs" />
+    <Compile Include="Sic\IPrGrupodatRepository.cs" />
+    <Compile Include="Sic\IPrGrupoRepository.cs" />
+    <Compile Include="Sic\IPrTipogrupoRepository.cs" />
+    <Compile Include="Sic\IRpfEnergiaPotenciaRepository.cs" />
+    <Compile Include="Sic\ISiEmpresaRepository.cs" />
+    <Compile Include="Sic\ISiFuenteenergiaRepository.cs" />
+    <Compile Include="Sic\ISiTipoempresaRepository.cs" />
+    <Compile Include="Sic\ISiTipogeneracionRepository.cs" />
+    <Compile Include="Sic\ISiTipoinformacionRepository.cs" />
+    <Compile Include="Sic\IWbGeneracionrerRepository.cs" />
+    <Compile Include="Sic\IWbMedidoresValidacionRepository.cs" />
+    <Compile Include="Transferencias\IAreaRepository.cs" />
+    <Compile Include="Transferencias\IBarraRepository.cs" />
+    <Compile Include="Transferencias\ICentralGeneracionRepository.cs" />
+    <Compile Include="Transferencias\ICodigoEntregaRepository.cs" />
+    <Compile Include="Transferencias\ICodigoRetiroRepository.cs" />
+    <Compile Include="Transferencias\ICodigoRetiroSinContratoRepository.cs" />
+    <Compile Include="Transferencias\ICompensacionRepository.cs" />
+    <Compile Include="Transferencias\ICostoMarginalRepository.cs" />
+    <Compile Include="Transferencias\IEmpresaPagoRepository.cs" />
+    <Compile Include="Transferencias\IEmpresaRepository.cs" />
+    <Compile Include="Transferencias\IEnvioInformacionRepository.cs" />
+    <Compile Include="Transferencias\IExportExcelRepository.cs" />
+    <Compile Include="Transferencias\IFactorPerdidaRepository.cs" />
+    <Compile Include="Transferencias\IInfoDesbalanceRepository.cs" />
+    <Compile Include="Transferencias\IInfoDesviacionRepository.cs" />
+    <Compile Include="Transferencias\IInfoFaltanteRepository.cs" />
+    <Compile Include="Transferencias\IInformePreliminarRepository.cs" />
+    <Compile Include="Transferencias\IIngresoCompensacionRepository.cs" />
+    <Compile Include="Transferencias\IIngresoPotenciaRepository.cs" />
+    <Compile Include="Transferencias\IIngresoRetiroSCRepository.cs" />
+    <Compile Include="Transferencias\IPeriodoRepository.cs" />
+    <Compile Include="Transferencias\IRatioCumplimientoRepository.cs" />
+    <Compile Include="Transferencias\IRecalculoRepository.cs" />
+    <Compile Include="Transferencias\ISaldoCodigoRetiroSCRepository.cs" />
+    <Compile Include="Transferencias\ISaldoEmpresaRepository.cs" />
+    <Compile Include="Transferencias\ITipoContratoRepository.cs" />
+    <Compile Include="Transferencias\ITipoEmpresaRepository.cs" />
+    <Compile Include="Transferencias\ITipoTramiteRepository.cs" />
+    <Compile Include="Transferencias\ITipoUsuarioRepository.cs" />
+    <Compile Include="Transferencias\ITramiteRepository.cs" />
+    <Compile Include="Transferencias\ITransferenciaEntregaDetalleRepository.cs" />
+    <Compile Include="Transferencias\ITransferenciaEntregaRepository.cs" />
+    <Compile Include="Transferencias\ITransferenciaRetiroDetalleRepository.cs" />
+    <Compile Include="Transferencias\ITransferenciaRetiroRepository.cs" />
+    <Compile Include="Transferencias\IValorTotalEmpresaRepository.cs" />
+    <Compile Include="Transferencias\IValorTransferenciaEmpresaRepository.cs" />
+    <Compile Include="Transferencias\IValorTransferenciaRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scada\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\COES.Base\COES.Base.csproj">
+      <Project>{2f0b7b6a-0c6a-42b2-8c44-11697cf04242}</Project>
+      <Name>COES.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COES.Dominio.DTO\COES.Dominio.DTO.csproj">
+      <Project>{28fff8f3-12ce-41b1-839b-2fd36d3c50a8}</Project>
+      <Name>COES.Dominio.DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
