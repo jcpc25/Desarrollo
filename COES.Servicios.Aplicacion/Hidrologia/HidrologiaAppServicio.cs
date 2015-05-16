@@ -583,8 +583,15 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             return strHtml.ToString();
         }
 
-
-        public string ObtenerReporteHidrologia(string idsEmpresa, DateTime fechaInicio, DateTime fechaFin, MeFormatoDTO formato)
+/// <summary>
+/// Obtiene Reporte en codigo HTLM de Historico de Hidrologia
+/// </summary>
+/// <param name="idsEmpresa"></param>
+/// <param name="fechaInicio"></param>
+/// <param name="fechaFin"></param>
+/// <param name="formato"></param>
+/// <returns></returns>
+        public string ObtenerReporteHidrologia(string idsEmpresa, string idsCuenca, DateTime fechaInicio, DateTime fechaFin, MeFormatoDTO formato)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberGroupSeparator = " ";
@@ -594,7 +601,15 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             List<Object> listaGenerica = new List<Object>();
             switch (formato.Formatresolucion)
             {
-                case 60 * 24: 
+                case 60 * 24 * 30:
+                    List<MeMedicion1DTO> listaMes = FactorySic.GetMeMedicion1Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaFin);
+                    foreach (var reg in listaMes)
+                    {
+                        listaGenerica.Add(reg);
+                    }
+                    break;
+
+                case 60 * 24:
                     List<MeMedicion1DTO> lista1 = FactorySic.GetMeMedicion1Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaFin);
                     foreach (var reg in lista1)
                     {
@@ -603,14 +618,14 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     break;
 
                 case 60:
-                    List<MeMedicion24DTO> lista24 = FactorySic.GetMeMedicion24Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, fechaInicio, fechaFin);
+                    List<MeMedicion24DTO> lista24 = FactorySic.GetMeMedicion24Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaInicio, fechaFin);
                     foreach (var reg in lista24)
                     {
                         listaGenerica.Add(reg);
                     }
                     break;
                 case 30:
-                    List<MeMedicion48DTO> lista48 = FactorySic.GetMeMedicion48Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5,idsEmpresa, fechaInicio, fechaFin);
+                    List<MeMedicion48DTO> lista48 = FactorySic.GetMeMedicion48Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5,idsEmpresa,idsCuenca, fechaInicio, fechaFin);
                     foreach (var reg in lista48)
                     {
                         listaGenerica.Add(reg);
@@ -624,8 +639,19 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     }
                     break;
             }
-            StringBuilder strHtml = new StringBuilder();
+            string strHtml =GeneraViewHidrologia(listaGenerica,  formato,  fechaInicio);
 
+            return strHtml;
+        }
+
+
+        public string GeneraViewHidrologia(List<Object> listaGenerica, MeFormatoDTO formato, DateTime fechaInicio)
+        {
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.NumberGroupSeparator = " ";
+            nfi.NumberDecimalDigits = 3;
+            nfi.NumberDecimalSeparator = ",";
+            StringBuilder strHtml = new StringBuilder();
             strHtml.Append("<table border='1' style='width:auto' class='pretty tabla-adicional ' cellspacing='0' width='100%' id='tabla'>");
             strHtml.Append("<thead>");
 
@@ -692,6 +718,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
 
             strHtml.Append("</tbody>");
             strHtml.Append("</table>");
+
 
             return strHtml.ToString();
         }

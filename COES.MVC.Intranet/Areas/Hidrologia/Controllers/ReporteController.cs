@@ -28,7 +28,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult Lista(string idsEmpresa, int idTipoInformacion, string fechaInicial, string fechaFinal, int nroPagina)
+        public PartialViewResult Lista(string idsEmpresa, string idsCuenca,int idTipoInformacion, string fechaInicial, string fechaFinal, int nroPagina)
         {
             HidrologiaModel model = new HidrologiaModel();
             var formato = logic.GetByIdMeFormato(idTipoInformacion);
@@ -46,7 +46,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                 case 60 * 24://ListaMedidores1
                     break;
             }
-            string resultado = this.logic.ObtenerReporteHidrologia(idsEmpresa, fechaIni, fechaFin, formato);
+            string resultado = this.logic.ObtenerReporteHidrologia(idsEmpresa,idsCuenca, fechaIni, fechaFin, formato);
             model.Resultado = resultado;
             return PartialView(model);
         }

@@ -350,6 +350,7 @@
       inner join si_empresa empr on empr.emprcodi = eq.emprcodi
       where m48.lectcodi = {0} and pto.origlectcodi ={1} and
       (empr.emprcodi in ({2}) or '{2}' = '-1') and
+      (eq.equipadre in ({5}) or '{5}' = '-1') and
       m48.medifecha >= to_date('{3}','YYYY-MM-DD') AND
       m48.medifecha &lt;= to_date('{4}','YYYY-MM-DD') 
     </query>

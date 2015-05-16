@@ -189,11 +189,11 @@ namespace COES.Infraestructura.Datos.Respositorio.Sic
             return entitys;
         }
 
-        public List<MeMedicion24DTO> GetHidrologia(int idLectura, int idOrigenLectura, DateTime fechaInicio, DateTime fechaFin)
+        public List<MeMedicion24DTO> GetHidrologia(int idLectura, int idOrigenLectura,string idsEmpresa,string idsCuenca, DateTime fechaInicio, DateTime fechaFin)
         {
             List<MeMedicion24DTO> entitys = new List<MeMedicion24DTO>();
             string sqlQuery = string.Format(helper.SqlGetHidrologia, idLectura, idOrigenLectura, fechaInicio.ToString(ConstantesBase.FormatoFecha),
-                fechaFin.ToString(ConstantesBase.FormatoFecha));
+                fechaFin.ToString(ConstantesBase.FormatoFecha), idsEmpresa, idsCuenca);
 
             DbCommand command = dbProvider.GetSqlStringCommand(sqlQuery);
 

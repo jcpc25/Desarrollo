@@ -25,6 +25,6 @@ namespace COES.Dominio.Interfaces.Sic
             DateTime fechaInicio, DateTime fechaFin);
         List<MeMedicion48DTO> ObtenerReporteValidacionDespacho(string empresas, int tipoGrupoCodi, string fuenteEnergia,
             DateTime fechaInicio, DateTime fechaFin);
-        List<MeMedicion48DTO> GetHidrologia(int idLectura, int idOrigenLectura, string idsEmpresa, DateTime fechaInicio, DateTime fechaFin);
+        List<MeMedicion48DTO> GetHidrologia(int idLectura, int idOrigenLectura, string idsEmpresa, string idsCuenca, DateTime fechaInicio, DateTime fechaFin);
     }
 }

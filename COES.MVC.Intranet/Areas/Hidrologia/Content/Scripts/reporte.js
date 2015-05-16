@@ -39,15 +39,17 @@ function buscarDatos() {
 
 function mostrarListado(nroPagina) {
     var empresa = $('#cbEmpresa').multipleSelect('getSelects');
-    
+    var cuenca = $('#cbCuenca').multipleSelect('getSelects');
     if (empresa == "[object Object]") empresa = "-1";
     $('#hfEmpresa').val(empresa);
+    $('#hfCuenca').val(cuenca);
     var tipoInformacion = $('#cbTipoInformacion').val();
     $.ajax({
         type: 'POST',
         url: controlador + "reporte/lista",
         data: {
-            idsEmpresa: $('#hfEmpresa').val(), idTipoInformacion: tipoInformacion, fechaInicial: $('#FechaDesde').val(), fechaFinal: $('#FechaHasta').val(),
+            idsEmpresa: $('#hfEmpresa').val(), idsCuenca: $('#hfCuenca').val(), idTipoInformacion: tipoInformacion,
+            fechaInicial: $('#FechaDesde').val(), fechaFinal: $('#FechaHasta').val(),
             nroPagina: nroPagina
         },
         success: function (evt) {

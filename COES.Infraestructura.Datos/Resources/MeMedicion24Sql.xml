@@ -260,7 +260,10 @@
       inner join eq_equipo eq on eq.equicodi = pto.equicodi
       inner join me_tipoptomedicion tpto on tpto.tipoptomedicodi = pto.tipoptomedicodi
       inner join si_tipoinformacion ti on ti.tipoinfocodi = m24.tipoinfocodi
+      inner join si_empresa empr on empr.emprcodi = eq.emprcodi
       where m24.lectcodi = {0} and pto.origlectcodi ={1} and m24.medifecha >= to_date('{2}','YYYY-MM-DD') AND
+      (empr.emprcodi in ({4}) or '{4}' = '-1') and
+      (eq.equipadre in ({5}) or '{5}' = '-1') and
       m24.medifecha &lt;= to_date('{3}','YYYY-MM-DD')
     </query>
   </Sql>  

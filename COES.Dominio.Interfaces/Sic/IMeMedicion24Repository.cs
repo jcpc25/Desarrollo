@@ -18,6 +18,6 @@ namespace COES.Dominio.Interfaces.Sic
         List<MeMedicion24DTO> GetByCriteria();
         void DeleteEnvioArchivo(int idLectura, DateTime fechaInicio, DateTime fechaFin, int idFormato, int idEmpresa);
         List<MeMedicion24DTO> GetEnvioArchivo(int idFormato, int idEmpresa, DateTime fechaInicio, DateTime fechaFin);
-        List<MeMedicion24DTO> GetHidrologia(int idLectura, int idOrigenLectura, DateTime fechaInicio, DateTime fechaFin);
+        List<MeMedicion24DTO> GetHidrologia(int idLectura, int idOrigenLectura,string idsEmpresa,string idsCuenca, DateTime fechaInicio, DateTime fechaFin);
     }
 }
