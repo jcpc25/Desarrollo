@@ -160,6 +160,8 @@ namespace COES.Infraestructura.Datos.Respositorio.Sic
                     if (!dr.IsDBNull(iEquinomb)) entity.Equinomb = dr.GetString(iEquinomb);
                     int iTipoptomedinomb = dr.GetOrdinal("Tipoptomedinomb");
                     if (!dr.IsDBNull(iEquinomb)) entity.Tipoptomedinomb = dr.GetString(iTipoptomedinomb);
+                    int iPtomedinomb = dr.GetOrdinal("ptomedibarranomb");
+                    if (!dr.IsDBNull(iPtomedinomb)) entity.Ptomedinomb = dr.GetString(iPtomedinomb);
                     int iTipoinfoabrev = dr.GetOrdinal("Tipoinfoabrev");
                     if (!dr.IsDBNull(iTipoinfoabrev)) entity.Tipoinfoabrev = dr.GetString(iTipoinfoabrev);
                     entitys.Add(entity);

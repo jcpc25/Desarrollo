@@ -33,17 +33,21 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             HidrologiaModel model = new HidrologiaModel();
             var formato = logic.GetByIdMeFormato(idTipoInformacion);
             formato.ListaHoja = logic.GetByCriteriaMeFormatohojas(idTipoInformacion);
-            DateTime fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
-            DateTime fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+            DateTime fechaIni = DateTime.MinValue;
+            DateTime fechaFin = DateTime.MinValue;
             switch (formato.Formatresolucion)
             {
-                case 15://ListaMedidores96
+                case 60 * 24 * 30://ListaMedidores1
+                    int mes = Int32.Parse(fechaInicial.Substring(0, 2));
+                    int anho = Int32.Parse(fechaInicial.Substring(3, 4));
+                    fechaIni = new DateTime(anho, mes, 1);
+                    anho = Int32.Parse(fechaFinal.Substring(3, 4));
+                    mes = Int32.Parse(fechaFinal.Substring(0, 2));
+                    fechaFin = new DateTime(anho, mes, 1);
                     break;
-                case 30: //ListaMedidores48
-                    break;
-                case 60://ListaMedidores24
-                    break;
-                case 60 * 24://ListaMedidores1
+                default:
+                    fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                    fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     break;
             }
             string resultado = this.logic.ObtenerReporteHidrologia(idsEmpresa,idsCuenca, fechaIni, fechaFin, formato);

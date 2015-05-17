@@ -19,12 +19,48 @@ $(function () {
     $('#FechaHasta').Zebra_DatePicker({
        
     });
+
+    $('#cbTipoInformacion').change(function () {
+        cambiarFormatoFecha($(this).val());
+    });
     $('#btnBuscar').click(function () {
         buscarDatos();
     });
     cargarPrevio();
     buscarDatos();
 });
+
+function cambiarFormatoFecha(tipo) {
+    
+    switch(tipo){
+        case "7":
+            $('#FechaDesde').Zebra_DatePicker({
+                format: 'm Y'
+            });
+            $('#FechaHasta').Zebra_DatePicker({
+                format: 'm Y'
+            });
+
+            var fecha = new Date();
+            var mes = "0" + (fecha.getMonth() + 1).toString();
+            mes = mes.substr(mes.length - 2, mes.length);
+            var stFecha = mes + " " +  fecha.getFullYear();
+            $('#FechaDesde').val(stFecha);
+            $('#FechaHasta').val(stFecha);
+            break;
+        default:
+            $('#FechaDesde').Zebra_DatePicker({
+            });
+            $('#FechaHasta').Zebra_DatePicker({
+            });
+            $('#FechaDesde').val($('#hfFechaDesde').val());
+            $('#FechaHasta').val($('#hfFechaHasta').val());
+
+            break;
+    }
+
+
+}
 
 function cargarPrevio(){
     $('#cbEmpresa').multipleSelect('checkAll');

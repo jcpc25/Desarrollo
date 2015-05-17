@@ -26,7 +26,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         public PartialViewResult lista(int cuenca, int nroPagina)
         {
             HidrologiaModel model = new HidrologiaModel();
-            model.ListaRecursosCuenca = this.logic.ListarRecursosxCuenca(cuenca);
+            model.ListaCuenca = this.logic.ListarRecursosxCuenca(cuenca);
             return PartialView(model);
         }
     }

@@ -301,7 +301,6 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         {
             return FactorySic.GetEqEquipoRepository().ListaRecursosxCuenca(idEquipo);
         }
-
         #endregion
 
         #region Métodos Tabla Me_PuntosdeMedicion
@@ -602,16 +601,22 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             nfi.NumberGroupSeparator = " ";
             nfi.NumberDecimalDigits = 3;
             nfi.NumberDecimalSeparator = ",";
+            string strHtml= string.Empty;
             if (string.IsNullOrEmpty(idsEmpresa)) idsEmpresa = Constantes.ParametroNoExiste;
             List<Object> listaGenerica = new List<Object>();
             switch (formato.Formatresolucion)
             {
                 case 60 * 24 * 30:
                     List<MeMedicion1DTO> listaMes = FactorySic.GetMeMedicion1Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaFin);
-                    foreach (var reg in listaMes)
-                    {
-                        listaGenerica.Add(reg);
-                    }
+                    List<MeMedicion1DTO> listaCabecera = listaMes.GroupBy(x => new {x.Ptomedicodi, x.Ptomedinomb,x.Tipoinfoabrev})
+                        .Select(y => new MeMedicion1DTO()
+                        {
+                            Ptomedicodi = y.Key.Ptomedicodi,
+                            Ptomedinomb = y.Key.Ptomedinomb,
+                            Tipoinfoabrev = y.Key.Tipoinfoabrev
+                        }
+                        ).ToList();
+                    strHtml = GeneraViewHidromensual(listaMes, listaCabecera, formato, fechaInicio, fechaFin);
                     break;
 
                 case 60 * 24:
@@ -620,6 +625,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     {
                         listaGenerica.Add(reg);
                     }
+                    strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
                     break;
 
                 case 60:
@@ -628,6 +634,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     {
                         listaGenerica.Add(reg);
                     }
+                    strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
                     break;
                 case 30:
                     List<MeMedicion48DTO> lista48 = FactorySic.GetMeMedicion48Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5,idsEmpresa,idsCuenca, fechaInicio, fechaFin);
@@ -635,6 +642,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     {
                         listaGenerica.Add(reg);
                     }
+                    strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
                     break;
                 case 15:
                     List<MeMedicion96DTO> lista96 = FactorySic.GetMeMedicion96Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaFin);
@@ -642,9 +650,10 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     {
                         listaGenerica.Add(reg);
                     }
+                    strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
                     break;
             }
-            string strHtml =GeneraViewHidrologia(listaGenerica,  formato,  fechaInicio);
+            
 
             return strHtml;
         }
@@ -725,6 +734,68 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             strHtml.Append("</table>");
 
 
+            return strHtml.ToString();
+        }
+
+        public string GeneraViewHidromensual(List<MeMedicion1DTO> listaGenerica,List<MeMedicion1DTO> listaCabecera, MeFormatoDTO formato, DateTime fechaInicio,DateTime fechaFin)
+        {
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.NumberGroupSeparator = " ";
+            nfi.NumberDecimalDigits = 3;
+            nfi.NumberDecimalSeparator = ",";
+            StringBuilder strHtml = new StringBuilder();
+            strHtml.Append("<table border='1' style='width:auto' class='pretty tabla-adicional ' cellspacing='0' width='100%' id='tabla'>");
+            strHtml.Append("<thead>");
+
+            strHtml.Append("<tr><th  style='width:160px;'>AFLUENTES</th>");
+
+            foreach (var p in listaCabecera)
+            {
+                strHtml.Append("<th style='width:100px;'>" + p.Ptomedinomb + "</th>");
+            }
+            strHtml.Append("</tr>");
+
+            strHtml.Append("<tr><td  style='background-color:#2980B9;border:1px solid #9AC9E9;color:#87CEEB;text-align: center'>AÑO - MES</td>");
+            //strHtml.Append("<td style='background-color:#2980B9;border:1px solid #9AC9E9;color:#87CEEB;text-align: center'>MESES</td>");
+            foreach (var p in listaCabecera)
+            {
+                strHtml.Append("<td style='background-color:#2980B9;border:1px solid #9AC9E9;color:#87CEEB;text-align: center'>" + p.Tipoinfoabrev + "</td>");
+            }
+            strHtml.Append("</tr>");
+            strHtml.Append("</thead>");
+            strHtml.Append("<tbody>");
+
+            if (formato.Formatresolucion == 60 * 24)
+                fechaInicio = fechaInicio.AddDays(-1);
+            if (listaGenerica.Count > 0)
+            {
+                for (var f = fechaInicio; f <= fechaFin; f = f.AddMonths(1))
+                {
+                    strHtml.Append("<tr>");
+                    var anho = f.Year.ToString();
+                    var mes = f.Month;
+                    strHtml.Append(string.Format("<td>{0} &nbsp;&nbsp;{1}</td>", anho, COES.Base.Tools.Util.ObtenerNombreMes(mes)));
+                    foreach (var p in listaCabecera)
+                    {
+                        var reg = listaGenerica.Find(x => x.Medifecha == f && x.Ptomedicodi == p.Ptomedicodi);
+                        if (reg != null)
+                        {
+                            decimal valor = (decimal)reg.H1;
+                            strHtml.Append(string.Format("<td>{0}</td>", valor.ToString("N", nfi)));
+                        }
+                        else
+                            strHtml.Append("<td></td>");
+                    }
+                    strHtml.Append("</tr>");
+                }
+            }
+            else
+            {
+                strHtml.Append("<td  style='text-align:center'>No existen registros.</td>");
+            }
+
+            strHtml.Append("</tbody>");
+            strHtml.Append("</table>");          
             return strHtml.ToString();
         }
 
