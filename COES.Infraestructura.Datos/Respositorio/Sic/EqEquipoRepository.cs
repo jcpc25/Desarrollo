@@ -367,10 +367,8 @@ namespace COES.Infraestructura.Datos.Respositorio.Sic
                 {
                     var oEquipo = new EqEquipoDTO();
                     oEquipo = helper.Create(dr);
-                    //oEquipo.EMPRNOMB = dr.GetString(dr.GetOrdinal("EMPRNOMB"));
-                    //oEquipo.AREANOMB = dr.GetString(dr.GetOrdinal("AREANOMB"));
                     oEquipo.Famnomb = dr.GetString(dr.GetOrdinal("Famnomb"));
-                    entitys.Add(oEquipo);
+                    entitys.Add(oEquipo);                                     
                 }
             }
             return entitys;

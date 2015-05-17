@@ -23,7 +23,8 @@
             <td>Cuenca:</td>.
             <td>
                 <select id="cbCuenca"  name="Idcuenca" >        
-                     @foreach (var item in Model.ListaCuenca)
+                    <option value="">--SELECCIONE--</option> 
+                    @foreach (var item in Model.ListaCuenca)
                      {   
                           <option value="@item.Equicodi">@item.Equinomb</option>
                      }
