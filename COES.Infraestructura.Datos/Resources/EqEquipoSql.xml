@@ -410,7 +410,7 @@
     <query>
       select eq.*, fam.famnomb from eq_equipo eq
       inner join eq_familia fam on fam.famcodi = eq.famcodi
-      where eq.equipadre = {0}
+      where eq.equipadre = {0} or (fam.famcodi=23 and eq.equipadre = {0})
     </query>
   </Sql>
 </Sqls>

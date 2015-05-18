@@ -4,19 +4,19 @@
 <table border="0" class="pretty tabla-adicional" cellspacing="0" width="640" id="tabla">
     <thead>
         <tr>
-            <th colspan="2"> Recurso Origen</th>
+            <th colspan="2"> Recurso Origen</th>            
         </tr>
         <tr>
             <th>Tipo</th>
-            <th>nombre</th>           
+            <th>Nombre</th>               
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.ListaCuenca)
+        @foreach (var item in Model.ListaRecursosCuenca)
         {
             <tr>
                 <td>@item.Famnomb</td>
-                <td>@item.Equinomb</td>             
+                <td>@item.Equinomb</td>                     
             </tr>
         }
     </tbody>
