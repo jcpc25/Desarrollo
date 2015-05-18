@@ -26,6 +26,9 @@ $(function () {
     $('#btnBuscar').click(function () {
         buscarDatos();
     });
+    $('#btnGrafico').click(function () {
+        generarGrafico();
+    });
     cargarPrevio();
     buscarDatos();
 });
@@ -69,7 +72,9 @@ function cargarPrevio(){
     $('#cbTipoInformacion').val(6);
 }
 function buscarDatos() {
- //   pintarPaginado();
+
+    $('#reporte').css("display", "block");
+    $('#graficos').css("display", "none");
     mostrarListado(1);
 }
 
@@ -122,4 +127,33 @@ function aoColumns() {
         }
     });
     return ao;
+}
+
+function generarGrafico() {
+
+    $('#reporte').css("display", "none");
+    //$('#paginado').css("display", "none");
+    $('#graficos').css("display", "block");
+
+    $.ajax({
+        type: 'POST',
+        url: controlador + "reporte/graficoreporte",
+        data: {
+            fechaInicial: $('#FechaDesde').val(), fechaFinal: $('#FechaHasta').val(),
+            tiposEmpresa: $('#hfTipoEmpresa').val(), empresas: $('#hfEmpresa').val(),
+            tiposEquipo: $('#hfTipoEquipo').val(), interrupcion: $('#cbInterrupcion').val(),
+            tiposMantto: $('#hfTipoMantto').val(), equipos: $('#hfEquipo').val()
+        },
+        success: function (evt) {
+
+        },
+        error: function () {
+            alert("Ha ocurrido un error");
+        }
+    });
+
+    graficoManttoEmpresa = function (result) {
+
+    }
+
 }
