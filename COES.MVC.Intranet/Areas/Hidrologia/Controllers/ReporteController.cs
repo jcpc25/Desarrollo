@@ -62,11 +62,11 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult GraficoReporte()
+        public JsonResult GraficoReporte()
         {
             HidrologiaModel model = new HidrologiaModel();
 
-            return PartialView(model);
+            return Json(model);
         }
 
     }
