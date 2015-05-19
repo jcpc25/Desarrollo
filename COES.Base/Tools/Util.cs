@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -139,6 +140,15 @@ namespace COES.Base.Tools
                     break;
             }
             return image;
+        }
+
+        public static int ObtenerNroSemanasxAnho(int anho)
+        {
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            DateTime date1 = new DateTime(anho, 1, 1);
+            Calendar cal = dfi.Calendar;
+            int nroSemanas = cal.GetWeekOfYear(date1, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+            return nroSemanas;
         }
     }
 }

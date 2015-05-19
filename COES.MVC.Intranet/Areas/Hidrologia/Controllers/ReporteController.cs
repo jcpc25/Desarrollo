@@ -37,13 +37,19 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             DateTime fechaFin = DateTime.MinValue;
             switch (formato.Formatresolucion)
             {
-                case 60 * 24 * 30://ListaMedidores1
+                case 60 * 24 * 30://mensual ->ListaMedidores1
                     int mes = Int32.Parse(fechaInicial.Substring(0, 2));
                     int anho = Int32.Parse(fechaInicial.Substring(3, 4));
                     fechaIni = new DateTime(anho, mes, 1);
                     anho = Int32.Parse(fechaFinal.Substring(3, 4));
                     mes = Int32.Parse(fechaFinal.Substring(0, 2));
                     fechaFin = new DateTime(anho, mes, 1);
+                    break;
+                case 60*24: //semanal -> ListaMedidores1
+                    int ianho = Int32.Parse(fechaInicial.Substring(0, 4));
+                    fechaIni = new DateTime(ianho, 1, 1);
+                    ianho = Int32.Parse(fechaFinal.Substring(0, 4));
+                    fechaFin = new DateTime(ianho, 1, 1);
                     break;
                 default:
                     fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);

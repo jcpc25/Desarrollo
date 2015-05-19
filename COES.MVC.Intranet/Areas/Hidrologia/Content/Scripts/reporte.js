@@ -51,6 +51,23 @@ function cambiarFormatoFecha(tipo) {
             $('#FechaDesde').val(stFecha);
             $('#FechaHasta').val(stFecha);
             break;
+        case "4":
+            $('#FechaDesde').Zebra_DatePicker({
+                format: 'Y'
+            });
+            $('#FechaHasta').Zebra_DatePicker({
+                format: 'Y'
+            });
+
+            var fecha = new Date();
+            //var anho = "0" + (fecha.getYear()).toString();
+            var stFecha = fecha.getFullYear();
+            $('#FechaDesde').val(stFecha);
+            $('#FechaHasta').val(stFecha);
+            break;
+
+
+
         default:
             $('#FechaDesde').Zebra_DatePicker({
             });

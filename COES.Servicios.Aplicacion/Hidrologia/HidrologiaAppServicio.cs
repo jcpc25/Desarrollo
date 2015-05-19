@@ -606,7 +606,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             List<Object> listaGenerica = new List<Object>();
             switch (formato.Formatresolucion)
             {
-                case 60 * 24 * 30:
+                case 60 * 24 * 30: //rpte MES
                     List<MeMedicion1DTO> listaMes = FactorySic.GetMeMedicion1Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaFin);
                     List<MeMedicion1DTO> listaCabecera = listaMes.GroupBy(x => new {x.Ptomedicodi, x.Ptomedinomb,x.Tipoinfoabrev})
                         .Select(y => new MeMedicion1DTO()
@@ -619,16 +619,21 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     strHtml = GeneraViewHidromensual(listaMes, listaCabecera, formato, fechaInicio, fechaFin);
                     break;
 
-                case 60 * 24:
+                case 60 * 24: // semanal (lectcodi = 12)
+                    
                     List<MeMedicion1DTO> lista1 = FactorySic.GetMeMedicion1Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaFin);
-                    foreach (var reg in lista1)
-                    {
-                        listaGenerica.Add(reg);
-                    }
-                    strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
+                    List<MeMedicion1DTO> listaCabecera1 = lista1.GroupBy(x => new { x.Ptomedicodi, x.Ptomedinomb, x.Tipoinfoabrev })
+                     .Select(y => new MeMedicion1DTO()
+                     {
+                         Ptomedicodi = y.Key.Ptomedicodi,
+                         Ptomedinomb = y.Key.Ptomedinomb,
+                         Tipoinfoabrev = y.Key.Tipoinfoabrev
+                     }
+                     ).ToList();
+                    strHtml = GeneraViewHidroSemanal(lista1,listaCabecera1, formato, fechaInicio, fechaFin);
                     break;
 
-                case 60:
+                case 60: //Rpte Diario (lectcodi=63)
                     List<MeMedicion24DTO> lista24 = FactorySic.GetMeMedicion24Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaInicio, fechaFin);
                     foreach (var reg in lista24)
                     {
@@ -636,7 +641,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     }
                     strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
                     break;
-                case 30:
+                case 30: // Rpte 1/2 horas
                     List<MeMedicion48DTO> lista48 = FactorySic.GetMeMedicion48Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5,idsEmpresa,idsCuenca, fechaInicio, fechaFin);
                     foreach (var reg in lista48)
                     {
@@ -644,7 +649,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     }
                     strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
                     break;
-                case 15:
+                case 15: // Rpte 15 minnutos
                     List<MeMedicion96DTO> lista96 = FactorySic.GetMeMedicion96Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaFin);
                     foreach (var reg in lista96)
                     {
@@ -769,8 +774,11 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                 fechaInicio = fechaInicio.AddDays(-1);
             if (listaGenerica.Count > 0)
             {
-                for (var f = fechaInicio; f <= fechaFin; f = f.AddMonths(1))
+                //for (var f = fechaInicio; f <= fechaFin; f = f.AddMonths(1))
+                var f = fechaInicio;
+                foreach (var lst in listaGenerica)
                 {
+                    
                     strHtml.Append("<tr>");
                     var anho = f.Year.ToString();
                     var mes = f.Month;
@@ -787,6 +795,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                             strHtml.Append("<td></td>");
                     }
                     strHtml.Append("</tr>");
+                    f = f.AddMonths(1);
                 }
             }
             else
@@ -796,6 +805,81 @@ namespace COES.Servicios.Aplicacion.Hidrologia
 
             strHtml.Append("</tbody>");
             strHtml.Append("</table>");          
+            return strHtml.ToString();
+        }
+
+        public string GeneraViewHidroSemanal(List<MeMedicion1DTO> listaGenerica, List<MeMedicion1DTO> listaCabecera, MeFormatoDTO formato, DateTime fechaInicio, DateTime fechaFin)
+        {
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.NumberGroupSeparator = " ";
+            nfi.NumberDecimalDigits = 3;
+            nfi.NumberDecimalSeparator = ",";
+            StringBuilder strHtml = new StringBuilder();
+            strHtml.Append("<table border='1' style='width:auto' class='pretty tabla-adicional ' cellspacing='0' width='100%' id='tabla'>");
+            strHtml.Append("<thead>");
+
+            strHtml.Append("<tr><th colspan ='2' style='width:160px;'>AFLUENTES</th>");
+
+            foreach (var p in listaCabecera)
+            {
+                strHtml.Append("<th style='width:100px;'>" + p.Ptomedinomb + "</th>");
+            }
+            strHtml.Append("</tr>");
+
+            strHtml.Append("<tr><td  style='background-color:#2980B9;border:1px solid #9AC9E9;color:#87CEEB;text-align: center'>AÑO</td>");
+            strHtml.Append("<td style='background-color:#2980B9;border:1px solid #9AC9E9;color:#87CEEB;text-align: center'>Semana</td>");
+            foreach (var p in listaCabecera)
+            {
+                strHtml.Append("<td style='background-color:#2980B9;border:1px solid #9AC9E9;color:#87CEEB;text-align: center'>" + p.Tipoinfoabrev + "</td>");
+            }
+            strHtml.Append("</tr>");
+            strHtml.Append("</thead>");
+            strHtml.Append("<tbody>");
+
+            if (formato.Formatresolucion == 60 * 24)
+                fechaInicio = fechaInicio.AddDays(-1);
+            if (listaGenerica.Count > 0)
+            {
+                //for (var f = fechaInicio; f <= fechaFin; f = f.AddMonths(1))
+                var f = fechaInicio;
+                int i = 1;
+                var anho = "2001";
+                foreach (var lst in listaGenerica)
+                {
+
+                    strHtml.Append("<tr>");
+                    var anho1 = f.Year.ToString();
+                    if (anho1 != anho)
+                    {
+                        strHtml.Append(string.Format("<td>{0}</td>", anho1));
+                        anho = anho1;
+                        i = 1;
+                    }
+                    strHtml.Append(string.Format("<td>{0}</td>", i));
+                    foreach (var p in listaCabecera)
+                    {
+                        var reg = listaGenerica.Find(x => x.Medifecha == f && x.Ptomedicodi == p.Ptomedicodi);
+                        if (reg != null)
+                        {
+                            decimal valor = (decimal)reg.H1;
+                           
+                            strHtml.Append(string.Format("<td>{0}</td>", valor.ToString("N", nfi)));                       
+                        }
+                        else
+                            strHtml.Append("<td></td>");
+                    }
+                    strHtml.Append("</tr>");
+                    i++;
+                    f = f.AddDays(7);
+                }
+            }
+            else
+            {
+                strHtml.Append("<td  style='text-align:center'>No existen registros.</td>");
+            }
+
+            strHtml.Append("</tbody>");
+            strHtml.Append("</table>");
             return strHtml.ToString();
         }
 
