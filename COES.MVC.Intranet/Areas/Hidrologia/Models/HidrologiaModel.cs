@@ -30,8 +30,13 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
 
     public class PtoMedida
     {
-        public int IdMedida { get; set; }
+        public int IdMedida { get; set; }       
         public string NombreMedida { get; set; }
+        
+
+ /// campos creados para prueba
+        public double IdMedida1 { get; set; }
+        public double IdMedida2 { get; set; }
     }
 
     public class TipoInformacion

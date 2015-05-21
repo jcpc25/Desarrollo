@@ -63,10 +63,28 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
 
         [HttpPost]
         public JsonResult GraficoReporte()
+            //(string fechaInicial, string fechaFinal, string idsempresas, string idscuencas, int idptomedida)
         {
             HidrologiaModel model = new HidrologiaModel();
+            List<PtoMedida> Lista = new List<PtoMedida>();
 
-            return Json(model);
+            Lista.Add(new PtoMedida() { IdMedida1 = 1.2, IdMedida2 = 1.2, NombreMedida = "ENE" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 0.5, IdMedida2 = 1.7, NombreMedida = "FEB" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 3.4, IdMedida2 = 1.9, NombreMedida = "MAR" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 4.5, IdMedida2 = 2.5, NombreMedida = "ABR" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 0.8, IdMedida2 = 3.5, NombreMedida = "MAY" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 2.5, IdMedida2 = 4.8, NombreMedida = "JUN" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 7.8, IdMedida2 = 5, NombreMedida = "JUL" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 8.0, IdMedida2 = 2.9, NombreMedida = "AGO" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 0.9, IdMedida2 = 3.4, NombreMedida = "SET" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 10.5,IdMedida2 = 5.6, NombreMedida = "OCT" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 11.5, IdMedida2 = 10, NombreMedida = "NOV" });
+            Lista.Add(new PtoMedida() { IdMedida1 = 12.7, IdMedida2 = 0.9, NombreMedida = "DIC" });
+            model.ListaPtoMedida = Lista;
+
+            var jsonResult = Json(model);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
 
     }

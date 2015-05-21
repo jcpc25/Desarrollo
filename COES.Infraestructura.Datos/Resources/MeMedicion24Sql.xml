@@ -264,7 +264,7 @@
       where m24.lectcodi = {0} and pto.origlectcodi ={1} and m24.medifecha >= to_date('{2}','YYYY-MM-DD') AND
       (empr.emprcodi in ({4}) or '{4}' = '-1') and
       (eq.equipadre in ({5}) or '{5}' = '-1') and
-      m24.medifecha &lt;= to_date('{3}','YYYY-MM-DD')
+      m24.medifecha &lt;= to_date('{3}','YYYY-MM-DD') order by m24.medifecha asc, m24.ptomedicodi asc
     </query>
   </Sql>  
   
