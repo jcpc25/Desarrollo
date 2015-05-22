@@ -189,7 +189,7 @@ function generarGrafico() {
         },
         dataType: 'json',
         success: function (result) {            
-            graficoHidrologia(result.ListaPtoMedida);
+            graficoHidrologia(result);
 
         },
         error: function () {
@@ -200,12 +200,48 @@ function generarGrafico() {
     graficoHidrologia = function (result) {
         var json = result;
         var jsondata = [];
-        var jsondata1 = [];
+        var jsonmesanho = [];
+        var jsonemp = [];
 
-        for (var i in json) {
-            jsondata.push(parseFloat(json[i].IdMedida1));
-            jsondata1.push(parseFloat(json[i].IdMedida2));
+        var nomempr = "";
+        var mes="";
+        for (var i in json) {//lleno el arreglo con los nombre de los afluentes o puntos de medicion
+            if (json[i].Ptomedinomb != nomempr) {
+                jsonemp.push(json[i].Ptomedinomb);               
+            }
+            nomempr = json[i].Ptomedinomb;
+
+            //if (json[i].Ptomedicodi != mes) {
+            //    jsonmes.push(json[i].Ptomedicodi);
+            //}
+            //mes = json[i].Ptomedicodi;
+            jsonmesanho.push(json[i].AmhoMesPtomedi);
+            //alert(jsonmesanho);
+
         }
+
+        var jsondata = [];
+        for (var i in jsonemp) {
+            jsondata[i] = [];
+            for (var j in json) {
+                jsondata[i].push(null);
+            }
+        }
+       
+        var k;
+        var j;
+        for (var i in json) {//lleno el arreglo on los valores H1
+            
+            //k = jsonmes.indexOf(json[i].Ptomedicodi);
+            j = jsonemp.indexOf(json[i].Ptomedinomb);
+            jsondata[j][i] = json[i].H1;
+            //alert(json.length);
+            //alert(jsondata[k][j]);
+            //alert("k:"+k+"j:"+j+"i:"+i);
+        }
+        //for (var i in jasonsata) {
+        //    alert(jsondata[i]);
+        //}
         var opcion = {
             chart: {
                 type: 'spline'
@@ -216,15 +252,20 @@ function generarGrafico() {
             subtitle: {
                 text: 'Caudal por puntos de Medición'
             },
-            xAxis: {
+            xAxis:{
 
-                categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'],
+                categories: jsonmesanho,
+                style: {
 
-                //type: 'datetime',
-                //dateTimeLabelFormats: { // don't display the dummy year
-                //    month: '%e. %b',
-                //    year: '%b'
-                //},
+                        fontSize: '5'
+                },
+            //        //['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'],
+
+            //    //type: 'datetime',
+            //    //dateTimeLabelFormats: { // don't display the dummy year
+            //    //    month: '%e. %b',
+            //    //    year: '%b'
+            //    //},
                 title: {
                     text: 'Meses'
                 },
@@ -248,17 +289,22 @@ function generarGrafico() {
                 }
             },
 
-            series: [{
-                name: 'Pto Medición 01',
-                data: jsondata
-            },
-            {
-                name: 'Pto Medición 02',
-                data: jsondata1
-            }
-            ]
+            series: []
+        };
+        for (var i in jsondata) {
+            //opcion.xAxis.push({
+            //    categories: jsonmesanho[i],
+            //    style: {
 
+            //        fontSize: '5'
+            //    }
+            //});
+            opcion.series.push({
+                name: jsonemp[i],
+                data: jsondata[i]
+            });
         }
+
         $('#graficos').highcharts(opcion);
     }
 }

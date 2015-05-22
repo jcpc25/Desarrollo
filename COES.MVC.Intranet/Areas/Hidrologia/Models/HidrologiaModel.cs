@@ -27,19 +27,14 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
         public List<EqEquipoDTO> ListaRecursosCuenca { get; set; }      
         public List<TipoInformacion> ListaTipoInformacion { get; set; }
 
-        public List<string> ListaAfluentes { get; set; }
-        public List<TipoInformacionAFluentes> ListaValoresAfluentes { get; set; }
+        public List<MeMedicion1DTO> ListaMesAfluentes { get; set; }
+        
     }
 
     public class PtoMedida
     {
         public int IdMedida { get; set; }       
-        public string NombreMedida { get; set; }
-        
-
- /// campos creados para prueba
-        public double IdMedida1 { get; set; }
-        public double IdMedida2 { get; set; }
+        public string NombreMedida { get; set; }        
     }
 
     public class TipoInformacion
@@ -48,9 +43,4 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
         public string NombreTipoInfo { get; set; }
     }
 
-    public class TipoInformacionAFluentes
-    {
-        public List<decimal> infoValue { get; set; }
-        public string UnidMedidaInfo { get; set; }
-    }
 }

@@ -150,5 +150,16 @@ namespace COES.Base.Tools
             int nroSemanas = cal.GetWeekOfYear(date1, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
             return nroSemanas;
         }
+
+        public static string ObtenerMesAnho(DateTime medifecha)
+        {
+            string resultado = string.Empty;
+            var f = medifecha;
+            var anho = f.Year.ToString();
+            var mes = f.Month;
+            resultado = ObtenerNombreMes(mes) + " " + anho;
+            
+            return resultado;
+        }
     }
 }
