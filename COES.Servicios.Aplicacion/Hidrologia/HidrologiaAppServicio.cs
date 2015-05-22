@@ -663,7 +663,6 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             return strHtml;
         }
 
-
         public string GeneraViewHidrologia(List<Object> listaGenerica, MeFormatoDTO formato, DateTime fechaInicio)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
@@ -1163,6 +1162,12 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             {
                 throw new Exception(ex.Message, ex);
             }
+        }
+
+        public List<MeMedicion1DTO> listaRptMesPtoMedicion(int lectocodi, int origlect, string idsEmpresa, DateTime fechaInicio, DateTime fechaFin)
+        {
+
+            return FactorySic.GetMeMedicion1Repository().GetHidrologia(lectocodi, origlect, idsEmpresa, fechaInicio, fechaFin);
         }
 
         #endregion

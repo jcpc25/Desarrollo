@@ -182,8 +182,9 @@ function generarGrafico() {
         type: 'POST',
         url: controlador + "reporte/graficoreporte",
         data: {
-            //fechaInicial: $('#hfFechaDesde').val(), fechaFinal: $('#hfFechaHasta').val(),
-            //idsempresas: $('#hfEmpresa').val(), idscuencas: $('#hfCuenca').val(),
+            fechaInicial: $('#hfFechaDesde').val(), fechaFinal: $('#hfFechaHasta').val(),
+            idsEmpresas: $('#hfEmpresa').val()
+            //, idscuencas: $('#hfCuenca').val(),
             //idptomedida: $('#hfPtoMedida').val()
         },
         dataType: 'json',
@@ -200,68 +201,12 @@ function generarGrafico() {
         var json = result;
         var jsondata = [];
         var jsondata1 = [];
-       
+
         for (var i in json) {
-            
             jsondata.push(parseFloat(json[i].IdMedida1));
             jsondata1.push(parseFloat(json[i].IdMedida2));
-           
-            
         }
-
-        //$('#graficos').highcharts({
-        //    chart: {
-        //        type: 'area'
-        //    },
-        //    title: {
-        //        text: 'Diagrama de duración mensual'
-        //    },
-        //    xAxis: {
-        //        allowDecimals: false,
-        //        title: {
-        //            text: 'Tiempo (h)'
-        //        },
-        //        labels: {
-        //            formatter: function () {
-        //                return this.value;
-        //            }
-        //        }
-        //    },
-        //    yAxis: {
-        //        title: {
-        //            text: 'Potencia (MW)'
-        //        },
-        //        labels: {
-        //            formatter: function () {
-        //                return this.value / 1000 + 'k';
-        //            }
-        //        }
-        //    },
-        //    tooltip: {
-        //        pointFormat: '{series.name} Potencia <b>{point.y:,.0f}</b><br/> en la hora {point.x}'
-        //    },
-        //    plotOptions: {
-        //        area: {
-        //            pointStart: 1,
-        //            marker: {
-        //                enabled: false,
-        //                symbol: 'circle',
-        //                radius: 2,
-        //                states: {
-        //                    hover: {
-        //                        enabled: true
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    },
-        //    series: [{
-        //        name: 'Potencia',
-        //        data: jsondata
-        //    }]
-        //});
-
-        $('#graficos').highcharts({
+        var opcion = {
             chart: {
                 type: 'spline'
             },
@@ -272,7 +217,7 @@ function generarGrafico() {
                 text: 'Caudal por puntos de Medición'
             },
             xAxis: {
-                
+
                 categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'],
 
                 //type: 'datetime',
@@ -312,7 +257,8 @@ function generarGrafico() {
                 data: jsondata1
             }
             ]
-        });
-    }
 
+        }
+        $('#graficos').highcharts(opcion);
+    }
 }

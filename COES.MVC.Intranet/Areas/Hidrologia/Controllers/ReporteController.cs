@@ -1,4 +1,5 @@
-﻿using COES.MVC.Intranet.Areas.Hidrologia.Helper;
+﻿using COES.Dominio.DTO.Sic;
+using COES.MVC.Intranet.Areas.Hidrologia.Helper;
 using COES.MVC.Intranet.Areas.Hidrologia.Models;
 using COES.Servicios.Aplicacion.Hidrologia;
 using System;
@@ -62,25 +63,56 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         }
 
         [HttpPost]
-        public JsonResult GraficoReporte()
+        public JsonResult GraficoReporte(string idsEmpresas, string fechaInicial, string fechaFinal)
             //(string fechaInicial, string fechaFinal, string idsempresas, string idscuencas, int idptomedida)
         {
             HidrologiaModel model = new HidrologiaModel();
-            List<PtoMedida> Lista = new List<PtoMedida>();
+            DateTime fechaIni = DateTime.MinValue;
+            DateTime fechaFin = DateTime.MinValue;
+            List<MeMedicion1DTO> ListaMes = new List<MeMedicion1DTO>();
 
-            Lista.Add(new PtoMedida() { IdMedida1 = 1.2, IdMedida2 = 1.2, NombreMedida = "ENE" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 0.5, IdMedida2 = 1.7, NombreMedida = "FEB" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 3.4, IdMedida2 = 1.9, NombreMedida = "MAR" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 4.5, IdMedida2 = 2.5, NombreMedida = "ABR" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 0.8, IdMedida2 = 3.5, NombreMedida = "MAY" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 2.5, IdMedida2 = 4.8, NombreMedida = "JUN" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 7.8, IdMedida2 = 5, NombreMedida = "JUL" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 8.0, IdMedida2 = 2.9, NombreMedida = "AGO" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 0.9, IdMedida2 = 3.4, NombreMedida = "SET" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 10.5,IdMedida2 = 5.6, NombreMedida = "OCT" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 11.5, IdMedida2 = 10, NombreMedida = "NOV" });
-            Lista.Add(new PtoMedida() { IdMedida1 = 12.7, IdMedida2 = 0.9, NombreMedida = "DIC" });
-            model.ListaPtoMedida = Lista;
+            int mes = Int32.Parse(fechaInicial.Substring(0, 2));
+            int anho = Int32.Parse(fechaInicial.Substring(3, 4));
+            fechaIni = new DateTime(anho, mes, 1);
+            anho = Int32.Parse(fechaFinal.Substring(3, 4));
+            mes = Int32.Parse(fechaFinal.Substring(0, 2));
+            fechaFin = new DateTime(anho, mes, 1);
+            string afluent = "";
+            
+            List<string> lstAfluentes = new List<string>();
+            TipoInformacionAFluentes listValxAfluente = new TipoInformacionAFluentes();
+            List<TipoInformacionAFluentes> ListValAfluentes = new List<TipoInformacionAFluentes>();
+
+            ListaMes = this.logic.listaRptMesPtoMedicion(24, 5, idsEmpresas, fechaIni, fechaFin);
+            bool isNvoPunto = false;
+            foreach(var list in ListaMes)
+            {
+                if (list.Ptomedinomb != afluent){
+                    lstAfluentes.Add(list.Ptomedinomb);
+                }
+                afluent = list.Ptomedinomb;
+                listValxAfluente.infoValue.Add((decimal)list.H1);
+                listValxAfluente.UnidMedidaInfo = list.Tipoinfoabrev;
+                
+            }
+            ListValAfluentes.Add(listValxAfluente);
+            model.ListaAfluentes = lstAfluentes;
+            model.ListaValoresAfluentes = ListValAfluentes;
+     
+            //List<PtoMedida> Lista = new List<PtoMedida>();
+            //Lista.Add(new PtoMedida() { IdMedida1 = 1.2, IdMedida2 = 1.2, NombreMedida = "ENE" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 0.5, IdMedida2 = 1.7, NombreMedida = "FEB" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 3.4, IdMedida2 = 1.9, NombreMedida = "MAR" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 4.5, IdMedida2 = 2.5, NombreMedida = "ABR" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 0.8, IdMedida2 = 3.5, NombreMedida = "MAY" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 2.5, IdMedida2 = 4.8, NombreMedida = "JUN" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 7.8, IdMedida2 = 5, NombreMedida = "JUL" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 8.0, IdMedida2 = 2.9, NombreMedida = "AGO" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 0.9, IdMedida2 = 3.4, NombreMedida = "SET" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 10.5, IdMedida2 = 5.6, NombreMedida = "OCT" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 11.5, IdMedida2 = 10, NombreMedida = "NOV" });
+            //Lista.Add(new PtoMedida() { IdMedida1 = 12.7, IdMedida2 = 0.9, NombreMedida = "DIC" });
+            //model.ListaPtoMedida = Lista;
 
             var jsonResult = Json(model);
             jsonResult.MaxJsonLength = int.MaxValue;
