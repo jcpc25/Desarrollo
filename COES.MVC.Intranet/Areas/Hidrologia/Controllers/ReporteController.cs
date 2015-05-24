@@ -63,32 +63,126 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         }
 
         [HttpPost]
-        public JsonResult GraficoReporte(string idsEmpresas, string fechaInicial, string fechaFinal)
+        public JsonResult GraficoReporte(string idsEmpresas,string idsCuencas, string fechaInicial, string fechaFinal,int idTipoInformacion)
             //(string fechaInicial, string fechaFinal, string idsempresas, string idscuencas, int idptomedida)
         {
             HidrologiaModel model = new HidrologiaModel();
             DateTime fechaIni = DateTime.MinValue;
             DateTime fechaFin = DateTime.MinValue;
-            List<MeMedicion1DTO> ListaMes = new List<MeMedicion1DTO>();
-            List<MeMedicion1DTO> listaMesAux = new List<MeMedicion1DTO>();  
-            int mes = Int32.Parse(fechaInicial.Substring(0, 2));
-            int anho = Int32.Parse(fechaInicial.Substring(3, 4));
-            fechaIni = new DateTime(anho, mes, 1);
-            anho = Int32.Parse(fechaFinal.Substring(3, 4));
-            mes = Int32.Parse(fechaFinal.Substring(0, 2));
-            fechaFin = new DateTime(anho, mes, 1);                        
-
-            ListaMes = this.logic.listaRptMesPtoMedicion(24, 5, idsEmpresas, fechaIni, fechaFin);
-
-            foreach (MeMedicion1DTO list in ListaMes)
+            var formato = logic.GetByIdMeFormato(idTipoInformacion);
+            formato.ListaHoja = logic.GetByCriteriaMeFormatohojas(idTipoInformacion);
+            model.TituloReporte = formato.ListaHoja[0].Hojatitulo;
+            switch (formato.Formatresolucion)
             {
-                list.AmhoMesPtomedi = COES.Base.Tools.Util.ObtenerMesAnho(list.Medifecha);                   
-                listaMesAux.Add(list);              
+                case 60 * 24 * 30:
+                    int mes = Int32.Parse(fechaInicial.Substring(0, 2));
+                    int anho = Int32.Parse(fechaInicial.Substring(3, 4));
+                    fechaIni = new DateTime(anho, mes, 1);
+                    anho = Int32.Parse(fechaFinal.Substring(3, 4));
+                    mes = Int32.Parse(fechaFinal.Substring(0, 2));
+                    fechaFin = new DateTime(anho, mes, 1);
+                    model = GraficoMensual(idsEmpresas, fechaIni, fechaFin);
+                    break;
+                case 30: 
+                    fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                    fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas,idsCuencas ,fechaIni, fechaFin);
+                    break;
+                case 60:
+                    fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                    fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas,idsCuencas ,fechaIni, fechaFin);
+                    break;
             }
-            ListaMes = listaMesAux;
-            var jsonResult = Json(ListaMes);
+            var jsonResult = Json(model);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
+        }
+
+        public HidrologiaModel GraficoMensual(string idsEmpresas, DateTime fechaIni, DateTime fechaFin)
+        {
+            HidrologiaModel model = new HidrologiaModel();
+            List<MeMedicion1DTO> lista = this.logic.ListaMed1Hidrologia(24, 5, idsEmpresas, fechaIni, fechaFin);
+            model.ListaCategoriaGrafico = new List<string>();
+            model.ListaSerieName = new List<string>();
+
+            // Obtener Lista de Anho y Mes ordenados para la categoria del grafico
+            int totalMeses = 0;
+            for (var f = fechaIni; f <= fechaFin; f = f.AddMonths(1))
+            {
+                string anhoMes = COES.Base.Tools.Util.ObtenerNombreMesAbrev(f.Month) + " " +
+                   f.Year.ToString().Substring(2, 2);
+                model.ListaCategoriaGrafico.Add(anhoMes);
+                totalMeses++;
+            }
+
+            // Obtener Lista de nombres de las series del grafico.
+            var listaGrupoMedicion = lista.GroupBy(x => x.Ptomedicodi).Select(group => group.First()).ToList();
+            foreach (var reg in listaGrupoMedicion)
+            {
+                string nombreSerie = reg.Ptomedinomb + " " + reg.Tipoptomedinomb + " " + reg.Tipoinfoabrev;
+                model.ListaSerieName.Add(nombreSerie);
+            }
+            // Obtener lista de valores para las series del grafico
+            model.ListaSerieData = new decimal?[listaGrupoMedicion.Count()][];
+            for (var i = 0; i < listaGrupoMedicion.Count(); i++)
+            {
+                model.ListaSerieData[i] = new decimal?[totalMeses];
+                var j = 0;
+                for (var f = fechaIni; f <= fechaFin; f = f.AddMonths(1))
+                {
+                    decimal? valor = null;
+                    var entity = lista.Find(x => x.Ptomedicodi == listaGrupoMedicion[i].Ptomedicodi && x.Medifecha == f);
+                    if (entity != null)
+                    {
+                        valor = entity.H1;
+                        model.ListaSerieData[i][j] = valor;
+                    }
+                    j++;
+                }
+            }
+            return model;
+        }
+
+        public HidrologiaModel GraficoDiario(int idLectura,string idsEmpresas, string idsCuencas,DateTime fechaIni, DateTime fechaFin)
+        {
+            HidrologiaModel model = new HidrologiaModel();
+            List<MeMedicion24DTO> lista = this.logic.ListaMed24Hidrologia(idLectura, 5, idsEmpresas, idsCuencas, fechaIni, fechaFin);
+            model.ListaCategoriaGrafico = new List<string>();
+            model.ListaSerieName = new List<string>();
+
+            // Obtener Lista de Anho y Mes ordenados para la categoria del grafico
+            int totalCuartoHoras = 0;
+            for (var j = 0; j <= 23; j++)
+            {
+                string hora = ("0" + j).Substring(0,2) + ":00"; 
+                model.ListaCategoriaGrafico.Add(hora);
+                totalCuartoHoras++;
+            }
+            // Obtener Lista de nombres de las series del grafico.
+            var listaGrupoMedicion = lista.GroupBy(x => x.Ptomedicodi).Select(group => group.First()).ToList();
+            foreach (var reg in listaGrupoMedicion)
+            {
+                string nombreSerie = reg.Ptomedinomb + " " + reg.Tipoptomedinomb + " " + reg.Tipoinfoabrev;
+                model.ListaSerieName.Add(nombreSerie);
+            }
+            // Obtener lista de valores para las series del grafico
+            model.ListaSerieData = new decimal?[listaGrupoMedicion.Count()][];
+            for (var i = 0; i < listaGrupoMedicion.Count(); i++)
+            {
+                model.ListaSerieData[i] = new decimal?[24];
+                var entity = lista.Find(x => x.Ptomedicodi == listaGrupoMedicion[i].Ptomedicodi && x.Medifecha == fechaIni);
+                if (entity != null)
+                {
+                    for (var j = 1; j <= 24; j++)
+                    {
+                        decimal valor = (decimal)entity.GetType().GetProperty("H" + j).GetValue(entity, null);
+                        model.ListaSerieData[i][j - 1] = valor;
+                    }
+                }
+
+            }
+            return model;
         }
 
     }

@@ -49,6 +49,7 @@ namespace COES.Dominio.DTO.Sic
         public string Tipoinfoabrev { get; set; }
         public int Tipoptomedicodi { get; set; }
         public string Tipoptomedinomb { get; set; }
+        public string Ptomedinomb { get; set; }
 
     }
 }

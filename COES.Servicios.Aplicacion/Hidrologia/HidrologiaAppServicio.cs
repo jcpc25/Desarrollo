@@ -938,6 +938,12 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             }
         }
 
+        public List<MeMedicion48DTO> ListaMed48Hidrologia(int lectocodi, int origlect, string idsEmpresa,string idsCuenca,DateTime fechaInicio, DateTime fechaFin)
+        {
+            return FactorySic.GetMeMedicion48Repository().GetHidrologia(lectocodi, origlect, idsEmpresa,idsCuenca, fechaInicio, fechaFin);
+        }
+
+
         #endregion
 
         #region Métodos Tabla ME_MEDICION24
@@ -1049,6 +1055,11 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             {
                 throw new Exception(ex.Message, ex);
             }
+        }
+
+        public List<MeMedicion24DTO> ListaMed24Hidrologia(int lectocodi, int origlect, string idsEmpresa, string idsCuenca, DateTime fechaInicio, DateTime fechaFin)
+        {
+            return FactorySic.GetMeMedicion24Repository().GetHidrologia(lectocodi, origlect, idsEmpresa, idsCuenca, fechaInicio, fechaFin);
         }
 
         #endregion
@@ -1164,7 +1175,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             }
         }
 
-        public List<MeMedicion1DTO> listaRptMesPtoMedicion(int lectocodi, int origlect, string idsEmpresa, DateTime fechaInicio, DateTime fechaFin)
+        public List<MeMedicion1DTO> ListaMed1Hidrologia(int lectocodi, int origlect, string idsEmpresa, DateTime fechaInicio, DateTime fechaFin)
         {
 
             return FactorySic.GetMeMedicion1Repository().GetHidrologia(lectocodi, origlect, idsEmpresa, fechaInicio, fechaFin);

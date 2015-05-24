@@ -8,3 +8,4 @@
 *.cache
 *.suo
 COES.Dominio.DTO/bin/Debug/COES.Dominio.DTO.pdb
+COES.Base/obj/Debug/COES.Framework.Base.pdb

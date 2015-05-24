@@ -34,7 +34,6 @@ $(function () {
 });
 
 function cambiarFormatoFecha(tipo) {
-    
     switch(tipo){
         case "7":
             $('#FechaDesde').Zebra_DatePicker({
@@ -88,6 +87,7 @@ function cargarPrevio(){
     $('#cbPtoMedida').multipleSelect('checkAll');
     $('#cbTipoInformacion').val(6);
 }
+
 function buscarDatos() {
 
     $('#reporte').css("display", "block");
@@ -163,7 +163,7 @@ function generarGrafico() {
     var ptoMedida = $('#cbPtoMedida').multipleSelect('getSelects');
     var fechadesde = $('#FechaDesde').val();
     var fechahasta = $('#FechaHasta').val();
-
+    var tipoInformacion = $('#cbTipoInformacion').val();
         
     if (empresa == "[object Object]") empresa = "-1";
     if (empresa == "") empresa = "-1";
@@ -183,8 +183,7 @@ function generarGrafico() {
         url: controlador + "reporte/graficoreporte",
         data: {
             fechaInicial: $('#hfFechaDesde').val(), fechaFinal: $('#hfFechaHasta').val(),
-            idsEmpresas: $('#hfEmpresa').val()
-            //, idscuencas: $('#hfCuenca').val(),
+            idsEmpresas: $('#hfEmpresa').val(), idTipoInformacion: tipoInformacion, idsCuencas: $('#hfCuenca').val()
             //idptomedida: $('#hfPtoMedida').val()
         },
         dataType: 'json',
@@ -198,74 +197,24 @@ function generarGrafico() {
     });
 
     graficoHidrologia = function (result) {
-        var json = result;
-        var jsondata = [];
-        var jsonmesanho = [];
-        var jsonemp = [];
-
-        var nomempr = "";
-        var mes="";
-        for (var i in json) {//lleno el arreglo con los nombre de los afluentes o puntos de medicion
-            if (json[i].Ptomedinomb != nomempr) {
-                jsonemp.push(json[i].Ptomedinomb);               
-            }
-            nomempr = json[i].Ptomedinomb;
-
-            //if (json[i].Ptomedicodi != mes) {
-            //    jsonmes.push(json[i].Ptomedicodi);
-            //}
-            //mes = json[i].Ptomedicodi;
-            jsonmesanho.push(json[i].AmhoMesPtomedi);
-            //alert(jsonmesanho);
-
-        }
-
-        var jsondata = [];
-        for (var i in jsonemp) {
-            jsondata[i] = [];
-            for (var j in json) {
-                jsondata[i].push(null);
-            }
-        }
-       
-        var k;
-        var j;
-        for (var i in json) {//lleno el arreglo on los valores H1
-            
-            //k = jsonmes.indexOf(json[i].Ptomedicodi);
-            j = jsonemp.indexOf(json[i].Ptomedinomb);
-            jsondata[j][i] = json[i].H1;
-            //alert(json.length);
-            //alert(jsondata[k][j]);
-            //alert("k:"+k+"j:"+j+"i:"+i);
-        }
-        //for (var i in jasonsata) {
-        //    alert(jsondata[i]);
-        //}
         var opcion = {
             chart: {
                 type: 'spline'
             },
             title: {
-                text: 'Gráfico Caudal Afluentes - Mensual'
+                text:  result.TituloReporte
             },
             subtitle: {
                 text: 'Caudal por puntos de Medición'
             },
             xAxis:{
 
-                categories: jsonmesanho,
+                categories: result.ListaCategoriaGrafico,
                 style: {
 
                         fontSize: '5'
                 },
-            //        //['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'],
 
-            //    //type: 'datetime',
-            //    //dateTimeLabelFormats: { // don't display the dummy year
-            //    //    month: '%e. %b',
-            //    //    year: '%b'
-            //    //},
                 title: {
                     text: 'Meses'
                 },
@@ -291,20 +240,12 @@ function generarGrafico() {
 
             series: []
         };
-        for (var i in jsondata) {
-            //opcion.xAxis.push({
-            //    categories: jsonmesanho[i],
-            //    style: {
-
-            //        fontSize: '5'
-            //    }
-            //});
+        for (var i in result.ListaSerieName) {
             opcion.series.push({
-                name: jsonemp[i],
-                data: jsondata[i]
+                name: result.ListaSerieName[i],
+                data: result.ListaSerieData[i]
             });
         }
-
         $('#graficos').highcharts(opcion);
     }
 }

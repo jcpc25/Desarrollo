@@ -340,7 +340,7 @@
     <key>GetHidrologia</key>
     <query>
       select
-      m48.*, tpto.tipoptomedinomb,eq.equinomb,ti.tipoinfoabrev
+      m48.*, tpto.tipoptomedinomb,eq.equinomb,ti.tipoinfoabrev,pto.ptomedibarranomb
       from
       me_medicion48 m48
       inner join me_ptomedicion pto on pto.ptomedicodi = m48.ptomedicodi

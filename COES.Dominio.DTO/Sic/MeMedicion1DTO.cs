@@ -26,7 +26,5 @@ namespace COES.Dominio.DTO.Sic
         public string Tipoptomedinomb { get; set; }
         public string Ptomedinomb { get; set; }
 
-        public string AmhoMesPtomedi { get; set; }
-
     }
 }
