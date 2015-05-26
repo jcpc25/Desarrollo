@@ -188,7 +188,16 @@ function generarGrafico() {
         },
         dataType: 'json',
         success: function (result) {            
-            graficoHidrologia(result);
+            var tipo = result.TipoReporte;
+            switch(tipo){
+                case 7:
+                    graficoHidrologiaMes(result);
+                    break;
+                default:
+                    graficoHidrologiaDiario(result);
+                    break;
+            }
+            
 
         },
         error: function () {
@@ -196,7 +205,7 @@ function generarGrafico() {
         }
     });
 
-    graficoHidrologia = function (result) {
+    graficoHidrologiaMes = function (result) {
         var opcion = {
             chart: {
                 type: 'spline'
@@ -213,6 +222,59 @@ function generarGrafico() {
                 style: {
 
                         fontSize: '5'
+                },
+
+                title: {
+                    text: 'Meses'
+                },
+            },
+            yAxis: {
+                title: {
+                    text: 'Caudal (m3/s)'
+                },
+                min: 0
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+            },
+
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enabled: true
+                    }
+                }
+            },
+
+            series: []
+        };
+        for (var i in result.ListaSerieName) {
+            opcion.series.push({
+                name: result.ListaSerieName[i],
+                data: result.ListaSerieData[i]
+            });
+        }
+        $('#graficos').highcharts(opcion);
+    }
+
+    graficoHidrologiaDiario = function (result) {
+        var opcion = {
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text:  result.TituloReporte
+            },
+            subtitle: {
+                text: 'Caudal por puntos de Medición'
+            },
+            xAxis:{
+
+                categories: result.ListaCategoriaGrafico,
+                style: {
+
+                    fontSize: '5'
                 },
 
                 title: {

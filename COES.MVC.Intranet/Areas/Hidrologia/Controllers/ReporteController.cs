@@ -74,23 +74,26 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             model.TituloReporte = formato.ListaHoja[0].Hojatitulo;
             switch (formato.Formatresolucion)
             {
-                case 60 * 24 * 30:
+                case 60 * 24 * 30: //grafico mensual
                     int mes = Int32.Parse(fechaInicial.Substring(0, 2));
                     int anho = Int32.Parse(fechaInicial.Substring(3, 4));
                     fechaIni = new DateTime(anho, mes, 1);
                     anho = Int32.Parse(fechaFinal.Substring(3, 4));
                     mes = Int32.Parse(fechaFinal.Substring(0, 2));
                     fechaFin = new DateTime(anho, mes, 1);
-                    model = GraficoMensual(idsEmpresas, fechaIni, fechaFin);
+                    model.TipoReporte = idTipoInformacion;
+                    model = GraficoMensual((int)formato.ListaHoja[0].Lectcodi, idsEmpresas, fechaIni, fechaFin);
                     break;
-                case 30: 
+                case 30: //grafio diario
                     fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                    model.TipoReporte = idTipoInformacion;
                     model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas,idsCuencas ,fechaIni, fechaFin);
                     break;
                 case 60:
                     fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                    model.TipoReporte = idTipoInformacion;
                     model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas,idsCuencas ,fechaIni, fechaFin);
                     break;
             }
@@ -99,10 +102,10 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             return jsonResult;
         }
 
-        public HidrologiaModel GraficoMensual(string idsEmpresas, DateTime fechaIni, DateTime fechaFin)
+        public HidrologiaModel GraficoMensual(int idLectura, string idsEmpresas, DateTime fechaIni, DateTime fechaFin)
         {
             HidrologiaModel model = new HidrologiaModel();
-            List<MeMedicion1DTO> lista = this.logic.ListaMed1Hidrologia(24, 5, idsEmpresas, fechaIni, fechaFin);
+            List<MeMedicion1DTO> lista = this.logic.ListaMed1Hidrologia(idLectura, 5, idsEmpresas, fechaIni, fechaFin);
             model.ListaCategoriaGrafico = new List<string>();
             model.ListaSerieName = new List<string>();
 
@@ -151,11 +154,20 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             model.ListaCategoriaGrafico = new List<string>();
             model.ListaSerieName = new List<string>();
 
-            // Obtener Lista de Anho y Mes ordenados para la categoria del grafico
+            // Obtener Lista de Horas ordenados para la categoria del grafico
             int totalCuartoHoras = 0;
             for (var j = 0; j <= 23; j++)
             {
-                string hora = ("0" + j).Substring(0,2) + ":00"; 
+                string hora = "";
+                if (j < 10)
+                {
+                   hora = ("0" + j).Substring(0, 2) + ":00";
+                }
+                else
+                {
+                   hora = j + ":00";
+                }
+                
                 model.ListaCategoriaGrafico.Add(hora);
                 totalCuartoHoras++;
             }
@@ -180,7 +192,6 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                         model.ListaSerieData[i][j - 1] = valor;
                     }
                 }
-
             }
             return model;
         }

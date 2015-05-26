@@ -30,6 +30,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
         public List<String> ListaSerieName { get; set; }
         public decimal?[][] ListaSerieData { get; set; }
         public string TituloReporte { get; set; }
+        public int TipoReporte { get; set; }
     }
 
     public class PtoMedida
