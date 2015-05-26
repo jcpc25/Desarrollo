@@ -634,7 +634,8 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     break;
 
                 case 60: //Rpte Diario (lectcodi=63)
-                    List<MeMedicion24DTO> lista24 = FactorySic.GetMeMedicion24Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaInicio, fechaFin);
+                    
+                    List<MeMedicion24DTO> lista24 = FactorySic.GetMeMedicion24Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaInicio, fechaInicio);
                     foreach (var reg in lista24)
                     {
                         listaGenerica.Add(reg);
@@ -642,7 +643,8 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
                     break;
                 case 30: // Rpte 1/2 horas
-                    List<MeMedicion48DTO> lista48 = FactorySic.GetMeMedicion48Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5,idsEmpresa,idsCuenca, fechaInicio, fechaFin);
+
+                    List<MeMedicion48DTO> lista48 = FactorySic.GetMeMedicion48Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaInicio, fechaInicio);
                     foreach (var reg in lista48)
                     {
                         listaGenerica.Add(reg);
@@ -650,7 +652,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
                     break;
                 case 15: // Rpte 15 minnutos
-                    List<MeMedicion96DTO> lista96 = FactorySic.GetMeMedicion96Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaFin);
+                    List<MeMedicion96DTO> lista96 = FactorySic.GetMeMedicion96Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaInicio);
                     foreach (var reg in lista96)
                     {
                         listaGenerica.Add(reg);

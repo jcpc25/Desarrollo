@@ -34,6 +34,7 @@ $(function () {
 });
 
 function cambiarFormatoFecha(tipo) {
+    alert(tipo);
     switch(tipo){
         case "7":
             $('#FechaDesde').Zebra_DatePicker({
@@ -196,9 +197,7 @@ function generarGrafico() {
                 default:
                     graficoHidrologiaDiario(result);
                     break;
-            }
-            
-
+            }            
         },
         error: function () {
             alert("Ha ocurrido un error en generar grafico");

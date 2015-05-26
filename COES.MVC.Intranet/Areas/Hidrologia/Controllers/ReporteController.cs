@@ -88,13 +88,13 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                     fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     model.TipoReporte = idTipoInformacion;
-                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas,idsCuencas ,fechaIni, fechaFin);
+                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas,idsCuencas ,formato, fechaIni, fechaFin);
                     break;
                 case 60:
                     fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     model.TipoReporte = idTipoInformacion;
-                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas,idsCuencas ,fechaIni, fechaFin);
+                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas,idsCuencas, formato ,fechaIni, fechaFin);
                     break;
             }
             var jsonResult = Json(model);
@@ -147,32 +147,24 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             return model;
         }
 
-        public HidrologiaModel GraficoDiario(int idLectura,string idsEmpresas, string idsCuencas,DateTime fechaIni, DateTime fechaFin)
+        public HidrologiaModel GraficoDiario(int idLectura, string idsEmpresas, string idsCuencas, MeFormatoDTO formato, DateTime fechaIni, DateTime fechaFin)
         {
             HidrologiaModel model = new HidrologiaModel();
-            List<MeMedicion24DTO> lista = this.logic.ListaMed24Hidrologia(idLectura, 5, idsEmpresas, idsCuencas, fechaIni, fechaFin);
+            List<MeMedicion24DTO> lista = this.logic.ListaMed24Hidrologia(idLectura, 5, idsEmpresas, idsCuencas, fechaIni, fechaIni);
             model.ListaCategoriaGrafico = new List<string>();
             model.ListaSerieName = new List<string>();
+            int totalIntervalos = 60 * 24 / (int)formato.Formatresolucion;
+            // Obtener Lista de intervalos categoria del grafico
 
-            // Obtener Lista de Horas ordenados para la categoria del grafico
-            int totalCuartoHoras = 0;
-            for (var j = 0; j <= 23; j++)
+            for (var j = 0; j <= (totalIntervalos - 1); j++)
             {
-                string hora = "";
-                if (j < 10)
-                {
-                   hora = ("0" + j).Substring(0, 2) + ":00";
-                }
-                else
-                {
-                   hora = j + ":00";
-                }
-                
+                string hora = ("0" + j.ToString()).Substring(("0" + j.ToString()).Length - 2, 2) + ":00";
                 model.ListaCategoriaGrafico.Add(hora);
-                totalCuartoHoras++;
+
             }
             // Obtener Lista de nombres de las series del grafico.
-            var listaGrupoMedicion = lista.GroupBy(x => x.Ptomedicodi).Select(group => group.First()).ToList();
+            
+            var listaGrupoMedicion = lista.GroupBy(x => new { x.Ptomedicodi, x.Tipoinfocodi }).Select(group => group.First()).ToList();
             foreach (var reg in listaGrupoMedicion)
             {
                 string nombreSerie = reg.Ptomedinomb + " " + reg.Tipoptomedinomb + " " + reg.Tipoinfoabrev;
@@ -182,16 +174,18 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             model.ListaSerieData = new decimal?[listaGrupoMedicion.Count()][];
             for (var i = 0; i < listaGrupoMedicion.Count(); i++)
             {
-                model.ListaSerieData[i] = new decimal?[24];
-                var entity = lista.Find(x => x.Ptomedicodi == listaGrupoMedicion[i].Ptomedicodi && x.Medifecha == fechaIni);
+                model.ListaSerieData[i] = new decimal?[totalIntervalos];
+                var entity = lista.Find(x => x.Ptomedicodi == listaGrupoMedicion[i].Ptomedicodi &&
+                    x.Tipoinfocodi == listaGrupoMedicion[i].Tipoinfocodi && x.Medifecha == fechaIni);
                 if (entity != null)
                 {
-                    for (var j = 1; j <= 24; j++)
+                    for (var j = 1; j <= totalIntervalos; j++)
                     {
                         decimal valor = (decimal)entity.GetType().GetProperty("H" + j).GetValue(entity, null);
                         model.ListaSerieData[i][j - 1] = valor;
                     }
                 }
+
             }
             return model;
         }
