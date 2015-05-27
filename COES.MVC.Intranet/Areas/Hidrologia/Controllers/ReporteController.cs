@@ -12,10 +12,24 @@ using System.Web.Mvc;
 namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
 {
     public class ReporteController : Controller
-    {
+    {             
         //
         // GET: /Hidrologia/Reporte/
         HidrologiaAppServicio logic = new HidrologiaAppServicio();
+
+        /// <summary>
+        /// Almacena los fechas del reporte
+        /// </summary>
+        public List<DateTime> ListaFechas
+        {
+            get
+            {
+                return (Session[DatosSesion.ListaFechas] != null) ?
+                    (List<DateTime>)Session[DatosSesion.ListaFechas] : new List<DateTime>();
+            }
+            set { Session[DatosSesion.ListaFechas] = value; }
+        }
+
         public ActionResult Index()
         {
             HidrologiaModel model = new HidrologiaModel();
@@ -38,7 +52,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             DateTime fechaFin = DateTime.MinValue;
             switch (formato.Formatresolucion)
             {
-                case 60 * 24 * 30://mensual ->ListaMedidores1
+                case 60 * 24 * 30://mensual 
                     int mes = Int32.Parse(fechaInicial.Substring(0, 2));
                     int anho = Int32.Parse(fechaInicial.Substring(3, 4));
                     fechaIni = new DateTime(anho, mes, 1);
@@ -46,25 +60,31 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                     mes = Int32.Parse(fechaFinal.Substring(0, 2));
                     fechaFin = new DateTime(anho, mes, 1);
                     break;
-                case 60*24: //semanal -> ListaMedidores1
+                case 60*24: //semanal 
                     int ianho = Int32.Parse(fechaInicial.Substring(0, 4));
                     fechaIni = new DateTime(ianho, 1, 1);
                     ianho = Int32.Parse(fechaFinal.Substring(0, 4));
-                    fechaFin = new DateTime(ianho, 1, 1);
+                    fechaFin = new DateTime(ianho, 1, 1);                    
+                    break;
+                case 60 : //diario
+                    fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                    fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                    List<MeMedicion24DTO> lista = this.logic.ListaMed24Hidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaIni, fechaFin);
+                    ListaFechas = lista.Select(x => x.Medifecha).Distinct().ToList();
                     break;
                 default:
                     fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     break;
             }
-            string resultado = this.logic.ObtenerReporteHidrologia(idsEmpresa,idsCuenca, fechaIni, fechaFin, formato);
+            
+            string resultado = this.logic.ObtenerReporteHidrologia(idsEmpresa, idsCuenca, fechaIni, fechaFin, formato, nroPagina, ListaFechas);
             model.Resultado = resultado;
             return PartialView(model);
         }
 
         [HttpPost]
-        public JsonResult GraficoReporte(string idsEmpresas,string idsCuencas, string fechaInicial, string fechaFinal,int idTipoInformacion)
-            //(string fechaInicial, string fechaFinal, string idsempresas, string idscuencas, int idptomedida)
+        public JsonResult GraficoReporte(string idsEmpresas, string idsCuencas, string fechaInicial, string fechaFinal, int idTipoInformacion, int nroPagina)       
         {
             HidrologiaModel model = new HidrologiaModel();
             DateTime fechaIni = DateTime.MinValue;
@@ -88,13 +108,13 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                     fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     model.TipoReporte = idTipoInformacion;
-                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas,idsCuencas ,formato, fechaIni, fechaFin);
+                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas, idsCuencas, formato, fechaIni, fechaFin, nroPagina);
                     break;
                 case 60:
                     fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     model.TipoReporte = idTipoInformacion;
-                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas,idsCuencas, formato ,fechaIni, fechaFin);
+                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas, idsCuencas, formato, fechaIni, fechaFin, nroPagina);
                     break;
             }
             var jsonResult = Json(model);
@@ -147,9 +167,10 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             return model;
         }
 
-        public HidrologiaModel GraficoDiario(int idLectura, string idsEmpresas, string idsCuencas, MeFormatoDTO formato, DateTime fechaIni, DateTime fechaFin)
+        public HidrologiaModel GraficoDiario(int idLectura, string idsEmpresas, string idsCuencas, MeFormatoDTO formato, DateTime fechaIni, DateTime fechaFin, int nroPagina)
         {
             HidrologiaModel model = new HidrologiaModel();
+            fechaIni = ListaFechas[nroPagina - 1];
             List<MeMedicion24DTO> lista = this.logic.ListaMed24Hidrologia(idLectura, 5, idsEmpresas, idsCuencas, fechaIni, fechaIni);
             model.ListaCategoriaGrafico = new List<string>();
             model.ListaSerieName = new List<string>();
@@ -188,6 +209,43 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
 
             }
             return model;
+        }
+
+        /// <summary>
+        /// Permite mostrar el paginado de la consulta
+        /// </summary>
+        /// <param name="modelo"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public PartialViewResult Paginado(string idsEmpresa, string idsCuenca, int idTipoInformacion, string fechaInicial, string fechaFinal)
+        {
+            HidrologiaModel model = new HidrologiaModel();
+            model.IndicadorPagina = false;
+            var formato = logic.GetByIdMeFormato(idTipoInformacion);
+            formato.ListaHoja = logic.GetByCriteriaMeFormatohojas(idTipoInformacion);
+            DateTime fechaInicio = DateTime.Now;
+            DateTime fechaFin = DateTime.Now;
+
+            if (fechaInicial != null)
+            {
+                fechaInicio = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+            }
+            if (fechaFinal != null)
+            {
+                fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+            }
+            fechaFin = fechaFin.AddDays(1);
+
+            int nroRegistros = this.logic.ObtenerNroFilasMed1Hidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaInicio, fechaFin);
+
+            if (nroRegistros > 0)
+            {
+                model.NroPaginas = nroRegistros;
+                model.NroMostrar = Constantes.NroPageShow;
+                model.IndicadorPagina = true;
+            }
+
+            return PartialView(model);
         }
 
     }

@@ -48,4 +48,13 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
 
         public const int EmpresaGeneradora = 3;
     }
+
+    /// <summary>
+    /// Constantes para los datos de sesion
+    /// </summary>
+    public class DatosSesion
+    {
+  
+        public const string ListaFechas = "ListaFechas";
+    }
 }

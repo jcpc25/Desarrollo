@@ -27,14 +27,14 @@ $(function () {
         buscarDatos();
     });
     $('#btnGrafico').click(function () {
-        generarGrafico();
+        pintarPaginado(0) // 0: paginado de grafico, 1: paginado de lista
+        generarGrafico(1);
     });
     cargarPrevio();
     buscarDatos();
 });
 
-function cambiarFormatoFecha(tipo) {
-    alert(tipo);
+function cambiarFormatoFecha(tipo) {   
     switch(tipo){
         case "7":
             $('#FechaDesde').Zebra_DatePicker({
@@ -93,6 +93,7 @@ function buscarDatos() {
 
     $('#reporte').css("display", "block");
     $('#graficos').css("display", "none");
+    pintarPaginado(1)
     mostrarListado(1);
 }
 
@@ -107,7 +108,6 @@ function mostrarListado(nroPagina) {
 
     $('#hfEmpresa').val(empresa);
     $('#hfCuenca').val(cuenca);
-
     var tipoInformacion = $('#cbTipoInformacion').val();
 
     $.ajax({
@@ -154,7 +154,7 @@ function aoColumns() {
     return ao;
 }
 
-function generarGrafico() {
+function generarGrafico(nroPagina) {
 
     $('#reporte').css("display", "none");
     //$('#paginado').css("display", "none");
@@ -184,7 +184,8 @@ function generarGrafico() {
         url: controlador + "reporte/graficoreporte",
         data: {
             fechaInicial: $('#hfFechaDesde').val(), fechaFinal: $('#hfFechaHasta').val(),
-            idsEmpresas: $('#hfEmpresa').val(), idTipoInformacion: tipoInformacion, idsCuencas: $('#hfCuenca').val()
+            idsEmpresas: $('#hfEmpresa').val(), idTipoInformacion: tipoInformacion, idsCuencas: $('#hfCuenca').val(),
+            nroPagina: nroPagina
             //idptomedida: $('#hfPtoMedida').val()
         },
         dataType: 'json',
@@ -202,111 +203,151 @@ function generarGrafico() {
         error: function () {
             alert("Ha ocurrido un error en generar grafico");
         }
-    });
+    });  
+}
 
-    graficoHidrologiaMes = function (result) {
-        var opcion = {
-            chart: {
-                type: 'spline'
+graficoHidrologiaMes = function (result) {
+    var opcion = {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: result.TituloReporte
+        },
+        subtitle: {
+            text: 'Caudal por puntos de Medición'
+        },
+        xAxis: {
+
+            categories: result.ListaCategoriaGrafico,
+            style: {
+
+                fontSize: '5'
             },
+
             title: {
-                text:  result.TituloReporte
+                text: 'Meses'
             },
-            subtitle: {
-                text: 'Caudal por puntos de Medición'
+        },
+        yAxis: {
+            title: {
+                text: 'Caudal (m3/s)'
             },
-            xAxis:{
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+        },
 
-                categories: result.ListaCategoriaGrafico,
-                style: {
-
-                        fontSize: '5'
-                },
-
-                title: {
-                    text: 'Meses'
-                },
-            },
-            yAxis: {
-                title: {
-                    text: 'Caudal (m3/s)'
-                },
-                min: 0
-            },
-            tooltip: {
-                headerFormat: '<b>{series.name}</b><br>',
-                pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
-            },
-
-            plotOptions: {
-                spline: {
-                    marker: {
-                        enabled: true
-                    }
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
                 }
-            },
+            }
+        },
 
-            series: []
-        };
-        for (var i in result.ListaSerieName) {
-            opcion.series.push({
-                name: result.ListaSerieName[i],
-                data: result.ListaSerieData[i]
-            });
-        }
-        $('#graficos').highcharts(opcion);
+        series: []
+    };
+    for (var i in result.ListaSerieName) {
+        opcion.series.push({
+            name: result.ListaSerieName[i],
+            data: result.ListaSerieData[i]
+        });
     }
+    $('#graficos').highcharts(opcion);
+}
 
-    graficoHidrologiaDiario = function (result) {
-        var opcion = {
-            chart: {
-                type: 'spline'
+graficoHidrologiaDiario = function (result) {
+    var opcion = {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: result.TituloReporte
+        },
+        subtitle: {
+            text: 'Caudal por puntos de Medición'
+        },
+        xAxis: {
+
+            categories: result.ListaCategoriaGrafico,
+            style: {
+
+                fontSize: '5'
             },
+
             title: {
-                text:  result.TituloReporte
+                text: 'Meses'
             },
-            subtitle: {
-                text: 'Caudal por puntos de Medición'
+        },
+        yAxis: {
+            title: {
+                text: 'Caudal (m3/s)'
             },
-            xAxis:{
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+        },
 
-                categories: result.ListaCategoriaGrafico,
-                style: {
-
-                    fontSize: '5'
-                },
-
-                title: {
-                    text: 'Meses'
-                },
-            },
-            yAxis: {
-                title: {
-                    text: 'Caudal (m3/s)'
-                },
-                min: 0
-            },
-            tooltip: {
-                headerFormat: '<b>{series.name}</b><br>',
-                pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
-            },
-
-            plotOptions: {
-                spline: {
-                    marker: {
-                        enabled: true
-                    }
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
                 }
-            },
+            }
+        },
 
-            series: []
-        };
-        for (var i in result.ListaSerieName) {
-            opcion.series.push({
-                name: result.ListaSerieName[i],
-                data: result.ListaSerieData[i]
-            });
+        series: []
+    };
+    for (var i in result.ListaSerieName) {
+        opcion.series.push({
+            name: result.ListaSerieName[i],
+            data: result.ListaSerieData[i]
+        });
+    }
+    $('#graficos').highcharts(opcion);
+}
+
+function pintarPaginado(id) {
+    var empresa = $('#cbEmpresa').multipleSelect('getSelects');
+    var cuenca = $('#cbCuenca').multipleSelect('getSelects');
+
+    if (empresa == "[object Object]") empresa = "-1";
+    if (empresa == "") empresa = "-1";
+    if (cuenca == "[object Object]") cuenca = "-1";
+    if (cuenca == "") cuenca = "-1";
+
+    $('#hfEmpresa').val(empresa);
+    $('#hfCuenca').val(cuenca);
+
+    var tipoInformacion = $('#cbTipoInformacion').val();
+
+    $.ajax({
+        type: 'POST',
+        url: controlador + "reporte/paginado",
+        data: {
+            idsEmpresa: $('#hfEmpresa').val(), idsCuenca: $('#hfCuenca').val(), idTipoInformacion: tipoInformacion,
+            fechaInicial: $('#FechaDesde').val(), fechaFinal: $('#FechaHasta').val()
+        },
+        success: function (evt) {
+            $('#paginado').html(evt);           
+            mostrarPaginado(id);
+        },
+        error: function () {
+            alert("Ha ocurrido un error paginado");
         }
-        $('#graficos').highcharts(opcion);
+    });
+}
+
+function pintarBusqueda(nroPagina, itipo) {
+    if (itipo == 0) {
+        generarGrafico(nroPagina);       
+    }
+    else {
+        mostrarListado(nroPagina);
     }
 }

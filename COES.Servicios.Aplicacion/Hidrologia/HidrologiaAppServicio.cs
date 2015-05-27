@@ -278,7 +278,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
 
         #region Métodos Tabla EQ_equipo
 
-        public List<EqEquipoDTO> GetByCriteriaEqequipo(int emprcodi,int famcodi)
+        public List<EqEquipoDTO> GetByCriteriaEqequipo(int emprcodi, int famcodi)
         {
             return FactorySic.GetEqEquipoRepository().GetByEmprFam(emprcodi, famcodi);
         }
@@ -291,7 +291,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         }
 
         public List<EqEquipoDTO> ListarEquiposXFamilia(int idFamilia)
-        { 
+        {
             List<int> idsFamilia = new List<int>();
             idsFamilia.Add(idFamilia);
             return FactorySic.GetEqEquipoRepository().ListarEquipoxFamilias(idsFamilia.ToArray());
@@ -382,7 +382,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             {
                 var result = ex.Message;
             }
-            return entitys;            
+            return entitys;
         }
 
         public List<MePtomedicionDTO> ListarPtoMedicionDuplicados(int equipo, int origen, int tipopto)
@@ -396,7 +396,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             {
                 var result = ex.Message;
             }
-            return entitys;             
+            return entitys;
         }
 
         /// <summary>
@@ -458,7 +458,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         /// <param name="horizonte"></param>
         /// <param name="fechaInicio"></param>
         /// <param name="fechaFin"></param>
-        public void EliminarValoresCargados96(int idLectura,int idFormato,int idEmpresa, DateTime fechaInicio, DateTime fechaFin)
+        public void EliminarValoresCargados96(int idLectura, int idFormato, int idEmpresa, DateTime fechaInicio, DateTime fechaFin)
         {
             try
             {
@@ -497,7 +497,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         /// <param name="fechaInicio"></param>
         /// <param name="fechaFin"></param>
         /// <returns></returns>
-        public string ObtenerResumenCargaDatos(int idEmpresa, DateTime fechaInicio, DateTime fechaFin, MeFormatoDTO formato,List<MeHojaptomedDTO> puntos,List<MeHeadcolumnDTO> cabeceras)
+        public string ObtenerResumenCargaDatos(int idEmpresa, DateTime fechaInicio, DateTime fechaFin, MeFormatoDTO formato, List<MeHojaptomedDTO> puntos, List<MeHeadcolumnDTO> cabeceras)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberGroupSeparator = " ";
@@ -541,12 +541,12 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             strHtml.Append("<table border='1' class='pretty tabla-adicional cell-border' cellspacing='0' width='100%' id='tabla'>");
             strHtml.Append("<thead>");
             strHtml.Append("<tr><th></th>");
-            foreach(var reg in cabeceras)
-                strHtml.Append("<th colspan='" + reg.Headlen + "'>" + reg.Headnombre +"</th>");
+            foreach (var reg in cabeceras)
+                strHtml.Append("<th colspan='" + reg.Headlen + "'>" + reg.Headnombre + "</th>");
             strHtml.Append("</tr>");
             strHtml.Append("<tr>");
             strHtml.Append("<th>FECHA HORA</th>");
-            foreach(var reg in puntos)
+            foreach (var reg in puntos)
                 strHtml.Append("<th>" + reg.Tipoptomedinomb + " (" + reg.Tipoinfoabrev + ")" + "</th>");
             strHtml.Append("</tr>");
             strHtml.Append("</thead>");
@@ -559,10 +559,10 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                 fechaInicio = fechaInicio.AddDays(-1);
             if (listaGenerica.Count > 0)
             {
-                for (int i = 0; i < formato.Formathorizonte;i++ )
+                for (int i = 0; i < formato.Formathorizonte; i++)
                     for (int k = 1; k <= nBloques; k++)
                     {
-                        var fechaMin = ((fechaInicio.AddMinutes(k * resolucion + i * 60*24))).ToString(ConstantesBase.FormatoFechaHora);
+                        var fechaMin = ((fechaInicio.AddMinutes(k * resolucion + i * 60 * 24))).ToString(ConstantesBase.FormatoFechaHora);
                         strHtml.Append("<tr>");
                         strHtml.Append(string.Format("<td>{0}</td>", fechaMin));
                         foreach (var p in listaGenerica)
@@ -587,28 +587,28 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             return strHtml.ToString();
         }
 
-/// <summary>
-/// Obtiene Reporte en codigo HTLM de Historico de Hidrologia
-/// </summary>
-/// <param name="idsEmpresa"></param>
-/// <param name="fechaInicio"></param>
-/// <param name="fechaFin"></param>
-/// <param name="formato"></param>
-/// <returns></returns>
-        public string ObtenerReporteHidrologia(string idsEmpresa, string idsCuenca, DateTime fechaInicio, DateTime fechaFin, MeFormatoDTO formato)
+        /// <summary>
+        /// Obtiene Reporte en codigo HTLM de Historico de Hidrologia
+        /// </summary>
+        /// <param name="idsEmpresa"></param>
+        /// <param name="fechaInicio"></param>
+        /// <param name="fechaFin"></param>
+        /// <param name="formato"></param>
+        /// <returns></returns>
+        public string ObtenerReporteHidrologia(string idsEmpresa, string idsCuenca, DateTime fechaInicio, DateTime fechaFin, MeFormatoDTO formato, int nroPagina, List<DateTime> ListaFechas)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberGroupSeparator = " ";
             nfi.NumberDecimalDigits = 3;
             nfi.NumberDecimalSeparator = ",";
-            string strHtml= string.Empty;
+            string strHtml = string.Empty;
             if (string.IsNullOrEmpty(idsEmpresa)) idsEmpresa = Constantes.ParametroNoExiste;
             List<Object> listaGenerica = new List<Object>();
             switch (formato.Formatresolucion)
             {
                 case 60 * 24 * 30: //rpte MES
                     List<MeMedicion1DTO> listaMes = FactorySic.GetMeMedicion1Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaFin);
-                    List<MeMedicion1DTO> listaCabecera = listaMes.GroupBy(x => new {x.Ptomedicodi, x.Ptomedinomb,x.Tipoinfoabrev})
+                    List<MeMedicion1DTO> listaCabecera = listaMes.GroupBy(x => new { x.Ptomedicodi, x.Ptomedinomb, x.Tipoinfoabrev })
                         .Select(y => new MeMedicion1DTO()
                         {
                             Ptomedicodi = y.Key.Ptomedicodi,
@@ -620,7 +620,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     break;
 
                 case 60 * 24: // semanal (lectcodi = 12)
-                    
+
                     List<MeMedicion1DTO> lista1 = FactorySic.GetMeMedicion1Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaInicio, fechaFin);
                     List<MeMedicion1DTO> listaCabecera1 = lista1.GroupBy(x => new { x.Ptomedicodi, x.Ptomedinomb, x.Tipoinfoabrev })
                      .Select(y => new MeMedicion1DTO()
@@ -630,15 +630,19 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                          Tipoinfoabrev = y.Key.Tipoinfoabrev
                      }
                      ).ToList();
-                    strHtml = GeneraViewHidroSemanal(lista1,listaCabecera1, formato, fechaInicio, fechaFin);
+                    strHtml = GeneraViewHidroSemanal(lista1, listaCabecera1, formato, fechaInicio, fechaFin);
                     break;
 
                 case 60: //Rpte Diario (lectcodi=63)
+
+                    fechaInicio = ListaFechas[nroPagina-1];
                     
                     List<MeMedicion24DTO> lista24 = FactorySic.GetMeMedicion24Repository().GetHidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaInicio, fechaInicio);
+                    
+                    
                     foreach (var reg in lista24)
                     {
-                        listaGenerica.Add(reg);
+                        listaGenerica.Add(reg);                       
                     }
                     strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
                     break;
@@ -660,7 +664,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                     strHtml = GeneraViewHidrologia(listaGenerica, formato, fechaInicio);
                     break;
             }
-            
+
 
             return strHtml;
         }
@@ -743,7 +747,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             return strHtml.ToString();
         }
 
-        public string GeneraViewHidromensual(List<MeMedicion1DTO> listaGenerica,List<MeMedicion1DTO> listaCabecera, MeFormatoDTO formato, DateTime fechaInicio,DateTime fechaFin)
+        public string GeneraViewHidromensual(List<MeMedicion1DTO> listaGenerica, List<MeMedicion1DTO> listaCabecera, MeFormatoDTO formato, DateTime fechaInicio, DateTime fechaFin)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberGroupSeparator = " ";
@@ -779,7 +783,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                 var f = fechaInicio;
                 foreach (var lst in listaGenerica)
                 {
-                    
+
                     strHtml.Append("<tr>");
                     var anho = f.Year.ToString();
                     var mes = f.Month;
@@ -805,7 +809,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             }
 
             strHtml.Append("</tbody>");
-            strHtml.Append("</table>");          
+            strHtml.Append("</table>");
             return strHtml.ToString();
         }
 
@@ -863,8 +867,8 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                         if (reg != null)
                         {
                             decimal valor = (decimal)reg.H1;
-                           
-                            strHtml.Append(string.Format("<td>{0}</td>", valor.ToString("N", nfi)));                       
+
+                            strHtml.Append(string.Format("<td>{0}</td>", valor.ToString("N", nfi)));
                         }
                         else
                             strHtml.Append("<td></td>");
@@ -940,9 +944,9 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             }
         }
 
-        public List<MeMedicion48DTO> ListaMed48Hidrologia(int lectocodi, int origlect, string idsEmpresa,string idsCuenca,DateTime fechaInicio, DateTime fechaFin)
+        public List<MeMedicion48DTO> ListaMed48Hidrologia(int lectocodi, int origlect, string idsEmpresa, string idsCuenca, DateTime fechaInicio, DateTime fechaFin)
         {
-            return FactorySic.GetMeMedicion48Repository().GetHidrologia(lectocodi, origlect, idsEmpresa,idsCuenca, fechaInicio, fechaFin);
+            return FactorySic.GetMeMedicion48Repository().GetHidrologia(lectocodi, origlect, idsEmpresa, idsCuenca, fechaInicio, fechaFin);
         }
 
 
@@ -1064,6 +1068,19 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             return FactorySic.GetMeMedicion24Repository().GetHidrologia(lectocodi, origlect, idsEmpresa, idsCuenca, fechaInicio, fechaFin);
         }
 
+        /// <summary>
+        /// Permite obtener la cantidad de registros con fechas distintas
+        /// </summary>
+        /// <returns></returns>
+        public int ObtenerNroFilasMed1Hidrologia(int lectocodi, int idOrigenLectura, string idsEmpresa, string idsCuenca, DateTime fechaInicio, DateTime fechaFin)
+        {
+            int cant;
+            var lista1 = FactorySic.GetMeMedicion24Repository().GetHidrologia(lectocodi, idOrigenLectura, idsEmpresa,idsCuenca,fechaInicio, fechaFin).Select(x => x.Medifecha).Distinct().ToList();
+            cant = lista1.Count();
+            return cant;
+        }
+
+
         #endregion
 
         #region Métodos Tabla ME_MEDICION1
@@ -1183,6 +1200,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             return FactorySic.GetMeMedicion1Repository().GetHidrologia(lectocodi, origlect, idsEmpresa, fechaInicio, fechaFin);
         }
 
+       
         #endregion
 
         #region Métodos Tabla ME_TIPOPUNTOMEDICION
@@ -1464,11 +1482,11 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         /// <summary>
         /// Inserta un registro de la tabla ME_HOJAPTOMED
         /// </summary>
-        public void SaveMeHojaptomed(MeHojaptomedDTO entity,int empresa)
+        public void SaveMeHojaptomed(MeHojaptomedDTO entity, int empresa)
         {
             try
             {
-                FactorySic.GetMeHojaptomedRepository().Save(entity,empresa);
+                FactorySic.GetMeHojaptomedRepository().Save(entity, empresa);
             }
             catch (Exception ex)
             {
@@ -1481,9 +1499,9 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         /// Graba un punto de medicion en el formato y devuelve el registro grabado
         /// </summary>
         /// <param name="entity"></param>
-        public MeHojaptomedDTO GrabarHojaPtoMedicion(MeHojaptomedDTO entity,int empresa)
+        public MeHojaptomedDTO GrabarHojaPtoMedicion(MeHojaptomedDTO entity, int empresa)
         {
-            SaveMeHojaptomed(entity,empresa);
+            SaveMeHojaptomed(entity, empresa);
             return GetByIdMeHojaptomed(entity.Hojanumero, entity.Formatcodi, entity.Tipoinfocodi, entity.Ptomedicodi, entity.Hojaptosigno);
         }
         /// <summary>
@@ -1509,7 +1527,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         {
             try
             {
-                FactorySic.GetMeHojaptomedRepository().Delete(hojanumero, formatcodi,1, ptomedicodi);
+                FactorySic.GetMeHojaptomedRepository().Delete(hojanumero, formatcodi, 1, ptomedicodi);
             }
             catch (Exception ex)
             {
@@ -1521,9 +1539,9 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         /// <summary>
         /// Permite obtener un registro de la tabla ME_HOJAPTOMED
         /// </summary>
-        public MeHojaptomedDTO GetByIdMeHojaptomed(int hojanumero, int formatcodi, int tipoinfocodi ,int ptomedicodi, int hojaptosigno)
+        public MeHojaptomedDTO GetByIdMeHojaptomed(int hojanumero, int formatcodi, int tipoinfocodi, int ptomedicodi, int hojaptosigno)
         {
-            return FactorySic.GetMeHojaptomedRepository().GetById(hojanumero, formatcodi, tipoinfocodi,ptomedicodi, hojaptosigno);
+            return FactorySic.GetMeHojaptomedRepository().GetById(hojanumero, formatcodi, tipoinfocodi, ptomedicodi, hojaptosigno);
         }
 
         /// <summary>
@@ -1537,9 +1555,9 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         /// <summary>
         /// Permite listar los puntos de medicion la tabla MeHojaptomed
         /// </summary>
-        public List<MeHojaptomedDTO> GetByCriteriaMeHojaptomeds(int emprcodi,int formatcodi,int hojacodi)
+        public List<MeHojaptomedDTO> GetByCriteriaMeHojaptomeds(int emprcodi, int formatcodi, int hojacodi)
         {
-            return FactorySic.GetMeHojaptomedRepository().GetByCriteria(emprcodi,formatcodi,hojacodi);
+            return FactorySic.GetMeHojaptomedRepository().GetByCriteria(emprcodi, formatcodi, hojacodi);
         }
 
         /// <summary>
@@ -1566,9 +1584,9 @@ namespace COES.Servicios.Aplicacion.Hidrologia
                 entity.Hojaptoorden = toPosition;
                 UpdateMeHojaptomed(entity);
             }
-            catch 
-            { 
-            resultado = -1;
+            catch
+            {
+                resultado = -1;
             }
             return resultado;
         }
@@ -1616,7 +1634,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         {
             try
             {
-                FactorySic.GetMeHeadcolumnRepository().Delete(formato,hoja,empresa,pos);
+                FactorySic.GetMeHeadcolumnRepository().Delete(formato, hoja, empresa, pos);
             }
             catch (Exception ex)
             {
@@ -1630,7 +1648,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         /// </summary>
         public MeHeadcolumnDTO GetByIdMeHeadcolumn(int formato, int hoja, int empresa, int pos)
         {
-            return FactorySic.GetMeHeadcolumnRepository().GetById(formato,hoja,empresa,pos);
+            return FactorySic.GetMeHeadcolumnRepository().GetById(formato, hoja, empresa, pos);
         }
 
         /// <summary>
@@ -1646,7 +1664,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         /// </summary>
         public List<MeHeadcolumnDTO> GetByCriteriaMeHeadcolumns(int formato, int empresa)
         {
-            return FactorySic.GetMeHeadcolumnRepository().GetByCriteria(formato,empresa);
+            return FactorySic.GetMeHeadcolumnRepository().GetByCriteria(formato, empresa);
         }
 
         #endregion

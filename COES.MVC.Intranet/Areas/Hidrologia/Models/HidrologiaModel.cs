@@ -24,19 +24,22 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
         public List<MePtomedicionDTO> ListaMedicion { get; set; }
         public List<PtoMedida> ListaPtoMedida { get; set; }
         public List<EqEquipoDTO> ListaCuenca { get; set; }
-        public List<EqEquipoDTO> ListaRecursosCuenca { get; set; }      
+        public List<EqEquipoDTO> ListaRecursosCuenca { get; set; }
         public List<TipoInformacion> ListaTipoInformacion { get; set; }
         public List<String> ListaCategoriaGrafico { get; set; }
         public List<String> ListaSerieName { get; set; }
         public decimal?[][] ListaSerieData { get; set; }
         public string TituloReporte { get; set; }
         public int TipoReporte { get; set; }
-    }
 
+        public bool IndicadorPagina { get; set; }
+        public int NroPaginas { get; set; }
+        public int NroMostrar { get; set; }
+    }
     public class PtoMedida
     {
-        public int IdMedida { get; set; }       
-        public string NombreMedida { get; set; }        
+        public int IdMedida { get; set; }
+        public string NombreMedida { get; set; }
     }
 
     public class TipoInformacion
@@ -44,5 +47,5 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
         public int IdTipoInfo { get; set; }
         public string NombreTipoInfo { get; set; }
     }
-
+    
 }
