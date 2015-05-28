@@ -248,5 +248,58 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             return PartialView(model);
         }
 
+        // exporta el reporte general consultado a archivo excel
+        [HttpPost]
+        public JsonResult GenerarArchivoReporte(string idsEmpresa, string idsCuenca, int idTipoInformacion, string fechaInicial, string fechaFinal)
+        {
+            int indicador = 1;
+
+            try
+            {
+                DateTime fechaIni = DateTime.MinValue;
+                DateTime fechaFin = DateTime.MinValue;
+                int mes = Int32.Parse(fechaInicial.Substring(0, 2));
+                int anho = Int32.Parse(fechaInicial.Substring(3, 4));
+                fechaIni = new DateTime(anho, mes, 1);
+                anho = Int32.Parse(fechaFinal.Substring(3, 4));
+                mes = Int32.Parse(fechaFinal.Substring(0, 2));
+                fechaFin = new DateTime(anho, mes, 1);
+                //if (fechaInicial != null)
+                //{
+                //    fechaInicio = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                //}
+                //if (fechaFinal != null)
+                //{
+                //    fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                //}
+                HidrologiaModel model = new HidrologiaModel();
+                var formato = logic.GetByIdMeFormato(idTipoInformacion);
+                formato.ListaHoja = logic.GetByCriteriaMeFormatohojas(idTipoInformacion);
+                List<MeMedicion1DTO> lista = this.logic.ListaMed1Hidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaIni, fechaFin);
+                model.ListaMedicion1 = lista;
+                ExcelDocument.GenerarArchivoHidrologiaMesQN(model);
+                indicador = 1;
+
+
+            }
+            catch
+            {
+                indicador = -1;
+            }
+
+            return Json(indicador);
+        }
+
+        //public virtual ActionResult ExportarReporte()
+        //{
+        //    string nombreArchivo = string.Empty;
+
+        //    nombreArchivo = Constantes.NombreReporteEnsayos;
+
+        //    string fullPath = ConfigurationManager.AppSettings[RutaDirectorio.ReporteEnsayos] + nombreArchivo;
+        //    return File(fullPath, Constantes.AppExcel, nombreArchivo);
+        //}
+
+
     }
 }

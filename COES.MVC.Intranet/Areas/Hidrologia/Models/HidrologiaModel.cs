@@ -31,6 +31,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
         public decimal?[][] ListaSerieData { get; set; }
         public string TituloReporte { get; set; }
         public int TipoReporte { get; set; }
+        public List<MeMedicion1DTO> ListaMedicion1 { get; set; }
 
         public bool IndicadorPagina { get; set; }
         public int NroPaginas { get; set; }

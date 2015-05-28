@@ -27,8 +27,15 @@ $(function () {
         buscarDatos();
     });
     $('#btnGrafico').click(function () {
-        pintarPaginado(0) // 0: paginado de grafico, 1: paginado de lista
+        var tipoInformacion = $('#cbTipoInformacion').val();
+        if (tipoInformacion != 7) {
+            pintarPaginado(0) // 0: paginado de grafico, 1: paginado de lista
+        }
+        
         generarGrafico(1);
+    });   
+    $('#btnExpotar').click(function () {
+        exportar();
     });
     cargarPrevio();
     buscarDatos();
@@ -90,10 +97,12 @@ function cargarPrevio(){
 }
 
 function buscarDatos() {
-
+    var tipoInformacion = $('#cbTipoInformacion').val();   
     $('#reporte').css("display", "block");
     $('#graficos').css("display", "none");
-    pintarPaginado(1)
+    if (tipoInformacion != 7) {
+        pintarPaginado(1)
+    }
     mostrarListado(1);
 }
 
@@ -350,4 +359,43 @@ function pintarBusqueda(nroPagina, itipo) {
     else {
         mostrarListado(nroPagina);
     }
+}
+
+function exportar() {
+    var empresa = $('#cbEmpresa').multipleSelect('getSelects');
+    var cuenca = $('#cbCuenca').multipleSelect('getSelects');
+
+    if (empresa == "[object Object]") empresa = "-1";
+    if (empresa == "") empresa = "-1";
+    if (cuenca == "[object Object]") cuenca = "-1";
+    if (cuenca == "") cuenca = "-1";
+
+    $('#hfEmpresa').val(empresa);
+    $('#hfCuenca').val(cuenca);
+    var tipoInformacion = $('#cbTipoInformacion').val();
+
+    $.ajax({
+        type: 'POST',
+        url: controlador + 'reporte/GenerarArchivoReporte',
+        data: {
+            idsEmpresa: $('#hfEmpresa').val(), idsCuenca: $('#hfCuenca').val(), idTipoInformacion: tipoInformacion,
+            fechaInicial: $('#FechaDesde').val(), fechaFinal: $('#FechaHasta').val(),
+        },
+        dataType: 'json',
+        success: function (result) {
+            if (result == 1) {
+                //window.location = controlador + "reporte/ExportarReporte?tipo=0";
+            }
+            if (result == -1) {
+               alert("Error en reporte result")
+            }
+        },
+        error: function () {
+            mostrarError();
+        }
+    });
+}
+
+mostrarError = function () {
+    alert("Ha ocurrido un error em reprte2 ");
 }

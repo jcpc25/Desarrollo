@@ -149,7 +149,7 @@
       where m1.lectcodi = {0} and pto.origlectcodi = {1} and
       (empr.emprcodi in ({2}) or '{2}' = '-1') and
       m1.medifecha >= to_date('{3}','YYYY-MM-DD') AND
-      m1.medifecha &lt;= to_date('{4}','YYYY-MM-DD')
+      m1.medifecha &lt;= to_date('{4}','YYYY-MM-DD') order by m1.MEDIFECHA
     </query>
   </Sql>
 </Sqls>

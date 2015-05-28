@@ -780,27 +780,35 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             if (listaGenerica.Count > 0)
             {
                 //for (var f = fechaInicio; f <= fechaFin; f = f.AddMonths(1))
-                var f = fechaInicio;
+                DateTime fant = new DateTime();
+                DateTime f = new DateTime();
                 foreach (var lst in listaGenerica)
                 {
 
-                    strHtml.Append("<tr>");
-                    var anho = f.Year.ToString();
-                    var mes = f.Month;
-                    strHtml.Append(string.Format("<td>{0} &nbsp;&nbsp;{1}</td>", anho, COES.Base.Tools.Util.ObtenerNombreMes(mes)));
-                    foreach (var p in listaCabecera)
+                    
+                    f = lst.Medifecha;
+                    if (f != fant)
                     {
-                        var reg = listaGenerica.Find(x => x.Medifecha == f && x.Ptomedicodi == p.Ptomedicodi);
-                        if (reg != null)
+                        strHtml.Append("<tr>");
+                        var anho = f.Year.ToString();
+                        var mes = f.Month;
+                        strHtml.Append(string.Format("<td>{0} &nbsp;&nbsp;{1}</td>", anho, COES.Base.Tools.Util.ObtenerNombreMes(mes)));
+
+                        foreach (var p in listaCabecera)
                         {
-                            decimal valor = (decimal)reg.H1;
-                            strHtml.Append(string.Format("<td>{0}</td>", valor.ToString("N", nfi)));
+                            var reg = listaGenerica.Find(x => x.Medifecha == f && x.Ptomedicodi == p.Ptomedicodi);
+                            if (reg != null)
+                            {
+                                decimal valor = (decimal)reg.H1;
+                                    strHtml.Append(string.Format("<td>{0}</td>", valor.ToString("N", nfi)));
+                            }
+                            else
+                                strHtml.Append("<td>--</td>");
                         }
-                        else
-                            strHtml.Append("<td></td>");
+                        strHtml.Append("</tr>");
                     }
-                    strHtml.Append("</tr>");
-                    f = f.AddMonths(1);
+                    
+                    fant = f;
                 }
             }
             else

@@ -16,6 +16,9 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
         public const string HojaReporteExcel = "REPORTE";
         public const string HojaFormatoExcel = "FORMATO";
         public const string NombreLogoCoes = "coes.png";
+        public const string PlantillaExcelHidrologia = "PlantillaReporteHIDROLOGIA.xlsx";
+        public const string NombreReporteHidrologia = "RptHidrologia.xlsx";
+
 
         public const string AppExcel = "application/vnd.ms-excel";
         public const string AppWord = "application/vnd.ms-word";
@@ -47,6 +50,14 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
         public const int FormatoCodigo = 2;
 
         public const int EmpresaGeneradora = 3;
+    }
+
+    /// <summary>
+    /// Contiene las rutas de los directorios utilizados
+    /// </summary>
+    public class RutaDirectorio
+    {
+        public const string ReporteHidrologia = "ReporteHidrologia";
     }
 
     /// <summary>
