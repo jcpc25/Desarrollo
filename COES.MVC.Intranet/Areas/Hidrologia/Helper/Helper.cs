@@ -40,5 +40,29 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
 
             return lista;
         }
+
+        public static List<TipoInformacion> ObtenerListaTipoInfo()
+        {
+            List<TipoInformacion> lista = new List<TipoInformacion>();
+            var elemento = new TipoInformacion() { IdTipoInfo = 1, NombreTipoInfo = "HISTORICO" };
+            lista.Add(elemento);
+            elemento = new TipoInformacion() { IdTipoInfo = 2, NombreTipoInfo = "PROYECTADO" };
+            lista.Add(elemento);           
+            return lista;
+        }
+
+        public static List<TipoInformacion> ObtenerListaFrecuencia()
+        {
+            List<TipoInformacion> lista = new List<TipoInformacion>();
+            var elemento = new TipoInformacion() { IdTipoInfo = 1, NombreTipoInfo = "DIARIA" };
+            lista.Add(elemento);
+            elemento = new TipoInformacion() { IdTipoInfo = 2, NombreTipoInfo = "CADA (3) HORAS" };
+            lista.Add(elemento);
+            elemento = new TipoInformacion() { IdTipoInfo = 3, NombreTipoInfo = "SEMANAL" };
+            lista.Add(elemento);
+            elemento = new TipoInformacion() { IdTipoInfo = 4, NombreTipoInfo = "MENSUAL" };
+            lista.Add(elemento);
+            return lista;
+        }
     }
 }

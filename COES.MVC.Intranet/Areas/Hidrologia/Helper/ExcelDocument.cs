@@ -79,6 +79,56 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
             ws.Cells[3, 3].Value = DateTime.Now.ToString(Constantes.FormatoFechaHora);
         }
 
+        public static void AddGraficoLineas(ExcelWorksheet ws, int row, int col)
+        {
+            var LineaChart = ws.Drawings.AddChart("crtExtensionsSize", eChartType.Line);
+            //Set top left corner to row 1 column 2
+            LineaChart.SetPosition(5, 0, col+3, 0);
+            LineaChart.SetSize(800, 600);
+
+            //LineaChart.Series.Add(ExcelRange.GetAddress(5, 3, row, 3), ExcelRange.GetAddress(5, 2, row, 2));
+
+            //pieChart.Title.Text = "Mantenimientos Ejecutados";
+            //Set datalabels and remove the legend
+            //LineaChart.DataLabel.ShowCategory = true;
+            //LineaChart.DataLabel.ShowPercent = true;
+            //LineaChart.DataLabel.ShowLeaderLines = true;
+            //LineaChart.Legend.Remove();
+
+
+            //ExcelChart ec = (ExcelLineChart)chartSheet.Drawings.AddChart("chart_1",      eChartType.Line);
+            //ec.SetPosition(1, 0, 3, 0);
+            //ec.SetSize(800, 300);
+            var ran1 = ws.Cells[7,3,row+7,3];
+            var ran2 = ws.Cells["0:0"];
+
+            var serie1 = (ExcelChartSerie)LineaChart.Series.Add(ran1, ran2);
+            serie1.Header = ws.Cells[6,3].Value.ToString();
+
+            ran1 = ws.Cells[7,4, row+7,4];
+            var serie2 = LineaChart.Series.Add(ran1, ran2);
+            serie2.Header = ws.Cells[6,4].Value.ToString();
+
+            ran1 = ws.Cells[7, 5,row+7,5];
+            var serie3 = LineaChart.Series.Add(ran1, ran2);
+            serie3.Header = ws.Cells[6, 5].Value.ToString();
+
+            
+            var xml = LineaChart.ChartXml;
+            var lst = xml.GetElementsByTagName("c:lineChart");
+            foreach (System.Xml.XmlNode item in lst[0].ChildNodes) {
+                if (item.Name.Equals("ser")) {
+                    foreach (System.Xml.XmlNode subitem in item.ChildNodes) {
+                        if (subitem.Name.Equals("c:cat")) {
+                            item.RemoveChild(subitem);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+        
         public static void AddGraficoPie(ExcelWorksheet ws, int row)
         {
             var pieChart = ws.Drawings.AddChart("crtExtensionsSize", eChartType.PieExploded3D) as ExcelPieChart;
@@ -191,6 +241,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
 
         }
 
+        //Genera archivo excel de reporte mensual QN
         public static void GenerarArchivoHidrologiaMesQN(HidrologiaModel model)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
@@ -277,6 +328,78 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
             }
 
         }
+
+        //genera archivo de grafico Programado Mensual QN
+        public static void GenerarArchivoGrafMensualQN(HidrologiaModel model)
+        {
+            List<String> listCategoriaGrafico = model.ListaCategoriaGrafico; // Lista de Anho y Mes ordenados para la categoria del grafico
+            List<String> listSerieName = new List<String>(); //Lista de nombres de las series del grafico(Ptos de medicion)
+            decimal?[][] listSerieData = model.ListaSerieData; // lista de valores para las series del grafico
+            
+            // Obtener Lista de nombres de las series del grafico.
+            var listaGrupoMedicion = model.ListaMedicion1.GroupBy(x => x.Ptomedicodi).Select(group => group.First()).ToList();
+            int z=0;
+            foreach (var reg in listaGrupoMedicion)
+            {         
+                listSerieName.Add(reg.Ptomedinomb);
+                z++;
+            }
+            
+            string ruta = ConfigurationManager.AppSettings[RutaDirectorio.ReporteHidrologia].ToString();
+            FileInfo newFile = new FileInfo(ruta + Constantes.NombreArchivoGrafMensualQN);
+            int nfil = listCategoriaGrafico.Count;
+            int ncol = listSerieName.Count;
+            int row = 7;           
+            string titulo = "";
+
+            if (newFile.Exists)
+            {
+                newFile.Delete();
+                newFile = new FileInfo(ruta + Constantes.NombreArchivoGrafMensualQN);
+            }
+
+            using (ExcelPackage xlPackage = new ExcelPackage(newFile))
+            {
+                ExcelWorksheet ws = null;
+                 ws = xlPackage.Workbook.Worksheets.Add("GRAF-MENSUAL-QN");
+                 ws = xlPackage.Workbook.Worksheets["GRAF-MENSUAL-QN"];
+                 
+                 titulo = "GRAFICO - PROGRAMADO MENSUAL - QN ";
+
+                        ConfiguraEncabezadoHojaExcel(ws, titulo);
+                        ws.Cells[4, 2].Value = "Fecha Inicio:";
+                        ws.Cells[5, 2].Value = "Fecha Fin:";
+                        ws.Cells[4, 3].Value = model.FechaInicio;
+                        ws.Cells[5, 3].Value = model.FechaFin;
+
+                        ws.Cells[row - 1, 2].Value = "AFLUENTES";
+                        for (int i=0 ; i<ncol; i++){
+                            ws.Cells[row - 1, i+3].Value = listSerieName[i];
+                        }
+                        for (int i = 0; i < nfil; i++)
+                        {
+                            ws.Cells[row + i, 2].Value = listCategoriaGrafico[i];
+                        }
+
+                        //Borde cabecera de Tabla Listado
+                        var border = ws.Cells[row - 1, 2, row - 1, ncol+2].Style.Border;
+                        border.Bottom.Style = border.Top.Style = border.Left.Style = border.Right.Style = ExcelBorderStyle.Thin;
+                        using (ExcelRange r = ws.Cells[row - 1, 2, row - 1, ncol+2])
+                        {
+                            r.Style.Font.Color.SetColor(Color.White);
+                            r.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.CenterContinuous;
+                            r.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            r.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(23, 55, 93));
+
+                        }
+                        for (int i = 0; i<ncol; i++ )
+                            for (int j = 0; j<nfil ; j++){
+                                ws.Cells[j+7, i+3].Value = listSerieData[i][j];
+                            }                             
+                AddGraficoLineas(ws, nfil, ncol);
+                xlPackage.Save();
+            }
+        }// ********************
 
 
     }

@@ -166,7 +166,11 @@ function aoColumns() {
 function generarGrafico(nroPagina) {
 
     $('#reporte').css("display", "none");
-    //$('#paginado').css("display", "none");
+    //$('#paginado').css("display", "none");   
+
+    $('#excelGrafico').css("display", "block");
+    $('#excelGrafico').html("<img onclick='exportar_GrafMensualQN();' width='32px' style='cursor: pointer; display: inline;' src='" + siteRoot + "Content/Images/ExportExcel.png' />");
+
     $('#graficos').css("display", "block");
     var empresa = $('#cbEmpresa').multipleSelect('getSelects');
     var cuenca = $('#cbCuenca').multipleSelect('getSelects');
@@ -202,7 +206,9 @@ function generarGrafico(nroPagina) {
             var tipo = result.TipoReporte;
             switch(tipo){
                 case 7:
+                    //$('#excelGrafico').html("<img width='32px' style='cursor: pointer; display: inline;' src='" + siteRoot + "Content/Images/ExportExcel.png' />");
                     graficoHidrologiaMes(result);
+                    //$('#excelGrafico').html("<img onclick='exportar_ManttoEmpresa();' width='32px' style='cursor: pointer; display: inline;' src='" + siteRoot + "Content/Images/ExportExcel.png' />");                   
                     break;
                 default:
                     graficoHidrologiaDiario(result);
@@ -384,7 +390,7 @@ function exportar() {
         dataType: 'json',
         success: function (result) {
             if (result == 1) {
-                //window.location = controlador + "reporte/ExportarReporte?tipo=0";
+                window.location = controlador + "reporte/ExportarReporte?tipo=0";
             }
             if (result == -1) {
                alert("Error en reporte result")
@@ -398,4 +404,26 @@ function exportar() {
 
 mostrarError = function () {
     alert("Ha ocurrido un error em reprte2 ");
+}
+
+function exportar_GrafMensualQN() {  // Genera Reporte excel de grafico Programado Mensual QN
+    $.ajax({
+        type: 'POST',
+        url: controlador + "reporte/GenerarArchivoGrafMensualQN",
+        data: {
+            fechaInicial: $('#hfFechaDesde').val(), fechaFinal: $('#hfFechaHasta').val()            
+        },
+        dataType: 'json',
+        success: function (result) {
+            if (result == 1) {
+                window.location = controlador + "reporte/ExportarReporte?tipo=1";
+            }
+            if (result == -1) {
+                mostrarError();
+            }
+        },
+        error: function () {
+            alert("Error en Ajax Exportar Empresa");
+        }
+    });
 }

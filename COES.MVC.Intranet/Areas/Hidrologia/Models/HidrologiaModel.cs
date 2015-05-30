@@ -26,6 +26,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
         public List<EqEquipoDTO> ListaCuenca { get; set; }
         public List<EqEquipoDTO> ListaRecursosCuenca { get; set; }
         public List<TipoInformacion> ListaTipoInformacion { get; set; }
+        public List<TipoInformacion> ListaFrecuencia { get; set; }
         public List<String> ListaCategoriaGrafico { get; set; }
         public List<String> ListaSerieName { get; set; }
         public decimal?[][] ListaSerieData { get; set; }

@@ -4,6 +4,7 @@ using COES.MVC.Intranet.Areas.Hidrologia.Models;
 using COES.Servicios.Aplicacion.Hidrologia;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -28,6 +29,19 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                     (List<DateTime>)Session[DatosSesion.ListaFechas] : new List<DateTime>();
             }
             set { Session[DatosSesion.ListaFechas] = value; }
+        }
+
+        /// <summary>
+        /// Almacena los datos del reporte grafico Mensual QN
+        /// </summary>
+        public HidrologiaModel modelGraficoMensual
+        {
+            get
+            {
+                return (Session[DatosSesion.modelGraficoMensual] != null) ?
+                    (HidrologiaModel)Session[DatosSesion.modelGraficoMensual] : new HidrologiaModel();
+            }
+            set { Session[DatosSesion.modelGraficoMensual] = value; }
         }
 
         public ActionResult Index()
@@ -126,7 +140,8 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         {
             HidrologiaModel model = new HidrologiaModel();
             List<MeMedicion1DTO> lista = this.logic.ListaMed1Hidrologia(idLectura, 5, idsEmpresas, fechaIni, fechaFin);
-            model.ListaCategoriaGrafico = new List<string>();
+            model.ListaMedicion1 = lista;
+            model.ListaCategoriaGrafico = new List<string>(); //AÑO - MES
             model.ListaSerieName = new List<string>();
 
             // Obtener Lista de Anho y Mes ordenados para la categoria del grafico
@@ -164,6 +179,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                     j++;
                 }
             }
+            modelGraficoMensual = model;
             return model;
         }
 
@@ -257,21 +273,9 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             try
             {
                 DateTime fechaIni = DateTime.MinValue;
+                fechaIni = FormatFecha(fechaInicial);
                 DateTime fechaFin = DateTime.MinValue;
-                int mes = Int32.Parse(fechaInicial.Substring(0, 2));
-                int anho = Int32.Parse(fechaInicial.Substring(3, 4));
-                fechaIni = new DateTime(anho, mes, 1);
-                anho = Int32.Parse(fechaFinal.Substring(3, 4));
-                mes = Int32.Parse(fechaFinal.Substring(0, 2));
-                fechaFin = new DateTime(anho, mes, 1);
-                //if (fechaInicial != null)
-                //{
-                //    fechaInicio = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
-                //}
-                //if (fechaFinal != null)
-                //{
-                //    fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
-                //}
+                fechaFin = FormatFecha(fechaFinal);               
                 HidrologiaModel model = new HidrologiaModel();
                 var formato = logic.GetByIdMeFormato(idTipoInformacion);
                 formato.ListaHoja = logic.GetByCriteriaMeFormatohojas(idTipoInformacion);
@@ -279,8 +283,6 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                 model.ListaMedicion1 = lista;
                 ExcelDocument.GenerarArchivoHidrologiaMesQN(model);
                 indicador = 1;
-
-
             }
             catch
             {
@@ -290,16 +292,86 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             return Json(indicador);
         }
 
-        //public virtual ActionResult ExportarReporte()
-        //{
-        //    string nombreArchivo = string.Empty;
+        [HttpPost]
+        public JsonResult GenerarArchivoGrafMensualQN(string fechaInicial, string fechaFinal)
+        {
+            int indicador = 1;
+            try
+            {
+                //DateTime fechaIni = DateTime.MinValue;
+                //fechaIni = FormatFecha(fechaInicial);
+                //DateTime fechaFin = DateTime.MinValue;
+                //fechaFin = FormatFecha(fechaFinal);
+                HidrologiaModel model = new HidrologiaModel();
+                model = modelGraficoMensual;
+                model.FechaInicio = fechaInicial;
+                model.FechaFin = fechaFinal;
+                ExcelDocument.GenerarArchivoGrafMensualQN(model);
+                indicador = 1;
+            }
 
-        //    nombreArchivo = Constantes.NombreReporteEnsayos;
+            catch
+            {
+                indicador = -1;
+            }
 
-        //    string fullPath = ConfigurationManager.AppSettings[RutaDirectorio.ReporteEnsayos] + nombreArchivo;
-        //    return File(fullPath, Constantes.AppExcel, nombreArchivo);
-        //}
+            
+            return Json(indicador);
+        }
+
+        /// <summary>
+        /// Permite exportar el reporte general y por tipo de mantenimientos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public virtual ActionResult ExportarReporte()
+        {
+            string nombreArchivo = string.Empty;
+            var sTipoReporte = Request["tipo"];
+            short tipoReporte = short.Parse(sTipoReporte);
+            switch (tipoReporte)
+            {
+                case 0:
+                    nombreArchivo = Constantes.NombreReporteHidrologia00;
+                    break;
+                case 1:
+                    nombreArchivo = Constantes.NombreRptGraficoHidrologia01;
+                    break;
+                //case 2:
+                //    nombreArchivo = Constantes.NombreReporteMantenimiento02;
+                //    break;
+                //case 3:
+                //    nombreArchivo = Constantes.NombreReporteMantenimiento03;
+                //    break;
+                //case 4:
+                //    nombreArchivo = Constantes.NombreReporteMantenimiento04;
+                //    break;
+                //case 5:
+                //    nombreArchivo = Constantes.NombreReporteMantenimiento05;
+                //    break;
+                //case 6:
+                //    nombreArchivo = Constantes.NombreReporteMantenimiento06;
+                //    break;
 
 
+            }
+            string fullPath = ConfigurationManager.AppSettings[RutaDirectorio.ReporteHidrologia] + nombreArchivo;
+            return File(fullPath, Constantes.AppExcel, nombreArchivo);
+        }
+
+        //funcion que devuelve la fecha del primer dia de la fecha recibida  en formaro MM-YYYY
+        public DateTime FormatFecha(String fechaInicial)
+        {           
+            DateTime dfecha = DateTime.MinValue;           
+            int mes = Int32.Parse(fechaInicial.Substring(0, 2));
+            int anho = Int32.Parse(fechaInicial.Substring(3, 4));
+            dfecha = new DateTime(anho, mes, 1);
+            
+            //if (fechaInicial != null)
+            //{
+            //    dfecha = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+            //}           
+            return dfecha;
+        }
     }
 }
