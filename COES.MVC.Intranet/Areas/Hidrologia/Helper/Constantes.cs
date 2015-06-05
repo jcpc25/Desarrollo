@@ -16,15 +16,14 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
         public const string HojaReporteExcel = "REPORTE";
         public const string HojaFormatoExcel = "FORMATO";
         public const string NombreLogoCoes = "coes.png";
-        public const string PlantillaExcelHidrologia = "PlantillaReporteHIDROLOGIA.xlsx";
-        public const string NombreReporteHidrologia = "RptHidrologia_00.xlsx";
-        public const string NombreArchivoGrafMensualQN = "RptGraficoHidrologia_01.xlsx";
-
+        public const string PlantillaExcelHidrologia = "PlantillaReporteHIDROLOGIA.xlsx";           
+        public const string NombreRptGraficoHidrologia00 = "RptGraficoHidrologia_00.xlsx";
         public const string NombreRptGraficoHidrologia01 = "RptGraficoHidrologia_01.xlsx";
         public const string NombreReporteHidrologia00 = "RptHidrologia_00.xlsx";
+        public const string NombreReporteHidrologia01 = "RptHidrologia_01.xlsx";
+        public const string NombreReporteHidrologia02 = "RptHidrologia_02.xlsx";
         
-
-
+        
         public const string AppExcel = "application/vnd.ms-excel";
         public const string AppWord = "application/vnd.ms-word";
         public const string AppPdf = "application/pdf";
@@ -73,5 +72,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
   
         public const string ListaFechas = "ListaFechas";        
         public const string modelGraficoMensual = "modelGraficoMensual";
+        public const string modelGraficoDiario = "modelGraficoDiario";
+        public const string modelGraficoSemanal = "modelGraficoSemanal";
     }
 }

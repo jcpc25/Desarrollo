@@ -176,6 +176,7 @@ namespace COES.MVC.Intranet.Helper
         public const string ListaReporteConsistencia = "ListaReporteConsistencia";
         public const string ListaManttoEmpresa = "ListaManttoEmpresa";
         public const string ListaManttosTotal = "ListaManttosTotal";
+        public const string ListaFechas = "ListaFechas";
     }
 
     /// <summary>

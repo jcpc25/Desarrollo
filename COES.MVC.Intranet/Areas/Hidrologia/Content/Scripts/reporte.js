@@ -1,4 +1,6 @@
 ﻿var controlador = siteRoot + 'hidrologia/';
+var tipoInformacion = 0;
+var opc = 0;
 $(function () {
     $('#cbEmpresa').multipleSelect({
         width: '222px',
@@ -19,27 +21,66 @@ $(function () {
     $('#FechaHasta').Zebra_DatePicker({
        
     });
-
+    $('#Anho').Zebra_DatePicker({
+        format: 'Y',
+        onSelect: function () {
+            cargarSemanaAnho()
+        }
+     });   
     $('#cbTipoInformacion').change(function () {
         cambiarFormatoFecha($(this).val());
     });
     $('#btnBuscar').click(function () {
+        opc = 1;
+        buscarDatos();
+    });
+    $('#btnBuscar2').click(function () {
+        opc = 2;
         buscarDatos();
     });
     $('#btnGrafico').click(function () {
-        var tipoInformacion = $('#cbTipoInformacion').val();
-        if (tipoInformacion != 7) {
+        var tipoInformacion = $('#cbTipoInformacion').val();        
+        if (tipoInformacion == 5) {
             pintarPaginado(0) // 0: paginado de grafico, 1: paginado de lista
-        }
-        
+        }        
         generarGrafico(1);
     });   
     $('#btnExpotar').click(function () {
-        exportar();
+        exportarExcel();
     });
     cargarPrevio();
     buscarDatos();
+    cargarSemanaAnho()
 });
+
+function mostrar_ocultar_FiltrosSemanal(opc) {    
+    if (opc == 1) {
+        $('#idTr td').show();
+    }
+    if (opc == 0) {
+        $('#idTr td').hide();               
+    }
+}
+function cargarSemanaAnho() {
+    var anho = $('#Anho').val();
+    $('#hfAnho').val(anho);
+    $.ajax({
+        type: 'POST',
+        url: controlador + 'reporte/CargarSemanas',
+
+        data: { idAnho: $('#hfAnho').val() },
+
+        success: function (aData) {
+
+            $('#SemanaIni').html(aData);
+            $('#SemanaFin').html(aData);
+        },
+        error: function () {
+            alert("Ha ocurrido un error");
+        }
+    });
+
+}
 
 function cambiarFormatoFecha(tipo) {   
     switch(tipo){
@@ -57,24 +98,11 @@ function cambiarFormatoFecha(tipo) {
             var stFecha = mes + " " +  fecha.getFullYear();
             $('#FechaDesde').val(stFecha);
             $('#FechaHasta').val(stFecha);
+            mostrar_ocultar_FiltrosSemanal(0)
             break;
         case "4":
-            $('#FechaDesde').Zebra_DatePicker({
-                format: 'Y'
-            });
-            $('#FechaHasta').Zebra_DatePicker({
-                format: 'Y'
-            });
-
-            var fecha = new Date();
-            //var anho = "0" + (fecha.getYear()).toString();
-            var stFecha = fecha.getFullYear();
-            $('#FechaDesde').val(stFecha);
-            $('#FechaHasta').val(stFecha);
+            mostrar_ocultar_FiltrosSemanal(1)
             break;
-
-
-
         default:
             $('#FechaDesde').Zebra_DatePicker({
             });
@@ -82,7 +110,7 @@ function cambiarFormatoFecha(tipo) {
             });
             $('#FechaDesde').val($('#hfFechaDesde').val());
             $('#FechaHasta').val($('#hfFechaHasta').val());
-
+            mostrar_ocultar_FiltrosSemanal(0)
             break;
     }
 
@@ -93,14 +121,21 @@ function cargarPrevio(){
     $('#cbEmpresa').multipleSelect('checkAll');
     $('#cbCuenca').multipleSelect('checkAll');
     $('#cbPtoMedida').multipleSelect('checkAll');
-    $('#cbTipoInformacion').val(6);
+    $('#cbTipoInformacion').val(5);
+    var fecha = new Date();       
+    var stFecha = fecha.getFullYear();
+    $('#Anho').val(stFecha);
+    $('#SemanaIni select').val(1);
+    $('#SemanaFin select').val(1);
+    $('#idTr td').hide();
+
 }
 
 function buscarDatos() {
     var tipoInformacion = $('#cbTipoInformacion').val();   
     $('#reporte').css("display", "block");
     $('#graficos').css("display", "none");
-    if (tipoInformacion != 7) {
+    if (tipoInformacion == 5) {
         pintarPaginado(1)
     }
     mostrarListado(1);
@@ -109,7 +144,11 @@ function buscarDatos() {
 function mostrarListado(nroPagina) {
     var empresa = $('#cbEmpresa').multipleSelect('getSelects');
     var cuenca = $('#cbCuenca').multipleSelect('getSelects');
-
+    var anho = $('#Anho').val();
+    var semanaIni = $('#SemanaIni select').val();
+    var semanaFin = $('#SemanaFin select').val();    
+    if (semanaIni == undefined) semanaIni = 0;
+    if (semanaFin == undefined) semanaFin = 1;
     if (empresa == "[object Object]") empresa = "-1";
     if (empresa == "") empresa = "-1";
     if (cuenca == "[object Object]") cuenca = "-1";
@@ -117,6 +156,9 @@ function mostrarListado(nroPagina) {
 
     $('#hfEmpresa').val(empresa);
     $('#hfCuenca').val(cuenca);
+    $('#hfAnho').val(anho);
+    $('#hfSemanaIni').val(semanaIni);
+    $('#hfSemanaFin').val(semanaFin);
     var tipoInformacion = $('#cbTipoInformacion').val();
 
     $.ajax({
@@ -125,25 +167,26 @@ function mostrarListado(nroPagina) {
         data: {
             idsEmpresa: $('#hfEmpresa').val(), idsCuenca: $('#hfCuenca').val(), idTipoInformacion: tipoInformacion,
             fechaInicial: $('#FechaDesde').val(), fechaFinal: $('#FechaHasta').val(),
-            nroPagina: nroPagina
+            nroPagina: nroPagina, anho: $('#hfAnho').val(), semanaIni: $('#hfSemanaIni').val(), semanaFin: $('#hfSemanaFin').val(),
+            opcion: opc
         },
         success: function (evt) {
             $('#listado').css("width", $('#mainLayout').width() + "px");
             
-            $('#listado').html(evt);
-            if ($('#tabla th').length > 1) {
-                $('#tabla').dataTable({
-                    "aoColumns": aoColumns(),
-                    "bSort": false,
-                    "scrollY": 430,
-                    "scrollX": true,
-                    "sDom": 't',
-                    "iDisplayLength": 50
-                });
-            }
+            $('#listado').html(evt);           
+            //if ($('#tabla th').length > 1) {
+            //    $('#tabla').dataTable({
+            //        "aoColumns": aoColumns(),
+            //        "bSort": false,
+            //        "scrollY": 430,
+            //        "scrollX": true,
+            //        "sDom": 't',
+            //        "iDisplayLength": 50
+            //    });
+            //}
         },
         error: function () {
-            alert("Ha ocurrido un error");
+            alert("Ha ocurrido un error en lista");
         }
     });
 }
@@ -167,18 +210,20 @@ function generarGrafico(nroPagina) {
 
     $('#reporte').css("display", "none");
     //$('#paginado').css("display", "none");   
-
+    tipoInformacion = $('#cbTipoInformacion').val();    
     $('#excelGrafico').css("display", "block");
-    $('#excelGrafico').html("<img onclick='exportar_GrafMensualQN();' width='32px' style='cursor: pointer; display: inline;' src='" + siteRoot + "Content/Images/ExportExcel.png' />");
-
+    $('#excelGrafico').html("<img onclick='exportar_Grafico();' width='32px' style='cursor: pointer; display: inline;' src='" + siteRoot + "Content/Images/ExportExcel.png' />");
     $('#graficos').css("display", "block");
+    var anho = $('#Anho').val();
+    var semanaIni = $('#SemanaIni select').val();
+    var semanaFin = $('#SemanaFin select').val();
+    if (semanaIni == undefined) semanaIni = 0;
+    if (semanaFin == undefined) semanaFin = 1;
     var empresa = $('#cbEmpresa').multipleSelect('getSelects');
     var cuenca = $('#cbCuenca').multipleSelect('getSelects');
     var ptoMedida = $('#cbPtoMedida').multipleSelect('getSelects');
     var fechadesde = $('#FechaDesde').val();
-    var fechahasta = $('#FechaHasta').val();
-    var tipoInformacion = $('#cbTipoInformacion').val();
-        
+    var fechahasta = $('#FechaHasta').val();            
     if (empresa == "[object Object]") empresa = "-1";
     if (empresa == "") empresa = "-1";
     if (cuenca == "[object Object]") cuenca = "-1";
@@ -191,6 +236,9 @@ function generarGrafico(nroPagina) {
     $('#hfPtoMedida').val(ptoMedida);
     $('#hfFechaDesde').val(fechadesde);
     $('#hfFechaHasta').val(fechahasta);
+    $('#hfAnho').val(anho);
+    $('#hfSemanaIni').val(semanaIni);
+    $('#hfSemanaFin').val(semanaFin);
 
     $.ajax({
         type: 'POST',
@@ -198,20 +246,25 @@ function generarGrafico(nroPagina) {
         data: {
             fechaInicial: $('#hfFechaDesde').val(), fechaFinal: $('#hfFechaHasta').val(),
             idsEmpresas: $('#hfEmpresa').val(), idTipoInformacion: tipoInformacion, idsCuencas: $('#hfCuenca').val(),
-            nroPagina: nroPagina
+            nroPagina: nroPagina, anho: $('#hfAnho').val(), semanaIni: $('#hfSemanaIni').val(), semanaFin: $('#hfSemanaFin').val()
             //idptomedida: $('#hfPtoMedida').val()
         },
         dataType: 'json',
         success: function (result) {            
-            var tipo = result.TipoReporte;
-            switch(tipo){
-                case 7:
+            var tipo = result.TipoReporte;            
+            switch (tipo) {
+                case 7: //PROGRAMADO MENSUAL - QN
                     //$('#excelGrafico').html("<img width='32px' style='cursor: pointer; display: inline;' src='" + siteRoot + "Content/Images/ExportExcel.png' />");
                     graficoHidrologiaMes(result);
                     //$('#excelGrafico').html("<img onclick='exportar_ManttoEmpresa();' width='32px' style='cursor: pointer; display: inline;' src='" + siteRoot + "Content/Images/ExportExcel.png' />");                   
                     break;
-                default:
+                case 5: //EJECUTADO DIARIO - Q TURB. VERT.
                     graficoHidrologiaDiario(result);
+                    break;
+                case 4: ////PROGRAMADO SEMANAL - QN.
+                    graficoHidrologiaSemanal(result);
+                    break;
+                default:
                     break;
             }            
         },
@@ -230,7 +283,7 @@ graficoHidrologiaMes = function (result) {
             text: result.TituloReporte
         },
         subtitle: {
-            text: 'Caudal por puntos de Medición'
+            text: 'Caudal por puntos de Medición - Programado Mensual'
         },
         xAxis: {
 
@@ -241,7 +294,7 @@ graficoHidrologiaMes = function (result) {
             },
 
             title: {
-                text: 'Meses'
+                text: result.TitlexAxis
             },
         },
         yAxis: {
@@ -283,7 +336,7 @@ graficoHidrologiaDiario = function (result) {
             text: result.TituloReporte
         },
         subtitle: {
-            text: 'Caudal por puntos de Medición'
+            text: 'Caudal por puntos de Medición - Programado Diario'
         },
         xAxis: {
 
@@ -294,7 +347,7 @@ graficoHidrologiaDiario = function (result) {
             },
 
             title: {
-                text: 'Meses'
+                text: result.TitlexAxis
             },
         },
         yAxis: {
@@ -325,6 +378,60 @@ graficoHidrologiaDiario = function (result) {
         });
     }
     $('#graficos').highcharts(opcion);
+}
+
+graficoHidrologiaSemanal = function (result) {
+    var opcion = {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: result.TituloReporte
+        },
+        subtitle: {
+            text: 'Caudal por puntos de Medición - Programado Semanal'
+        },
+        xAxis: {
+
+            categories: result.ListaCategoriaGrafico,
+            style: {
+
+                fontSize: '5'
+            },
+
+            title: {
+                text: result.TitlexAxis
+            },
+        },
+        yAxis: {
+            title: {
+                text: 'Caudal (m3/s)'
+            },
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+        },
+
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+
+        series: []
+    };
+    for (var i in result.ListaSerieName) {
+        opcion.series.push({
+            name: result.ListaSerieName[i],
+            data: result.ListaSerieData[i]
+        });
+    }
+    $('#graficos').highcharts(opcion);
+
 }
 
 function pintarPaginado(id) {
@@ -367,10 +474,14 @@ function pintarBusqueda(nroPagina, itipo) {
     }
 }
 
-function exportar() {
+function exportarExcel() {
     var empresa = $('#cbEmpresa').multipleSelect('getSelects');
     var cuenca = $('#cbCuenca').multipleSelect('getSelects');
-
+    var anho = $('#Anho').val();
+    var semanaIni = $('#SemanaIni select').val();
+    var semanaFin = $('#SemanaFin select').val();    
+    if (semanaIni == undefined) semanaIni = 0;
+    if (semanaFin == undefined) semanaFin = 1;
     if (empresa == "[object Object]") empresa = "-1";
     if (empresa == "") empresa = "-1";
     if (cuenca == "[object Object]") cuenca = "-1";
@@ -378,19 +489,29 @@ function exportar() {
 
     $('#hfEmpresa').val(empresa);
     $('#hfCuenca').val(cuenca);
+    $('#hfAnho').val(anho);
+    $('#hfSemanaIni').val(semanaIni);
+    $('#hfSemanaFin').val(semanaFin);
     var tipoInformacion = $('#cbTipoInformacion').val();
 
     $.ajax({
         type: 'POST',
-        url: controlador + 'reporte/GenerarArchivoReporte',
+        url: controlador + 'reporte/GenerarArchivoReporteXLS',
         data: {
             idsEmpresa: $('#hfEmpresa').val(), idsCuenca: $('#hfCuenca').val(), idTipoInformacion: tipoInformacion,
             fechaInicial: $('#FechaDesde').val(), fechaFinal: $('#FechaHasta').val(),
+            annho: $('#hfAnho').val(), semanaIni: $('#hfSemanaIni').val(), semanaFin: $('#hfSemanaFin').val()
         },
         dataType: 'json',
         success: function (result) {
-            if (result == 1) {
+            if (result == 7) {//PROGRAMADO MENSUAL - QN
                 window.location = controlador + "reporte/ExportarReporte?tipo=0";
+            }
+            if (result == 5) {//EJECUTADO DIARIO - Q TURB. VERT.
+                window.location = controlador + "reporte/ExportarReporte?tipo=2";
+            }
+            if (result == 4) {//PROGRAMADO SEMANAL - QN.
+                window.location = controlador + "reporte/ExportarReporte?tipo=4";
             }
             if (result == -1) {
                alert("Error en reporte result")
@@ -406,7 +527,23 @@ mostrarError = function () {
     alert("Ha ocurrido un error em reprte2 ");
 }
 
-function exportar_GrafMensualQN() {  // Genera Reporte excel de grafico Programado Mensual QN
+function exportar_Grafico(){     
+    var tipoinf = tipoInformacion;
+    
+    switch (tipoinf) {
+        case '7': //PROGRAMADO MENSUAL - QN                      
+            exportar_GrafMensualQN()
+            break;
+        case '5': //EJECUTADO DIARIO - Q TURB. VERT.
+            exportar_GrafDiario01();
+            break;
+        default:
+            break;
+    }            
+}
+
+// Genera Reporte excel de grafico Programado Mensual QN
+function exportar_GrafMensualQN() {    
     $.ajax({
         type: 'POST',
         url: controlador + "reporte/GenerarArchivoGrafMensualQN",
@@ -424,6 +561,29 @@ function exportar_GrafMensualQN() {  // Genera Reporte excel de grafico Programa
         },
         error: function () {
             alert("Error en Ajax Exportar Empresa");
+        }
+    });
+}
+
+// Genera Reporte excel de grafico Programado Diario Q.Turb. Vert.
+function exportar_GrafDiario01() {
+    $.ajax({
+        type: 'POST',
+        url: controlador + "reporte/GenerarArchivoGrafDiario01",
+        data: {
+            fechaInicial: $('#hfFechaDesde').val(), fechaFinal: $('#hfFechaHasta').val()
+        },
+        dataType: 'json',
+        success: function (result) {
+            if (result == 1) {
+                window.location = controlador + "reporte/ExportarReporte?tipo=3";
+            }
+            if (result == -1) {
+                mostrarError();
+            }
+        },
+        error: function () {
+            alert("Error en Ajax Grafico export a Excel");
         }
     });
 }

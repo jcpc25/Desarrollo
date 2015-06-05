@@ -10,11 +10,14 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
     {
         public List<SiEmpresaDTO> ListaEmpresas { get; set; }
         public int empresa { get; set; }
-        public List<string> ListaSemanas { get; set; }
-        public int NroSemana { get; set; }
+        //public List<string> ListaSemanas { get; set; }
+        //public int NroSemana { get; set; }
         public string Fecha { get; set; }
         public string FechaInicio { get; set; }
         public string FechaFin { get; set; }
+        public string Anho { get; set; }
+        public string SemanaIni { get; set; }
+        public string SemanaFin { get; set; }
         public string FechaPlazo { get; set; }
         public int HoraPlazo { get; set; }
         public string Resultado { get; set; }
@@ -27,12 +30,15 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
         public List<EqEquipoDTO> ListaRecursosCuenca { get; set; }
         public List<TipoInformacion> ListaTipoInformacion { get; set; }
         public List<TipoInformacion> ListaFrecuencia { get; set; }
+        public List<TipoInformacion> ListaSemanas { get; set; }
         public List<String> ListaCategoriaGrafico { get; set; }
         public List<String> ListaSerieName { get; set; }
         public decimal?[][] ListaSerieData { get; set; }
         public string TituloReporte { get; set; }
+        public string TitlexAxis { get; set; }
         public int TipoReporte { get; set; }
         public List<MeMedicion1DTO> ListaMedicion1 { get; set; }
+        public List<MeMedicion24DTO> ListaMedicion24 { get; set; }
 
         public bool IndicadorPagina { get; set; }
         public int NroPaginas { get; set; }

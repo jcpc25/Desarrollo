@@ -44,6 +44,32 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             set { Session[DatosSesion.modelGraficoMensual] = value; }
         }
 
+        /// <summary>
+        /// Almacena los datos del reporte grafico Semanal QN
+        /// </summary>
+        public HidrologiaModel modelGraficoSemanal
+        {
+            get
+            {
+                return (Session[DatosSesion.modelGraficoSemanal] != null) ?
+                    (HidrologiaModel)Session[DatosSesion.modelGraficoMensual] : new HidrologiaModel();
+            }
+            set { Session[DatosSesion.modelGraficoSemanal] = value; }
+        }
+        
+        /// <summary>
+        /// Almacena los datos del reporte grafico diario
+        /// </summary>
+        public HidrologiaModel modelGraficoDiario
+        {
+            get
+            {
+                return (Session[DatosSesion.modelGraficoDiario] != null) ?
+                    (HidrologiaModel)Session[DatosSesion.modelGraficoDiario] : new HidrologiaModel();
+            }
+            set { Session[DatosSesion.modelGraficoDiario] = value; }
+        }
+
         public ActionResult Index()
         {
             HidrologiaModel model = new HidrologiaModel();
@@ -57,7 +83,8 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult Lista(string idsEmpresa, string idsCuenca,int idTipoInformacion, string fechaInicial, string fechaFinal, int nroPagina)
+        public PartialViewResult Lista(string idsEmpresa, string idsCuenca,int idTipoInformacion, string fechaInicial, string fechaFinal, int nroPagina,
+                                       string anho, int semanaIni, int semanaFin, int opcion)
         {
             HidrologiaModel model = new HidrologiaModel();
             var formato = logic.GetByIdMeFormato(idTipoInformacion);
@@ -67,24 +94,31 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             switch (formato.Formatresolucion)
             {
                 case 60 * 24 * 30://mensual 
-                    int mes = Int32.Parse(fechaInicial.Substring(0, 2));
-                    int anho = Int32.Parse(fechaInicial.Substring(3, 4));
-                    fechaIni = new DateTime(anho, mes, 1);
-                    anho = Int32.Parse(fechaFinal.Substring(3, 4));
-                    mes = Int32.Parse(fechaFinal.Substring(0, 2));
-                    fechaFin = new DateTime(anho, mes, 1);
+                    fechaIni = COES.Base.Tools.Util.FormatFecha(fechaInicial);
+                    fechaFin = COES.Base.Tools.Util.FormatFecha(fechaFinal);
+                    List<MeMedicion1DTO> lista = this.logic.ListaMed1Hidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa,fechaIni, fechaFin);
+                    ListaFechas = lista.Select(x => x.Medifecha).Distinct().ToList();
+                    if (ListaFechas.Count > 0)
+                    {
+                        fechaIni = lista.Min(x => x.Medifecha);
+                        fechaFin = lista.Max(x => x.Medifecha);
+                    }
+
                     break;
                 case 60*24: //semanal 
-                    int ianho = Int32.Parse(fechaInicial.Substring(0, 4));
-                    fechaIni = new DateTime(ianho, 1, 1);
-                    ianho = Int32.Parse(fechaFinal.Substring(0, 4));
-                    fechaFin = new DateTime(ianho, 1, 1);                    
+                    int ianho = Int32.Parse(anho);
+                    fechaIni = COES.Base.Tools.Util.GenerarFecha(ianho, semanaIni);
+                    fechaFin = COES.Base.Tools.Util.GenerarFecha(ianho, semanaFin);                  
                     break;
                 case 60 : //diario
                     fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
-                    List<MeMedicion24DTO> lista = this.logic.ListaMed24Hidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaIni, fechaFin);
-                    ListaFechas = lista.Select(x => x.Medifecha).Distinct().ToList();
+                    List<MeMedicion24DTO> lista24 = this.logic.ListaMed24Hidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaIni, fechaFin);
+                    ListaFechas = lista24.Select(x => x.Medifecha).Distinct().ToList();
+                    if (ListaFechas.Count > 0)
+                    {
+                        fechaIni = ListaFechas[nroPagina-1];
+                    }
                     break;
                 default:
                     fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
@@ -92,13 +126,14 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                     break;
             }
             
-            string resultado = this.logic.ObtenerReporteHidrologia(idsEmpresa, idsCuenca, fechaIni, fechaFin, formato, nroPagina, ListaFechas);
+            string resultado = this.logic.ObtenerReporteHidrologia(idsEmpresa, idsCuenca, fechaIni, fechaFin, formato, opcion);
             model.Resultado = resultado;
             return PartialView(model);
         }
 
         [HttpPost]
-        public JsonResult GraficoReporte(string idsEmpresas, string idsCuencas, string fechaInicial, string fechaFinal, int idTipoInformacion, int nroPagina)       
+        public JsonResult GraficoReporte(string idsEmpresas, string idsCuencas, string fechaInicial, string fechaFinal, int idTipoInformacion, int nroPagina,
+                                        string anho, int semanaIni, int semanaFin)       
         {
             HidrologiaModel model = new HidrologiaModel();
             DateTime fechaIni = DateTime.MinValue;
@@ -109,26 +144,23 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             switch (formato.Formatresolucion)
             {
                 case 60 * 24 * 30: //grafico mensual
-                    int mes = Int32.Parse(fechaInicial.Substring(0, 2));
-                    int anho = Int32.Parse(fechaInicial.Substring(3, 4));
-                    fechaIni = new DateTime(anho, mes, 1);
-                    anho = Int32.Parse(fechaFinal.Substring(3, 4));
-                    mes = Int32.Parse(fechaFinal.Substring(0, 2));
-                    fechaFin = new DateTime(anho, mes, 1);
-                    model.TipoReporte = idTipoInformacion;
+                    fechaIni = COES.Base.Tools.Util.FormatFecha(fechaInicial);
+                    fechaFin = COES.Base.Tools.Util.FormatFecha(fechaFinal);                    
                     model = GraficoMensual((int)formato.ListaHoja[0].Lectcodi, idsEmpresas, fechaIni, fechaFin);
-                    break;
-                case 30: //grafio diario
-                    fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
-                    fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
                     model.TipoReporte = idTipoInformacion;
-                    model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas, idsCuencas, formato, fechaIni, fechaFin, nroPagina);
                     break;
-                case 60:
-                    fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
-                    fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                case 60 * 24: //grafico semanal - QN
+                    int ianho = Int32.Parse(anho);
+                    fechaIni = COES.Base.Tools.Util.GenerarFecha(ianho, semanaIni);
+                    fechaFin = COES.Base.Tools.Util.GenerarFecha(ianho, semanaFin);             
+                    model = GraficoSemanal((int)formato.ListaHoja[0].Lectcodi, idsEmpresas, fechaIni, fechaFin);
                     model.TipoReporte = idTipoInformacion;
+                    break;
+                case 60: // grafico diario QN - TURB. VERT.
+                    fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                    fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);                   
                     model = GraficoDiario((int)formato.ListaHoja[0].Lectcodi, idsEmpresas, idsCuencas, formato, fechaIni, fechaFin, nroPagina);
+                    model.TipoReporte = idTipoInformacion;
                     break;
             }
             var jsonResult = Json(model);
@@ -143,7 +175,14 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             model.ListaMedicion1 = lista;
             model.ListaCategoriaGrafico = new List<string>(); //AÑO - MES
             model.ListaSerieName = new List<string>();
-
+            ListaFechas = lista.Select(x => x.Medifecha).Distinct().ToList();
+            if (ListaFechas.Count > 0)
+            {
+                fechaIni = lista.Min(x => x.Medifecha);
+                fechaFin = lista.Max(x => x.Medifecha);
+            }
+            model.TitlexAxis = "MESES - AÑO";
+            model.TituloReporte = "REPORTE GRÁFICO PROGRAMADO MENSUAL - QN";
             // Obtener Lista de Anho y Mes ordenados para la categoria del grafico
             int totalMeses = 0;
             for (var f = fechaIni; f <= fechaFin; f = f.AddMonths(1))
@@ -183,10 +222,66 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             return model;
         }
 
+        public HidrologiaModel GraficoSemanal(int idLectura, string idsEmpresas, DateTime fechaIni, DateTime fechaFin)
+        {
+            HidrologiaModel model = new HidrologiaModel();
+            List<MeMedicion1DTO> lista = this.logic.ListaMed1Hidrologia(idLectura, 5, idsEmpresas, fechaIni, fechaFin);
+            model.ListaMedicion1 = lista;
+            model.ListaCategoriaGrafico = new List<string>(); //
+            model.ListaSerieName = new List<string>();
+            ListaFechas = lista.Select(x => x.Medifecha).Distinct().ToList();
+           
+            if (ListaFechas.Count > 0)
+            {
+                fechaIni = lista.Min(x => x.Medifecha);
+                fechaFin = lista.Max(x => x.Medifecha);
+            }
+             model.TitlexAxis = "AÑO :" + fechaIni.Year.ToString();
+             model.TituloReporte = "REPORTE GRÁFICO PROGRAMADO SEMANAL - QN";
+            // Obtener Lista de Sem-Nros ordenados para la categoria del grafico
+            int nSemanaIni = COES.Base.Tools.Util.GenerarNroSemana(fechaIni);
+            int nSemanaFin = COES.Base.Tools.Util.GenerarNroSemana(fechaFin);
+            int nroSemanas = nSemanaFin - nSemanaIni + 1;
+            for (var i = nSemanaIni; i <= nSemanaFin; i++)
+            {
+                string semNro = "Sem-" + i;                
+                model.ListaCategoriaGrafico.Add(semNro);               
+            }
+
+            // Obtener Lista de nombres de las series del grafico.
+            var listaGrupoMedicion = lista.GroupBy(x => x.Ptomedicodi).Select(group => group.First()).ToList();
+            foreach (var reg in listaGrupoMedicion)
+            {
+                string nombreSerie = reg.Ptomedinomb + " " + reg.Tipoptomedinomb + " " + reg.Tipoinfoabrev;
+                model.ListaSerieName.Add(nombreSerie);
+            }
+            // Obtener lista de valores para las series del grafico
+            model.ListaSerieData = new decimal?[listaGrupoMedicion.Count()][];
+            for (var i = 0; i < listaGrupoMedicion.Count(); i++)
+            {
+                model.ListaSerieData[i] = new decimal?[nroSemanas];              
+                for (var j=0; j < nroSemanas; j++)
+                {
+                    DateTime fecha = ListaFechas[j];
+                    decimal? valor = null;
+                    var entity = lista.Find(x => x.Ptomedicodi == listaGrupoMedicion[i].Ptomedicodi && x.Medifecha == fecha);
+                    if (entity != null)
+                    {
+                        valor = entity.H1;
+                        model.ListaSerieData[i][j] = valor;
+                    }                    
+                }
+            }
+            modelGraficoSemanal = model;
+            return model;
+        }
+
         public HidrologiaModel GraficoDiario(int idLectura, string idsEmpresas, string idsCuencas, MeFormatoDTO formato, DateTime fechaIni, DateTime fechaFin, int nroPagina)
         {
             HidrologiaModel model = new HidrologiaModel();
             fechaIni = ListaFechas[nroPagina - 1];
+            model.TitlexAxis = "Dia:" + fechaIni.ToString("dd - MM - yyyy");
+            model.TituloReporte = "REPORTE GRÁFICO PROGRAMADO DIARIO - QN TURB. VERT";
             List<MeMedicion24DTO> lista = this.logic.ListaMed24Hidrologia(idLectura, 5, idsEmpresas, idsCuencas, fechaIni, fechaIni);
             model.ListaCategoriaGrafico = new List<string>();
             model.ListaSerieName = new List<string>();
@@ -204,7 +299,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             var listaGrupoMedicion = lista.GroupBy(x => new { x.Ptomedicodi, x.Tipoinfocodi }).Select(group => group.First()).ToList();
             foreach (var reg in listaGrupoMedicion)
             {
-                string nombreSerie = reg.Ptomedinomb + " " + reg.Tipoptomedinomb + " " + reg.Tipoinfoabrev;
+                string nombreSerie = reg.Equinomb + "-" + reg.Tipoptomedinomb + " " + reg.Tipoinfoabrev;
                 model.ListaSerieName.Add(nombreSerie);
             }
             // Obtener lista de valores para las series del grafico
@@ -224,6 +319,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                 }
 
             }
+            modelGraficoDiario = model;
             return model;
         }
 
@@ -266,23 +362,62 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
 
         // exporta el reporte general consultado a archivo excel
         [HttpPost]
-        public JsonResult GenerarArchivoReporte(string idsEmpresa, string idsCuenca, int idTipoInformacion, string fechaInicial, string fechaFinal)
+        public JsonResult GenerarArchivoReporteXLS(string idsEmpresa, string idsCuenca, int idTipoInformacion, string fechaInicial, string fechaFinal,
+                                                    string annho, int semanaIni, int semanaFin)
         {
             int indicador = 1;
-
+            DateTime fechaIni = DateTime.MinValue;
+            DateTime fechaFin = DateTime.MinValue;
+            HidrologiaModel model = new HidrologiaModel();
+            var formato = logic.GetByIdMeFormato(idTipoInformacion);
+            formato.ListaHoja = logic.GetByCriteriaMeFormatohojas(idTipoInformacion);
             try
             {
-                DateTime fechaIni = DateTime.MinValue;
-                fechaIni = FormatFecha(fechaInicial);
-                DateTime fechaFin = DateTime.MinValue;
-                fechaFin = FormatFecha(fechaFinal);               
-                HidrologiaModel model = new HidrologiaModel();
-                var formato = logic.GetByIdMeFormato(idTipoInformacion);
-                formato.ListaHoja = logic.GetByCriteriaMeFormatohojas(idTipoInformacion);
-                List<MeMedicion1DTO> lista = this.logic.ListaMed1Hidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaIni, fechaFin);
-                model.ListaMedicion1 = lista;
-                ExcelDocument.GenerarArchivoHidrologiaMesQN(model);
-                indicador = 1;
+                switch (idTipoInformacion)
+                {
+                    case 4: //PROGRAMADO SEMANAL - QN.
+                        int ianho = Int32.Parse(annho);
+                        fechaIni = COES.Base.Tools.Util.GenerarFecha(ianho, semanaIni);
+                        fechaFin = COES.Base.Tools.Util.GenerarFecha(ianho, semanaFin);
+                        List<MeMedicion1DTO> lista1 = this.logic.ListaMed1Hidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaIni, fechaFin);                                            
+                        model.FechaInicio = fechaIni.ToString("dd - MM - yyyy");
+                        model.FechaFin = fechaFin.ToString("dd - MM - yyyy");
+                        model.ListaMedicion1 = lista1;
+                        ExcelDocument.GenerarArchivoHidrologiaSemanal(model);
+                        indicador = 4;
+
+                        break;
+                    case 5: //EJECUTADO DIARIO - Q TURB. VERT.
+                        fechaIni = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                        fechaFin = DateTime.ParseExact(fechaFinal, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+                        List<MeMedicion24DTO> lista24 = this.logic.ListaMed24Hidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, idsCuenca, fechaIni, fechaFin);
+                        //ListaFechas = lista24.Select(x => x.Medifecha).Distinct().ToList();
+                        model.FechaInicio = fechaIni.ToString("dd - MM - yyyy");
+                        model.FechaFin = fechaFin.ToString("dd - MM - yyyy");
+                        model.ListaMedicion24 = lista24;
+                        ExcelDocument.GenerarArchivoHidrologiaDiario(model);
+                        indicador = 5;
+
+                        break;
+                    case 7: //PROGRAMADO MENSUAL - QN
+                       
+                        fechaIni = COES.Base.Tools.Util.FormatFecha(fechaInicial);                       
+                        fechaFin = COES.Base.Tools.Util.FormatFecha(fechaFinal);                                       
+                        List<MeMedicion1DTO> lista = this.logic.ListaMed1Hidrologia((int)formato.ListaHoja[0].Lectcodi, 5, idsEmpresa, fechaIni, fechaFin);
+                        model.ListaMedicion1 = lista;
+                        var anho = fechaIni.Year.ToString();
+                        var mes = fechaIni.Month;                
+                        model.FechaInicio = COES.Base.Tools.Util.ObtenerNombreMes(mes) + " - " + anho;
+                        anho = fechaFin.Year.ToString();
+                        mes = fechaFin.Month;
+                        model.FechaFin = COES.Base.Tools.Util.ObtenerNombreMes(mes) + " - " + anho;
+                        ExcelDocument.GenerarArchivoHidrologiaMesQN(model);
+                        indicador = 7;
+                        break;                   
+                }
+                
+                
+                
             }
             catch
             {
@@ -297,11 +432,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         {
             int indicador = 1;
             try
-            {
-                //DateTime fechaIni = DateTime.MinValue;
-                //fechaIni = FormatFecha(fechaInicial);
-                //DateTime fechaFin = DateTime.MinValue;
-                //fechaFin = FormatFecha(fechaFinal);
+            {               
                 HidrologiaModel model = new HidrologiaModel();
                 model = modelGraficoMensual;
                 model.FechaInicio = fechaInicial;
@@ -316,6 +447,26 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             }
 
             
+            return Json(indicador);
+        }
+
+        public JsonResult GenerarArchivoGrafDiario01(string fechaInicial, string fechaFinal)
+        {
+            int indicador = 1;
+            try
+            {
+                HidrologiaModel model = new HidrologiaModel();
+                model = modelGraficoDiario;
+                model.FechaInicio = fechaInicial;
+                model.FechaFin = fechaFinal;
+                ExcelDocument.GenerarArchivoGrafDiario(model);
+                indicador = 1;
+            }
+            catch
+            {
+                indicador = -1;
+            }
+
             return Json(indicador);
         }
 
@@ -335,17 +486,17 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
                     nombreArchivo = Constantes.NombreReporteHidrologia00;
                     break;
                 case 1:
+                    nombreArchivo = Constantes.NombreRptGraficoHidrologia00;
+                    break;
+                case 2:
+                    nombreArchivo = Constantes.NombreReporteHidrologia01;
+                    break;
+                case 3:
                     nombreArchivo = Constantes.NombreRptGraficoHidrologia01;
                     break;
-                //case 2:
-                //    nombreArchivo = Constantes.NombreReporteMantenimiento02;
-                //    break;
-                //case 3:
-                //    nombreArchivo = Constantes.NombreReporteMantenimiento03;
-                //    break;
-                //case 4:
-                //    nombreArchivo = Constantes.NombreReporteMantenimiento04;
-                //    break;
+                case 4:
+                    nombreArchivo = Constantes.NombreReporteHidrologia02;
+                    break;
                 //case 5:
                 //    nombreArchivo = Constantes.NombreReporteMantenimiento05;
                 //    break;
@@ -359,19 +510,24 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             return File(fullPath, Constantes.AppExcel, nombreArchivo);
         }
 
-        //funcion que devuelve la fecha del primer dia de la fecha recibida  en formaro MM-YYYY
-        public DateTime FormatFecha(String fechaInicial)
-        {           
-            DateTime dfecha = DateTime.MinValue;           
-            int mes = Int32.Parse(fechaInicial.Substring(0, 2));
-            int anho = Int32.Parse(fechaInicial.Substring(3, 4));
-            dfecha = new DateTime(anho, mes, 1);
-            
-            //if (fechaInicial != null)
-            //{
-            //    dfecha = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
-            //}           
-            return dfecha;
+        public PartialViewResult CargarSemanas(string idAnho)
+        {
+            HidrologiaModel model = new HidrologiaModel();
+            List<TipoInformacion> entitys = new List<TipoInformacion>();
+            DateTime dfecha = new DateTime(Int32.Parse(idAnho), 12, 31);
+            int nsemanas = COES.Base.Tools.Util.ObtenerNroSemanasxAnho(dfecha);
+
+            for (int i = 1; i <= nsemanas; i++)
+            {
+                TipoInformacion reg = new TipoInformacion();
+                reg.IdTipoInfo = i;
+                reg.NombreTipoInfo = "Semana " + i + "-" + idAnho;
+                entitys.Add(reg);
+
+            }            
+            model.ListaSemanas= entitys;
+            return PartialView(model);
         }
+        
     }
 }

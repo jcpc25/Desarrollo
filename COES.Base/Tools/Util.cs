@@ -142,12 +142,23 @@ namespace COES.Base.Tools
             return image;
         }
 
-        public static int ObtenerNroSemanasxAnho(int anho)
+        public static int ObtenerNroSemanasxAnho(DateTime fecha)
         {
-            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-            DateTime date1 = new DateTime(anho, 1, 1);
-            Calendar cal = dfi.Calendar;
-            int nroSemanas = cal.GetWeekOfYear(date1, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+            // Gets the Calendar instance associated with a CultureInfo.
+            CultureInfo myCI = new CultureInfo("en-US");
+            Calendar myCal = myCI.Calendar;
+            
+            // Gets the DTFI properties required by GetWeekOfYear.
+            CalendarWeekRule myCWR = myCI.DateTimeFormat.CalendarWeekRule;
+            DayOfWeek myFirstDOW = myCI.DateTimeFormat.FirstDayOfWeek;
+            //DateTime LastDay = new System.DateTime(anho, 12, 31);
+            DateTime LastDay = fecha;
+            int nroSemanas = myCal.GetWeekOfYear(LastDay, myCWR, myFirstDOW);
+            
+            //DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            //DateTime date1 = new DateTime(anho, 1, 31);
+            //Calendar cal = dfi.Calendar;
+            //int nroSemanas = cal.GetWeekOfYear(date1, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
             return nroSemanas;
         }
 
@@ -158,8 +169,41 @@ namespace COES.Base.Tools
             var anho = f.Year.ToString();
             var mes = f.Month;
             resultado = ObtenerNombreMes(mes) + " " + anho;
-            
+
             return resultado;
+        }
+
+        //funcion que devuelve la fecha del primer dia de la fecha recibida  en formaro MM-YYYY
+        public static DateTime FormatFecha(String fechaInicial)
+        {
+            DateTime dfecha = DateTime.MinValue;
+            int mes = Int32.Parse(fechaInicial.Substring(0, 2));
+            int anho = Int32.Parse(fechaInicial.Substring(3, 4));
+            dfecha = new DateTime(anho, mes, 1);
+
+            //if (fechaInicial != null)
+            //{
+            //    dfecha = DateTime.ParseExact(fechaInicial, Constantes.FormatoFecha, CultureInfo.InvariantCulture);
+            //}           
+            return dfecha;
+        }
+
+        //funcion que devuelve la fecha del primer dia de la semana ingresado como parametro y año respectivamente
+        public static DateTime GenerarFecha(int year, int weekOfYear)
+        {            
+            DateTime jan1 = new DateTime(year, 1, 1); 
+            int daysOffset = DayOfWeek.Monday - jan1.DayOfWeek;
+            DateTime firstMonday = jan1.AddDays(daysOffset); 
+            var cal = CultureInfo.CurrentCulture.Calendar;
+            int firstWeek = cal.GetWeekOfYear(firstMonday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday); 
+            var weekNum = weekOfYear; if (firstWeek <= 1) { weekNum -= 1; }
+            var result = firstMonday.AddDays(weekNum * 7); 
+            return result.AddDays(0);           
+        }
+
+        public static int GenerarNroSemana(DateTime fecha)
+        {
+            return ObtenerNroSemanasxAnho(fecha)-1;
         }
     }
 }

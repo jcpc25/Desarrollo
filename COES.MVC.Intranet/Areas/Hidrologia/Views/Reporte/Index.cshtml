@@ -7,10 +7,24 @@
 <script src="~/Content/Scripts/multiselect.js"></script>
 <script src="~/Areas/Hidrologia/Content/Scripts/reporte.js"></script>
 <script src="~/Content/Scripts/highcharts.js"></script>
+<script type="text/javascript">
+   
+
+    $(function () {
+       
+    });   
+   
+    function CargarSemanaAnho2() {
+        CargarSemanaAnho();
+    }
+</script>
+
+
 <div class="form-title">
     <div class="content-titulo">Consulta Histórica de Hidrología</div>
     <div class="content-botonera">
           <input type="button" id="btnBuscar" value="Reporte" />
+          <input type="button" id="btnBuscar2" value="Reporte 2" />
           <input type="button" id="btnGrafico" value="Ver Gráfico" />
           <input type="button" id="btnExpotar" value="Exportar" />
     </div>
@@ -19,7 +33,7 @@
 <div class="content-hijo" id="mainLayout">
     <div class="spfilter-container">
          <table class="content-tabla-search" style="width:auto">
-            <tr>
+            <tr >
                 <td>Empresa:</td>
                 <td style="width:200px;">
                     <select id="cbEmpresa" name="IdEmpresa" multiple="multiple">
@@ -40,7 +54,7 @@
                     </select>
                     <input type="hidden" id="hfCuenca" />
                 </td>
-                <td>Lugar de Medición:</td>
+                <td >Lugar de Medición:</td>
                 <td style="width:200px;">
                     <select id="cbPtoMedida" name="IdPtoMedida" multiple="multiple">
                         @foreach (var item in Model.ListaPtoMedida)
@@ -51,7 +65,7 @@
                     <input type="hidden" id="hfPtoMedida" />
                 </td>
             </tr>
-             <tr>
+            <tr>
                 <td>Fecha desde:</td>
                 <td>
                     <input type="text" id="FechaDesde" name="FechaInicio" value="@Model.FechaInicio"  />
@@ -72,7 +86,24 @@
                     </select>
                 </td>
              </tr>
-
+            <tr id="idTr">               
+                <td  >Año:</td>
+                <td >
+                    <input type="text" id="Anho" name="Año" value="@Model.Anho" onchange=CargarSemanaAnho2()/>
+                    <input type="hidden" id="hfAnho"  value="@Model.Anho"  />
+                </td>
+                <td >Semana inicio:</td>
+                <td >
+                    <div id="SemanaIni" > </div>
+                    <input type="hidden" id="hfSemanaIni" />
+                </td>                
+                <td >Semana fin:</td>
+                <td >
+                    <div id="SemanaFin" > </div>
+                    <input type="hidden" id="hfSemanaFin"/>
+                </td>
+               
+             </tr>
         </table>
     </div>
     <div class="content-tabla">

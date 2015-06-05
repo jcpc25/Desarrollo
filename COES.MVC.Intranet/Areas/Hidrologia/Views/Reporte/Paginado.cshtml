@@ -51,12 +51,10 @@
         var nroToShow = parseInt($('#hfNroMostrar').val());
         var nroPaginas = parseInt($('#hfNroPaginas').val());
         var nroActual = parseInt($('#hfPaginaActual').val());
-
         $('.pag-ini').css('display', 'none');
         $('.pag-item').css('display', 'none');
         $('.pag-fin').css('display', 'none');
         $('.pag-item').removeClass('paginado-activo');
-
         $('#pag' + nroActual).addClass('paginado-activo');        
 
         if (nroToShow - nroPaginas >= 0) {            
