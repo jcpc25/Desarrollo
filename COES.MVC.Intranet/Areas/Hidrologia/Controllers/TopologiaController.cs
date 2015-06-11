@@ -1,4 +1,5 @@
-﻿using COES.MVC.Intranet.Areas.Hidrologia.Models;
+﻿using COES.MVC.Intranet.Areas.Hidrologia.Helper;
+using COES.MVC.Intranet.Areas.Hidrologia.Models;
 using COES.Servicios.Aplicacion.Hidrologia;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,14 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         {
             HidrologiaModel model = new HidrologiaModel();
             model.ListaCuenca = this.logic.ListarEquiposXFamilia(41);
+            model.ListaTipoRecursos = this.logic.ListarTipoRecursos(Constantes.Recursos);
             return View(model);
         }
 
-        public PartialViewResult lista(int cuenca, int nroPagina)
+        public PartialViewResult lista(int cuenca, int nroPagina, string recursos)
         {
             HidrologiaModel model = new HidrologiaModel();
-            model.ListaRecursosCuenca = this.logic.ListarRecursosxCuenca(cuenca);
+            model.ListaRecursosCuenca = this.logic.ListarRecursosxCuenca(cuenca, recursos);
             return PartialView(model);
         }
     }

@@ -16,5 +16,6 @@ namespace COES.Dominio.Interfaces.Sic
         EqFamiliaDTO GetById(int famcodi);
         List<EqFamiliaDTO> List();
         List<EqFamiliaDTO> GetByCriteria();
+        List<EqFamiliaDTO> GetByCriteriaRecurso(string recursos);
     }
 }

@@ -355,10 +355,10 @@ namespace COES.Infraestructura.Datos.Respositorio.Sic
             return entitys;
         }
 
-        public List<EqEquipoDTO> ListaRecursosxCuenca(int idEquipo)
+        public List<EqEquipoDTO> ListaRecursosxCuenca(int idEquipo, string recursos)
         {
             List<EqEquipoDTO> entitys = new List<EqEquipoDTO>();
-            string query = string.Format(helper.SqlListaRecursosxCuenca, idEquipo);
+            string query = string.Format(helper.SqlListaRecursosxCuenca, idEquipo, recursos);
             DbCommand command = dbProvider.GetSqlStringCommand(query);
 
             using (IDataReader dr = dbProvider.ExecuteReader(command))

@@ -102,7 +102,7 @@ namespace COES.Infraestructura.Datos.Respositorio.Sic
         public List<EqFamiliaDTO> GetByCriteria()
         {
             List<EqFamiliaDTO> entitys = new List<EqFamiliaDTO>();
-            DbCommand command = dbProvider.GetSqlStringCommand(helper.SqlGetByCriteria);
+            DbCommand command = dbProvider.GetSqlStringCommand(helper.SqlList);
 
             using (IDataReader dr = dbProvider.ExecuteReader(command))
             {
@@ -112,6 +112,23 @@ namespace COES.Infraestructura.Datos.Respositorio.Sic
                 }
             }
 
+            return entitys;
+        }
+
+        public List<EqFamiliaDTO> GetByCriteriaRecurso(string recursos)
+        {           
+            string sqlQuery = string.Format(helper.SqlGetByCriteriaRecurso, recursos);
+            List<EqFamiliaDTO> entitys = new List<EqFamiliaDTO>();
+            DbCommand command = dbProvider.GetSqlStringCommand(sqlQuery);
+            EqFamiliaDTO entity;
+            using (IDataReader dr = dbProvider.ExecuteReader(command))
+            {                
+                while (dr.Read())
+                {
+                    entity = helper.Create(dr);                   
+                    entitys.Add(entity);
+                }
+            }
             return entitys;
         }
     }
