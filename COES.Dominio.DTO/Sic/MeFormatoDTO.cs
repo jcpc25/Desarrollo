@@ -20,6 +20,7 @@ namespace COES.Dominio.DTO.Sic
         public int Formathorizonte { get; set; }
         public int? Formatversion { get; set; }
         public string Areaname { get; set; }
+        public int? Modcodi { get; set; }
 
         public string Periodo { get; set; }
         public string Resolucion { get; set; }

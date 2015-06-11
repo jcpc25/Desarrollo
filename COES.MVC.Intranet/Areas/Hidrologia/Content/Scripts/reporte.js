@@ -18,7 +18,7 @@ $(function () {
         
     });
 
-    $('#FechaHasta').Zebra_DatePicker({
+    $('#FechaHasta').Zebra_DatePicker({     
        
     });
     $('#Anho').Zebra_DatePicker({
@@ -29,14 +29,26 @@ $(function () {
      });   
     $('#cbTipoInformacion').change(function () {
         cambiarFormatoFecha($(this).val());
+        desactivaBtn();
+        $('#listado').html("");
+        $('#paginado').html("");
     });
     $('#btnBuscar').click(function () {
         opc = 1;
-        buscarDatos();
+        var resultado = validarFiltros();
+        if (resultado == "") {
+            buscarDatos();
+            activaBtn();
+        }
+        else {
+            alert("Error:" + resultado);
+        }
+        
     });
     $('#btnBuscar2').click(function () {
         opc = 2;
         buscarDatos();
+        
     });
     $('#btnGrafico').click(function () {
         var tipoInformacion = $('#cbTipoInformacion').val();        
@@ -53,6 +65,68 @@ $(function () {
     cargarSemanaAnho()
 });
 
+
+function validarFiltros() {
+    var empresa = $('#cbEmpresa').multipleSelect('getSelects');
+    var cuenca = $('#cbCuenca').multipleSelect('getSelects');
+    var tipoInformacion = $('#cbTipoInformacion').val();
+    var resultado = "";
+    var fini = $('#FechaDesde').val();
+    var ffin = $('#FechaHasta').val();    
+    var semanaIni = $('#SemanaIni select').val();
+    var semanaFin = $('#SemanaFin select').val();   
+
+    if (empresa == "") {
+        resultado = "Debe seleccionar una empresa."
+        return resultado;
+    }
+    if (cuenca == "") {
+        resultado = "Debe selecionar una cuenca";
+        return resultado;
+    }
+
+
+    if (tipoInformacion == 4) { // rpte semanal        
+        var com = Number(semanaIni) > Number(semanaFin);    
+        if (semanaIni == 0) {
+            resultado = "Debe seleccionar una semana de inicio";
+            return resultado;
+        }
+        if (semanaFin == 0) {
+            resultado = "Debe seleccionar una semana fin";
+            return resultado;
+        }
+        if (com) {
+            resultado = "La semana inicio no puede ser mayor a la semana final";
+            return resultado;
+        }
+    }
+    if (tipoInformacion == 7) { // rpte mensual        
+        if ((process(fini)) > (process(ffin))) {
+            resultado = "El mes inicial no puede ser mayor que el mes final’";
+            return resultado;
+        }
+    }
+    else {        
+        if ((process(fini)) > (process(ffin))) {
+            resultado = "La fecha inicial no puede ser mayor que la fecha final’";
+            return resultado;
+        }
+    }
+    return resultado;
+}
+
+function process(date) { //format YYYY/MM/DD
+    var tipoInformacion = $('#cbTipoInformacion').val();
+    
+    if (tipoInformacion == 7) {
+        var parts = date.split(" ");
+        return new Date(parts[1], parts[0] - 1, 1);
+    }
+    var parts = date.split("/");
+    return new Date(parts[2], parts[1]-1, parts[0]);
+}
+
 function mostrar_ocultar_FiltrosSemanal(opc) {    
     if (opc == 1) {
         $('#idTr td').show();
@@ -61,6 +135,17 @@ function mostrar_ocultar_FiltrosSemanal(opc) {
         $('#idTr td').hide();               
     }
 }
+
+function activaBtn() {
+    $('#btnGrafico').show();
+    $('#btnExpotar').show();
+}
+
+function desactivaBtn() {
+    $('#btnGrafico').hide();
+    $('#btnExpotar').hide();
+}
+
 function cargarSemanaAnho() {
     var anho = $('#Anho').val();
     $('#hfAnho').val(anho);
@@ -128,6 +213,7 @@ function cargarPrevio(){
     $('#SemanaIni select').val(1);
     $('#SemanaFin select').val(1);
     $('#idTr td').hide();
+    desactivaBtn();
 
 }
 

@@ -128,5 +128,36 @@ namespace COES.Infraestructura.Datos.Respositorio.Sic
 
             return entitys;
         }
+
+        public List<MeFormatoDTO> ListaModulosHidrologia(int modcodi)
+        {
+            string sqlQuery = string.Format(helper.SqlListaModulosHidrologia, modcodi);
+            List<MeFormatoDTO> entitys = new List<MeFormatoDTO>();
+            DbCommand command = dbProvider.GetSqlStringCommand(sqlQuery);
+            using (IDataReader dr = dbProvider.ExecuteReader(command))
+            {
+                while (dr.Read())
+                {
+                    entitys.Add(helper.Create(dr));
+                }
+            }
+
+            return entitys;
+
+            //DbCommand command = dbProvider.GetSqlStringCommand(helper.SqlListaModulosHidrologia);
+
+            //dbProvider.AddInParameter(command, helper.Formatcodi, DbType.Int32, modcodi);
+            ////MeFormatoDTO entity = null;
+            //List<MeFormatoDTO> entitys = new List<MeFormatoDTO>();
+            //using (IDataReader dr = dbProvider.ExecuteReader(command))
+            //{
+            //    if (dr.Read())
+            //    {
+            //        entitys.Add(helper.Create(dr));
+            //    }
+            //}
+
+            //return entitys;
+        }
     }
 }

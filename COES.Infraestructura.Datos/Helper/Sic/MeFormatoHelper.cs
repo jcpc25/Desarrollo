@@ -49,6 +49,9 @@ namespace COES.Infraestructura.Datos.Helper.Sic
             int iFormatversion = dr.GetOrdinal(this.Formatversion);
             if (!dr.IsDBNull(iFormatversion)) entity.Formatversion = Convert.ToInt32(dr.GetValue(iFormatversion));
 
+            int iModcodi = dr.GetOrdinal(this.Modcodi);
+            if (!dr.IsDBNull(iModcodi)) entity.Modcodi = Convert.ToInt32(dr.GetValue(iModcodi));
+
             switch (entity.Formatperiodo)
             { 
                 case 1:
@@ -116,7 +119,15 @@ namespace COES.Infraestructura.Datos.Helper.Sic
         public string Formatcodi = "FORMATCODI";
         public string Formathorizonte = "FORMATHORIZONTE";
         public string Formatversion = "FORMATVERSION";
+        public string Modcodi = "MODCODI";
+
+        public string SqlListaModulosHidrologia
+        {
+            get { return GetSqlXml("ListaModulosHidrologia"); }
+        }
 
         #endregion
+
+        
     }
 }

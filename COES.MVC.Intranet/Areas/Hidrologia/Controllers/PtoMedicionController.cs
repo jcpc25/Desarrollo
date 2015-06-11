@@ -33,7 +33,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         public PartialViewResult Lista(string empresas, string tipoOrigenLectura, string tipoPtomedicodi, int nroPagina)
         {
             PtoMedicionModel model = new PtoMedicionModel();
-            model.ListaPtoMedicion = servicio.ListarPtoMedicion(empresas, tipoOrigenLectura, tipoPtomedicodi);
+            model.ListaPtoMedicion = servicio.ListarDetallePtoMedicion(empresas, tipoOrigenLectura, tipoPtomedicodi, nroPagina, Constantes.PageSize);
             return PartialView(model);
         }
         /// <summary>
@@ -170,6 +170,25 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             });
 
             model.ListaTipoPuntoMedicion = lista;
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public PartialViewResult Paginado(string empresas, string tipoOrigenLectura, string tipoPtomedicodi, int nroPagina)
+                       
+        {
+            PtoMedicionModel model = new PtoMedicionModel();
+            model.IndicadorPagina = false;
+
+            int nroRegistros = servicio.GetTotalPtomedicion(empresas, tipoOrigenLectura, tipoPtomedicodi);
+            if (nroRegistros > Constantes.NroPageShow)
+            {
+                int pageSize = Constantes.PageSize;
+                int nroPaginas = (nroRegistros % pageSize == 0) ? nroRegistros / pageSize : nroRegistros / pageSize + 1;
+                model.NroPaginas = nroPaginas;
+                model.NroMostrar = Constantes.NroPageShow;
+                model.IndicadorPagina = true;
+            }
             return PartialView(model);
         }
     }

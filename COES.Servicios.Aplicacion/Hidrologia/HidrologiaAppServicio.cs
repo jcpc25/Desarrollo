@@ -400,7 +400,7 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         }
 
         /// <summary>
-        /// permite contar la cantidad de untos de medicion
+        /// permite contar la cantidad de puntos de medicion
         /// </summary>       
         public int GetTotalPtomedicion(string empresas, string idsOriglectura, string idsTipoptomedicion)
         {
@@ -1527,6 +1527,14 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         public List<MeFormatoDTO> GetByCriteriaMeFormatos(int areaUsuario)
         {
             return FactorySic.GetMeFormatoRepository().GetByCriteria(areaUsuario);
+        }
+
+         /// <summary>
+        /// Permite listar los modulos de hidrologia
+        /// </summary>
+        public List<MeFormatoDTO> ListModulosHidrologia(int modcodi)
+        {
+            return FactorySic.GetMeFormatoRepository().ListaModulosHidrologia(modcodi);
         }
 
         #endregion

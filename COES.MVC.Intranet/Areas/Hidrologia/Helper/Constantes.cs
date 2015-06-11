@@ -54,6 +54,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
         public const int FormatoCodigo = 2;
 
         public const int EmpresaGeneradora = 3;
+        public const int IdmModulo = 3;
     }
 
     /// <summary>

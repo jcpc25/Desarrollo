@@ -24,9 +24,20 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             model.ListaEmpresas = this.logic.ListarEmpresasPorTipo(Constantes.EmpresaGeneradora.ToString());                     
             model.FechaInicio = DateTime.Now.AddDays(-15).ToString(Constantes.FormatoFecha);
             model.FechaFin = DateTime.Now.ToString(Constantes.FormatoFecha);
-            model.ListaTipoInformacion = Tools.ObtenerListaTipoInfo();
+            model.ListaTipoInformacionEnvio = Tools.ObtenerListaTipoInfo();
             model.ListaFrecuencia = Tools.ObtenerListaFrecuencia();
             return View(model);           
+        }
+
+        public ActionResult EnvioDetallado()
+        {
+            HidrologiaModel model = new HidrologiaModel();
+            model.ListaEmpresas = this.logic.ListarEmpresasPorTipo(Constantes.EmpresaGeneradora.ToString());                     
+            model.FechaInicio = DateTime.Now.AddDays(-15).ToString(Constantes.FormatoFecha);
+            model.FechaFin = DateTime.Now.ToString(Constantes.FormatoFecha);            
+            model.ListaTipoFormato = Tools.ObtenerListaTipoFormato();
+            model.ListaPtoMedida = Tools.ObtenerListaMedida();
+            return View(model);
         }
 
     }

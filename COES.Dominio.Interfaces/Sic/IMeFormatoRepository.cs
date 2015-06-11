@@ -16,5 +16,6 @@ namespace COES.Dominio.Interfaces.Sic
         MeFormatoDTO GetById(int formatcodi);
         List<MeFormatoDTO> List();
         List<MeFormatoDTO> GetByCriteria(int areaUsuario);
+        List<MeFormatoDTO> ListaModulosHidrologia(int modcodi);
     }
 }

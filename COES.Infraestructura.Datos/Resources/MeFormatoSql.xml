@@ -102,4 +102,17 @@
       where ar.areacode = {0} or 0 ={0}
     </query>
   </Sql>
+  
+  <Sql>
+  <key>ListaModulosHidrologia</key>
+  <query>
+    select
+      *
+    from
+      me_formato
+    where
+      modcodi = {0}
+
+  </query>
+</Sql>
 </Sqls>

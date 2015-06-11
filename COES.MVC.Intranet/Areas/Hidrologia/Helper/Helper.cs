@@ -20,26 +20,11 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
             lista.Add(elemento);
             elemento = new PtoMedida() { IdMedida = 3, NombreMedida = "Estación Hidrológica" };
             lista.Add(elemento);
-
-            return lista;
-        }
-       
-        public static List<TipoInformacion> ObtenerListaFormato()
-        {
-            List<TipoInformacion> lista = new List<TipoInformacion>();
-            var elemento = new TipoInformacion() { IdTipoInfo = 3, NombreTipoInfo = "PROGRAMA DIARIO - QN" };
-            lista.Add(elemento);
-            elemento = new TipoInformacion() { IdTipoInfo = 4, NombreTipoInfo = "PROGRAMA SEMANAL - QN" };
-            lista.Add(elemento);
-            elemento = new TipoInformacion() { IdTipoInfo = 5, NombreTipoInfo = "EJECUTADO DIARIO - Q TURB. VERT." };
-            lista.Add(elemento);
-            elemento = new TipoInformacion() { IdTipoInfo = 6, NombreTipoInfo = "EJECUTADO DIARIO - EMBALSES" };
-            lista.Add(elemento);
-            elemento = new TipoInformacion() { IdTipoInfo = 7, NombreTipoInfo = "PROGRAMADO MENSUAL - QN" };
+            elemento = new PtoMedida() { IdMedida = 4, NombreMedida = "Cuenca" };
             lista.Add(elemento);
 
             return lista;
-        }
+        }             
 
         public static List<TipoInformacion> ObtenerListaTipoInfo()
         {
@@ -63,6 +48,19 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
             elemento = new TipoInformacion() { IdTipoInfo = 4, NombreTipoInfo = "MENSUAL" };
             lista.Add(elemento);
             return lista;
+        }
+
+        public static List<TipoInformacion> ObtenerListaTipoFormato()
+        {
+            List<TipoInformacion> lista = new List<TipoInformacion>();
+            var elemento = new TipoInformacion() { IdTipoInfo = 1, NombreTipoInfo = "EJECUTADO" };
+            lista.Add(elemento);
+            elemento = new TipoInformacion() { IdTipoInfo = 2, NombreTipoInfo = "PROGRAMADO DIARIO" };
+            lista.Add(elemento);
+            elemento = new TipoInformacion() { IdTipoInfo = 3, NombreTipoInfo = "PROGRAMADO SEMANAL" };
+            lista.Add(elemento);            
+            return lista;
+
         }
     }
 }

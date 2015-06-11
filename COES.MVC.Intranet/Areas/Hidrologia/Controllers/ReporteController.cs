@@ -78,7 +78,7 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
             model.ListaCuenca = this.logic.ListarEquiposXFamilia(41);
             model.FechaInicio = DateTime.Now.AddDays(-15).ToString(Constantes.FormatoFecha);
             model.FechaFin = DateTime.Now.ToString(Constantes.FormatoFecha);
-            model.ListaTipoInformacion = Tools.ObtenerListaFormato();
+            model.ListaTipoInformacion = this.logic.ListModulosHidrologia(Constantes.IdmModulo);            
             return View(model);
         }
 
@@ -279,7 +279,10 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Controllers
         public HidrologiaModel GraficoDiario(int idLectura, string idsEmpresas, string idsCuencas, MeFormatoDTO formato, DateTime fechaIni, DateTime fechaFin, int nroPagina)
         {
             HidrologiaModel model = new HidrologiaModel();
-            fechaIni = ListaFechas[nroPagina - 1];
+            if (ListaFechas.Count > 0)
+            {
+                fechaIni = ListaFechas[nroPagina - 1];
+            }
             model.TitlexAxis = "Dia:" + fechaIni.ToString("dd - MM - yyyy");
             model.TituloReporte = "REPORTE GRÁFICO PROGRAMADO DIARIO - QN TURB. VERT";
             List<MeMedicion24DTO> lista = this.logic.ListaMed24Hidrologia(idLectura, 5, idsEmpresas, idsCuencas, fechaIni, fechaIni);
