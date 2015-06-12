@@ -103,24 +103,7 @@
            famnumconec,
            famnombgraf
        from
-           eq_familia      
-    </query>
-  </Sql>
-  <Sql>
-    <key>GetByCriteriaRecurso</key>
-    <query>
-      select
-        famcodi,
-        famabrev,
-        tipoecodi,
-        tareacodi,
-        famnomb,
-        famnumconec,
-        famnombgraf
-      from
-        eq_familia
-      where
-        famcodi in ({0})
+           eq_familia
     </query>
   </Sql>
 </Sqls>

@@ -30,18 +30,7 @@
                      }
                 </select>
                 <input type="hidden" id="hfCuenca" />
-            </td> 
-            <td>Tipo recurso:</td>.
-            <td>
-                <select id="cbRecurso"  name="Idrecurso" multiple="multiple">        
-                    @*<option value="">--SELECCIONE--</option> *@
-                    @foreach (var item in Model.ListaTipoRecursos)
-                     {   
-                          <option value="@item.Famcodi">@item.Famnomb</option>
-                     }
-                </select>
-                <input type="hidden" id="hfRecurso" />
-            </td>           
+            </td>          
         </tr>
       </table>
     <input type="hidden" id="hfNroPagina" name="NroPagina" value="1" />

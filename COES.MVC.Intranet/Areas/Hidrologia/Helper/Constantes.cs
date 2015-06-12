@@ -55,7 +55,6 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Helper
 
         public const int EmpresaGeneradora = 3;
         public const int IdmModulo = 3;
-        public const string Recursos = "4,19,23,41,42";
     }
 
     /// <summary>

@@ -28,7 +28,6 @@ namespace COES.MVC.Intranet.Areas.Hidrologia.Models
         public List<PtoMedida> ListaPtoMedida { get; set; }
         public List<EqEquipoDTO> ListaCuenca { get; set; }
         public List<EqEquipoDTO> ListaRecursosCuenca { get; set; }
-        public List<EqFamiliaDTO> ListaTipoRecursos { get; set; }
         public List<MeFormatoDTO> ListaTipoInformacion { get; set; }
         public List<TipoInformacion> ListaTipoInformacionEnvio { get; set; }
         public List<TipoInformacion> ListaTipoFormato { get; set; }

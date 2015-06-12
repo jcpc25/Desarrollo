@@ -297,9 +297,9 @@ namespace COES.Servicios.Aplicacion.Hidrologia
             return FactorySic.GetEqEquipoRepository().ListarEquipoxFamilias(idsFamilia.ToArray());
         }
 
-        public List<EqEquipoDTO> ListarRecursosxCuenca(int idEquipo, string recursos)
+        public List<EqEquipoDTO> ListarRecursosxCuenca(int idEquipo)
         {
-            return FactorySic.GetEqEquipoRepository().ListaRecursosxCuenca(idEquipo, recursos);
+            return FactorySic.GetEqEquipoRepository().ListaRecursosxCuenca(idEquipo);
         }
         #endregion
 
@@ -1424,11 +1424,6 @@ namespace COES.Servicios.Aplicacion.Hidrologia
         public List<EqFamiliaDTO> ListarFamilia()
         {
             return FactorySic.GetEqFamiliaRepository().List();
-        }
-
-        public List<EqFamiliaDTO> ListarTipoRecursos(string recursos)
-        {
-            return FactorySic.GetEqFamiliaRepository().GetByCriteriaRecurso(recursos);
         }
 
         #endregion

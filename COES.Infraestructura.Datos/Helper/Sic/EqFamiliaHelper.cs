@@ -54,12 +54,6 @@ namespace COES.Infraestructura.Datos.Helper.Sic
         public string Famnumconec = "FAMNUMCONEC";
         public string Famnombgraf = "FAMNOMBGRAF";
 
-        
-        public string SqlGetByCriteriaRecurso
-        {
-            get { return GetSqlXml("GetByCriteriaRecurso"); }
-        }
-
         #endregion
     }
 }
